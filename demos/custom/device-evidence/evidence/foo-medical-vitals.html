@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Acme Cardio patch v2 — Foo Medical Vitals</title>
+    <style>
+      body { font-family: "DejaVu Sans", sans-serif; margin: 32px; color: #1b1b1b; background: #f6f8fb; }
+      h1, h2 { color: #0b3d6e; }
+      .panel { background: white; border: 1px solid #d7dde5; border-radius: 8px; padding: 20px 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+      table { border-collapse: collapse; width: 100%; }
+      th, td { border-bottom: 1px solid #e4e8ee; text-align: left; padding: 8px 10px; font-size: 14px; }
+      th { background: #eef3f8; }
+      .badge { display: inline-block; background: #d7f3e3; color: #0b5b32; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+    </style>
+  </head>
+  <body>
+    <div class="panel">
+      <h1>Foo Medical Vitals</h1>
+      <p>Synthetic patient <strong>River Synthetic00</strong> (acme-patient-00) <span class="badge">Synthetic: true</span></p>
+      <table>
+        <thead><tr><th>Measurement</th><th>Your Value</th><th>Last Updated</th></tr></thead>
+        <tbody><tr><td>Blood Pressure</td><td>127 mm[Hg] / 68 mm[Hg]</td><td>2026-11-04T08:00:00Z</td></tr><tr><td>MDC_ECG_ELEC_POTL</td><td>40 samples, -0.812 to 0.809 mV (mean 0.000)</td><td>2026-11-04T08:00:00Z</td></tr></tbody>
+      </table>
+    </div>
+    <div class="panel">
+      <h2>ECG summary ingest</h2>
+      <p>20 synthetic Acme Cardio patch v2 ECG Observations parsed from component valueSampledData.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Patient</th><th>Observation</th><th>Lead</th><th>Samples</th><th>Min</th><th>Max</th><th>Mean</th><th>Period</th>
+          </tr>
+        </thead>
+        <tbody><tr><td>River Synthetic00</td><td>acme-ecg-00</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.812</td><td>0.809</td><td>0.000</td><td>8 ms</td></tr><tr><td>Sky Synthetic01</td><td>acme-ecg-01</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.799</td><td>0.809</td><td>0.002</td><td>8 ms</td></tr><tr><td>Cedar Synthetic02</td><td>acme-ecg-02</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.811</td><td>0.815</td><td>0.005</td><td>8 ms</td></tr><tr><td>Rowan Synthetic03</td><td>acme-ecg-03</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.823</td><td>0.797</td><td>-0.003</td><td>8 ms</td></tr><tr><td>Indigo Synthetic04</td><td>acme-ecg-04</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.800</td><td>0.790</td><td>-0.003</td><td>8 ms</td></tr><tr><td>Maple Synthetic05</td><td>acme-ecg-05</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.827</td><td>0.792</td><td>-0.003</td><td>8 ms</td></tr><tr><td>Quill Synthetic06</td><td>acme-ecg-06</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.803</td><td>0.837</td><td>0.002</td><td>8 ms</td></tr><tr><td>North Synthetic07</td><td>acme-ecg-07</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.782</td><td>0.829</td><td>0.006</td><td>8 ms</td></tr><tr><td>Lake Synthetic08</td><td>acme-ecg-08</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.778</td><td>0.802</td><td>0.005</td><td>8 ms</td></tr><tr><td>Moss Synthetic09</td><td>acme-ecg-09</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.832</td><td>0.818</td><td>-0.006</td><td>8 ms</td></tr><tr><td>Pine Synthetic10</td><td>acme-ecg-10</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.829</td><td>0.810</td><td>0.002</td><td>8 ms</td></tr><tr><td>Ash Synthetic11</td><td>acme-ecg-11</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.810</td><td>0.808</td><td>-0.002</td><td>8 ms</td></tr><tr><td>Fern Synthetic12</td><td>acme-ecg-12</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.792</td><td>0.806</td><td>-0.003</td><td>8 ms</td></tr><tr><td>Sage Synthetic13</td><td>acme-ecg-13</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.824</td><td>0.780</td><td>-0.002</td><td>8 ms</td></tr><tr><td>Wren Synthetic14</td><td>acme-ecg-14</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.814</td><td>0.808</td><td>-0.002</td><td>8 ms</td></tr><tr><td>Brook Synthetic15</td><td>acme-ecg-15</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.837</td><td>0.806</td><td>0.001</td><td>8 ms</td></tr><tr><td>Glen Synthetic16</td><td>acme-ecg-16</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.831</td><td>0.792</td><td>-0.000</td><td>8 ms</td></tr><tr><td>Reed Synthetic17</td><td>acme-ecg-17</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.830</td><td>0.797</td><td>-0.000</td><td>8 ms</td></tr><tr><td>Vale Synthetic18</td><td>acme-ecg-18</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.822</td><td>0.802</td><td>-0.003</td><td>8 ms</td></tr><tr><td>Dale Synthetic19</td><td>acme-ecg-19</td><td>MDC_ECG_ELEC_POTL_I</td><td>40</td><td>-0.803</td><td>0.827</td><td>-0.001</td><td>8 ms</td></tr></tbody>
+      </table>
+    </div>
+  </body>
+</html>
