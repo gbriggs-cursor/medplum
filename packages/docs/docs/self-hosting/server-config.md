@@ -684,15 +684,15 @@ Enable heartbeat.
 
 ### defaultSuperAdminEmail
 
-Default super admin email address. If specified, and no users exist, this user will be created as a super admin.
+Default super admin email address. On first boot, if no users exist, seed creates this user as a super admin. When the setting is omitted, seed uses `admin@example.com`.
 
-**Default:** None
+**Default:** `admin@example.com` (seed fallback in `packages/server/src/seed.ts`)
 
 ### defaultSuperAdminPassword
 
-Default super admin password.
+Default super admin password. When the setting is omitted, seed uses `medplum_admin`. Use this only on local or throwaway environments.
 
-**Default:** None
+**Default:** `medplum_admin` (seed fallback in `packages/server/src/seed.ts`)
 
 ### defaultSuperAdminClientId
 

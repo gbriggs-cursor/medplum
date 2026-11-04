@@ -30,7 +30,7 @@ git clone https://github.com/{YOUR GITHUB USERNAME}/medplum.git medplum
 
 That will create a complete copy of the project source code on your local machine, including code for the Medplum Server, Medplum App, and associated libraries.
 
-In the next step, we'll build the application and run the tests.
+Next: [build and run the stack](./run-the-stack), then [load synthetic sample patients](./local-sample-patients). The clone alone does not start Postgres, Redis, or the API.
 
 ## (Optional) Set up [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/) in your IDE
 

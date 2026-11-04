@@ -28,11 +28,13 @@ Download one or both of the following files:
 
 ## Batch Upload Tool
 
-Log into Medplum and navigate to the [batch create](https://app.medplum.com/batch) tool. Upload the files you downloaded in the previous section.
+Log into Medplum and open the batch create tool. On the hosted service that is [https://app.medplum.com/batch](https://app.medplum.com/batch). On a local stack it is [http://localhost:3000/batch](http://localhost:3000/batch). Upload the files you downloaded in the previous section.
+
+If you are running Medplum yourself, first-boot seed does not create any `Patient` resources. Follow [Local development with sample patients](/docs/contributing/local-sample-patients) for ports, default credentials, and a small synthetic bundle you can paste in.
 
 :::caution[Note]
 
-**Do not upload files twice.** If you aren't sure whether the upload worked, go to the [Patient](https://app.medplum.com/Patient) page. If you see a patient there - it worked.
+**Do not upload files twice.** If you aren't sure whether the upload worked, go to the Patient page ([hosted](https://app.medplum.com/Patient) or [http://localhost:3000/Patient](http://localhost:3000/Patient)). If you see a patient there — it worked.
 
 :::
 
