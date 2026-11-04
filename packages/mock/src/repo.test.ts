@@ -95,6 +95,23 @@ describe('Mock Repo', () => {
     expect(result.entry?.length).toBe(2);
   });
 
+  test('Search by _project', async () => {
+    const client = new MockClient();
+    const projectId = '11111111-1111-4111-8111-111111111111';
+    const otherProjectId = '22222222-2222-4222-8222-222222222222';
+    const match = await client.createResource<Patient>({
+      resourceType: 'Patient',
+      meta: { project: projectId },
+    });
+    await client.createResource<Patient>({
+      resourceType: 'Patient',
+      meta: { project: otherProjectId },
+    });
+
+    const result = await client.searchResources('Patient', `_project=${projectId}`);
+    expect(result.map((patient) => patient.id)).toEqual([match.id]);
+  });
+
   test('Delete resource', async () => {
     const client = new MockClient();
     const resource1 = await client.createResource<Patient>({
