@@ -67,7 +67,7 @@ export function LandingPage(): JSX.Element {
         </Container>
         <Container>
           <div className={classes.inner}>
-            <div style={{ width: 500 }}>
+            <div className={classes.sectionCopy}>
               <Title order={3} fw={500} c={theme.primaryColor} mb="lg">
                 {brand.landingSectionEyebrow}
               </Title>
