@@ -84,6 +84,7 @@ export * from './OperationOutcomeAlert/OperationOutcomeAlert';
 export * from './Panel/Panel';
 export * from './PasswordInput/PasswordInput';
 export * from './PatientAccountsForm/PatientAccountsForm';
+export * from './PatientDevices/PatientDevices';
 export * from './PatientExportForm/PatientExportForm';
 export * from './PatientHeader/PatientHeader';
 export * from './PatientSummary/PatientSummary';
