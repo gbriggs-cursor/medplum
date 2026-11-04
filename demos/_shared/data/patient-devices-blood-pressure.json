@@ -12,10 +12,10 @@
   },
   "entry": [
     {
-      "fullUrl": "urn:uuid:synthetic-patient-devices",
+      "fullUrl": "urn:uuid:fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
       "resource": {
         "resourceType": "Patient",
-        "id": "synthetic-patient-devices",
+        "id": "fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
         "meta": {
           "tag": [
             {
@@ -45,14 +45,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Patient/synthetic-patient-devices"
+        "url": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064"
       }
     },
     {
-      "fullUrl": "urn:uuid:synthetic-bp-cuff",
+      "fullUrl": "urn:uuid:119574d7-2ce0-4bc1-839a-b76ec6eddc58",
       "resource": {
         "resourceType": "Device",
-        "id": "synthetic-bp-cuff",
+        "id": "119574d7-2ce0-4bc1-839a-b76ec6eddc58",
         "meta": {
           "tag": [
             {
@@ -89,20 +89,20 @@
           "text": "Home blood pressure monitor"
         },
         "patient": {
-          "reference": "Patient/synthetic-patient-devices",
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
           "display": "Taylor Demo"
         }
       },
       "request": {
         "method": "PUT",
-        "url": "Device/synthetic-bp-cuff"
+        "url": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58"
       }
     },
     {
-      "fullUrl": "urn:uuid:synthetic-bp-obs-01",
+      "fullUrl": "urn:uuid:c0370f31-a031-40fc-98c4-61d317d59054",
       "resource": {
         "resourceType": "Observation",
-        "id": "synthetic-bp-obs-01",
+        "id": "c0370f31-a031-40fc-98c4-61d317d59054",
         "meta": {
           "tag": [
             {
@@ -142,12 +142,12 @@
           "text": "Blood pressure"
         },
         "subject": {
-          "reference": "Patient/synthetic-patient-devices",
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
           "display": "Taylor Demo"
         },
         "effectiveDateTime": "2026-10-07T08:15:00Z",
         "device": {
-          "reference": "Device/synthetic-bp-cuff",
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
           "display": "Omron 5 Series Upper Arm"
         },
         "component": [
@@ -189,14 +189,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/synthetic-bp-obs-01"
+        "url": "Observation/c0370f31-a031-40fc-98c4-61d317d59054"
       }
     },
     {
-      "fullUrl": "urn:uuid:synthetic-bp-obs-02",
+      "fullUrl": "urn:uuid:b20d3210-aaa8-4595-9c26-88a5001e222f",
       "resource": {
         "resourceType": "Observation",
-        "id": "synthetic-bp-obs-02",
+        "id": "b20d3210-aaa8-4595-9c26-88a5001e222f",
         "meta": {
           "tag": [
             {
@@ -236,12 +236,12 @@
           "text": "Blood pressure"
         },
         "subject": {
-          "reference": "Patient/synthetic-patient-devices",
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
           "display": "Taylor Demo"
         },
         "effectiveDateTime": "2026-10-10T08:20:00Z",
         "device": {
-          "reference": "Device/synthetic-bp-cuff",
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
           "display": "Omron 5 Series Upper Arm"
         },
         "component": [
@@ -283,14 +283,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/synthetic-bp-obs-02"
+        "url": "Observation/b20d3210-aaa8-4595-9c26-88a5001e222f"
       }
     },
     {
-      "fullUrl": "urn:uuid:synthetic-bp-obs-03",
+      "fullUrl": "urn:uuid:89898da5-10ee-4ebc-af5e-221ac7bb0759",
       "resource": {
         "resourceType": "Observation",
-        "id": "synthetic-bp-obs-03",
+        "id": "89898da5-10ee-4ebc-af5e-221ac7bb0759",
         "meta": {
           "tag": [
             {
@@ -330,12 +330,12 @@
           "text": "Blood pressure"
         },
         "subject": {
-          "reference": "Patient/synthetic-patient-devices",
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
           "display": "Taylor Demo"
         },
         "effectiveDateTime": "2026-10-13T08:05:00Z",
         "device": {
-          "reference": "Device/synthetic-bp-cuff",
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
           "display": "Omron 5 Series Upper Arm"
         },
         "component": [
@@ -377,14 +377,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/synthetic-bp-obs-03"
+        "url": "Observation/89898da5-10ee-4ebc-af5e-221ac7bb0759"
       }
     },
     {
-      "fullUrl": "urn:uuid:synthetic-bp-obs-04",
+      "fullUrl": "urn:uuid:f623e2ae-630d-4ac2-aae4-6237b7d0314f",
       "resource": {
         "resourceType": "Observation",
-        "id": "synthetic-bp-obs-04",
+        "id": "f623e2ae-630d-4ac2-aae4-6237b7d0314f",
         "meta": {
           "tag": [
             {
@@ -424,12 +424,12 @@
           "text": "Blood pressure"
         },
         "subject": {
-          "reference": "Patient/synthetic-patient-devices",
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
           "display": "Taylor Demo"
         },
         "effectiveDateTime": "2026-10-16T08:12:00Z",
         "device": {
-          "reference": "Device/synthetic-bp-cuff",
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
           "display": "Omron 5 Series Upper Arm"
         },
         "component": [
@@ -471,14 +471,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/synthetic-bp-obs-04"
+        "url": "Observation/f623e2ae-630d-4ac2-aae4-6237b7d0314f"
       }
     },
     {
-      "fullUrl": "urn:uuid:synthetic-bp-obs-05",
+      "fullUrl": "urn:uuid:11628e2f-9851-4982-95e4-63e17e2f3415",
       "resource": {
         "resourceType": "Observation",
-        "id": "synthetic-bp-obs-05",
+        "id": "11628e2f-9851-4982-95e4-63e17e2f3415",
         "meta": {
           "tag": [
             {
@@ -518,12 +518,12 @@
           "text": "Blood pressure"
         },
         "subject": {
-          "reference": "Patient/synthetic-patient-devices",
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
           "display": "Taylor Demo"
         },
         "effectiveDateTime": "2026-10-19T08:18:00Z",
         "device": {
-          "reference": "Device/synthetic-bp-cuff",
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
           "display": "Omron 5 Series Upper Arm"
         },
         "component": [
@@ -565,14 +565,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/synthetic-bp-obs-05"
+        "url": "Observation/11628e2f-9851-4982-95e4-63e17e2f3415"
       }
     },
     {
-      "fullUrl": "urn:uuid:synthetic-bp-obs-06",
+      "fullUrl": "urn:uuid:12fa39ab-3a51-4ef2-85ab-91759e630fbc",
       "resource": {
         "resourceType": "Observation",
-        "id": "synthetic-bp-obs-06",
+        "id": "12fa39ab-3a51-4ef2-85ab-91759e630fbc",
         "meta": {
           "tag": [
             {
@@ -612,12 +612,12 @@
           "text": "Blood pressure"
         },
         "subject": {
-          "reference": "Patient/synthetic-patient-devices",
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
           "display": "Taylor Demo"
         },
         "effectiveDateTime": "2026-10-22T08:09:00Z",
         "device": {
-          "reference": "Device/synthetic-bp-cuff",
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
           "display": "Omron 5 Series Upper Arm"
         },
         "component": [
@@ -659,14 +659,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/synthetic-bp-obs-06"
+        "url": "Observation/12fa39ab-3a51-4ef2-85ab-91759e630fbc"
       }
     },
     {
-      "fullUrl": "urn:uuid:synthetic-bp-obs-07",
+      "fullUrl": "urn:uuid:2555b2f7-7bfb-4965-a66f-995a67e56473",
       "resource": {
         "resourceType": "Observation",
-        "id": "synthetic-bp-obs-07",
+        "id": "2555b2f7-7bfb-4965-a66f-995a67e56473",
         "meta": {
           "tag": [
             {
@@ -706,12 +706,12 @@
           "text": "Blood pressure"
         },
         "subject": {
-          "reference": "Patient/synthetic-patient-devices",
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
           "display": "Taylor Demo"
         },
         "effectiveDateTime": "2026-10-25T08:22:00Z",
         "device": {
-          "reference": "Device/synthetic-bp-cuff",
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
           "display": "Omron 5 Series Upper Arm"
         },
         "component": [
@@ -753,14 +753,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/synthetic-bp-obs-07"
+        "url": "Observation/2555b2f7-7bfb-4965-a66f-995a67e56473"
       }
     },
     {
-      "fullUrl": "urn:uuid:synthetic-bp-obs-08",
+      "fullUrl": "urn:uuid:4e41e0d1-9b3a-4269-a6c4-3a80d386957f",
       "resource": {
         "resourceType": "Observation",
-        "id": "synthetic-bp-obs-08",
+        "id": "4e41e0d1-9b3a-4269-a6c4-3a80d386957f",
         "meta": {
           "tag": [
             {
@@ -800,12 +800,12 @@
           "text": "Blood pressure"
         },
         "subject": {
-          "reference": "Patient/synthetic-patient-devices",
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
           "display": "Taylor Demo"
         },
         "effectiveDateTime": "2026-10-28T08:11:00Z",
         "device": {
-          "reference": "Device/synthetic-bp-cuff",
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
           "display": "Omron 5 Series Upper Arm"
         },
         "component": [
@@ -847,14 +847,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/synthetic-bp-obs-08"
+        "url": "Observation/4e41e0d1-9b3a-4269-a6c4-3a80d386957f"
       }
     },
     {
-      "fullUrl": "urn:uuid:synthetic-bp-obs-09",
+      "fullUrl": "urn:uuid:da0ab8f8-2e03-4fd7-86a5-50ca23868a1c",
       "resource": {
         "resourceType": "Observation",
-        "id": "synthetic-bp-obs-09",
+        "id": "da0ab8f8-2e03-4fd7-86a5-50ca23868a1c",
         "meta": {
           "tag": [
             {
@@ -894,12 +894,12 @@
           "text": "Blood pressure"
         },
         "subject": {
-          "reference": "Patient/synthetic-patient-devices",
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
           "display": "Taylor Demo"
         },
         "effectiveDateTime": "2026-10-31T08:16:00Z",
         "device": {
-          "reference": "Device/synthetic-bp-cuff",
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
           "display": "Omron 5 Series Upper Arm"
         },
         "component": [
@@ -941,14 +941,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/synthetic-bp-obs-09"
+        "url": "Observation/da0ab8f8-2e03-4fd7-86a5-50ca23868a1c"
       }
     },
     {
-      "fullUrl": "urn:uuid:synthetic-bp-obs-10",
+      "fullUrl": "urn:uuid:57a760bc-f17e-478b-a803-afc2543093c5",
       "resource": {
         "resourceType": "Observation",
-        "id": "synthetic-bp-obs-10",
+        "id": "57a760bc-f17e-478b-a803-afc2543093c5",
         "meta": {
           "tag": [
             {
@@ -988,12 +988,12 @@
           "text": "Blood pressure"
         },
         "subject": {
-          "reference": "Patient/synthetic-patient-devices",
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
           "display": "Taylor Demo"
         },
         "effectiveDateTime": "2026-11-02T08:07:00Z",
         "device": {
-          "reference": "Device/synthetic-bp-cuff",
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
           "display": "Omron 5 Series Upper Arm"
         },
         "component": [
@@ -1035,14 +1035,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/synthetic-bp-obs-10"
+        "url": "Observation/57a760bc-f17e-478b-a803-afc2543093c5"
       }
     },
     {
-      "fullUrl": "urn:uuid:synthetic-bp-obs-11",
+      "fullUrl": "urn:uuid:90b1c13b-16c5-40ac-9472-deb164ba8216",
       "resource": {
         "resourceType": "Observation",
-        "id": "synthetic-bp-obs-11",
+        "id": "90b1c13b-16c5-40ac-9472-deb164ba8216",
         "meta": {
           "tag": [
             {
@@ -1082,12 +1082,12 @@
           "text": "Blood pressure"
         },
         "subject": {
-          "reference": "Patient/synthetic-patient-devices",
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
           "display": "Taylor Demo"
         },
         "effectiveDateTime": "2026-11-03T08:14:00Z",
         "device": {
-          "reference": "Device/synthetic-bp-cuff",
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
           "display": "Omron 5 Series Upper Arm"
         },
         "component": [
@@ -1129,14 +1129,14 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/synthetic-bp-obs-11"
+        "url": "Observation/90b1c13b-16c5-40ac-9472-deb164ba8216"
       }
     },
     {
-      "fullUrl": "urn:uuid:synthetic-bp-obs-12",
+      "fullUrl": "urn:uuid:306f1130-bc75-4711-a2b8-747da94af0ad",
       "resource": {
         "resourceType": "Observation",
-        "id": "synthetic-bp-obs-12",
+        "id": "306f1130-bc75-4711-a2b8-747da94af0ad",
         "meta": {
           "tag": [
             {
@@ -1176,12 +1176,12 @@
           "text": "Blood pressure"
         },
         "subject": {
-          "reference": "Patient/synthetic-patient-devices",
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
           "display": "Taylor Demo"
         },
         "effectiveDateTime": "2026-11-04T08:10:00Z",
         "device": {
-          "reference": "Device/synthetic-bp-cuff",
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
           "display": "Omron 5 Series Upper Arm"
         },
         "component": [
@@ -1223,7 +1223,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/synthetic-bp-obs-12"
+        "url": "Observation/306f1130-bc75-4711-a2b8-747da94af0ad"
       }
     }
   ]
