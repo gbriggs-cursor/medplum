@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Acme Cardio requirement matrix</title>
+  <style>
+    @font-face { font-family: EvidenceSans; src: url("./DejaVuSans.ttf") format("truetype"); }
+    body { font-family: EvidenceSans, "DejaVu Sans", Arial, sans-serif; margin: 32px; color: #1a1a1a; word-spacing: 0.15em; }
+    table { border-collapse: collapse; width: 100%; font-size: 13px; }
+    th, td { border: 1px solid #ccc; padding: 8px; vertical-align: top; }
+    th { background: #f4f6f8; }
+    .pass { color: #0b6b2b; font-weight: 700; }
+    .gap { color: #9a3412; font-weight: 700; }
+    .banner { background: #fff3cd; border: 1px solid #e6c35c; padding: 8px 12px; margin: 16px 0; }
+  </style>
+</head>
+<body>
+  <h1>Requirement → test → run → result</h1>
+  <p>Acme Cardio patch v2 · seed 20251104 · 11 tests passed, 0 failed · synthetic data only</p>
+  <div class="banner">No PHI. MockClient ingest of demos/custom/device-evidence/data/acme-cardio-bundle.json.</div>
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Requirement</th><th>Test</th><th>Result</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>R1</td><td>20 Patients, 20 Devices + DeviceDefinition, BP panels, ECG with component + valueSampledData</td><td>generate.test.ts cohort shape</td><td class="pass">PASS</td></tr>
+      <tr><td>R2</td><td>Fixed seed and committed bundle</td><td>deterministic seed; committed bundle match</td><td class="pass">PASS</td></tr>
+      <tr><td>R3</td><td>Manifest ids, seed, counts</td><td>write-data.ts → manifest.json</td><td class="pass">PASS — 82 resources</td></tr>
+      <tr><td>R4</td><td>MockClient ingest</td><td>executeBatch + Observation search</td><td class="pass">PASS — 82 × 200</td></tr>
+      <tr><td>R5</td><td>ECG parser reads components and SampledData</td><td>ecg-summary-parser.test.ts</td><td class="pass">PASS — 20/20</td></tr>
+      <tr><td>R6</td><td>Foo Medical Vitals displays BP and ECG</td><td>foomedical-vitals.test.tsx table render</td><td class="pass">PASS</td></tr>
+      <tr><td>R7</td><td>PatientSummary Vitals reads systolic / diastolic</td><td>getObservationValue + Vitals render</td><td class="pass">PASS — 136 / 89 mm[Hg]</td></tr>
+      <tr><td>R8</td><td>Foo Medical formats ECG waveform</td><td>formatObservationValue on ECG</td><td class="gap">GAP — valueSampledData ignored</td></tr>
+      <tr><td>R9</td><td>Heart-rate vital from ECG</td><td>PatientSummary HR row</td><td class="gap">GAP — no standalone 8867-4 Observation</td></tr>
+    </tbody>
+  </table>
+</body>
+</html>

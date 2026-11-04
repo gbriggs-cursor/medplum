@@ -1,0 +1,345 @@
+{
+  "seed": 20251104,
+  "seedLabel": "acme-cardio-v2-20251104",
+  "generatedAt": "2025-10-15T12:00:00Z",
+  "synthetic": true,
+  "phi": false,
+  "counts": {
+    "Organization": 1,
+    "DeviceDefinition": 1,
+    "Patient": 20,
+    "Device": 20,
+    "Observation": 40,
+    "total": 82
+  },
+  "resources": [
+    {
+      "resourceType": "Organization",
+      "id": "acme-cardio-org"
+    },
+    {
+      "resourceType": "DeviceDefinition",
+      "id": "acme-cardio-patch-v2"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-01"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-01"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-01"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-01"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-02"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-02"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-02"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-02"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-03"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-03"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-03"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-03"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-04"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-04"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-04"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-04"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-05"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-05"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-05"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-05"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-06"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-06"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-06"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-06"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-07"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-07"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-07"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-07"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-08"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-08"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-08"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-08"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-09"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-09"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-09"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-09"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-10"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-10"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-10"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-10"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-11"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-11"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-11"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-11"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-12"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-12"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-12"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-12"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-13"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-13"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-13"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-13"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-14"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-14"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-14"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-14"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-15"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-15"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-15"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-15"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-16"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-16"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-16"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-16"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-17"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-17"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-17"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-17"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-18"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-18"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-18"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-18"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-19"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-19"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-19"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-19"
+    },
+    {
+      "resourceType": "Patient",
+      "id": "acme-cardio-patient-20"
+    },
+    {
+      "resourceType": "Device",
+      "id": "acme-cardio-device-20"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-bp-20"
+    },
+    {
+      "resourceType": "Observation",
+      "id": "acme-cardio-ecg-20"
+    }
+  ]
+}
