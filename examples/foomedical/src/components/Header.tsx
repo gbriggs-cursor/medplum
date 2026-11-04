@@ -76,7 +76,7 @@ export function Header(): JSX.Element {
                 Settings
               </Menu.Item>
               <Menu.Item
-                leftSection={<IconLink size={16} color={theme.colors.teal[6]} stroke={1.5} />}
+                leftSection={<IconLink size={16} color={theme.colors[theme.primaryColor][6]} stroke={1.5} />}
                 onClick={() => navigate('/smart-health-links')?.catch(console.error)}
               >
                 SMART Health Links

@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: Copyright Orangebot, Inc. and Medplum contributors
 // SPDX-License-Identifier: Apache-2.0
-import { MantineProvider, createTheme } from '@mantine/core';
+import { MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import { Notifications } from '@mantine/notifications';
 import '@mantine/notifications/styles.css';
@@ -11,29 +11,13 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
 import { App } from './App';
+import { brand, theme } from './theme';
+
+document.title = brand.pageTitle;
 
 const medplum = new MedplumClient({
   onUnauthenticated: () => (window.location.href = '/'),
   baseUrl: import.meta.env.MEDPLUM_BASE_URL,
-});
-
-const theme = createTheme({
-  primaryColor: 'teal',
-  primaryShade: 8,
-  fontSizes: {
-    xs: '0.6875rem',
-    sm: '0.875rem',
-    md: '0.875rem',
-    lg: '1rem',
-    xl: '1.125rem',
-  },
-  components: {
-    Container: {
-      defaultProps: {
-        size: 1200,
-      },
-    },
-  },
 });
 
 const root = createRoot(document.getElementById('root') as HTMLElement);

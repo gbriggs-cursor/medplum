@@ -29,12 +29,13 @@ import HealthRecordImage from '../img/homePage/health-record.svg';
 import HealthVisitImage from '../img/homePage/health-visit.jpg';
 import PharmacyImage from '../img/homePage/pharmacy.svg';
 import PillImage from '../img/homePage/pill.svg';
+import { brand } from '../theme';
 import classes from './HomePage.module.css';
 
 const carouselItems = [
   {
     img: <IconChecklist />,
-    title: 'Welcome to Foo Medical',
+    title: brand.welcomeTitle,
     description:
       'Lorem ipsum at porta donec ultricies ut, arcu morbi amet arcu ornare, curabitur pharetra magna tempus',
     url: '/screening-questionnaire',
@@ -98,7 +99,7 @@ const recommendations = [
   },
   {
     title: 'Request health record',
-    description: 'Get records sent to or from Foo Medical.',
+    description: brand.recordsDescription,
   },
 ];
 
@@ -123,7 +124,7 @@ export function HomePage(): JSX.Element {
         />
         <Container className={classes.heroContainer}>
           <Title className={classes.heroTitle}>
-            Hi <span className="text-teal-600">{profileName}</span>,<br /> we’re here to help
+            Hi <span className={classes.heroName}>{profileName}</span>,<br /> we’re here to help
           </Title>
           <Button size="xl" radius="xl" className={classes.heroButton}>
             Get Care
