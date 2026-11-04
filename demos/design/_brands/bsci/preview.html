@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Boston Scientific brand source</title>
+    <style>
+      :root {
+        --brand-primary: #003c71;
+        --logo-primary: #00467f;
+        --logo-secondary: #6a737b;
+        --action-40: #0153cc;
+        --action-20: #012965;
+        --action-95: #e6f0ff;
+        --neutral-95: #f2f2f2;
+        --neutral-40: #666666;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #000;
+        background: #fff;
+      }
+      main {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 40px 32px 56px;
+      }
+      h1 {
+        font-size: 28px;
+        margin: 0 0 8px;
+        color: var(--brand-primary);
+      }
+      p {
+        margin: 0 0 24px;
+        color: var(--neutral-40);
+        line-height: 1.5;
+      }
+      .logo-row {
+        display: flex;
+        gap: 32px;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 28px;
+        border: 1px solid #e6e6e6;
+        border-radius: 8px;
+        background: var(--neutral-95);
+        margin-bottom: 32px;
+      }
+      .logo-row img {
+        background: #fff;
+        padding: 16px 20px;
+        border-radius: 4px;
+      }
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 12px;
+      }
+      .swatch {
+        border: 1px solid #e6e6e6;
+        border-radius: 6px;
+        overflow: hidden;
+      }
+      .chip {
+        height: 72px;
+      }
+      .meta {
+        padding: 8px 10px 10px;
+        font-size: 12px;
+      }
+      .meta strong {
+        display: block;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Boston Scientific</h1>
+      <p>
+        Official Anatomy wordmark and corporate light tokens. Source:
+        bos-sci/anatomy-docs and bos-sci/anatomy-tokens.
+      </p>
+      <div class="logo-row">
+        <img src="logo-bsc.svg" width="240" alt="Boston Scientific wordmark" />
+        <img src="logo-bsc-tagline.svg" width="220" alt="Boston Scientific Advancing science for life" />
+      </div>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="chip" style="background: #003c71"></div>
+          <div class="meta"><strong>brand-primary</strong>#003C71</div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background: #00467f"></div>
+          <div class="meta"><strong>bsc-logo-primary</strong>#00467F</div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background: #0153cc"></div>
+          <div class="meta"><strong>action-primary-40</strong>#0153CC</div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background: #012965"></div>
+          <div class="meta"><strong>action-primary-20</strong>#012965</div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background: #e6f0ff"></div>
+          <div class="meta"><strong>action-primary-95</strong>#E6F0FF</div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background: #6a737b"></div>
+          <div class="meta"><strong>bsc-logo-secondary</strong>#6A737B</div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background: #f2f2f2"></div>
+          <div class="meta"><strong>neutral-95</strong>#F2F2F2</div>
+        </div>
+        <div class="swatch">
+          <div class="chip" style="background: #000"></div>
+          <div class="meta"><strong>neutral-00</strong>#000000</div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

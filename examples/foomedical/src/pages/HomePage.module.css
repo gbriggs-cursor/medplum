@@ -49,10 +49,6 @@
 
 .heroButton {
   margin-top: 2.25rem;
-
-  @mixin smaller-than $mantine-breakpoint-sm {
-    width: 100px;
-  }
 }
 
 /* Call to action */

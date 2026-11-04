@@ -20,13 +20,24 @@
 .content {
   max-width: 480px;
   margin-right: 4.5rem;
+  position: relative;
+  z-index: 1;
+
+  @mixin smaller-than $mantine-breakpoint-md {
+    margin-right: 0;
+  }
+}
+
+.healthcareCopy {
+  width: 500px;
+  max-width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .title {
   color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
-  font-family:
-    Greycliff CF,
-    theme.fontFamily;
+  font-family: var(--mantine-font-family-headings);
   font-size: 56px;
   line-height: 1.2;
   font-weight: 600;
@@ -82,6 +93,10 @@
   right: -128px;
   width: 448px;
   height: 448px;
+
+  @mixin smaller-than $mantine-breakpoint-md {
+    display: none;
+  }
 }
 
 .heroImage4 {
@@ -107,6 +122,7 @@
   border-radius: var(--mantine-radius-xl);
   padding: 2.25rem;
   width: 512px;
+  max-width: 100%;
 }
 
 .featureTitle {

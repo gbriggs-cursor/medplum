@@ -29,14 +29,14 @@ import HealthRecordImage from '../img/homePage/health-record.svg';
 import HealthVisitImage from '../img/homePage/health-visit.jpg';
 import PharmacyImage from '../img/homePage/pharmacy.svg';
 import PillImage from '../img/homePage/pill.svg';
+import { copy } from '../theme';
 import classes from './HomePage.module.css';
 
 const carouselItems = [
   {
     img: <IconChecklist />,
-    title: 'Welcome to Foo Medical',
-    description:
-      'Lorem ipsum at porta donec ultricies ut, arcu morbi amet arcu ornare, curabitur pharetra magna tempus',
+    title: copy.welcomeTitle,
+    description: 'Complete your health-related social needs screening so your care team can plan the right next steps.',
     url: '/screening-questionnaire',
     label: 'AHC HRSN Screening',
   },
@@ -98,7 +98,7 @@ const recommendations = [
   },
   {
     title: 'Request health record',
-    description: 'Get records sent to or from Foo Medical.',
+    description: copy.recordsDescription,
   },
 ];
 
@@ -111,9 +111,7 @@ export function HomePage(): JSX.Element {
   return (
     <Box bg="gray.0">
       <Box className={classes.announcements}>
-        <span>
-          Announcements go here. <Anchor href="#">Include links if needed.</Anchor>
-        </span>
+        <span>{copy.announcement}</span>
       </Box>
       <div className={classes.hero}>
         <Overlay
@@ -123,7 +121,7 @@ export function HomePage(): JSX.Element {
         />
         <Container className={classes.heroContainer}>
           <Title className={classes.heroTitle}>
-            Hi <span className="text-teal-600">{profileName}</span>,<br /> we’re here to help
+            Hi {profileName},<br /> we&apos;re here to help
           </Title>
           <Button size="xl" radius="xl" className={classes.heroButton}>
             Get Care
@@ -143,7 +141,7 @@ export function HomePage(): JSX.Element {
         <Container>
           <Grid>
             {carouselItems.map((item, index) => (
-              <Grid.Col key={`card-${index}`} span={3} pb={40}>
+              <Grid.Col key={`card-${index}`} span={{ base: 12, sm: 6, md: 3 }} pb={40}>
                 <Card shadow="md" radius="md" className={classes.card} p="xl">
                   <IconSquareCheck />
                   <Text size="lg" fw={500} mt="md">
@@ -203,7 +201,7 @@ export function HomePage(): JSX.Element {
         <Container>
           <Grid columns={3} pb="xl">
             {linkPages.map((item, index) => (
-              <Grid.Col key={`card-${index}`} span={1}>
+              <Grid.Col key={`card-${index}`} span={{ base: 3, sm: 1 }}>
                 <Card shadow="md" radius="md" className={classes.card} p="xl">
                   <Image src={item.img} w={80} />
                   <Text size="lg" fw={500} mt="md">
@@ -218,7 +216,7 @@ export function HomePage(): JSX.Element {
       <Box p="lg">
         <Container>
           <Grid columns={2} pb="xl">
-            <Grid.Col span={1}>
+            <Grid.Col span={{ base: 2, md: 1 }}>
               <Card shadow="md" radius="md" className={classes.card} p="xl">
                 <Group wrap="nowrap">
                   <Avatar src={DoctorImage} size="xl" />
@@ -232,7 +230,7 @@ export function HomePage(): JSX.Element {
                 </Group>
               </Card>
             </Grid.Col>
-            <Grid.Col span={1}>
+            <Grid.Col span={{ base: 2, md: 1 }}>
               <Card shadow="md" radius="md" className={classes.card} p="xl">
                 <Stack>
                   {recommendations.map((item, index) => (
