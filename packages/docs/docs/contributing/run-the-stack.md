@@ -15,7 +15,7 @@ Follow these instructions to get the complete Medplum stack running directly on 
 ## Prerequisites
 
 1. **[Git](https://git-scm.com/)**
-2. **[Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)** (version 22+ required)
+2. **[Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)** — `22.22+` on the Node 22 line, or `24.2+` on the Node 24 line (Node 23 is not supported; see the root `package.json` `engines` field)
 3. **[Docker](https://docs.docker.com/engine/install/)**
 4. [Clone the Medplum repo](./local-dev-setup#clone-the-repo)
 
@@ -49,25 +49,23 @@ When running these services on your local machine you can either use Docker (rec
 
 ### Using Docker (Recommended)
 
-Use the supplied `docker-compose.yml` file to run PostgreSQL and Redis background services. These services will be deployed with all necessary medplum configurations and database migrations.
+Use the supplied `docker-compose.yml` file to run PostgreSQL 16 and Redis 7. This file starts **only** those two services. It does not run the Medplum server or app, and it does not apply FHIR migrations — those happen when you start `packages/server`.
 
 From your root `medplum` directory run
-
-```sh
-docker-compose up
-```
-
-If this doesn't work for you, try
 
 ```sh
 docker compose up
 ```
 
+If your Docker install is older and does not include the Compose plugin, use `docker-compose up` instead.
+
 This will:
 
-1. Start the PostgreSQL server in a container
-2. Set up the appropriate configurations (see [postgres.conf](https://github.com/medplum/medplum/blob/main/postgres/postgres.conf))
-3. Create databases (see [init_test.sql](https://github.com/medplum/medplum/blob/main/postgres/init_test.sql))
+1. Start PostgreSQL 16 on port `5432` (user `medplum`, password `medplum`)
+2. Apply [postgres.conf](https://github.com/medplum/medplum/blob/main/postgres/postgres.conf)
+3. Create the `medplum` application database (the official Postgres image creates a database named after `POSTGRES_USER`)
+4. Create the `medplum_test` databases used by unit tests (see [init_test.sql](https://github.com/medplum/medplum/blob/main/postgres/init_test.sql))
+5. Start Redis 7 on port `6379` (password `medplum`)
 
 When `docker-compose` completes, you should see something like this in your terminal:
 
@@ -94,8 +92,8 @@ Where `medplum-postgres-1` can be replaced with the name of your postgres docker
 
 If you'd prefer to install the dependencies directly, you can find installation instructions for the required services below:
 
-1. [Install PostgreSQL](https://www.postgresql.org/download/) (version 13+ required)
-2. [Install Redis](https://redis.io/download) (version 6+ required)
+1. [Install PostgreSQL](https://www.postgresql.org/download/) (version 16 matches `docker-compose.yml`)
+2. [Install Redis](https://redis.io/download) (version 7 matches `docker-compose.yml`)
 
 After that, you will have to update the file `packages/server/medplum.config.json`
 
@@ -137,8 +135,9 @@ cd packages/server
 npm run dev
 ```
 
-This will seed the medplum database with an example project and user.
-The email and password for the example user are:
+This seeds a Super Admin user and project so you can sign in. It does **not** create test patients or a regular application project. See [Local development with sample patients](./local-sample-patients) to create a working project and import synthetic FHIR data.
+
+The default Super Admin credentials are:
 
 |              |                   |
 | ------------ | ----------------- |
@@ -161,7 +160,7 @@ If you get an error such as `error: role "medplum" does not exist` or `password 
 
 ### Run the Medplum Web App
 
-Lastly, you can start the Medplum Wep App.
+Lastly, you can start the Medplum Web App.
 
 From your root `medplum` directory run:
 
@@ -172,4 +171,4 @@ npm run dev
 
 You can access the app at [http://localhost:3000/](http://localhost:3000/)
 
-The default username is admin@example.com, default password medplum_admin.
+The default username is `admin@example.com`, default password `medplum_admin`. After you can sign in, [load synthetic sample patients](./local-sample-patients) — a fresh database has none.
