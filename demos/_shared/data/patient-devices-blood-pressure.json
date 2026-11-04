@@ -1,0 +1,1230 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "meta": {
+    "tag": [
+      {
+        "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+        "code": "synthetic",
+        "display": "Synthetic"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Demo",
+            "given": ["Taylor"]
+          }
+        ],
+        "gender": "unknown",
+        "birthDate": "1984-06-15"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:119574d7-2ce0-4bc1-839a-b76ec6eddc58",
+      "resource": {
+        "resourceType": "Device",
+        "id": "119574d7-2ce0-4bc1-839a-b76ec6eddc58",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "active",
+        "manufacturer": "Omron",
+        "modelNumber": "5 Series",
+        "deviceName": [
+          {
+            "name": "Omron 5 Series Upper Arm",
+            "type": "user-friendly-name"
+          }
+        ],
+        "type": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "466086009",
+              "display": "Home blood pressure monitor"
+            }
+          ],
+          "text": "Home blood pressure monitor"
+        },
+        "patient": {
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
+          "display": "Taylor Demo"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c0370f31-a031-40fc-98c4-61d317d59054",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "c0370f31-a031-40fc-98c4-61d317d59054",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel with all children optional"
+            }
+          ],
+          "text": "Blood pressure"
+        },
+        "subject": {
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
+          "display": "Taylor Demo"
+        },
+        "effectiveDateTime": "2026-10-07T08:15:00Z",
+        "device": {
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
+          "display": "Omron 5 Series Upper Arm"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 128,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 82,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/c0370f31-a031-40fc-98c4-61d317d59054"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b20d3210-aaa8-4595-9c26-88a5001e222f",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "b20d3210-aaa8-4595-9c26-88a5001e222f",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel with all children optional"
+            }
+          ],
+          "text": "Blood pressure"
+        },
+        "subject": {
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
+          "display": "Taylor Demo"
+        },
+        "effectiveDateTime": "2026-10-10T08:20:00Z",
+        "device": {
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
+          "display": "Omron 5 Series Upper Arm"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 124,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 80,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/b20d3210-aaa8-4595-9c26-88a5001e222f"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:89898da5-10ee-4ebc-af5e-221ac7bb0759",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "89898da5-10ee-4ebc-af5e-221ac7bb0759",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel with all children optional"
+            }
+          ],
+          "text": "Blood pressure"
+        },
+        "subject": {
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
+          "display": "Taylor Demo"
+        },
+        "effectiveDateTime": "2026-10-13T08:05:00Z",
+        "device": {
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
+          "display": "Omron 5 Series Upper Arm"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 130,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 84,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/89898da5-10ee-4ebc-af5e-221ac7bb0759"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f623e2ae-630d-4ac2-aae4-6237b7d0314f",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "f623e2ae-630d-4ac2-aae4-6237b7d0314f",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel with all children optional"
+            }
+          ],
+          "text": "Blood pressure"
+        },
+        "subject": {
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
+          "display": "Taylor Demo"
+        },
+        "effectiveDateTime": "2026-10-16T08:12:00Z",
+        "device": {
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
+          "display": "Omron 5 Series Upper Arm"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 122,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 78,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/f623e2ae-630d-4ac2-aae4-6237b7d0314f"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:11628e2f-9851-4982-95e4-63e17e2f3415",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "11628e2f-9851-4982-95e4-63e17e2f3415",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel with all children optional"
+            }
+          ],
+          "text": "Blood pressure"
+        },
+        "subject": {
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
+          "display": "Taylor Demo"
+        },
+        "effectiveDateTime": "2026-10-19T08:18:00Z",
+        "device": {
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
+          "display": "Omron 5 Series Upper Arm"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 126,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 81,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/11628e2f-9851-4982-95e4-63e17e2f3415"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:12fa39ab-3a51-4ef2-85ab-91759e630fbc",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "12fa39ab-3a51-4ef2-85ab-91759e630fbc",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel with all children optional"
+            }
+          ],
+          "text": "Blood pressure"
+        },
+        "subject": {
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
+          "display": "Taylor Demo"
+        },
+        "effectiveDateTime": "2026-10-22T08:09:00Z",
+        "device": {
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
+          "display": "Omron 5 Series Upper Arm"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 118,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 76,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/12fa39ab-3a51-4ef2-85ab-91759e630fbc"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2555b2f7-7bfb-4965-a66f-995a67e56473",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "2555b2f7-7bfb-4965-a66f-995a67e56473",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel with all children optional"
+            }
+          ],
+          "text": "Blood pressure"
+        },
+        "subject": {
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
+          "display": "Taylor Demo"
+        },
+        "effectiveDateTime": "2026-10-25T08:22:00Z",
+        "device": {
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
+          "display": "Omron 5 Series Upper Arm"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 121,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 79,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/2555b2f7-7bfb-4965-a66f-995a67e56473"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4e41e0d1-9b3a-4269-a6c4-3a80d386957f",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "4e41e0d1-9b3a-4269-a6c4-3a80d386957f",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel with all children optional"
+            }
+          ],
+          "text": "Blood pressure"
+        },
+        "subject": {
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
+          "display": "Taylor Demo"
+        },
+        "effectiveDateTime": "2026-10-28T08:11:00Z",
+        "device": {
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
+          "display": "Omron 5 Series Upper Arm"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 125,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 82,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/4e41e0d1-9b3a-4269-a6c4-3a80d386957f"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:da0ab8f8-2e03-4fd7-86a5-50ca23868a1c",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "da0ab8f8-2e03-4fd7-86a5-50ca23868a1c",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel with all children optional"
+            }
+          ],
+          "text": "Blood pressure"
+        },
+        "subject": {
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
+          "display": "Taylor Demo"
+        },
+        "effectiveDateTime": "2026-10-31T08:16:00Z",
+        "device": {
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
+          "display": "Omron 5 Series Upper Arm"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 119,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 77,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/da0ab8f8-2e03-4fd7-86a5-50ca23868a1c"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:57a760bc-f17e-478b-a803-afc2543093c5",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "57a760bc-f17e-478b-a803-afc2543093c5",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel with all children optional"
+            }
+          ],
+          "text": "Blood pressure"
+        },
+        "subject": {
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
+          "display": "Taylor Demo"
+        },
+        "effectiveDateTime": "2026-11-02T08:07:00Z",
+        "device": {
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
+          "display": "Omron 5 Series Upper Arm"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 123,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 80,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/57a760bc-f17e-478b-a803-afc2543093c5"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:90b1c13b-16c5-40ac-9472-deb164ba8216",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "90b1c13b-16c5-40ac-9472-deb164ba8216",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel with all children optional"
+            }
+          ],
+          "text": "Blood pressure"
+        },
+        "subject": {
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
+          "display": "Taylor Demo"
+        },
+        "effectiveDateTime": "2026-11-03T08:14:00Z",
+        "device": {
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
+          "display": "Omron 5 Series Upper Arm"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 120,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 78,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/90b1c13b-16c5-40ac-9472-deb164ba8216"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:306f1130-bc75-4711-a2b8-747da94af0ad",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "306f1130-bc75-4711-a2b8-747da94af0ad",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel with all children optional"
+            }
+          ],
+          "text": "Blood pressure"
+        },
+        "subject": {
+          "reference": "Patient/fb8bedb5-f2b1-4d65-b3b1-2b0fa9cba064",
+          "display": "Taylor Demo"
+        },
+        "effectiveDateTime": "2026-11-04T08:10:00Z",
+        "device": {
+          "reference": "Device/119574d7-2ce0-4bc1-839a-b76ec6eddc58",
+          "display": "Omron 5 Series Upper Arm"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 117,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 75,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/306f1130-bc75-4711-a2b8-747da94af0ad"
+      }
+    }
+  ]
+}
