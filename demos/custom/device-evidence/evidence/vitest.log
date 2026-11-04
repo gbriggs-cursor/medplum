@@ -1,0 +1,25 @@
+
+ RUN  v4.1.12 /agent/repos/medplum/demos/custom/device-evidence
+      Coverage enabled with v8
+
+
+ Test Files  3 passed (3)
+      Tests  11 passed (11)
+   Start at  04:32:57
+   Duration  2.86s (transform 1.77s, setup 2.37s, import 1.66s, tests 455ms, environment 1.21s)
+
+ % Coverage report from v8
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   88.88 |    81.25 |   96.87 |   88.11 |                   
+ ...mary-parser.ts |   96.77 |       92 |     100 |   96.55 | 57                
+ generate.ts       |   85.71 |    74.35 |   95.45 |   84.72 | 375,389-400       
+-------------------|---------|----------|---------|---------|-------------------
+
+=============================== Coverage summary ===============================
+Statements   : 88.88% ( 96/108 )
+Branches     : 81.25% ( 52/64 )
+Functions    : 96.87% ( 31/32 )
+Lines        : 88.11% ( 89/101 )
+================================================================================

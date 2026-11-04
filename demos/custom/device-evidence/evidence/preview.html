@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Acme Cardio patch v2 — device evidence</title>
+  <style>
+    @font-face { font-family: EvidenceSans; src: url("./DejaVuSans.ttf") format("truetype"); }
+    body { font-family: EvidenceSans, "DejaVu Sans", Arial, sans-serif; margin: 32px; color: #1a1a1a; word-spacing: 0.15em; }
+    h1 { margin-bottom: 4px; }
+    .banner { background: #fff3cd; border: 1px solid #e6c35c; padding: 8px 12px; margin: 16px 0; }
+    table { border-collapse: collapse; width: 100%; font-size: 14px; }
+    th, td { border: 1px solid #ccc; padding: 6px 8px; text-align: left; }
+    th { background: #f4f6f8; }
+    .vitals { display: grid; grid-template-columns: 160px 1fr; gap: 8px 16px; max-width: 640px; }
+    .vitals div { padding: 8px 10px; background: #f7f9fb; border: 1px solid #d9e1ea; }
+    .label { color: #5c6b7a; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <h1>Foo Medical Vitals — Acme Cardio patch v2</h1>
+  <p>Synthetic cohort only. Seed 20251104. No PHI.</p>
+  <div class="banner">Every resource is tagged synthetic. This is fictional wearable-patch data for a Boston Scientific CDx demo.</div>
+  <h2>Patient 01 as Foo Medical would list it</h2>
+  <div class="vitals">
+    <div class="label">Patient</div><div>Ada Synthetica (acme-cardio-patient-01)</div>
+    <div class="label">Device</div><div>Acme Cardio patch v2 · ACP2-2025-01</div>
+    <div class="label">Blood pressure panel</div><div>136 mm[Hg] / 89 mm[Hg]</div>
+    <div class="label">EKG study (formatted)</div><div>89 /min / 138 ms / 89 ms / 437 ms / Normal sinus rhythm /</div>
+    <div class="label">Parsed heart rate</div><div>89 /min</div>
+    <div class="label">Parsed interpretation</div><div>Normal sinus rhythm</div>
+    <div class="label">SampledData points</div><div>250 Lead II samples</div>
+  </div>
+  <h2>Full synthetic cohort</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Patient</th>
+        <th>Device serial</th>
+        <th>Blood pressure</th>
+        <th>ECG heart rate</th>
+        <th>Interpretation</th>
+        <th>Samples</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ada Synthetica</td>
+        <td>ACP2-2025-01</td>
+        <td>136 mm[Hg] / 89 mm[Hg]</td>
+        <td>89 /min</td>
+        <td>Normal sinus rhythm</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Blake Synthetica</td>
+        <td>ACP2-2025-02</td>
+        <td>119 mm[Hg] / 79 mm[Hg]</td>
+        <td>77 /min</td>
+        <td>Normal sinus rhythm</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Casey Synthetica</td>
+        <td>ACP2-2025-03</td>
+        <td>119 mm[Hg] / 74 mm[Hg]</td>
+        <td>56 /min</td>
+        <td>Sinus bradycardia</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Drew Synthetica</td>
+        <td>ACP2-2025-04</td>
+        <td>118 mm[Hg] / 70 mm[Hg]</td>
+        <td>83 /min</td>
+        <td>Normal sinus rhythm</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Eden Synthetica</td>
+        <td>ACP2-2025-05</td>
+        <td>121 mm[Hg] / 74 mm[Hg]</td>
+        <td>64 /min</td>
+        <td>Normal sinus rhythm</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Finley Synthetica</td>
+        <td>ACP2-2025-06</td>
+        <td>118 mm[Hg] / 73 mm[Hg]</td>
+        <td>54 /min</td>
+        <td>Sinus bradycardia</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Gray Synthetica</td>
+        <td>ACP2-2025-07</td>
+        <td>141 mm[Hg] / 81 mm[Hg]</td>
+        <td>54 /min</td>
+        <td>Sinus bradycardia</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Harper Synthetica</td>
+        <td>ACP2-2025-08</td>
+        <td>134 mm[Hg] / 83 mm[Hg]</td>
+        <td>61 /min</td>
+        <td>Normal sinus rhythm</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Indigo Synthetica</td>
+        <td>ACP2-2025-09</td>
+        <td>130 mm[Hg] / 75 mm[Hg]</td>
+        <td>54 /min</td>
+        <td>Sinus bradycardia</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Jules Synthetica</td>
+        <td>ACP2-2025-10</td>
+        <td>119 mm[Hg] / 84 mm[Hg]</td>
+        <td>55 /min</td>
+        <td>Sinus bradycardia</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Kai Synthetica</td>
+        <td>ACP2-2025-11</td>
+        <td>108 mm[Hg] / 71 mm[Hg]</td>
+        <td>58 /min</td>
+        <td>Sinus bradycardia</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Logan Synthetica</td>
+        <td>ACP2-2025-12</td>
+        <td>116 mm[Hg] / 73 mm[Hg]</td>
+        <td>69 /min</td>
+        <td>Normal sinus rhythm</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Morgan Synthetica</td>
+        <td>ACP2-2025-13</td>
+        <td>110 mm[Hg] / 71 mm[Hg]</td>
+        <td>64 /min</td>
+        <td>Normal sinus rhythm</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Noel Synthetica</td>
+        <td>ACP2-2025-14</td>
+        <td>118 mm[Hg] / 85 mm[Hg]</td>
+        <td>58 /min</td>
+        <td>Sinus bradycardia</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Oakley Synthetica</td>
+        <td>ACP2-2025-15</td>
+        <td>140 mm[Hg] / 87 mm[Hg]</td>
+        <td>98 /min</td>
+        <td>Sinus tachycardia</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Parker Synthetica</td>
+        <td>ACP2-2025-16</td>
+        <td>123 mm[Hg] / 88 mm[Hg]</td>
+        <td>63 /min</td>
+        <td>Normal sinus rhythm</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Quinn Synthetica</td>
+        <td>ACP2-2025-17</td>
+        <td>113 mm[Hg] / 74 mm[Hg]</td>
+        <td>97 /min</td>
+        <td>Sinus tachycardia</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Reese Synthetica</td>
+        <td>ACP2-2025-18</td>
+        <td>138 mm[Hg] / 92 mm[Hg]</td>
+        <td>74 /min</td>
+        <td>Normal sinus rhythm</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Sage Synthetica</td>
+        <td>ACP2-2025-19</td>
+        <td>136 mm[Hg] / 74 mm[Hg]</td>
+        <td>73 /min</td>
+        <td>Normal sinus rhythm</td>
+        <td>250</td>
+      </tr>
+<tr>
+        <td>Tatum Synthetica</td>
+        <td>ACP2-2025-20</td>
+        <td>135 mm[Hg] / 69 mm[Hg]</td>
+        <td>86 /min</td>
+        <td>Normal sinus rhythm</td>
+        <td>250</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
