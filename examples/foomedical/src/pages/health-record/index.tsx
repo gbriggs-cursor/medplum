@@ -23,6 +23,7 @@ const sideMenu = {
         href: `/health-record/vitals/${id}`,
       })),
     },
+    { name: 'My Devices', href: '/health-record/devices' },
   ],
 };
 
