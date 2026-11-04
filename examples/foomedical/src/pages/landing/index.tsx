@@ -8,29 +8,26 @@ import DoctorImage from '../../img/landingPage/doctor.jpg';
 import EngineeringImage from '../../img/landingPage/engineering.jpg';
 import LabImage from '../../img/landingPage/laboratory.jpg';
 import WorkingEnvironmentImage from '../../img/landingPage/working-environment.jpg';
+import { copy } from '../../theme';
 import { Header } from './Header';
 import classes from './index.module.css';
 
 const features = [
   {
-    title: 'Comprehsive Care Plans',
-    description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+    title: 'Comprehensive care plans',
+    description: 'See the next steps your care team recommends after a companion diagnostic result.',
   },
   {
-    title: 'No hidden fees',
-    description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+    title: 'Clear access',
+    description: 'Review results and messages in one place, with no hidden portal fees in this demo.',
   },
   {
-    title: '24/7 Messaging',
-    description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+    title: '24/7 messaging',
+    description: 'Send questions to your care team when you need them — this demo uses synthetic data only.',
   },
   {
     title: 'Clinically rigorous',
-    description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+    description: 'Built for companion diagnostics workflows with the same structure your clinic already uses.',
   },
 ];
 
@@ -45,20 +42,19 @@ export function LandingPage(): JSX.Element {
           <div className={classes.inner}>
             <div className={classes.content}>
               <Title className={classes.title}>
-                An extraordinary
+                {copy.landingTitleLead}
                 <br />
-                <span className={classes.highlight}>doctor&apos;s office</span>
+                <span className={classes.highlight}>{copy.landingTitleHighlight}</span>
               </Title>
               <Text size="lg" c="dimmed" mt="md">
-                This is not actually a medical practice, this is a sample open source application for developers to
-                clone, customize and run.
+                {copy.landingSubtitle}
               </Text>
               <Group mt={30}>
                 <Button radius="xl" size="md" className={classes.control}>
-                  Get started
+                  {copy.getStarted}
                 </Button>
                 <Button variant="default" radius="xl" size="md" className={classes.control}>
-                  Source code
+                  {copy.sourceCode}
                 </Button>
               </Group>
             </div>
@@ -67,16 +63,15 @@ export function LandingPage(): JSX.Element {
         </Container>
         <Container>
           <div className={classes.inner}>
-            <div style={{ width: 500 }}>
+            <div className={classes.healthcareCopy}>
               <Title order={3} fw={500} c={theme.primaryColor} mb="lg">
-                Healthcare
+                {copy.landingHealthcareEyebrow}
               </Title>
               <Title order={1} fw={500} mb="md">
-                A better way to get care
+                {copy.landingHealthcareTitle}
               </Title>
               <Text size="xl" c="gray">
-                Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in
-                accusamus quisquam.
+                {copy.landingHealthcareBody}
               </Text>
             </div>
             <img className={classes.heroImage3} src={LabImage} alt="Laboratory" />

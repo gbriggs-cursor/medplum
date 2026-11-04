@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 import { Anchor, Container, Divider, SimpleGrid, Stack, Text } from '@mantine/core';
 import type { JSX } from 'react';
+import { footerCopyright } from '../theme';
 import classes from './Footer.module.css';
 
 export function Footer(): JSX.Element {
@@ -10,7 +11,7 @@ export function Footer(): JSX.Element {
       <div className={classes.inner}>
         <Container p="xl">
           <Stack gap="xl">
-            <SimpleGrid cols={4}>
+            <SimpleGrid cols={{ base: 1, sm: 2, md: 4 }}>
               <Anchor href="https://www.medplum.com/docs/tutorials/api-basics/create-fhir-data">Getting started</Anchor>
               <Anchor href="https://www.medplum.com/docs/tutorials">Playing with Medplum</Anchor>
               <Anchor href="https://github.com/medplum/foomedical">Open Source</Anchor>
@@ -18,7 +19,7 @@ export function Footer(): JSX.Element {
             </SimpleGrid>
             <Divider />
             <Text c="dimmed" size="sm">
-              &copy; {new Date().getFullYear()} Foo Medical, Inc. All rights reserved.
+              {footerCopyright(new Date().getFullYear())}
             </Text>
           </Stack>
         </Container>

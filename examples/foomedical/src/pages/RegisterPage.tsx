@@ -1,15 +1,18 @@
 // SPDX-FileCopyrightText: Copyright Orangebot, Inc. and Medplum contributors
 // SPDX-License-Identifier: Apache-2.0
-import { BackgroundImage, Box, SimpleGrid } from '@mantine/core';
+import { BackgroundImage, Box, SimpleGrid, Stack } from '@mantine/core';
 import { RegisterForm } from '@medplum/react';
 import type { JSX } from 'react';
 import { useNavigate } from 'react-router';
+import { Logo } from '../components/Logo';
+import LabImage from '../img/landingPage/laboratory.jpg';
+import { copy } from '../theme';
 
 export function RegisterPage(): JSX.Element {
   const navigate = useNavigate();
   return (
-    <SimpleGrid cols={2}>
-      <Box pt={100} pb={200}>
+    <SimpleGrid cols={{ base: 1, md: 2 }}>
+      <Box pt={100} pb={200} px="md">
         <RegisterForm
           type="patient"
           projectId={import.meta.env.FOOMEDICAL_PROJECT_ID}
@@ -19,10 +22,13 @@ export function RegisterPage(): JSX.Element {
           onSuccess={() => navigate('/')?.catch(console.error)}
           onSignIn={() => navigate('/signin')?.catch(console.error)}
         >
-          <h2>Register with Foo Medical</h2>
+          <Stack align="center" gap="sm" mb="md">
+            <Logo width={200} />
+            <h2>{copy.registerTitle}</h2>
+          </Stack>
         </RegisterForm>
       </Box>
-      <BackgroundImage src="https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1567&amp;q=80" />
+      <BackgroundImage visibleFrom="md" src={LabImage} mih="100vh" />
     </SimpleGrid>
   );
 }

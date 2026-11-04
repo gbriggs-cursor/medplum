@@ -19,7 +19,6 @@ import {
   Text,
   ThemeIcon,
   UnstyledButton,
-  useMantineTheme,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import {
@@ -34,6 +33,7 @@ import {
 import type { JSX } from 'react';
 import { useNavigate } from 'react-router';
 import { Logo } from '../../components/Logo';
+import { brand } from '../../theme';
 import classes from './Header.module.css';
 
 const mockdata = [
@@ -73,13 +73,12 @@ export function Header(): JSX.Element {
   const navigate = useNavigate();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
-  const theme = useMantineTheme();
 
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
       <Group wrap="nowrap" align="flex-start">
         <ThemeIcon size={34} variant="default" radius="md">
-          <item.icon style={{ width: rem(22), height: rem(22) }} color={theme.primaryColor} />
+          <item.icon style={{ width: rem(22), height: rem(22) }} color={brand.colors.brandPrimary} />
         </ThemeIcon>
         <div>
           <Text size="sm" fw={500}>
@@ -99,7 +98,7 @@ export function Header(): JSX.Element {
         <Container h="100%">
           <Group justify="space-between" h="100%">
             <UnstyledButton className={classes.logoButton} onClick={() => navigate('/')?.catch(console.error)}>
-              <Logo width={240} />
+              <Logo width={180} />
             </UnstyledButton>
 
             <Group style={{ height: '100%' }} gap={0} className={classes.hiddenMobile}>

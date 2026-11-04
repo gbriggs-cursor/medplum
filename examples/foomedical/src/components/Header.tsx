@@ -16,6 +16,7 @@ import { useState } from 'react';
 import type { JSX } from 'react';
 import { Link, useNavigate } from 'react-router';
 import classes from './Header.module.css';
+import { brand } from '../theme';
 import { Logo } from './Logo';
 
 const navigation = [
@@ -37,7 +38,7 @@ export function Header(): JSX.Element {
       <Container>
         <div className={classes.inner}>
           <UnstyledButton className={classes.logoButton} onClick={() => navigate('/')?.catch(console.error)}>
-            <Logo width={240} />
+            <Logo width={180} />
           </UnstyledButton>
           <Group gap={5} className={classes.links}>
             {navigation.map((link) => (
@@ -76,7 +77,7 @@ export function Header(): JSX.Element {
                 Settings
               </Menu.Item>
               <Menu.Item
-                leftSection={<IconLink size={16} color={theme.colors.teal[6]} stroke={1.5} />}
+                leftSection={<IconLink size={16} color={brand.colors.action40} stroke={1.5} />}
                 onClick={() => navigate('/smart-health-links')?.catch(console.error)}
               >
                 SMART Health Links
