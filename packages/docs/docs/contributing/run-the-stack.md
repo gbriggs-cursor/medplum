@@ -15,7 +15,7 @@ Follow these instructions to get the complete Medplum stack running directly on 
 ## Prerequisites
 
 1. **[Git](https://git-scm.com/)**
-2. **[Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)** (version 22+ required)
+2. **[Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)** (`>=22.22.0 <23` or `>=24.2.0 <25`, matching the root `package.json` `engines` field)
 3. **[Docker](https://docs.docker.com/engine/install/)**
 4. [Clone the Medplum repo](./local-dev-setup#clone-the-repo)
 
@@ -49,25 +49,22 @@ When running these services on your local machine you can either use Docker (rec
 
 ### Using Docker (Recommended)
 
-Use the supplied `docker-compose.yml` file to run PostgreSQL and Redis background services. These services will be deployed with all necessary medplum configurations and database migrations.
+Use the supplied `docker-compose.yml` file to run PostgreSQL 16 and Redis 7. These are background services only — this file does not start the Medplum API or app. For a one-command API plus app, see [Running the Full Medplum Stack in Docker](/docs/self-hosting/running-full-medplum-stack-in-docker).
 
-From your root `medplum` directory run
-
-```sh
-docker-compose up
-```
-
-If this doesn't work for you, try
+From your root `medplum` directory run:
 
 ```sh
 docker compose up
 ```
 
+(`docker-compose` with a hyphen still works on some installs. Prefer the Compose V2 plugin shown above.)
+
 This will:
 
-1. Start the PostgreSQL server in a container
-2. Set up the appropriate configurations (see [postgres.conf](https://github.com/medplum/medplum/blob/main/postgres/postgres.conf))
-3. Create databases (see [init_test.sql](https://github.com/medplum/medplum/blob/main/postgres/init_test.sql))
+1. Start PostgreSQL 16 on port `5432` with user, password, and database `medplum` (Postgres creates that database because `POSTGRES_USER=medplum`)
+2. Apply [postgres.conf](https://github.com/medplum/medplum/blob/main/postgres/postgres.conf)
+3. Run [init_test.sql](https://github.com/medplum/medplum/blob/main/postgres/init_test.sql), which creates the extra `medplum_test` and `medplum_test_shard_1` databases used by unit tests — not the application database
+4. Start Redis 7 on port `6379` with password `medplum`
 
 When `docker-compose` completes, you should see something like this in your terminal:
 
@@ -94,8 +91,8 @@ Where `medplum-postgres-1` can be replaced with the name of your postgres docker
 
 If you'd prefer to install the dependencies directly, you can find installation instructions for the required services below:
 
-1. [Install PostgreSQL](https://www.postgresql.org/download/) (version 13+ required)
-2. [Install Redis](https://redis.io/download) (version 6+ required)
+1. [Install PostgreSQL](https://www.postgresql.org/download/) (16 is what `docker-compose.yml` ships; 13 may still work for older local installs)
+2. [Install Redis](https://redis.io/download) (7 required; Redis 6 support was dropped in Medplum v5)
 
 After that, you will have to update the file `packages/server/medplum.config.json`
 
@@ -137,8 +134,7 @@ cd packages/server
 npm run dev
 ```
 
-This will seed the medplum database with an example project and user.
-The email and password for the example user are:
+This seeds the Super Admin user and project. It does not create sample patients. The email and password are:
 
 |              |                   |
 | ------------ | ----------------- |
@@ -161,7 +157,7 @@ If you get an error such as `error: role "medplum" does not exist` or `password 
 
 ### Run the Medplum Web App
 
-Lastly, you can start the Medplum Wep App.
+Lastly, you can start the Medplum Web App.
 
 From your root `medplum` directory run:
 
@@ -172,4 +168,4 @@ npm run dev
 
 You can access the app at [http://localhost:3000/](http://localhost:3000/)
 
-The default username is admin@example.com, default password medplum_admin.
+The default username is `admin@example.com`, default password `medplum_admin`. After you can sign in, follow [Run Medplum locally with synthetic test patients](./local-dev-sample-data) to create a regular project and import sample patients.

@@ -14,7 +14,28 @@ The Docker Compose file includes the following containers:
 - [medplum/medplum-server](https://hub.docker.com/r/medplum/medplum-server)
 - [medplum/medplum-app](https://hub.docker.com/r/medplum/medplum-app)
 
-All the containers present are configured to work together out of the box with no configuration. Just run the commands above and go to http://localhost:3000 to get started with your own full-stack local instance of Medplum!
+All the containers present are configured to work together out of the box with no configuration.
+
+| Service | URL |
+| ------- | --- |
+| App | [http://localhost:3000](http://localhost:3000) |
+| API | [http://localhost:8103](http://localhost:8103) |
+| Health check | [http://localhost:8103/healthcheck](http://localhost:8103/healthcheck) |
+
+Wait until the health check returns `{"ok":true,...}` before signing in. First boot seeds structure definitions and can take several minutes.
+
+Then sign in with the seeded Super Admin account:
+
+| | |
+| --- | --- |
+| **Email** | `admin@example.com` |
+| **Password** | `medplum_admin` |
+
+That account is created on first start when `defaultSuperAdminEmail` / `defaultSuperAdminPassword` are unset. It lands in the Super Admin project, which has no sample patients. To create a regular project, issue a local client, and load synthetic patients, see [Run Medplum locally with synthetic test patients](/docs/contributing/local-dev-sample-data).
+
+Point any SDK or bot at `http://localhost:8103/` (`baseUrl`). Using the hosted API URL with a locally created client returns `Invalid client`.
+
+The compose file sets `MEDPLUM_MAX_JSON_SIZE=1mb`. Raise that value if you import Synthea-sized bundles. See the [sample-data how-to](/docs/contributing/local-dev-sample-data#larger-synthea-populations).
 
 :::info[]
 
