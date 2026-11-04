@@ -30,6 +30,10 @@
   }
 }
 
+.heroName {
+  color: var(--mantine-primary-color-filled);
+}
+
 .heroTitle {
   color: var(--mantine-color-white);
   font-size: 50px;

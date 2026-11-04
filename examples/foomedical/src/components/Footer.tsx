@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 import { Anchor, Container, Divider, SimpleGrid, Stack, Text } from '@mantine/core';
 import type { JSX } from 'react';
+import { brand } from '../theme';
 import classes from './Footer.module.css';
 
 export function Footer(): JSX.Element {
@@ -18,7 +19,7 @@ export function Footer(): JSX.Element {
             </SimpleGrid>
             <Divider />
             <Text c="dimmed" size="sm">
-              &copy; {new Date().getFullYear()} Foo Medical, Inc. All rights reserved.
+              &copy; {new Date().getFullYear()} {brand.companyName}. All rights reserved.
             </Text>
           </Stack>
         </Container>

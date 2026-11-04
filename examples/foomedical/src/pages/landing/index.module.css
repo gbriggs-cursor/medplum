@@ -82,6 +82,13 @@
   right: -128px;
   width: 448px;
   height: 448px;
+
+  @mixin smaller-than $mantine-breakpoint-md {
+    position: static;
+    width: 288px;
+    height: 288px;
+    margin-top: var(--mantine-spacing-xl);
+  }
 }
 
 .heroImage4 {
@@ -95,6 +102,13 @@
     width: 288px;
     height: 288px;
   }
+}
+
+.sectionCopy {
+  width: 100%;
+  max-width: 500px;
+  position: relative;
+  z-index: 1;
 }
 
 .featureSection {

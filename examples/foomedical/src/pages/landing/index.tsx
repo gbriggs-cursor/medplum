@@ -8,6 +8,7 @@ import DoctorImage from '../../img/landingPage/doctor.jpg';
 import EngineeringImage from '../../img/landingPage/engineering.jpg';
 import LabImage from '../../img/landingPage/laboratory.jpg';
 import WorkingEnvironmentImage from '../../img/landingPage/working-environment.jpg';
+import { brand } from '../../theme';
 import { Header } from './Header';
 import classes from './index.module.css';
 
@@ -45,13 +46,12 @@ export function LandingPage(): JSX.Element {
           <div className={classes.inner}>
             <div className={classes.content}>
               <Title className={classes.title}>
-                An extraordinary
+                {brand.landingTitleLead}
                 <br />
-                <span className={classes.highlight}>doctor&apos;s office</span>
+                <span className={classes.highlight}>{brand.landingTitleHighlight}</span>
               </Title>
               <Text size="lg" c="dimmed" mt="md">
-                This is not actually a medical practice, this is a sample open source application for developers to
-                clone, customize and run.
+                {brand.landingSubtitle}
               </Text>
               <Group mt={30}>
                 <Button radius="xl" size="md" className={classes.control}>
@@ -67,12 +67,12 @@ export function LandingPage(): JSX.Element {
         </Container>
         <Container>
           <div className={classes.inner}>
-            <div style={{ width: 500 }}>
+            <div className={classes.sectionCopy}>
               <Title order={3} fw={500} c={theme.primaryColor} mb="lg">
-                Healthcare
+                {brand.landingSectionEyebrow}
               </Title>
               <Title order={1} fw={500} mb="md">
-                A better way to get care
+                {brand.landingSectionTitle}
               </Title>
               <Text size="xl" c="gray">
                 Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam voluptatum cupiditate veritatis in
