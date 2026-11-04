@@ -5,7 +5,15 @@ sidebar_label: Import Sample Data
 
 # Import Sample Data
 
-When starting development, it can be really useful to have some sample data to work with, and to test your application. This tutorial will walk you through importing sample FHIR data into your Medplum project to aid in building a realistic application.
+When starting development, it can be really useful to have some sample data to work with, and to test your application. This tutorial will walk you through importing **synthetic** FHIR data into your Medplum project to aid in building a realistic application.
+
+For a local server (Docker or from source), use [Run Medplum locally with synthetic test patients](/docs/contributing/local-dev-sample-data) instead. That page has the seeded admin login, the localhost batch tool, and a small bundle that does not depend on Google Drive.
+
+:::danger[Synthetic data only]
+
+Do not upload real patient charts, production exports, or any PHI into hosted or local projects used for development.
+
+:::
 
 :::tip[The Medplum App]
 
@@ -28,7 +36,9 @@ Download one or both of the following files:
 
 ## Batch Upload Tool
 
-Log into Medplum and navigate to the [batch create](https://app.medplum.com/batch) tool. Upload the files you downloaded in the previous section.
+Log into Medplum and navigate to the [batch create](https://app.medplum.com/batch) tool (or [http://localhost:3000/batch](http://localhost:3000/batch) on a local stack). Upload the files you downloaded in the previous section.
+
+Hosted Medplum and a default Docker stack both cap synchronous JSON bodies at `maxJsonSize` (`1mb` unless you raise it). A 50+ MB Synthea bundle needs a higher `maxJsonSize` or an [async batch](/docs/fhir-datastore/processing-async-bundles).
 
 :::caution[Note]
 

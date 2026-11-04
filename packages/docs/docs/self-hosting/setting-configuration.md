@@ -33,7 +33,7 @@ You can provide a path to a JSON file (e.g., `medplum.config.json`) when startin
 To start the server with this configuration, you would run:
 
 ```bash
-nodepackages/server/dist/index.js medplum.config.json
+node packages/server/dist/index.js file:medplum.config.json
 ```
 
 ## Environment Variables
