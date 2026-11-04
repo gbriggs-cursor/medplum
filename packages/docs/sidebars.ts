@@ -11,6 +11,7 @@ const sidebars: SidebarsConfig = {
     },
     'home',
     'fhir-basics',
+    'contributing/local-dev-sample-data',
     {
       type: 'category',
       label: 'Tutorials',
@@ -545,6 +546,7 @@ const sidebars: SidebarsConfig = {
         { type: 'doc', id: 'self-hosting/install-from-scratch' },
         { type: 'doc', id: 'self-hosting/running-medplum-docker-container' },
         { type: 'doc', id: 'self-hosting/running-full-medplum-stack-in-docker' },
+        { type: 'doc', id: 'contributing/local-dev-sample-data' },
         { type: 'html', value: '<strong class="menu__link">Configuring</strong>' },
         { type: 'doc', id: 'self-hosting/server-config' },
         { type: 'doc', id: 'self-hosting/setting-configuration' },

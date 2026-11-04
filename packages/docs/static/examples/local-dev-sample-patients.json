@@ -1,0 +1,158 @@
+{
+  "resourceType": "Bundle",
+  "id": "local-dev-sample-patients",
+  "type": "batch",
+  "meta": {
+    "tag": [
+      {
+        "system": "https://medplum.com/fhir/CodeSystem/sample-data",
+        "code": "synthetic",
+        "display": "Synthetic sample data — not real patients"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:11111111-1111-4111-8111-111111111111",
+      "request": { "method": "PUT", "url": "Practitioner/local-dev-practitioner-morgan" },
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "local-dev-practitioner-morgan",
+        "name": [{ "family": "Chen", "given": ["Morgan"], "prefix": ["Dr"] }],
+        "gender": "unknown",
+        "telecom": [{ "system": "email", "value": "morgan.chen@example.com" }]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:22222222-2222-4222-8222-222222222222",
+      "request": { "method": "PUT", "url": "Patient/local-dev-patient-avery" },
+      "resource": {
+        "resourceType": "Patient",
+        "id": "local-dev-patient-avery",
+        "identifier": [
+          {
+            "system": "http://example.org/mrn",
+            "value": "SYN-10001"
+          }
+        ],
+        "name": [{ "family": "Patel", "given": ["Avery"], "use": "official" }],
+        "gender": "female",
+        "birthDate": "1988-04-12",
+        "telecom": [{ "system": "email", "value": "avery.patel@example.com" }],
+        "address": [
+          {
+            "line": ["100 Example Ave"],
+            "city": "Springfield",
+            "state": "MA",
+            "postalCode": "01101",
+            "country": "US"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:33333333-3333-4333-8333-333333333333",
+      "request": { "method": "PUT", "url": "Patient/local-dev-patient-jordan" },
+      "resource": {
+        "resourceType": "Patient",
+        "id": "local-dev-patient-jordan",
+        "identifier": [
+          {
+            "system": "http://example.org/mrn",
+            "value": "SYN-10002"
+          }
+        ],
+        "name": [{ "family": "Kim", "given": ["Jordan"], "use": "official" }],
+        "gender": "male",
+        "birthDate": "1994-11-03",
+        "telecom": [{ "system": "email", "value": "jordan.kim@example.com" }]
+      }
+    },
+    {
+      "request": { "method": "POST", "url": "Condition" },
+      "resource": {
+        "resourceType": "Condition",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "38341003",
+              "display": "Hypertensive disorder"
+            }
+          ],
+          "text": "Hypertension"
+        },
+        "subject": { "reference": "Patient/local-dev-patient-avery", "display": "Avery Patel" },
+        "recorder": { "reference": "Practitioner/local-dev-practitioner-morgan" }
+      }
+    },
+    {
+      "request": { "method": "POST", "url": "Observation" },
+      "resource": {
+        "resourceType": "Observation",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ]
+        },
+        "subject": { "reference": "Patient/local-dev-patient-avery", "display": "Avery Patel" },
+        "effectiveDateTime": "2024-06-15T14:30:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [{ "system": "http://loinc.org", "code": "8480-6", "display": "Systolic blood pressure" }]
+            },
+            "valueQuantity": {
+              "value": 128,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [{ "system": "http://loinc.org", "code": "8462-4", "display": "Diastolic blood pressure" }]
+            },
+            "valueQuantity": {
+              "value": 82,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -73,7 +73,7 @@ just reopen it once it's linked, or open the issue first if one doesn't exist ye
 a pull request directly by adding the `vouched` label to it; labeled pull requests aren't closed automatically.
 Medplum team members and established community contributors aren't subject to this requirement.
 
-**Ready to get started writing code?** First things first, you need to [clone the Medplum repository](./contributing/local-dev-setup).
+**Ready to get started writing code?** First things first, you need to [clone the Medplum repository](./contributing/local-dev-setup). To sign in locally and load synthetic test patients, see [Run Medplum locally with synthetic test patients](./contributing/local-dev-sample-data).
 
 :::note[Legal Note]
 
