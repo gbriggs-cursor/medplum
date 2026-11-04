@@ -1,0 +1,1139 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "meta": {
+    "tag": [
+      {
+        "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+        "code": "synthetic",
+        "display": "Synthetic"
+      }
+    ],
+    "security": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+        "code": "HTEST",
+        "display": "test health data"
+      }
+    ]
+  },
+  "identifier": {
+    "system": "https://foomedical.example/identifier/synthetic",
+    "value": "home-bp-cuff-bundle"
+  },
+  "timestamp": "2026-11-04T00:00:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:9b2e4c71-0a18-4d5f-8e33-6c1f0a7d2b54",
+      "request": {
+        "method": "PUT",
+        "url": "Patient?identifier=https://foomedical.example/identifier/synthetic|jordan-foo"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/identifier/synthetic",
+            "value": "jordan-foo"
+          }
+        ],
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Foo",
+            "given": [
+              "Jordan"
+            ]
+          }
+        ],
+        "gender": "unknown",
+        "birthDate": "1988-06-15"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3f8a0d26-7c91-4e2b-9a54-1d6e8b0c3f72",
+      "request": {
+        "method": "PUT",
+        "url": "Device?identifier=https://foomedical.example/identifier/synthetic|home-bp-cuff-1"
+      },
+      "resource": {
+        "resourceType": "Device",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/identifier/synthetic",
+            "value": "home-bp-cuff-1"
+          }
+        ],
+        "status": "active",
+        "manufacturer": "Foo Medical",
+        "deviceName": [
+          {
+            "name": "Foo Medical Home BP Cuff",
+            "type": "user-friendly-name"
+          }
+        ],
+        "modelNumber": "FM-BP-1",
+        "type": {
+          "text": "Home blood pressure cuff"
+        },
+        "patient": {
+          "reference": "urn:uuid:9b2e4c71-0a18-4d5f-8e33-6c1f0a7d2b54",
+          "display": "Jordan Foo"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c0a11a10-1b21-4c31-8d41-5e61f071a001",
+      "request": {
+        "method": "PUT",
+        "url": "Observation?identifier=https://foomedical.example/identifier/synthetic|home-bp-cuff-reading-1"
+      },
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/identifier/synthetic",
+            "value": "home-bp-cuff-reading-1"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "urn:uuid:9b2e4c71-0a18-4d5f-8e33-6c1f0a7d2b54",
+          "display": "Jordan Foo"
+        },
+        "device": {
+          "reference": "urn:uuid:3f8a0d26-7c91-4e2b-9a54-1d6e8b0c3f72",
+          "display": "Foo Medical Home BP Cuff"
+        },
+        "effectiveDateTime": "2026-10-06T08:12:00Z",
+        "issued": "2026-10-06T08:12:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic Blood Pressure"
+                }
+              ],
+              "text": "Diastolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 78,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic Blood Pressure"
+                }
+              ],
+              "text": "Systolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 122,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c0a11a10-1b21-4c31-8d41-5e61f071a002",
+      "request": {
+        "method": "PUT",
+        "url": "Observation?identifier=https://foomedical.example/identifier/synthetic|home-bp-cuff-reading-2"
+      },
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/identifier/synthetic",
+            "value": "home-bp-cuff-reading-2"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "urn:uuid:9b2e4c71-0a18-4d5f-8e33-6c1f0a7d2b54",
+          "display": "Jordan Foo"
+        },
+        "device": {
+          "reference": "urn:uuid:3f8a0d26-7c91-4e2b-9a54-1d6e8b0c3f72",
+          "display": "Foo Medical Home BP Cuff"
+        },
+        "effectiveDateTime": "2026-10-09T07:58:00Z",
+        "issued": "2026-10-09T07:58:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic Blood Pressure"
+                }
+              ],
+              "text": "Diastolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 76,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic Blood Pressure"
+                }
+              ],
+              "text": "Systolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 118,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c0a11a10-1b21-4c31-8d41-5e61f071a003",
+      "request": {
+        "method": "PUT",
+        "url": "Observation?identifier=https://foomedical.example/identifier/synthetic|home-bp-cuff-reading-3"
+      },
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/identifier/synthetic",
+            "value": "home-bp-cuff-reading-3"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "urn:uuid:9b2e4c71-0a18-4d5f-8e33-6c1f0a7d2b54",
+          "display": "Jordan Foo"
+        },
+        "device": {
+          "reference": "urn:uuid:3f8a0d26-7c91-4e2b-9a54-1d6e8b0c3f72",
+          "display": "Foo Medical Home BP Cuff"
+        },
+        "effectiveDateTime": "2026-10-12T08:05:00Z",
+        "issued": "2026-10-12T08:05:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic Blood Pressure"
+                }
+              ],
+              "text": "Diastolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 80,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic Blood Pressure"
+                }
+              ],
+              "text": "Systolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 124,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c0a11a10-1b21-4c31-8d41-5e61f071a004",
+      "request": {
+        "method": "PUT",
+        "url": "Observation?identifier=https://foomedical.example/identifier/synthetic|home-bp-cuff-reading-4"
+      },
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/identifier/synthetic",
+            "value": "home-bp-cuff-reading-4"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "urn:uuid:9b2e4c71-0a18-4d5f-8e33-6c1f0a7d2b54",
+          "display": "Jordan Foo"
+        },
+        "device": {
+          "reference": "urn:uuid:3f8a0d26-7c91-4e2b-9a54-1d6e8b0c3f72",
+          "display": "Foo Medical Home BP Cuff"
+        },
+        "effectiveDateTime": "2026-10-15T08:21:00Z",
+        "issued": "2026-10-15T08:21:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic Blood Pressure"
+                }
+              ],
+              "text": "Diastolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 75,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic Blood Pressure"
+                }
+              ],
+              "text": "Systolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 119,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c0a11a10-1b21-4c31-8d41-5e61f071a005",
+      "request": {
+        "method": "PUT",
+        "url": "Observation?identifier=https://foomedical.example/identifier/synthetic|home-bp-cuff-reading-5"
+      },
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/identifier/synthetic",
+            "value": "home-bp-cuff-reading-5"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "urn:uuid:9b2e4c71-0a18-4d5f-8e33-6c1f0a7d2b54",
+          "display": "Jordan Foo"
+        },
+        "device": {
+          "reference": "urn:uuid:3f8a0d26-7c91-4e2b-9a54-1d6e8b0c3f72",
+          "display": "Foo Medical Home BP Cuff"
+        },
+        "effectiveDateTime": "2026-10-18T07:49:00Z",
+        "issued": "2026-10-18T07:49:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic Blood Pressure"
+                }
+              ],
+              "text": "Diastolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 82,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic Blood Pressure"
+                }
+              ],
+              "text": "Systolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 126,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c0a11a10-1b21-4c31-8d41-5e61f071a006",
+      "request": {
+        "method": "PUT",
+        "url": "Observation?identifier=https://foomedical.example/identifier/synthetic|home-bp-cuff-reading-6"
+      },
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/identifier/synthetic",
+            "value": "home-bp-cuff-reading-6"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "urn:uuid:9b2e4c71-0a18-4d5f-8e33-6c1f0a7d2b54",
+          "display": "Jordan Foo"
+        },
+        "device": {
+          "reference": "urn:uuid:3f8a0d26-7c91-4e2b-9a54-1d6e8b0c3f72",
+          "display": "Foo Medical Home BP Cuff"
+        },
+        "effectiveDateTime": "2026-10-21T08:03:00Z",
+        "issued": "2026-10-21T08:03:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic Blood Pressure"
+                }
+              ],
+              "text": "Diastolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 77,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic Blood Pressure"
+                }
+              ],
+              "text": "Systolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 121,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c0a11a10-1b21-4c31-8d41-5e61f071a007",
+      "request": {
+        "method": "PUT",
+        "url": "Observation?identifier=https://foomedical.example/identifier/synthetic|home-bp-cuff-reading-7"
+      },
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/identifier/synthetic",
+            "value": "home-bp-cuff-reading-7"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "urn:uuid:9b2e4c71-0a18-4d5f-8e33-6c1f0a7d2b54",
+          "display": "Jordan Foo"
+        },
+        "device": {
+          "reference": "urn:uuid:3f8a0d26-7c91-4e2b-9a54-1d6e8b0c3f72",
+          "display": "Foo Medical Home BP Cuff"
+        },
+        "effectiveDateTime": "2026-10-24T08:14:00Z",
+        "issued": "2026-10-24T08:14:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic Blood Pressure"
+                }
+              ],
+              "text": "Diastolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 81,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic Blood Pressure"
+                }
+              ],
+              "text": "Systolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 128,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c0a11a10-1b21-4c31-8d41-5e61f071a008",
+      "request": {
+        "method": "PUT",
+        "url": "Observation?identifier=https://foomedical.example/identifier/synthetic|home-bp-cuff-reading-8"
+      },
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/identifier/synthetic",
+            "value": "home-bp-cuff-reading-8"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "urn:uuid:9b2e4c71-0a18-4d5f-8e33-6c1f0a7d2b54",
+          "display": "Jordan Foo"
+        },
+        "device": {
+          "reference": "urn:uuid:3f8a0d26-7c91-4e2b-9a54-1d6e8b0c3f72",
+          "display": "Foo Medical Home BP Cuff"
+        },
+        "effectiveDateTime": "2026-10-27T07:55:00Z",
+        "issued": "2026-10-27T07:55:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic Blood Pressure"
+                }
+              ],
+              "text": "Diastolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 74,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic Blood Pressure"
+                }
+              ],
+              "text": "Systolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 120,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c0a11a10-1b21-4c31-8d41-5e61f071a009",
+      "request": {
+        "method": "PUT",
+        "url": "Observation?identifier=https://foomedical.example/identifier/synthetic|home-bp-cuff-reading-9"
+      },
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/identifier/synthetic",
+            "value": "home-bp-cuff-reading-9"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "urn:uuid:9b2e4c71-0a18-4d5f-8e33-6c1f0a7d2b54",
+          "display": "Jordan Foo"
+        },
+        "device": {
+          "reference": "urn:uuid:3f8a0d26-7c91-4e2b-9a54-1d6e8b0c3f72",
+          "display": "Foo Medical Home BP Cuff"
+        },
+        "effectiveDateTime": "2026-10-30T08:08:00Z",
+        "issued": "2026-10-30T08:08:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic Blood Pressure"
+                }
+              ],
+              "text": "Diastolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 79,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic Blood Pressure"
+                }
+              ],
+              "text": "Systolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 123,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c0a11a10-1b21-4c31-8d41-5e61f071a00a",
+      "request": {
+        "method": "PUT",
+        "url": "Observation?identifier=https://foomedical.example/identifier/synthetic|home-bp-cuff-reading-10"
+      },
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/identifier/synthetic",
+            "value": "home-bp-cuff-reading-10"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "urn:uuid:9b2e4c71-0a18-4d5f-8e33-6c1f0a7d2b54",
+          "display": "Jordan Foo"
+        },
+        "device": {
+          "reference": "urn:uuid:3f8a0d26-7c91-4e2b-9a54-1d6e8b0c3f72",
+          "display": "Foo Medical Home BP Cuff"
+        },
+        "effectiveDateTime": "2026-11-02T08:00:00Z",
+        "issued": "2026-11-02T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic Blood Pressure"
+                }
+              ],
+              "text": "Diastolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 73,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic Blood Pressure"
+                }
+              ],
+              "text": "Systolic Blood Pressure"
+            },
+            "valueQuantity": {
+              "value": 117,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
