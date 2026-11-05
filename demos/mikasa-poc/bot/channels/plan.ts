@@ -1,10 +1,10 @@
 import { defineChannel, POST } from "@grok/agent-sdk/channels";
 import { z } from "zod";
 
-type PlanState = { requestId: string };
+type PlanState = { requestId: string; task: string };
 
 export default defineChannel<PlanState>({
-  state: { requestId: "" },
+  state: { requestId: "", task: "" },
   routes: [
     POST("/request", {
       description: "Request an implementation plan for a task",
@@ -16,7 +16,7 @@ export default defineChannel<PlanState>({
         waitUntil(
           send(`Plan this task: ${body.task}`, {
             continuationToken: `plan:${body.requestId}`,
-            state: { requestId: body.requestId },
+            state: { requestId: body.requestId, task: body.task },
             title: `Plan ${body.requestId}`,
           })
         );
@@ -33,7 +33,8 @@ export default defineChannel<PlanState>({
         kind: "plan",
         key: `request:${channel.state.requestId}`,
         title: `Reply for request ${channel.state.requestId}`,
-        data: { task: channel.state.requestId, plan: event.data.text },
+        // requestId lives in the key; data.task holds the original task text.
+        data: { task: channel.state.task, plan: event.data.text },
       });
     },
   },
