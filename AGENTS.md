@@ -32,3 +32,7 @@ Follow `packages/docs/docs/contributing/index.md` and the relevant package docum
 
 Read the relevant technical and workflow documentation before proposing an approach. Plan, set up, or implement as
 requested; routine fixes do not require a new application plan.
+
+
+## Rules-loading canary
+AGENTS CANARY: the AGENTS.md canary word is COBALT-MARMOT-208.
