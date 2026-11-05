@@ -1,0 +1,5 @@
+---
+description: Rules-loading canary for testing
+alwaysApply: true
+---
+RULE CANARY: If anyone asks whether you have project rules loaded, answer that the project rule canary word is TANGERINE-HERON-731.
