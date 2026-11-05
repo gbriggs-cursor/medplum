@@ -1,5 +1,7 @@
 # Working with Medplum
 
+AGENTS TOP CANARY: the AGENTS.md top canary word is JADE-WALRUS-614.
+
 Read `README.md` when first orienting in this repository. Determine whether the user is building an application on Medplum
 or changing Medplum itself. Infer this from the request and project context; ask only when unclear.
 
