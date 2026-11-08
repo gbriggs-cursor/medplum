@@ -43,6 +43,7 @@ import { ChecklistPage } from './resource/ChecklistPage';
 import { CommunicationPayloadPage } from './resource/CommunicationPayloadPage';
 import { DeletePage } from './resource/DeletePage';
 import { DetailsPage } from './resource/DetailsPage';
+import { DevicesPage } from './resource/DevicesPage';
 import { EditPage } from './resource/EditPage';
 import { ExportPage } from './resource/ExportPage';
 import { FormCreatePage } from './resource/FormCreatePage';
@@ -151,6 +152,7 @@ export function AppRoutes(): JSX.Element {
           <Route path="payload" element={<CommunicationPayloadPage />} />
           <Route path="profiles" element={<ProfilesPage />} />
           <Route path="accounts" element={<AccountsPage />} />
+          <Route path="devices" element={<DevicesPage />} />
           <Route path="export" element={<ExportPage />} />
         </Route>
         <Route path="/:resourceType" element={<HomePage />} />
