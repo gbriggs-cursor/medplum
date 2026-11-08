@@ -1,0 +1,17 @@
+
+ RUN  v4.1.12 /agent/repos/medplum/demos/payments-checkout
+
+ ✓ |payments-checkout| src/checkout.test.ts > checkout promo validation > places the discounted order when promo-rules is slower than 3 seconds 4ms
+ ✓ |payments-checkout| src/checkout.test.ts > checkout promo validation > places the discounted order when a cache miss returns within the budget 1ms
+ ✓ |payments-checkout| src/checkout.test.ts > checkout promo validation > places a full-price order without calling promo-rules 1ms
+ ✓ |payments-checkout| src/checkout.test.ts > checkout promo validation > returns 503 when an uncached promo-rules call exceeds the checkout budget 1ms
+ ✓ |payments-checkout| src/checkout.test.ts > checkout promo validation > applies a stale cached promo while promo-rules is slow 1ms
+ ✓ |payments-checkout| src/checkout.test.ts > checkout promo validation > returns 400 for an unknown promo code 1ms
+ ✓ |payments-checkout| src/checkout.test.ts > checkout promo validation > v2.14 sync validation returns 502 when promo-rules exceeds 3 seconds 1ms
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  16:42:00
+   Duration  152ms (transform 39ms, setup 0ms, import 51ms, tests 10ms, environment 0ms)
+
+EXIT:0
