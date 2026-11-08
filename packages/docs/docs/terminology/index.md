@@ -9,6 +9,10 @@ example, [LOINC][loinc] is a code system for laboratory tests, measurements, sur
 observable healthcare data. Code systems are often defined by large, national or international organizations; however,
 FHIR makes it simple to leverage the same systems for your own locally-defined code systems as well.
 
+LOINC, RxNorm, SNOMED CT concepts, ICD-10-CM, and CPT are not in a new project. `$expand` and `$lookup` fail
+until the code system is loaded or linked. See
+[Loading Standard Terminologies](/docs/terminology/loading-standard-terminologies).
+
 [loinc]: /docs/careplans/loinc
 
 ## Representing Coded Values
