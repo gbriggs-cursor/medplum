@@ -64,6 +64,35 @@ describe('Search matching', () => {
     ).toBe(false);
   });
 
+  test('Matches _project as an id or a Project reference', () => {
+    const projectA = '11111111-1111-4111-8111-111111111111';
+    const projectB = '22222222-2222-4222-8222-222222222222';
+    const patientA: Patient = { resourceType: 'Patient', id: 'patient-a', meta: { project: projectA } };
+    const patientB: Patient = { resourceType: 'Patient', id: 'patient-b', meta: { project: projectB } };
+    const projectFilter = (value: string, operator: Operator = Operator.EQUALS): SearchRequest => ({
+      resourceType: 'Patient',
+      filters: [{ code: '_project', operator, value }],
+    });
+
+    expect(matchesSearchRequest(patientA, projectFilter(projectA))).toBe(true);
+    expect(matchesSearchRequest(patientA, projectFilter(`Project/${projectA}`))).toBe(true);
+    expect(matchesSearchRequest(patientA, projectFilter(`Project/${projectA},Project/${projectB}`))).toBe(true);
+    expect(matchesSearchRequest(patientA, projectFilter(projectB))).toBe(false);
+    expect(matchesSearchRequest(patientA, projectFilter(`Project/${projectB}`))).toBe(false);
+    expect(matchesSearchRequest(patientB, projectFilter(`Project/${projectB}`))).toBe(true);
+    expect(matchesSearchRequest(patientA, projectFilter(`Project/${projectA}`, Operator.NOT))).toBe(false);
+    expect(matchesSearchRequest(patientB, projectFilter(`Project/${projectA}`, Operator.NOT))).toBe(true);
+    expect(
+      matchesSearchRequest(
+        { resourceType: 'Patient', meta: { tag: [{ code: projectA }] } },
+        {
+          resourceType: 'Patient',
+          filters: [{ code: '_tag', operator: Operator.EQUALS, value: `Project/${projectA}` }],
+        }
+      )
+    ).toBe(false);
+  });
+
   test('Unknown filter', () => {
     expect(
       matchesSearchRequest(

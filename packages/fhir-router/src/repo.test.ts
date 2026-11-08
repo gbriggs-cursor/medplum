@@ -142,6 +142,29 @@ describe('MemoryRepository', () => {
     expect(emptyResources).toHaveLength(0);
   });
 
+  test('Search _project by id or Project reference', async () => {
+    const projectRepo = new MemoryRepository();
+    const projectA = randomUUID();
+    const projectB = randomUUID();
+    const patientA = await projectRepo.createResource<Patient>({
+      resourceType: 'Patient',
+      meta: { project: projectA },
+    });
+    const patientB = await projectRepo.createResource<Patient>({
+      resourceType: 'Patient',
+      meta: { project: projectB },
+    });
+
+    const byId = await projectRepo.searchResources<Patient>(parseSearchRequest(`Patient?_project=${projectA}`));
+    const byReference = await projectRepo.searchResources<Patient>(
+      parseSearchRequest(`Patient?_project=Project/${projectA}`)
+    );
+
+    expect(byId.map((patient) => patient.id)).toEqual([patientA.id]);
+    expect(byReference.map((patient) => patient.id)).toEqual([patientA.id]);
+    expect(byReference.some((patient) => patient.id === patientB.id)).toBe(false);
+  });
+
   test('searchOne helper', async () => {
     const family = randomUUID();
     const patient = await repo.createResource<Patient>({ resourceType: 'Patient', name: [{ family }] });
