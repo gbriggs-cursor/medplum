@@ -1,0 +1,10 @@
+{
+  "name": "@medplum-demo/payments-checkout",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "demo": "tsx src/demo.ts",
+    "test": "vitest run --config vitest.config.ts"
+  }
+}
