@@ -117,7 +117,7 @@ function matchesReferenceFilter(searchParam: SearchParameter, typedValues: Typed
 
 function matchesTokenFilter(typedValues: TypedValue[], filter: Filter): boolean {
   const resourceValues = convertToSearchableTokens(typedValues);
-  const filterValues = splitSearchOnComma(filter.value);
+  const filterValues = splitSearchOnComma(filter.value).map((value) => projectIdFilterValue(filter.code, value));
   const negated = isNegated(filter.operator);
   for (const resourceValue of resourceValues) {
     for (const filterValue of filterValues) {
@@ -130,6 +130,14 @@ function matchesTokenFilter(typedValues: TypedValue[], filter: Filter): boolean 
   // If "not equals" and no matches, then return true
   // If "equals" and no matches, then return false
   return negated;
+}
+
+// meta.project stores the id. A Project/ reference is the same filter the server accepts.
+function projectIdFilterValue(code: string, value: string): string {
+  if (code === '_project' && value.startsWith('Project/')) {
+    return value.slice('Project/'.length);
+  }
+  return value;
 }
 
 function matchesTokenValue(resourceValue: SearchableToken, filterValue: string): boolean {

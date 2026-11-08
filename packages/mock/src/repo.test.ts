@@ -116,6 +116,27 @@ describe('Mock Repo', () => {
     }
   });
 
+  test('Search _project by id or Project reference', async () => {
+    const client = new MockClient({ seedDefaultData: false });
+    const projectA = randomUUID();
+    const projectB = randomUUID();
+    const patientA = await client.createResource<Patient>({
+      resourceType: 'Patient',
+      meta: { project: projectA },
+    });
+    const patientB = await client.createResource<Patient>({
+      resourceType: 'Patient',
+      meta: { project: projectB },
+    });
+
+    const byId = await client.searchResources('Patient', `_project=${projectA}`);
+    const byReference = await client.searchResources('Patient', `_project=Project/${projectA}`);
+
+    expect(byId.map((patient) => patient.id)).toEqual([patientA.id]);
+    expect(byReference.map((patient) => patient.id)).toEqual([patientA.id]);
+    expect(byReference.some((patient) => patient.id === patientB.id)).toBe(false);
+  });
+
   test('Date filters', async () => {
     const client = new MockClient();
 
