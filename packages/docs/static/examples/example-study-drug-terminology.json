@@ -1,0 +1,59 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:example-study-drug-codesystem",
+      "request": {
+        "method": "POST",
+        "url": "CodeSystem",
+        "ifNoneExist": "url=http://example.com/fhir/CodeSystem/example-study-drug"
+      },
+      "resource": {
+        "resourceType": "CodeSystem",
+        "url": "http://example.com/fhir/CodeSystem/example-study-drug",
+        "name": "ExampleStudyDrug",
+        "title": "Example study drug",
+        "status": "active",
+        "content": "complete",
+        "caseSensitive": true,
+        "concept": [
+          {
+            "code": "EX-100",
+            "display": "Example compound A 10 mg tablet"
+          },
+          {
+            "code": "EX-200",
+            "display": "Example compound B 20 mg tablet"
+          },
+          {
+            "code": "EX-300",
+            "display": "Example compound C 5 mg capsule"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:example-study-drug-valueset",
+      "request": {
+        "method": "POST",
+        "url": "ValueSet",
+        "ifNoneExist": "url=http://example.com/fhir/ValueSet/example-study-drug"
+      },
+      "resource": {
+        "resourceType": "ValueSet",
+        "url": "http://example.com/fhir/ValueSet/example-study-drug",
+        "name": "ExampleStudyDrug",
+        "title": "Example study drug",
+        "status": "active",
+        "compose": {
+          "include": [
+            {
+              "system": "http://example.com/fhir/CodeSystem/example-study-drug"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

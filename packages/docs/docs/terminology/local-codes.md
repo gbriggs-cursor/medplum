@@ -100,8 +100,9 @@ If the code system includes a hierarchy or other properties, you can use those t
 ## Importing Larger Systems
 
 If the number of codes in the code system is too large to fit in a single resource, Medplum server supports a
-proprietary [`$import` operation](/docs/api/fhir/operations/codesystem-import) that allows Super Admin users to load
-codes and their metadata into the database. Although codes imported this way will not appear in the `CodeSystem`
+proprietary [`$import` operation](/docs/api/fhir/operations/codesystem-import) that allows a project admin or a
+super admin to load codes and their metadata into the database. A project admin can import only into a
+`CodeSystem` in their own project. Although codes imported this way will not appear in the `CodeSystem`
 resource, they are available for use as normal. To use this method, create the `CodeSystem` as normal, but set
 `CodeSystem.content` to `not-present`:
 
@@ -115,3 +116,7 @@ resource, they are available for use as normal. To use this method, create the `
 ```
 
 Subsequently, codes and any metadata properties associated with them can be sent in batches using the operation endpoint.
+
+For LOINC, RxNorm, SNOMED CT, ICD-10-CM, and other licensed dictionaries, follow
+[Loading Standard Terminologies](/docs/terminology/loading-standard-terminologies). Create the `CodeSystem`
+before calling `$import`, send concepts before properties that refer to them, and keep each call to 1,000 codes.

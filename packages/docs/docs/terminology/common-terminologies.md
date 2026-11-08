@@ -6,7 +6,7 @@ This guide provides a comprehensive reference for the most commonly used code sy
 
 The following table shows the most commonly used code system for each clinical application area:
 
-| Clinical Application             | Primary Code System | CodeSystem URL                                | Description                                                     | Full System Valueset                             |
+| Clinical Application             | Primary Code System | CodeSystem URL                                | Description                                                     | ValueSet canonical                               |
 | -------------------------------- | ------------------- | --------------------------------------------- | --------------------------------------------------------------- | ------------------------------------------------ |
 | Clinical Findings                | LOINC               | `http://loinc.org`                            | Laboratory tests, vital signs, clinical observations            | `http://loinc.org/vs`                            |
 | Medications                      | RXNorm              | `http://www.nlm.nih.gov/research/umls/rxnorm` | Normalized medication names                                     | `http://www.nlm.nih.gov/research/umls/rxnorm/vs` |
@@ -14,6 +14,15 @@ The following table shows the most commonly used code system for each clinical a
 | Diagnoses                        | ICD-10-CM           | `http://hl7.org/fhir/sid/icd-10-cm`           | International Classification of Diseases, Clinical Modification | `http://hl7.org/fhir/sid/icd-10-cm/vs`           |
 | Vaccines                         | CVX                 | `http://hl7.org/fhir/sid/cvx`                 | Vaccine Administered                                            | `http://hl7.org/fhir/sid/cvx/vs`                 |
 | Allergies (food + environmental) | SNOMED CT           | `http://snomed.info/sct`                      | Substance and clinical concepts                                 | `http://snomed.info/sct/vs`                      |
+
+:::warning[ValueSet canonicals are not preloaded]
+
+The **ValueSet canonical** column is a URL to bind after that code system has been loaded or linked. Server seed
+does not create these ValueSets. On a fresh project, `ValueSet/$expand?url=http://loinc.org/vs` returns
+`ValueSet http://loinc.org/vs not found`. See
+[Loading Standard Terminologies](/docs/terminology/loading-standard-terminologies).
+
+:::
 
 ## Use-case Specific ValueSets
 
