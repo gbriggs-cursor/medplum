@@ -7,7 +7,7 @@
 // <tree> is a checkout root (the repository, or the remediation workspace).
 
 import { execFileSync, spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -52,6 +52,7 @@ if (!existsSync(reportFile)) {
   process.exit(2);
 }
 const report = JSON.parse(readFileSync(reportFile, 'utf8'));
+unlinkSync(reportFile);
 const assertions = report.testResults.flatMap((f) => f.assertionResults);
 
 const rows = [];
