@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Key-free L13 run. Replays checked-in turns, executes their SQL locally, writes findings.
 
-No CURSOR_API_KEY, no network. Uses the installed 10k pack when it is on disk, otherwise the
-committed fixture-100. Scores with the private score.py when that file and the answer key are present.
+No CURSOR_API_KEY, no network. Uses the installed 10k pack when it is on disk, otherwise the committed fixture-100.
+Everything it learns about the data comes from the queries; outputs go to the gitignored run/ directory.
+Scoring goes through score.py, which prints "answer key absent" when the private key is not on this machine.
 """
 
 import datetime as dt
@@ -18,12 +19,15 @@ sys.path.insert(0, SHARED)
 TURNS = os.path.join(HERE, "fixtures", "replay", "turns.json")
 RUN = os.path.join(HERE, "run")
 LABEL = "REPLAY (no key)"
+LATE_DAYS = 90
+COHORT_LABELS = {
+    "snomed_44054006": "naive: SNOMED 44054006 only",
+    "t2dm_value_set": "headline: SNOMED 44054006 or ICD-10-CM E11.9",
+}
 
 
 def resolve_pack():
-    candidate = os.environ.get("L13_PACK_DIR") or os.path.expanduser(
-        "~/.cache/medplum-demos/synthea-analytics-10k"
-    )
+    candidate = os.environ.get("L13_PACK_DIR") or os.path.expanduser("~/.cache/medplum-demos/synthea-analytics-10k")
     manifest = os.path.join(candidate, "MANIFEST.json")
     duck = os.path.join(candidate, "analytics.duckdb")
     if os.path.exists(manifest) or os.path.exists(duck):
@@ -43,33 +47,24 @@ def cell(value):
         return value.isoformat()
     if isinstance(value, float):
         return f"{value:.4g}"
+    if isinstance(value, (list, tuple)):
+        return "[" + ", ".join(cell(v) for v in value) + "]"
     return str(value)
 
 
-def as_list(value):
-    if value is None:
-        return []
-    if isinstance(value, str):
-        text = value.strip()
-        if text.startswith("[") and text.endswith("]"):
-            inner = text[1:-1].strip()
-            if not inner:
-                return []
-            return [part.strip().strip("'\"") for part in inner.split(",")]
-        return [text]
-    return [cell(v) for v in value]
+def as_date(value):
+    return value.date() if isinstance(value, dt.datetime) else value
 
 
-def rows_of(con, sql):
-    cur = con.execute(sql)
+def rows_of(con, sql, params=None):
+    cur = con.execute(sql, params or [])
     names = [d[0] for d in cur.description]
     return names, [dict(zip(names, row)) for row in cur.fetchall()]
 
 
 def table(names, rows, limit=24):
-    shown = rows[:limit]
     lines = [" | ".join(names), " | ".join("---" for _ in names)]
-    for row in shown:
+    for row in rows[:limit]:
         lines.append(" | ".join(cell(row[name]) for name in names))
     if len(rows) > limit:
         lines.append(f"... {len(rows) - limit} more rows")
@@ -79,7 +74,7 @@ def table(names, rows, limit=24):
 def longest_internal_gap(rows):
     by_model = {}
     for row in rows:
-        by_model.setdefault(row["model"], set()).add(row["reading_date"])
+        by_model.setdefault(row["model"], set()).add(as_date(row["reading_date"]))
     if not by_model:
         return None
     span_start = min(min(days) for days in by_model.values())
@@ -92,7 +87,7 @@ def longest_internal_gap(rows):
             if day not in days:
                 missing.append(day)
             elif missing:
-                if missing[0] != span_start and missing[-1] != span_end and (best is None or len(missing) > best[0]):
+                if missing[0] != span_start and (best is None or len(missing) > best[0]):
                     best = (len(missing), model, missing[0], missing[-1] + dt.timedelta(days=1))
                 missing = []
             day += dt.timedelta(days=1)
@@ -102,22 +97,49 @@ def longest_internal_gap(rows):
     return {"model": model, "start_date": start.isoformat(), "end_date": end_exclusive.isoformat(), "days": length}
 
 
-def answer_keys_dir():
-    candidates = []
-    if os.environ.get("L13_ANSWER_KEYS_DIR"):
-        candidates.append(os.environ["L13_ANSWER_KEYS_DIR"])
-    candidates.append(os.path.expanduser("~/.cache/medplum-demos/answer-keys/analytics-10k"))
-    candidates.append(os.path.join(os.path.dirname(REPO), "answer-keys", "analytics-10k"))
-    for path in candidates:
-        if os.path.isdir(path):
-            return path
-    return None
+def largest_fall(rows):
+    """(previous, current) month rows with the largest month-over-month fall in control_pct_raw, or None."""
+    best = None
+    for prev, cur in zip(rows, rows[1:]):
+        fall = prev["control_pct_raw"] - cur["control_pct_raw"]
+        if fall > 0 and (best is None or fall > best[0]):
+            best = (fall, prev, cur)
+    return best[1:] if best else None
 
 
-def key_file(pack):
-    if "10k" in pack:
-        return "answer-key-10k.json"
-    return "answer-key-fixture-100.json"
+class Session:
+    def __init__(self, con):
+        self.con = con
+        self.results = {}
+        self.log = []
+        self.report = []
+
+    def run(self, qid, sql, params=None):
+        names, rows = rows_of(self.con, sql, params)
+        self.results[qid] = rows
+        self.log.append({"id": qid, "sql": sql, "params": params or []})
+        rendered = table(names, rows)
+        print(f"\nOFFLINE {qid} ({len(rows)} rows)")
+        print(rendered)
+        self.report += [f"### OFFLINE {qid} ({len(rows)} rows)", "", rendered, ""]
+        return rows
+
+    def sql_for(self, *ids):
+        return [q["sql"] for q in self.log if q["id"] in ids]
+
+
+def control_table(by_cohort, months):
+    lines = ["cohort | conversion | " + " | ".join(months), "--- | --- | " + " | ".join("---" for _ in months)]
+    for cohort in ("snomed_44054006", "t2dm_value_set"):
+        rows = by_cohort.get(cohort, {})
+        for conv, n_key, pct_key in (("raw (as stored)", "controlled_raw_n", "control_pct_raw"),
+                                     ("converted (NGSP %)", "controlled_n", "control_pct")):
+            cells = []
+            for m in months:
+                r = rows.get(m)
+                cells.append(f"{r[pct_key]}% ({r[n_key]}/{r['n']})" if r else "no rows")
+            lines.append(f"{COHORT_LABELS[cohort]} | {conv} | " + " | ".join(cells))
+    return "\n".join(lines)
 
 
 def main():
@@ -136,156 +158,156 @@ def main():
     print(f"pack: {pack} ({source}) at {pack_dir} via {store}")
     print(f"turns: {os.path.relpath(TURNS, REPO)} label={doc['label']}")
 
-    results = {}
-    query_log = []
-    report = [LABEL, "", f"Pack: {pack} ({source})", f"Store: {store}", ""]
+    s = Session(con)
+    s.report += [LABEL, "", f"Pack: {pack} ({source})", f"Store: {store}", ""]
     for turn in doc["turns"]:
         print(f"\n--- {turn['role']} {LABEL} ---")
         print(turn["content"])
-        report.append(f"## {turn['role']}")
-        report.append("")
-        report.append(turn["content"])
-        report.append("")
+        s.report += [f"## {turn['role']}", "", turn["content"], ""]
         for query in turn.get("queries", []):
-            names, rows = rows_of(con, query["sql"])
-            results[query["id"]] = rows
-            query_log.append(query)
-            rendered = table(names, rows)
-            print(f"\nOFFLINE {query['id']} ({len(rows)} rows)")
-            print(rendered)
-            report.append(f"### OFFLINE {query['id']} ({len(rows)} rows)")
-            report.append("")
-            report.append(rendered)
-            report.append("")
+            s.run(query["id"], query["sql"])
 
-    unit = results["unit-start"][0]
-    start = unit["start_date"]
-    orgs = [row["organization_id"] for row in results["unit-orgs"]]
-    monthly = results["monthly-control"]
-    ym = lambda d: cell(d)[:7]
-    if start is None:
-        answer = "No HbA1c results in mmol/mol turned up in this pack, so the unit-change explanation is not supported here."
-    else:
-        cut = start.replace(day=1)
-        before = [row for row in monthly if row["month"] < cut]
-        after = [row for row in monthly if row["month"] >= cut]
-        if before and after:
-            prev, nxt = before[-1], after[0]
-            drop = (
-                f" Naive control goes from {prev['control_pct_naive']}% in {ym(prev['month'])} "
-                f"to {nxt['control_pct_naive']}% in {ym(nxt['month'])}. Converted to percent first, "
-                f"{ym(nxt['month'])} control is {nxt['control_pct']}% ({nxt['controlled_n']}/{nxt['n']})."
-            )
-        else:
-            drop = " This pack has no type 2 diabetes HbA1c results in the months around the change, so control is not recomputed here."
-        answer = (
-            f"HbA1c control drops because {unit['n']} results switch to mmol/mol starting {cell(start)} "
-            f"and the dashboard still treats every value as a percent.{drop}"
-        )
+    window_start = as_date(s.results["window"][0]["window_start"])
+    late_after = window_start + dt.timedelta(days=LATE_DAYS) if window_start else None
+    is_late = lambda d: late_after is not None and d is not None and as_date(d) > late_after
 
-    dup_ids = []
-    for row in results["duplicates"]:
-        dup_ids.extend(as_list(row["ids"]))
-    coding = results["coding"][0]
-    codes = as_list(coding["codes"])
-    gap = longest_internal_gap(results["device-days"])
+    print(f"\n--- follow-ups {LABEL} (values first seen after {cell(late_after)}) ---")
+    s.report += [f"## follow-ups (values first seen more than {LATE_DAYS} days after {cell(window_start)})", ""]
+    late_units = [r for r in s.results["hba1c-units"] if is_late(r["first_seen"])]
+    for i, u in enumerate(late_units):
+        u["orgs"] = [r["organization_id"] for r in s.run(
+            f"hba1c-unit-orgs-{i}",
+            "select distinct e.organization as organization_id from observations o join encounters e on e.id = o.encounter "
+            "where o.code = '4548-4' and o.units = ? order by 1",
+            [u["units"]],
+        )]
+    late_systems = [r for r in s.results["condition-systems"] if is_late(r["first_seen"])]
+    for i, sysrow in enumerate(late_systems):
+        sysrow["code_list"] = [r["code"] for r in s.run(
+            f"condition-system-codes-{i}",
+            "select code, min(start)::date as first_seen, count(*) as n from conditions where system = ? group by 1 order by 1",
+            [sysrow["system"]],
+        )]
+
+    by_cohort = {}
+    for r in s.results["monthly-control"]:
+        by_cohort.setdefault(r["cohort"], {})[cell(r["month"])[:7]] = r
+    naive_rows = sorted(by_cohort.get("snomed_44054006", {}).values(), key=lambda r: r["month"])
+    fall = largest_fall(naive_rows)
 
     findings = []
-    if start is not None:
-        findings.append(
-            {
-                "title": "HbA1c unit change to mmol/mol",
-                "summary": f"{unit['n']} LOINC 4548-4 rows are mmol/mol from {cell(start)}, so a '% under 7' rule misreads them.",
-                "start_date": cell(start),
-                "end_date": None,
-                "entities": orgs,
-                "sql": [q["sql"] for q in query_log if q["id"] in ("monthly-control", "unit-start", "unit-orgs")],
-            }
-        )
+    for u, i in zip(late_units, range(len(late_units))):
+        findings.append({
+            "title": f"HbA1c results in a new unit: {u['units']}",
+            "summary": f"{u['n']} LOINC 4548-4 rows are in {u['units']} from {cell(u['first_seen'])}; a threshold on stored values misreads them.",
+            "start_date": cell(u["first_seen"]),
+            "end_date": None,
+            "entities": u["orgs"],
+            "sql": s.sql_for("hba1c-units", f"hba1c-unit-orgs-{i}", "monthly-control"),
+        })
+    dup_ids = [str(i) for row in s.results["duplicates"] for i in row["ids"]]
     if dup_ids:
-        findings.append(
-            {
-                "title": "Duplicate patients",
-                "summary": f"{len(results['duplicates'])} registration pairs share an SSN and birth date.",
-                "start_date": None,
-                "end_date": None,
-                "entities": dup_ids,
-                "sql": [q["sql"] for q in query_log if q["id"] == "duplicates"],
-            }
-        )
-    if coding["start_date"] is not None:
-        findings.append(
-            {
-                "title": "Coding drift to ICD-10-CM",
-                "summary": f"New conditions use ICD-10-CM ({', '.join(codes)}) from {cell(coding['start_date'])}.",
-                "start_date": cell(coding["start_date"]),
-                "end_date": None,
-                "entities": codes,
-                "sql": [q["sql"] for q in query_log if q["id"] == "coding"],
-            }
-        )
+        findings.append({
+            "title": "Duplicate patients",
+            "summary": f"{len(s.results['duplicates'])} registration groups share an SSN and birth date.",
+            "start_date": None,
+            "end_date": None,
+            "entities": dup_ids,
+            "sql": s.sql_for("duplicates"),
+        })
+    for sysrow, i in zip(late_systems, range(len(late_systems))):
+        findings.append({
+            "title": f"New condition code system: {sysrow['system']}",
+            "summary": f"Conditions coded in {sysrow['system']} ({', '.join(sysrow['code_list'])}) appear from {cell(sysrow['first_seen'])}; a cohort keyed on one code system misses them.",
+            "start_date": cell(sysrow["first_seen"]),
+            "end_date": None,
+            "entities": sysrow["code_list"],
+            "sql": s.sql_for("condition-systems", f"condition-system-codes-{i}"),
+        })
+    gap = longest_internal_gap(s.results["device-days"])
     if gap:
-        findings.append(
-            {
-                "title": "Device reading gap",
-                "summary": f"{gap['model']} sends no readings from {gap['start_date']} to {gap['end_date']}.",
-                "start_date": gap["start_date"],
-                "end_date": gap["end_date"],
-                "entities": [gap["model"]],
-                "sql": [q["sql"] for q in query_log if q["id"] == "device-days"],
-            }
-        )
+        findings.append({
+            "title": "Device reading gap",
+            "summary": f"{gap['model']} sends no readings from {gap['start_date']} to {gap['end_date']} ({gap['days']} days).",
+            "start_date": gap["start_date"],
+            "end_date": gap["end_date"],
+            "entities": [gap["model"]],
+            "sql": s.sql_for("device-days"),
+        })
 
-    payload = {"mode": LABEL, "pack": pack, "pack_source": source, "answer": answer, "findings": findings}
+    if fall:
+        pm, cm = cell(fall[0]["month"])[:7], cell(fall[1]["month"])[:7]
+        months = [pm, cm]
+        head = by_cohort.get("t2dm_value_set", {}).get(cm)
+        answer = (
+            f"Naive (SNOMED 44054006 only, values as stored, the dashboard's view): {fall[0]['control_pct_raw']}% in {pm} "
+            f"to {fall[1]['control_pct_raw']}% in {cm}. "
+        )
+        if head:
+            answer += (
+                f"Headline (SNOMED 44054006 or ICD-10-CM E11.9, values in NGSP percent): {cm} control is "
+                f"{head['control_pct']}% ({head['controlled_n']}/{head['n']}). "
+            )
+        causes = [f["summary"] for f in findings if f["title"].startswith(("HbA1c results in a new unit", "New condition code system"))]
+        answer += " ".join(causes) if causes else "No late-appearing unit or code system explains the fall."
+    else:
+        months = sorted({m for rows in by_cohort.values() for m in rows})[-2:]
+        answer = "Naive HbA1c control does not fall month over month in this pack's window, so there is no drop to explain here."
+
+    labeled = control_table(by_cohort, months) if months else "No type 2 diabetes HbA1c rows in the window."
+    print(f"\nOFFLINE control (naive vs headline)\n{labeled}")
+    print(f"\nOFFLINE answer: {answer}")
+    s.report += ["## Control, naive vs headline", "", labeled, "", "## Answer", "", answer, ""]
+
     os.makedirs(RUN, exist_ok=True)
     findings_path = os.path.join(RUN, "findings.json")
     with open(findings_path, "w") as fh:
-        json.dump(payload, fh, indent=2)
+        json.dump({"mode": LABEL, "pack": pack, "pack_source": source, "answer": answer, "findings": findings}, fh, indent=2)
         fh.write("\n")
     with open(os.path.join(RUN, "queries.sql"), "w") as fh:
         fh.write("-- shared HbA1c control definition (demos/_shared/data-packs/synthea-analytics/hba1c-control.sql)\n")
         fh.write(open(shared.SQL_PATH).read().rstrip() + "\n\n")
-        for query in query_log:
-            fh.write(f"-- {query['id']}\n{query['sql']};\n\n")
+        for q in s.log:
+            params = f" -- params: {q['params']}" if q["params"] else ""
+            fh.write(f"-- {q['id']}{params}\n{q['sql']};\n\n")
 
-    print(f"\nOFFLINE answer: {answer}")
-    report.append("## Answer")
-    report.append("")
-    report.append(answer)
-    report.append("")
+    proc = subprocess.run(
+        [sys.executable, os.path.join(HERE, "score.py"), findings_path, "--pack-dir", pack_dir],
+        capture_output=True,
+        text=True,
+    )
+    score_text = ((proc.stdout or "") + (proc.stderr or "")).rstrip()
+    print(f"\nOFFLINE score.py\n{score_text}")
+    s.report += ["## Score", "", score_text, ""]
 
-    keys = answer_keys_dir()
-    score_py = os.path.join(keys, "score.py") if keys else ""
-    key_path = os.path.join(keys, key_file(pack)) if keys else ""
-    if keys and os.path.isfile(score_py) and os.path.isfile(key_path):
-        proc = subprocess.run(
-            [sys.executable, score_py, key_path, findings_path, "--pack-dir", pack_dir, "--shared-dir", SHARED],
-            capture_output=True,
-            text=True,
-        )
-        score_text = (proc.stdout or "") + (proc.stderr or "")
-        print(f"\nOFFLINE score.py ({os.path.basename(key_path)})")
-        print(score_text.rstrip())
-        report.append("## Score")
-        report.append("")
-        report.append("OFFLINE score.py")
-        report.append("")
-        report.append(score_text.rstrip())
-        report.append("")
-        if proc.returncode != 0:
-            sys.exit(proc.returncode)
-    else:
-        note = "score.py not run: private answer key is not on this machine (answer-keys://analytics-10k/). Findings still come from the DuckDB queries."
-        print(f"\nOFFLINE {note}")
-        report.append("## Score")
-        report.append("")
-        report.append(note)
-        report.append("")
-
-    report_path = os.path.join(RUN, "REPORT.md")
-    with open(report_path, "w") as fh:
-        fh.write("\n".join(report).rstrip() + "\n")
-    print(f"\nOFFLINE wrote {os.path.relpath(findings_path, REPO)} and {os.path.relpath(report_path, REPO)}")
+    with open(os.path.join(RUN, "REPORT.md"), "w") as fh:
+        fh.write("\n".join(s.report).rstrip() + "\n")
+    evidence = [
+        LABEL,
+        "",
+        f"Pack: {pack} ({source}), store {store}",
+        "",
+        "## HbA1c control, naive vs headline",
+        "",
+        labeled,
+        "",
+        "## Answer",
+        "",
+        answer,
+        "",
+        "## Findings",
+        "",
+        *[f"- {f['title']}: {f['summary']}" for f in findings],
+        "",
+        "## Score",
+        "",
+        score_text,
+        "",
+    ]
+    with open(os.path.join(RUN, "EVIDENCE.md"), "w") as fh:
+        fh.write("\n".join(evidence))
+    print(f"\nOFFLINE wrote run/findings.json, run/queries.sql, run/REPORT.md, run/EVIDENCE.md under {os.path.relpath(HERE, REPO)}")
+    sys.exit(proc.returncode)
 
 
 if __name__ == "__main__":

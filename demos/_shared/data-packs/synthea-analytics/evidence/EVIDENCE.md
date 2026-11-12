@@ -43,43 +43,30 @@ Synthetic: true
 
 ## Key-free replay (2026-11-12, keys unset)
 
-Requirement: `bash demos/analytics-10k/run.sh` runs with CURSOR_API_KEY, XAI_API_KEY, and JIRA_* unset, prints REPLAY (no key), executes the checked-in SQL locally, and reports score.py when the private answer key is on the machine.
-Change: demos/analytics-10k/run.sh, replay.py, fixtures/replay/turns.json, story.yaml offline/default_mode/live_mode_note.
-Test: the command below, then the same command with the 10k pack hidden, then DEMO_MODE=live with no key.
-Result: pass for the 10k pack (exit 0, SCORE 4/4, CONTROL ok 93.4%). Fixture fallback exits 0 and scores 2/4 (see note). DEMO_MODE=live with no key exits 3.
+Requirement: `bash demos/analytics-10k/run.sh` runs with CURSOR_API_KEY, XAI_API_KEY, and JIRA_* unset, prints REPLAY (no key), executes the checked-in SQL locally, and scores through `demos/analytics-10k/score.py`, which prints `answer key absent` and exits 0 when the private key is missing.
+Change: run.sh, replay.py (findings derived from the query results), fixtures/replay/turns.json, score.py (public key loader), story.yaml offline/default_mode/live_mode_note.
+Test: the command with the private key present, the same command with the key directory moved away, the fixture-100 fallback, then DEMO_MODE=live with no key.
+Result: pass. Key present: exit 0, SCORE 4/4, CONTROL ok, PINNED ok. Key absent: exit 0, unscored. Fixture fallback: exit 0, unscored. DEMO_MODE=live with no key: BLOCKED, exit 3.
 Synthetic: true
 
 | Requirement | Test | Run | Result |
 | --- | --- | --- | --- |
-| Key-free command on the installed 10k pack | env -u CURSOR_API_KEY -u XAI_API_KEY -u JIRA_API_KEY bash demos/analytics-10k/run.sh | 2026-11-12 | pass, exit 0, SCORE 4/4 |
-| Same command with the 10k pack absent | L13_PACK_DIR=/tmp/l13-no-pack | 2026-11-12 | exit 0, pack fixture-100, SCORE 2/4 |
+| Key-free command on the installed 10k pack, key present | env -u CURSOR_API_KEY -u XAI_API_KEY -u JIRA_API_KEY bash demos/analytics-10k/run.sh | 2026-11-12 | pass, exit 0, SCORE 4/4 |
+| Same command, key absent | key directory moved away | 2026-11-12 | pass, exit 0, `answer key absent`, unscored |
+| fixture-100 fallback, key absent | L13_PACK_DIR=/tmp/l13-no-pack | 2026-11-12 | pass, exit 0, unscored |
 | DEMO_MODE=live without the key | DEMO_MODE=live, keys unset | 2026-11-12 | BLOCKED, exit 3 |
 | Key present does not replay | CURSOR_API_KEY set, DEMO_MODE unset | 2026-11-12 | prints LIVE and prompt.md, exit 0, no SQL |
 
-Naive control on the 10k pack, from the command output: 96.8% in February 2026, 68.1% in March 2026. Converted March control 93.4% (199/213) by the shared definition (the first version of this run reported 93.9%; see the next section). First mmol/mol row 2026-03-07. score.py: hba1c found (org recall 91%), duplicates 120 pairs (id recall 100%), coding drift found, device gap GlucoSense G3 Plus 2026-01-16..2026-01-28. SCORE 4/4.
+Each run writes `demos/analytics-10k/run/EVIDENCE.md` (gitignored) with `REPLAY (no key)` as its first line and the HbA1c control table labeled naive (SNOMED 44054006 only) and headline (SNOMED 44054006 or ICD-10-CM E11.9), raw and converted. The figures, findings and full transcripts are kept with the private answer key, not here, because they would give away what the agent is asked to find.
 
-Fixture-100 score is 2/4. The replay reports the first row that shows each anomaly. On this small pack that row is later than the planted cutover the private key records (HbA1c first mmol/mol row 2026-03-30 vs key 2026-03-08; first ICD-10-CM row 2025-12-23 vs key 2025-09-26), so those two checks miss. Duplicates and the device gap match. This is the real score.py output, not adjusted.
-
-The 10k score ran because this machine has the private key at ~/.cache/medplum-demos/answer-keys/analytics-10k (a local link to the staging copy). That directory is not in the repo. Without it the command still exits 0 and says the key is absent.
-
-Transcripts: evidence/offline-10k-run.txt, evidence/offline-fixture-run.txt, evidence/live-blocked.txt.
+Redacted transcripts (label, pack, scorer status, exit code): evidence/key-free-runs.txt. BLOCKED transcript: evidence/live-blocked.txt.
 
 ## HbA1c control: one shared definition (2026-11-12)
 
-Requirement: L13 and G10 report the same March 2026 HbA1c control on the same pinned 10k pack, from one shared calculation.
-Change: demos/_shared/data-packs/synthea-analytics/hba1c-control.sql, hba1c_control.py, test_hba1c_control.py, hba1c-control.expected.json, README.md "Metrics"; L13 replay.py and turns.json use it; the private score.py checks the control figure with the same module.
-Test: python3 evidence/compare-hba1c-formulas.py <10k pack> 2026-03; python3 test_hba1c_control.py; bash demos/analytics-10k/run.sh with keys unset.
-Result: pass. Root cause: conversion formula. Correct March 2026 control is 93.4% (199/213). Test: PASS, 0 failed. Key-free run: exit 0, SCORE 4/4, CONTROL ok.
+Requirement: L13 and G10 compute HbA1c control from one shared calculation, with the headline cohort SNOMED 44054006 or ICD-10-CM E11.9 and the SNOMED-only cohort reported beside it as naive.
+Change: demos/_shared/data-packs/synthea-analytics/hba1c-control.sql, hba1c_control.py, test_hba1c_control.py, README.md "Metrics"; L13 replay.py uses it; the private scorer checks the headline figure with the same module. Pinned pack values moved out of this repo to the private answer key.
+Test: python3 test_hba1c_control.py, with and without the private key.
+Result: pass, 0 failed both ways. Without the key the pack checks print `answer key absent` and only check that the views load. With the key the pinned values for both cohorts match.
 Synthetic: true
 
-| Candidate cause | Checked | Result |
-| --- | --- | --- |
-| Denominator | rows in March, both calculations | same, 213 |
-| Cohort filter | cohort rows, both calculations | same, 7441 rows, one per observation, no living filter in either |
-| Threshold inclusivity | strict < 7 in both; <= 7 would give 203/213 | not the cause |
-| Rounding | counts 200/213 and 199/213 round to 93.9 and 93.4; no value is rounded before the threshold | not the cause |
-| Conversion formula | L13 `IFCC / 10.929 + 2.15` vs G10 `0.09148 * IFCC + 2.152` | cause: 53 mmol/mol is 6.99948 vs 7.00044. 1 row in March, 17 rows over all months |
-
-The differing March row: patient 505eac29-d51f-a48d-670c-7a8c4fea5b96, 2026-03-26, 53 mmol/mol. Against the original values (unplanted data, run on this VM), the shared formula matches the original under-7 decision on all 7441 cohort rows; the old L13 formula is wrong on the 17 rows at 53 mmol/mol, whose original value was exactly 7.0%.
-
-Transcripts: evidence/hba1c-formula-comparison.txt (both calculations and the row diff), evidence/test-hba1c-control.txt, evidence/offline-10k-run.txt, evidence/offline-fixture-run.txt.
+Transcript without the key: evidence/test-hba1c-control-key-absent.txt.

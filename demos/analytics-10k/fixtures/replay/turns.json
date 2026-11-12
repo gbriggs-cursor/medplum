@@ -1,7 +1,7 @@
 {
   "label": "REPLAY (no key)",
   "sdk": "@grok/agent-sdk",
-  "source": "Checked-in turns for key-free mode. Not a capture of a live model call. The SQL is executed locally against whichever pack is installed. HbA1c control comes from the shared definition (hba1c-control.sql).",
+  "source": "Checked-in turns for key-free mode. Not a capture of a live model call. The SQL runs locally against whichever pack is installed; follow-up queries are built from what these return. HbA1c control comes from the shared definition (hba1c-control.sql).",
   "turns": [
     {
       "role": "user",
@@ -9,37 +9,33 @@
     },
     {
       "role": "assistant",
-      "content": "REPLAY (no key)\n\nI will measure monthly HbA1c control for type 2 diabetes (SNOMED 44054006) with the shared definition in demos/_shared/data-packs/synthea-analytics/hba1c-control.sql: one row per observation, converted to NGSP percent first (mmol/mol rows: 0.09148 * IFCC + 2.152), controlled means under 7 (strict). The same view also reports the naive rate that applies the threshold to raw values, so a unit change shows up as a sharp drop in the naive rate with a new unit beside it.",
+      "content": "REPLAY (no key)\n\nI will put the dashboard's view (SNOMED 44054006 only, threshold on stored values) next to the shared definition (type 2 diabetes value set, values in NGSP percent), month by month, and find the month with the largest fall. Then I will profile the fields that feed the metric: for HbA1c units and condition code systems, when each value first appears relative to the start of the data window.",
       "queries": [
         {
+          "id": "window",
+          "sql": "select min(start)::date as window_start, max(start)::date as window_end from encounters"
+        },
+        {
           "id": "monthly-control",
-          "sql": "select month, n, mmol_rows, controlled_n, control_pct, control_pct_naive from hba1c_control_monthly where month >= '2025-12-01' and month < '2026-06-01' order by month"
+          "sql": "select cohort, month, n, controlled_n, control_pct, controlled_raw_n, control_pct_raw from hba1c_control_monthly_by_cohort where month >= '2025-12-01' and month < '2026-06-01' order by cohort, month"
         },
         {
-          "id": "monthly-units",
-          "sql": "select date_trunc('month', date)::date as month, units, count(*) as n, round(avg(value_num), 1) as avg_value from observations where code = '4548-4' and date >= '2025-12-01' and date < '2026-06-01' group by 1, 2 order by 1, 2"
+          "id": "hba1c-units",
+          "sql": "select units, min(date)::date as first_seen, count(*) as n from observations where code = '4548-4' group by 1 order by 2"
         },
         {
-          "id": "unit-start",
-          "sql": "select min(date)::date as start_date, count(*) as n from observations where code = '4548-4' and units = 'mmol/mol'"
-        },
-        {
-          "id": "unit-orgs",
-          "sql": "select distinct e.organization as organization_id from observations o join encounters e on e.id = o.encounter where o.code = '4548-4' and o.units = 'mmol/mol' order by 1"
+          "id": "condition-systems",
+          "sql": "select system, min(start)::date as first_seen, count(*) as n, count(distinct code) as codes from conditions group by 1 order by 2"
         }
       ]
     },
     {
       "role": "assistant",
-      "content": "REPLAY (no key)\n\nI will look for other distortions: a second patient row with the same SSN and birth date, new diagnoses stored under a different code system, and a glucose meter model that stops sending readings for a run of days.",
+      "content": "REPLAY (no key)\n\nI will look for other distortions: a second patient row with the same SSN and birth date, and a device model with a run of days with no readings inside its reporting span.",
       "queries": [
         {
           "id": "duplicates",
           "sql": "select ssn, birthdate, count(*) as n, list(id) as ids from patients group by ssn, birthdate having count(*) > 1 order by ssn"
-        },
-        {
-          "id": "coding",
-          "sql": "select min(start) as start_date, list(distinct code) as codes, count(*) as n from conditions where system = 'ICD-10-CM'"
         },
         {
           "id": "device-days",

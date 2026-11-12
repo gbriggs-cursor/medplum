@@ -35,7 +35,6 @@ metrics:
     definition: README.md#metrics
     sql: hba1c-control.sql
     python: hba1c_control.py
-    expected: hba1c-control.expected.json
     test: test_hba1c_control.py
 
 answer_key: answer-keys://analytics-10k/
