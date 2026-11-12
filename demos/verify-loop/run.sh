@@ -107,4 +107,8 @@ node "$here/ci.mjs" --root "$repo" --label "$label" --mode "$mode" --out "$out" 
 
 node "$here/evidence.mjs" --out "$out" --mode "$mode"
 echo "verify-loop: evidence in ${out#"$repo"/}/ (EVIDENCE.md, trace.json, TRACE.md)"
+if [ "$status" -eq 0 ]; then
+  if [ "$mode" = live ]; then echo "PASS: live L5 verify loop. Red, then green after the agent fix"
+  else echo "PASS: OFFLINE (no key) L5 verify loop. Red, then green after the reference remediator; tests, guard, and trace are real"; fi
+fi
 exit "$status"
