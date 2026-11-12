@@ -13,6 +13,16 @@ All data is synthetic.
 3. The QuestionnaireResponse (`seed/questionnaire.json`, url `https://foomedical.example/fhir/Questionnaire/support-intake`) is checked with the server's `$validate` and written. The intake id is its identifier, so repeats don't duplicate it.
 4. The L9 pipeline redacts and triages. The GIO ticket (dry-run) gets `QuestionnaireResponse/<id>` and no identity.
 
+## Key-free (no API keys)
+
+This is the default when `XAI_API_KEY` is unset. The transcript comes from `fixtures/replay/transcripts.json` and is labeled `REPLAY (no key)`. Extraction, the QuestionnaireResponse, the server `$validate`, and the Medplum write still run. The GIO file is labeled `OFFLINE`.
+
+```bash
+node demos/speech-to-fhir/scripts/run.mjs
+```
+
+`DEMO_MODE=live` without `XAI_API_KEY` prints `BLOCKED` and exits 3. With the key set, the command reads `seed/transcripts.json` and does not print a replay label. It still does not open a voice session.
+
 ## Run it
 
 Needs the local Medplum server on `http://localhost:8103` (override with `MEDPLUM_BASE_URL`, `MEDPLUM_EMAIL`, `MEDPLUM_PASSWORD`).

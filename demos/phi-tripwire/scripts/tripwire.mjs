@@ -3,7 +3,15 @@
 //   node scripts/tripwire.mjs --note P3-N-001 [--blind]
 //   node scripts/tripwire.mjs --text "pasted note" [--patient p3-001]
 
+import { applyDemoMode } from '../../_shared/demo-mode.mjs';
 import { buildTicket, chartContext, loadPack, tripwire, writeTicket } from '../lib/tripwire.mjs';
+
+const offlineCommand = 'node demos/phi-tripwire/scripts/tripwire.mjs --note P3-N-001';
+const mode = applyDemoMode({
+  needs: ['JIRA'],
+  offlineCommand,
+  kind: 'OFFLINE',
+});
 
 const arg = (name) => {
   const i = process.argv.indexOf(name);
@@ -29,8 +37,18 @@ console.log(`1. PHI screen on raw text: ${r.rawHits.length ? `REFUSE to store ($
 console.log(`2. redacted: ${r.redacted}`);
 console.log(`3. tripwire after redaction: ${r.allowed ? 'clean' : `BLOCKED (${r.blocked.join(', ')})`}`);
 if (!r.allowed) {
-  console.log('4. Jira: nothing written. Route the note to a human reviewer.');
+  if (mode === 'key-free') {
+    console.log('OFFLINE');
+    console.log('OFFLINE: Jira not written. Route the note to a human reviewer.');
+  } else {
+    console.log('4. Jira: nothing written. Route the note to a human reviewer.');
+  }
   process.exit(3);
 }
-const file = writeTicket(note.id, buildTicket(note.id, r));
-console.log(`4. Jira (dry-run): demos/phi-tripwire/${file}`);
+const file = writeTicket(note.id, buildTicket(note.id, r), { offline: mode === 'key-free' });
+if (mode === 'key-free') {
+  console.log('OFFLINE');
+  console.log(`OFFLINE: GIO ticket demos/phi-tripwire/${file}`);
+} else {
+  console.log(`4. Jira (dry-run): demos/phi-tripwire/${file}`);
+}

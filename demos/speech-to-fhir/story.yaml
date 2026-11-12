@@ -25,7 +25,10 @@ proof:
 reset: demos/speech-to-fhir/reset.sh
 fallback: []
 fallback_note: New story, no earlier run. Show the run.mjs output from the evidence log
-blast_radius: Local Medplum server only (Patients and QuestionnaireResponses tagged speech-to-fhir). Jira is dry-run only
+blast_radius: Local Medplum server only (Patients and QuestionnaireResponses tagged speech-to-fhir). Key-free runs write an OFFLINE ticket file and do not post to Jira
+offline: node demos/speech-to-fhir/scripts/run.mjs
+default_mode: replay
+live_mode_note: 'Live mode available once keys are added: the command reads the seeded transcript and does not print a replay label. Extraction, server validation, and the Medplum write are the same either way. This repo still does not open a live voice session.'
 
 variables:
   prospect: Foo Medical

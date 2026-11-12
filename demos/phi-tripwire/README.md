@@ -13,6 +13,16 @@ All data is synthetic (P3 pack, `demos/_shared/data-packs/p3-phi-like`).
 3. **Tripwire.** The redacted text is screened again by the pattern screen, a strict screen (any 5+ digit run, any `@`), and one rule: no chart context means no automatic write.
 4. **Jira (dry-run).** If clean, a GIO ticket JSON is written to `run/outbox/` with labels `demo, medplum, story:phi-tripwire, track:ls, stage:floor`. Otherwise nothing is written and the note goes to a human.
 
+## Key-free (no API keys)
+
+This is the default. There is no model step. The Jira step writes `run/outbox/<note>.json` with `"mode": "OFFLINE"` and does not call Jira.
+
+```bash
+node demos/phi-tripwire/scripts/tripwire.mjs --note P3-N-001
+```
+
+`DEMO_MODE=live` without `JIRA_BASE_URL`, `JIRA_EMAIL`, and `JIRA_API_KEY` prints `BLOCKED` and exits 3. With those set, the file is the same payload without the OFFLINE label, and this story still does not post to Jira.
+
 ## Run it
 
 ```bash

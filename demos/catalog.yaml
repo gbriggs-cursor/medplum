@@ -407,9 +407,9 @@ stories:
     data_pack: P3 PHI-like pack, demos/_shared/data-packs/p3-phi-like, seed 20261112 (24 patients, 50 notes, 213 planted identifiers), tagged synthetic + HTEST
     fallback: []
     reset: demos/phi-tripwire/reset.sh
-    offline: null
-    default_mode: null
-    live_mode_note: null
+    offline: node demos/phi-tripwire/scripts/tripwire.mjs --note P3-N-001
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: the ticket file is the same redacted payload without the OFFLINE label. This story still does not post to Jira."
     automation: false
     intake: false
     labels:
@@ -538,9 +538,9 @@ stories:
     data_pack: seed/questionnaire.json (Foo Medical support intake) and 3 synthetic transcripts in seed/transcripts.json; patients are created or matched by name + birth date and tagged synthetic + HTEST + demo-story speech-to-fhir
     fallback: []
     reset: demos/speech-to-fhir/reset.sh
-    offline: null
-    default_mode: null
-    live_mode_note: null
+    offline: node demos/speech-to-fhir/scripts/run.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: the command reads the seeded transcript and does not print a replay label. Extraction, server validation, and the Medplum write are the same either way. This repo still does not open a live voice session."
     automation: false
     intake: true
     labels:
@@ -566,9 +566,9 @@ stories:
     data_pack: P4 support KB (8 Foo Medical articles in kb/foomedical plus 9 Medplum docs listed in kb/medplum-docs.json) and 14 synthetic intakes in evals/cases.json
     fallback: []
     reset: demos/support-voice/reset.sh
-    offline: null
-    default_mode: null
-    live_mode_note: null
+    offline: node demos/support-voice/scripts/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: this command creates the GIO issue from the same synthetic call instead of writing the OFFLINE file. Grok Voice and the triage agent are still not called from this repo."
     automation: false
     intake: true
     labels:
