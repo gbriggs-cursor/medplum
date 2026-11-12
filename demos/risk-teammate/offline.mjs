@@ -129,7 +129,10 @@ writeText(
 
 console.log('REPLAY (no key): risk teammate turn from demos/risk-teammate/fixtures/replay/clerk-turn.json');
 console.log(`REPLAY (no key): ${turn.id} ${turn.req_id} severity=${turn.severity} safety_class=${turn.safety_class} status=${turn.status}`);
-console.log(`OFFLINE: read ${jiraRead.issues.length} GIO issues from demos/risk-teammate/fixtures/jira/search.json`);
+const readCount = jiraRead.issues.length;
+console.log(
+  `OFFLINE: read ${readCount} GIO ${readCount === 1 ? 'issue' : 'issues'} from demos/risk-teammate/fixtures/jira/search.json`
+);
 console.log('OFFLINE: 1 GIO create written to demos/risk-teammate/run/jira-dry-run.json (no status change, no comment)');
 
 function fail(message) {

@@ -142,7 +142,10 @@ writeText(
 
 console.log('REPLAY (no key): requirements clerk turn from demos/requirements-clerk/fixtures/replay/clerk-turn.json');
 console.log(`REPLAY (no key): filed ${creates.map((row) => row.summary.split(' ')[0]).join(', ')}; skipped the brand aside`);
-console.log(`OFFLINE: read ${jiraRead.issues.length} GIO issues from demos/requirements-clerk/fixtures/jira/search.json`);
+const readCount = jiraRead.issues.length;
+console.log(
+  `OFFLINE: read ${readCount} GIO ${readCount === 1 ? 'issue' : 'issues'} from demos/requirements-clerk/fixtures/jira/search.json`
+);
 console.log(`OFFLINE: ${creates.length} GIO creates written to demos/requirements-clerk/run/jira-dry-run.json (no status change, no comment)`);
 
 function fail(message) {
