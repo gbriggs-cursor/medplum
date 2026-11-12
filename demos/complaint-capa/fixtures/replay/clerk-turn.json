@@ -1,0 +1,13 @@
+{
+  "label": "REPLAY (no key)",
+  "source": "Generated from demos/complaint-capa/seed against the fictional SOP. Not a live bot call.",
+  "complaint_id": "CMP-001",
+  "capa_id": "CAPA-001",
+  "synthetic_subject": "SP-014",
+  "sop_section": "CMP-SOP-3",
+  "reportability": "no",
+  "reportability_rationale": "CMP-SOP-3 matches: the complaint alleges pairing failed and a displayed 90/50 mmHg that disagreed with a home cuff, and it reports no injury. This fictional SOP calls that not reportable.",
+  "capa": "open",
+  "capa_rationale": "CMP-SOP-3 says to open a CAPA when a displayed measurement is disputed and no injury is alleged.",
+  "event": "SP-014 reported that the {prospect} patch v2 showed pairing failed three times on 2026-11-04, then displayed 90/50 mmHg. A home cuff at the same sitting showed a different number. No injury was reported."
+}

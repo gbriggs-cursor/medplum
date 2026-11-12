@@ -5,6 +5,56 @@ jira_project: GIO
 default_prospect: Acme Cardio
 answer_keys: answer-keys:// resolves to a separate private repo (placeholder; see demos/README.md)
 stories:
+  - id: audit-qa
+    code: L17
+    title: Audit-ready Q&A
+    track: ls
+    stage: "07"
+    readiness: new
+    runtime: 3 min
+    wow: Asking for REQ-012 returns the requirement, risk, test, run, and approval from the index
+    trigger: Presenter pastes prompt.md into the audit Q&A Grok Bot and asks for one requirement id. The bot answers from the trace index only.
+    data_pack: Hand-written trace index standing in for an L7 DHF index. Requirement, risk, test, run, result, approval, and commit rows for a few REQ ids. All rows are fixtures and were not executed here.
+    fallback: []
+    reset: demos/audit-qa/reset.sh
+    automation: false
+    labels:
+      - demo
+      - medplum
+      - story:audit-qa
+      - track:ls
+      - stage:07
+    card: demos/audit-qa/story.yaml
+    prompt: demos/audit-qa/prompt.md
+    readme: demos/audit-qa/README.md
+    offline: node demos/audit-qa/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: the audit Q&A bot reads prompt.md and answers from the trace index. This runner does not call the bot."
+  - id: complaint-capa
+    code: L16
+    title: Complaint to CAPA
+    track: ls
+    stage: post-market
+    readiness: new
+    runtime: 5 min
+    wow: The bot files a complaint record and a reportability assessment, ready for review
+    trigger: Presenter pastes prompt.md into the complaint-clerk Grok Bot. The bot reads the fixture complaint and files a complaint record and a reportability assessment. It does not wait for approval.
+    data_pack: Synthetic complaint fixture standing in for an L9 intake ticket, plus a fictional complaint SOP, in demos/complaint-capa/seed/. Tagged HTEST. Subject id SP-014 only. No patient name or date of birth.
+    fallback: []
+    reset: demos/complaint-capa/reset.sh
+    automation: false
+    labels:
+      - demo
+      - medplum
+      - story:complaint-capa
+      - track:ls
+      - stage:post-market
+    card: demos/complaint-capa/story.yaml
+    prompt: demos/complaint-capa/prompt.md
+    readme: demos/complaint-capa/README.md
+    offline: node demos/complaint-capa/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: the complaint-clerk bot reads prompt.md and creates GIO issues through the Atlassian connector. This runner does not call the bot."
   - id: device-evidence
     code: L3
     title: Traced build (device evidence)

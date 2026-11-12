@@ -12,6 +12,7 @@ Every demo ticket lives on the **GIO** board. Stories are told apart by labels, 
 | `story:<id>` | every demo ticket | The story folder under `demos/`, for example `story:ticket-to-pr`. |
 | `track:generic` or `track:ls` | every demo ticket | Generic beat, or the life-sciences factory track. |
 | `stage:<01-07>` | life-sciences tickets only | Factory stage: 01 Requirement, 02 Risk, 03 Build, 04 Review, 05 Verify, 06 Approve, 07 Release. Generic stories carry no stage label. |
+| `stage:post-market` | life-sciences tickets that sit after release | Complaint handling and other post-market stories. Not a factory stage, and not an automation label. |
 | `automatable` | automation stories only | Fires the ticket-to-PR automation. |
 | `agent-safe` | automation stories only | Fires the ticket-to-PR automation. |
 | `maintenance` | automation stories only (legacy) | Present on GIO-40 to GIO-43, which proved automation `d5489670`. Keep it on ticket-to-PR tickets until that automation's label filter is confirmed. |
@@ -33,4 +34,10 @@ demo, medplum, story:ticket-to-pr, track:generic, automatable, agent-safe, maint
 
 ```
 demo, medplum, story:device-evidence, track:ls, stage:03
+```
+
+## Example: post-market
+
+```
+demo, medplum, story:complaint-capa, track:ls, stage:post-market
 ```

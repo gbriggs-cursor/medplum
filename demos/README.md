@@ -22,7 +22,7 @@ All data is synthetic. All stories run in cloud agent environment `67842161`, us
 | Field | Holds |
 | --- | --- |
 | `id`, `code`, `title` | Folder name, catalog code (G1, L3, ...), display title. |
-| `track`, `stage` | `generic` or `ls`; `generic` or factory stage `01`-`07`. |
+| `track`, `stage` | `generic` or `ls`; `generic`, factory stage `01`-`07`, or `post-market`. |
 | `readiness`, `runtime`, `environment` | `exists`, `adapt`, `new`, or `planned`; minutes; always `67842161`. |
 | `persona` | Who it is for. Uses `{prospect}`. |
 | `trigger` | What starts it. |
@@ -39,6 +39,11 @@ All data is synthetic. All stories run in cloud agent environment `67842161`, us
 | `variables` | Prompt variables and defaults. `prospect` defaults to Acme Cardio or Foo Medical. |
 | `jira` | `project: GIO`, `automation`, and the labels from `_shared/labels.md`. |
 | `answer_key` | Optional. `answer-keys://<story>/` (see below). |
+| `offline` | Command from the repo root that runs the story with no API keys. |
+| `default_mode` | `replay` or `offline` for that command. `live` is not the default. |
+| `live_mode_note` | One line starting `Live mode available once keys are added:`. |
+
+Stories that do not have a key-free command yet omit those three fields. The catalog copies them when the card sets them.
 
 ## Personas
 
