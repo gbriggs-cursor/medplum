@@ -165,7 +165,6 @@ function validateStory(dir) {
   validateDependsOn(where, card);
   validateVariables(where, dir, card);
   validateJira(where, dir, card);
-  validateOffline(where, card);
 
   for (const doc of ['README.md', 'prompt.md']) {
     if (!existsSync(join(demosDir, dir, doc))) {
@@ -173,18 +172,6 @@ function validateStory(dir) {
     }
   }
   return card;
-}
-
-function validateOffline(where, card) {
-  if (typeof card.offline !== 'string' || !card.offline.trim()) {
-    err(where, '`offline` must be a non-empty command run from the repo root');
-  }
-  if (!DEFAULT_MODES.includes(card.default_mode)) {
-    err(where, '`default_mode` must be replay or offline: the default demo path is key-free');
-  }
-  if (typeof card.live_mode_note !== 'string' || !card.live_mode_note.startsWith(LIVE_NOTE_PREFIX)) {
-    err(where, `\`live_mode_note\` must start with "${LIVE_NOTE_PREFIX}"`);
-  }
 }
 
 function validateGate(where, card) {
@@ -196,25 +183,14 @@ function validateGate(where, card) {
 // A dependency names another story by catalog code, so it resolves once that story's card lands,
 // whatever folder it ends up in.
 function validateKeyFree(where, card) {
-  const present = ['offline', 'default_mode', 'live_mode_note'].filter((key) => card[key] !== undefined);
-  if (present.length === 0) {
-    return;
-  }
-  if (present.length !== 3) {
-    err(where, 'key-free stories need `offline`, `default_mode`, and `live_mode_note` together');
-    return;
-  }
   if (typeof card.offline !== 'string' || !card.offline.trim()) {
-    err(where, '`offline` must be the key-free command');
+    err(where, '`offline` must be a non-empty command run from the repo root');
   }
-  if (!['replay', 'offline', 'live'].includes(card.default_mode)) {
-    err(where, '`default_mode` must be replay, offline, or live');
+  if (!DEFAULT_MODES.includes(card.default_mode)) {
+    err(where, '`default_mode` must be replay or offline: the default demo path is key-free');
   }
-  if (
-    typeof card.live_mode_note !== 'string' ||
-    !card.live_mode_note.startsWith('Live mode available once keys are added:')
-  ) {
-    err(where, '`live_mode_note` must start with "Live mode available once keys are added:"');
+  if (typeof card.live_mode_note !== 'string' || !card.live_mode_note.startsWith(LIVE_NOTE_PREFIX)) {
+    err(where, `\`live_mode_note\` must start with "${LIVE_NOTE_PREFIX}"`);
   }
 }
 

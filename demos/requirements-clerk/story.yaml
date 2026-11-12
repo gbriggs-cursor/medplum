@@ -31,6 +31,11 @@ blast_radius: >-
   When the bot runs, it creates new GIO tickets and does not change status or comment on existing
   tickets. No GitHub writes. No write-back to Medplum. This change itself writes nothing to Jira.
 answer_key: answer-keys://requirements-clerk/
+offline: node demos/requirements-clerk/offline.mjs
+default_mode: replay
+live_mode_note: >-
+  Live mode available once keys are added: the requirements-clerk bot reads prompt.md and creates
+  GIO issues through the Atlassian connector. This runner does not call the bot.
 
 variables:
   prospect: Acme Cardio

@@ -6,24 +6,21 @@
 
 ## Preflight
 
-Stop, and name the blocker, when any of these is missing:
-
-- The requirements-clerk Grok Bot. This folder does not create or edit a bot.
-- The Atlassian connector, with permission to create GIO issues and no permission to transition them.
-
-The run does not wait on an approval card. Approval, if a presenter wants one, is recorded later in the evidence package.
+No API key and no bot are required. The run does not wait on an approval card.
 
 ## Run it
 
 1. `demos/requirements-clerk/reset.sh` (safe to re-run). It never calls Jira.
-2. Paste `prompt.md` into the requirements-clerk bot. `{prospect}` defaults to Acme Cardio.
+2. From the repo root, with no keys set: `node demos/requirements-clerk/offline.mjs`. Stdout is labeled `REPLAY (no key)` and `OFFLINE`.
 3. While it runs, this is factory stage 01 Requirement.
-4. When it finishes, open the new GIO tickets and `run/requirements.yaml`.
+4. Show `run/requirements.yaml` and `run/jira-dry-run.json`. The dry-run file is the Jira write. Nothing is sent to GIO.
+
+Live mode available once keys are added: paste `prompt.md` into the requirements-clerk bot. `{prospect}` defaults to Acme Cardio. This folder does not create or edit that bot. `DEMO_MODE=live` with no keys prints `BLOCKED` and points back at the command above.
 
 ## What to click
 
 - The meeting notes: four product behaviors, plus a branding aside the bot should skip.
-- The new tickets: titles start with the REQ id, labels match the card, status was not transitioned.
+- `run/jira-dry-run.json`: four creates, labeled OFFLINE, with empty status changes and comments. REQ-001 is not among them.
 - `run/requirements.yaml`: one row per filed input, `safety_class` left empty.
 
 ## Answer key

@@ -44,9 +44,9 @@ stories:
     fallback:
       - 11
     reset: demos/approval-gate/reset.sh
-    offline: null
-    default_mode: null
-    live_mode_note: null
+    offline: demos/approval-gate/offline.sh
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: none are needed for the gate itself. Live mode is prompt.md in a cloud agent, with Grok Bot posting APPROVAL-CARD.md and the decision recorded with --channel grok-bot. The Grok Bot card post has not been run yet"
     automation: false
     intake: false
     labels:
@@ -486,9 +486,9 @@ stories:
     data_pack: Requirements slice of the P5 regulatory seed. Meeting notes and an id register in demos/requirements-clerk/seed/. Synthetic, tagged HTEST. No patient names.
     fallback: []
     reset: demos/requirements-clerk/reset.sh
-    offline: null
-    default_mode: null
-    live_mode_note: null
+    offline: node demos/requirements-clerk/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: the requirements-clerk bot reads prompt.md and creates GIO issues through the Atlassian connector. This runner does not call the bot."
     automation: false
     intake: false
     labels:
@@ -512,9 +512,9 @@ stories:
     data_pack: Hazard slice of the P5 regulatory seed. Intended use, one already-filed hazard, and one unassessed requirement in demos/risk-teammate/seed/. Synthetic, tagged HTEST.
     fallback: []
     reset: demos/risk-teammate/reset.sh
-    offline: null
-    default_mode: null
-    live_mode_note: null
+    offline: node demos/risk-teammate/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: the risk-teammate bot reads prompt.md and creates one GIO issue through the Atlassian connector. This runner does not call the bot."
     automation: false
     intake: false
     labels:

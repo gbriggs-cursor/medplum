@@ -6,27 +6,22 @@
 
 ## Preflight
 
-Stop, and name the blocker, when any of these is missing:
-
-- The risk-teammate Grok Bot. This folder does not create or edit a bot.
-- The Atlassian connector, with permission to create GIO issues and no permission to transition them.
-
-L1 does not have to run first. `seed/unassessed.yaml` is a fixture standing in for a requirement the clerk would have filed.
-
-The run does not wait on an approval card.
+No API key and no bot are required. L1 does not have to run first. `seed/unassessed.yaml` is a fixture standing in for a requirement the clerk would have filed. The run does not wait on an approval card.
 
 ## Run it
 
 1. `demos/risk-teammate/reset.sh` (safe to re-run). It never calls Jira.
-2. Paste `prompt.md` into the risk-teammate bot. `{prospect}` defaults to Acme Cardio.
+2. From the repo root, with no keys set: `node demos/risk-teammate/offline.mjs`. Stdout is labeled `REPLAY (no key)` and `OFFLINE`.
 3. While it runs, this is factory stage 02 Risk.
-4. Show `run/hazard.yaml`: the new hazard, the class, and `status: ready-for-review`.
+4. Show `run/hazard.yaml`: the replayed class and `status: ready-for-review`. `run/jira-dry-run.json` is the Jira write. Nothing is sent to GIO.
+
+Live mode available once keys are added: paste `prompt.md` into the risk-teammate bot. `{prospect}` defaults to Acme Cardio. This folder does not create or edit that bot. `DEMO_MODE=live` with no keys prints `BLOCKED` and points back at the command above.
 
 ## What to click
 
 - `seed/hazard-log.yaml`: HAZ-001 stays filed. The bot must not edit it.
 - `seed/unassessed.yaml`: the requirement text only. No class is stored there.
-- The new GIO ticket and `run/hazard.yaml`.
+- `run/hazard.yaml` and `run/jira-dry-run.json`: one create, labeled OFFLINE. HAZ-001 is not updated.
 
 ## Answer key
 
