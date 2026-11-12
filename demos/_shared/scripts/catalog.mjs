@@ -338,18 +338,20 @@ for (const card of cards) {
 }
 scanBranchPinning();
 
+const next = buildCatalog(cards);
+const current = existsSync(catalogPath) ? readFileSync(catalogPath, 'utf8') : '';
+for (const c of cards) {
+  console.log(`ok  ${c.code.padEnd(4)} ${c.id.padEnd(22)} ${c.track.padEnd(8)} stage=${c.stage}`);
+}
 if (errors.length) {
+  if (!checkOnly) {
+    writeFileSync(catalogPath, next);
+  }
   console.error(`FAIL: ${errors.length} problem(s) (0 passed, ${errors.length} failed)`);
   for (const e of errors) {
     console.error(`  - ${e}`);
   }
   process.exit(1);
-}
-
-const next = buildCatalog(cards);
-const current = existsSync(catalogPath) ? readFileSync(catalogPath, 'utf8') : '';
-for (const c of cards) {
-  console.log(`ok  ${c.code.padEnd(4)} ${c.id.padEnd(22)} ${c.track.padEnd(8)} stage=${c.stage}`);
 }
 if (checkOnly) {
   if (current !== next) {
@@ -360,7 +362,6 @@ if (checkOnly) {
     `PASS: ${cards.length} stories valid (${cards.length} passed, 0 failed), catalog.yaml up to date, no branch pinning`
   );
 } else {
-  writeFileSync(catalogPath, next);
   console.log(
     `PASS: ${cards.length} stories valid (${cards.length} passed, 0 failed), no branch pinning. Wrote demos/catalog.yaml`
   );

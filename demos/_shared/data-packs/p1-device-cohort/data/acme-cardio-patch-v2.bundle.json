@@ -1,0 +1,6542 @@
+{
+  "resourceType": "Bundle",
+  "type": "batch",
+  "meta": {
+    "tag": [
+      {
+        "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+        "code": "synthetic",
+        "display": "Synthetic"
+      }
+    ],
+    "security": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+        "code": "HTEST",
+        "display": "test health data"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "Patient/acme-patient-00",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-00",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-00"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic00",
+            "given": ["River"]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1970-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "river.synthetic00@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-00"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-00",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-00",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-00"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-00"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-00",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-00",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-00"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-00"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-00"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-00"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-00",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-00",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-00"
+        },
+        "device": {
+          "reference": "Device/acme-device-00"
+        },
+        "effectiveDateTime": "2026-11-04T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 127,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 68,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-00"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-00",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-00",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-00"
+        },
+        "device": {
+          "reference": "Device/acme-device-00"
+        },
+        "effectiveDateTime": "2026-11-04T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "0.013 0.276 0.466 0.622 0.726 0.809 0.739 0.626 0.45 0.268 -0.019 -0.254 -0.496 -0.611 -0.745 -0.789 -0.769 -0.625 -0.447 -0.247 0.029 0.278 0.486 0.676 0.726 0.793 0.78 0.616 0.495 0.276 -0.018 -0.27 -0.472 -0.63 -0.743 -0.812 -0.799 -0.665 -0.446 -0.28"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-00"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-01",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-01",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-01"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic01",
+            "given": ["Sky"]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1971-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "sky.synthetic01@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-01"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-01",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-01",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-01"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-01"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-01",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-01",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-01"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-01"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-01"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-01"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-01",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-01",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-01"
+        },
+        "device": {
+          "reference": "Device/acme-device-01"
+        },
+        "effectiveDateTime": "2026-11-04T08:01:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 129,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 69,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-01"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-01",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-01",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-01"
+        },
+        "device": {
+          "reference": "Device/acme-device-01"
+        },
+        "effectiveDateTime": "2026-11-04T08:01:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "0.683 0.809 0.759 0.776 0.65 0.44 0.205 -0.018 -0.285 -0.514 -0.695 -0.751 -0.783 -0.743 -0.634 -0.471 -0.242 0.082 0.254 0.534 0.643 0.799 0.772 0.757 0.643 0.409 0.199 -0.04 -0.317 -0.499 -0.679 -0.799 -0.767 -0.741 -0.591 -0.462 -0.178 0.053 0.33 0.495"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-01"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-02",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-02",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-02"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic02",
+            "given": ["Cedar"]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1972-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "cedar.synthetic02@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-02"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-02",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-02",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-02"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-02"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-02",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-02",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-02"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-02"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-02"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-02"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-02",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-02",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-02"
+        },
+        "device": {
+          "reference": "Device/acme-device-02"
+        },
+        "effectiveDateTime": "2026-11-04T08:02:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 116,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 72,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-02"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-02",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-02",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-02"
+        },
+        "device": {
+          "reference": "Device/acme-device-02"
+        },
+        "effectiveDateTime": "2026-11-04T08:02:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "0.72 0.584 0.423 0.165 -0.09 -0.334 -0.535 -0.672 -0.811 -0.788 -0.723 -0.554 -0.431 -0.186 0.126 0.341 0.511 0.668 0.779 0.77 0.759 0.604 0.353 0.15 -0.057 -0.307 -0.549 -0.665 -0.793 -0.761 -0.708 -0.552 -0.404 -0.144 0.094 0.318 0.566 0.733 0.788 0.815"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-02"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-03",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-03",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-03"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic03",
+            "given": ["Rowan"]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1973-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "rowan.synthetic03@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-03"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-03",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-03",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-03"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-03"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-03",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-03",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-03"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-03"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-03"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-03"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-03",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-03",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-03"
+        },
+        "device": {
+          "reference": "Device/acme-device-03"
+        },
+        "effectiveDateTime": "2026-11-04T08:03:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 133,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 82,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-03"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-03",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-03",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-03"
+        },
+        "device": {
+          "reference": "Device/acme-device-03"
+        },
+        "effectiveDateTime": "2026-11-04T08:03:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "0.143 -0.127 -0.385 -0.579 -0.697 -0.823 -0.778 -0.704 -0.594 -0.316 -0.112 0.109 0.413 0.581 0.703 0.758 0.797 0.669 0.548 0.313 0.09 -0.116 -0.361 -0.562 -0.75 -0.754 -0.806 -0.718 -0.525 -0.343 -0.136 0.136 0.36 0.544 0.708 0.78 0.785 0.717 0.564 0.347"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-03"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-04",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-04",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-04"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic04",
+            "given": ["Indigo"]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1974-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "indigo.synthetic04@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-04"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-04",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-04",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-04"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-04"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-04",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-04",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-04"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-04"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-04"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-04"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-04",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-04",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-04"
+        },
+        "device": {
+          "reference": "Device/acme-device-04"
+        },
+        "effectiveDateTime": "2026-11-04T08:04:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 120,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 79,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-04"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-04",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-04",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-04"
+        },
+        "device": {
+          "reference": "Device/acme-device-04"
+        },
+        "effectiveDateTime": "2026-11-04T08:04:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "-0.595 -0.727 -0.777 -0.792 -0.691 -0.484 -0.308 -0.054 0.155 0.435 0.596 0.763 0.768 0.743 0.664 0.515 0.281 0.073 -0.171 -0.412 -0.58 -0.748 -0.8 -0.759 -0.709 -0.548 -0.339 -0.075 0.221 0.401 0.596 0.703 0.781 0.79 0.667 0.511 0.306 0.1 -0.218 -0.409"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-04"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-05",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-05",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-05"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic05",
+            "given": ["Maple"]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1975-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "maple.synthetic05@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-05"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-05",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-05",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-05"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-05"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-05",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-05",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-05"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-05"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-05"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-05"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-05",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-05",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-05"
+        },
+        "device": {
+          "reference": "Device/acme-device-05"
+        },
+        "effectiveDateTime": "2026-11-04T08:05:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 124,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 82,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-05"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-05",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-05",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-05"
+        },
+        "device": {
+          "reference": "Device/acme-device-05"
+        },
+        "effectiveDateTime": "2026-11-04T08:05:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "-0.781 -0.675 -0.51 -0.27 0.018 0.252 0.44 0.645 0.733 0.784 0.731 0.646 0.471 0.242 0.036 -0.259 -0.475 -0.616 -0.725 -0.778 -0.783 -0.636 -0.455 -0.297 -0.047 0.256 0.472 0.642 0.715 0.792 0.73 0.692 0.484 0.275 0.031 -0.231 -0.482 -0.615 -0.735 -0.827"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-05"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-06",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-06",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-06"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic06",
+            "given": ["Quill"]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1976-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "quill.synthetic06@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-06"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-06",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-06",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-06"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-06"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-06",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-06",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-06"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-06"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-06"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-06"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-06",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-06",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-06"
+        },
+        "device": {
+          "reference": "Device/acme-device-06"
+        },
+        "effectiveDateTime": "2026-11-04T08:06:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 133,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 84,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-06"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-06",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-06",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-06"
+        },
+        "device": {
+          "reference": "Device/acme-device-06"
+        },
+        "effectiveDateTime": "2026-11-04T08:06:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "-0.21 0.001 0.232 0.471 0.69 0.788 0.782 0.739 0.662 0.415 0.237 -0.06 -0.269 -0.507 -0.632 -0.8 -0.774 -0.75 -0.639 -0.425 -0.24 0.052 0.306 0.487 0.65 0.807 0.837 0.779 0.641 0.47 0.243 -0.038 -0.262 -0.516 -0.625 -0.803 -0.802 -0.734 -0.667 -0.446"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-06"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-07",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-07",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-07"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic07",
+            "given": ["North"]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1977-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "north.synthetic07@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-07"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-07",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-07",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-07"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-07"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-07",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-07",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-07"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-07"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-07"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-07"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-07",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-07",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-07"
+        },
+        "device": {
+          "reference": "Device/acme-device-07"
+        },
+        "effectiveDateTime": "2026-11-04T08:07:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 120,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 81,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-07"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-07",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-07",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-07"
+        },
+        "device": {
+          "reference": "Device/acme-device-07"
+        },
+        "effectiveDateTime": "2026-11-04T08:07:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "0.509 0.714 0.804 0.798 0.763 0.609 0.387 0.166 -0.103 -0.31 -0.503 -0.725 -0.74 -0.765 -0.712 -0.594 -0.421 -0.167 0.071 0.343 0.553 0.647 0.747 0.829 0.724 0.64 0.419 0.19 -0.075 -0.274 -0.498 -0.703 -0.782 -0.757 -0.761 -0.573 -0.386 -0.185 0.053 0.31"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-07"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-08",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-08",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-08"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic08",
+            "given": ["Lake"]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1978-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "lake.synthetic08@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-08"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-08",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-08",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-08"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-08"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-08",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-08",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-08"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-08"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-08"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-08"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-08",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-08",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-08"
+        },
+        "device": {
+          "reference": "Device/acme-device-08"
+        },
+        "effectiveDateTime": "2026-11-04T08:08:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 114,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 78,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-08"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-08",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-08",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-08"
+        },
+        "device": {
+          "reference": "Device/acme-device-08"
+        },
+        "effectiveDateTime": "2026-11-04T08:08:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "0.802 0.699 0.572 0.331 0.166 -0.078 -0.363 -0.573 -0.716 -0.753 -0.774 -0.705 -0.59 -0.338 -0.109 0.136 0.356 0.547 0.711 0.777 0.765 0.729 0.572 0.39 0.146 -0.105 -0.338 -0.561 -0.698 -0.778 -0.761 -0.75 -0.571 -0.37 -0.108 0.122 0.39 0.529 0.678 0.801"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-08"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-09",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-09",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-09"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic09",
+            "given": ["Moss"]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1979-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "moss.synthetic09@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-09"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-09",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-09",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-09"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-09"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-09",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-09",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-09"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-09"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-09"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-09"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-09",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-09",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-09"
+        },
+        "device": {
+          "reference": "Device/acme-device-09"
+        },
+        "effectiveDateTime": "2026-11-04T08:09:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 134,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 74,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-09"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-09",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-09",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-09"
+        },
+        "device": {
+          "reference": "Device/acme-device-09"
+        },
+        "effectiveDateTime": "2026-11-04T08:09:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "0.347 0.076 -0.135 -0.398 -0.613 -0.706 -0.801 -0.751 -0.678 -0.507 -0.355 -0.114 0.133 0.392 0.626 0.727 0.757 0.749 0.681 0.514 0.352 0.076 -0.139 -0.43 -0.594 -0.745 -0.832 -0.752 -0.724 -0.567 -0.338 -0.074 0.141 0.406 0.553 0.69 0.818 0.756 0.729 0.5"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-09"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-10",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-10",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-10"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic10",
+            "given": ["Pine"]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1980-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "pine.synthetic10@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-10"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-10",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-10",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-10"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-10"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-10",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-10",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-10"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-10"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-10"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-10"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-10",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-10",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-10"
+        },
+        "device": {
+          "reference": "Device/acme-device-10"
+        },
+        "effectiveDateTime": "2026-11-04T08:10:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 123,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 77,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-10"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-10",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-10",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-10"
+        },
+        "device": {
+          "reference": "Device/acme-device-10"
+        },
+        "effectiveDateTime": "2026-11-04T08:10:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "-0.406 -0.65 -0.736 -0.811 -0.754 -0.636 -0.489 -0.313 -0.031 0.195 0.426 0.64 0.77 0.801 0.776 0.692 0.49 0.314 0.045 -0.223 -0.436 -0.66 -0.74 -0.829 -0.798 -0.693 -0.494 -0.273 -0.034 0.242 0.431 0.625 0.77 0.81 0.798 0.677 0.513 0.255 0.051 -0.216"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-10"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-11",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-11",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-11"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic11",
+            "given": ["Ash"]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1981-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "ash.synthetic11@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-11"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-11",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-11",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-11"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-11"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-11",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-11",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-11"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-11"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-11"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-11"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-11",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-11",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-11"
+        },
+        "device": {
+          "reference": "Device/acme-device-11"
+        },
+        "effectiveDateTime": "2026-11-04T08:11:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 130,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 69,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-11"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-11",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-11",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-11"
+        },
+        "device": {
+          "reference": "Device/acme-device-11"
+        },
+        "effectiveDateTime": "2026-11-04T08:11:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "-0.81 -0.798 -0.615 -0.503 -0.249 0.039 0.289 0.489 0.689 0.728 0.808 0.799 0.618 0.461 0.226 0.024 -0.241 -0.507 -0.655 -0.742 -0.804 -0.784 -0.672 -0.479 -0.282 -0.002 0.214 0.485 0.633 0.781 0.777 0.728 0.684 0.46 0.231 0.035 -0.251 -0.476 -0.647 -0.743"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-11"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-12",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-12",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-12"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic12",
+            "given": ["Fern"]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1982-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "fern.synthetic12@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-12"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-12",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-12",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-12"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-12"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-12",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-12",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-12"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-12"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-12"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-12"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-12",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-12",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-12"
+        },
+        "device": {
+          "reference": "Device/acme-device-12"
+        },
+        "effectiveDateTime": "2026-11-04T08:12:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 116,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 75,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-12"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-12",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-12",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-12"
+        },
+        "device": {
+          "reference": "Device/acme-device-12"
+        },
+        "effectiveDateTime": "2026-11-04T08:12:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "-0.41 -0.177 0.061 0.315 0.481 0.678 0.755 0.761 0.708 0.598 0.392 0.187 -0.069 -0.278 -0.549 -0.644 -0.738 -0.792 -0.758 -0.602 -0.42 -0.212 0.037 0.271 0.488 0.706 0.806 0.762 0.743 0.603 0.405 0.175 -0.016 -0.325 -0.525 -0.68 -0.758 -0.769 -0.718 -0.62"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-12"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-13",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-13",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-13"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic13",
+            "given": ["Sage"]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1983-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "sage.synthetic13@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-13"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-13",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-13",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-13"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-13"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-13",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-13",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-13"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-13"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-13"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-13"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-13",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-13",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-13"
+        },
+        "device": {
+          "reference": "Device/acme-device-13"
+        },
+        "effectiveDateTime": "2026-11-04T08:13:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 113,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 75,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-13"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-13",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-13",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-13"
+        },
+        "device": {
+          "reference": "Device/acme-device-13"
+        },
+        "effectiveDateTime": "2026-11-04T08:13:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "0.299 0.576 0.724 0.764 0.761 0.759 0.564 0.364 0.158 -0.106 -0.321 -0.514 -0.677 -0.777 -0.771 -0.717 -0.611 -0.397 -0.116 0.12 0.312 0.53 0.683 0.761 0.78 0.713 0.56 0.423 0.159 -0.124 -0.339 -0.525 -0.705 -0.806 -0.824 -0.712 -0.613 -0.396 -0.137 0.082"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-13"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-14",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-14",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-14"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic14",
+            "given": ["Wren"]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1984-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "wren.synthetic14@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-14"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-14",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-14",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-14"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-14"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-14",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-14",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-14"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-14"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-14"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-14"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-14",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-14",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-14"
+        },
+        "device": {
+          "reference": "Device/acme-device-14"
+        },
+        "effectiveDateTime": "2026-11-04T08:14:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 135,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 75,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-14"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-14",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-14",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-14"
+        },
+        "device": {
+          "reference": "Device/acme-device-14"
+        },
+        "effectiveDateTime": "2026-11-04T08:14:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "0.781 0.753 0.743 0.548 0.347 0.11 -0.146 -0.349 -0.613 -0.753 -0.778 -0.814 -0.704 -0.569 -0.315 -0.13 0.172 0.338 0.559 0.698 0.808 0.758 0.672 0.576 0.323 0.118 -0.161 -0.37 -0.569 -0.707 -0.757 -0.789 -0.722 -0.579 -0.336 -0.081 0.179 0.405 0.546 0.724"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-14"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-15",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-15",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-15"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic15",
+            "given": ["Brook"]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1985-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "brook.synthetic15@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-15"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-15",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-15",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-15"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-15"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-15",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-15",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-15"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-15"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-15"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-15"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-15",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-15",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-15"
+        },
+        "device": {
+          "reference": "Device/acme-device-15"
+        },
+        "effectiveDateTime": "2026-11-04T08:15:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 127,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 68,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-15"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-15",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-15",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-15"
+        },
+        "device": {
+          "reference": "Device/acme-device-15"
+        },
+        "effectiveDateTime": "2026-11-04T08:15:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "0.545 0.302 0.073 -0.147 -0.407 -0.638 -0.723 -0.837 -0.794 -0.66 -0.507 -0.333 -0.065 0.16 0.442 0.616 0.718 0.804 0.805 0.713 0.485 0.301 0.049 -0.212 -0.417 -0.63 -0.74 -0.761 -0.783 -0.668 -0.504 -0.277 -0.081 0.169 0.385 0.647 0.73 0.775 0.806 0.716"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-15"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-16",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-16",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-16"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic16",
+            "given": ["Glen"]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1986-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "glen.synthetic16@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-16"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-16",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-16",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-16"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-16"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-16",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-16",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-16"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-16"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-16"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-16"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-16",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-16",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-16"
+        },
+        "device": {
+          "reference": "Device/acme-device-16"
+        },
+        "effectiveDateTime": "2026-11-04T08:16:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 113,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 80,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-16"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-16",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-16",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-16"
+        },
+        "device": {
+          "reference": "Device/acme-device-16"
+        },
+        "effectiveDateTime": "2026-11-04T08:16:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "-0.241 -0.489 -0.603 -0.779 -0.787 -0.752 -0.673 -0.473 -0.244 -0.004 0.227 0.452 0.625 0.768 0.792 0.749 0.691 0.478 0.284 0.008 -0.228 -0.492 -0.604 -0.74 -0.831 -0.734 -0.673 -0.457 -0.288 -0.027 0.23 0.446 0.613 0.726 0.774 0.766 0.692 0.499 0.266 0.023"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-16"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-17",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-17",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-17"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic17",
+            "given": ["Reed"]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1987-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "reed.synthetic17@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-17"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-17",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-17",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-17"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-17"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-17",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-17",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-17"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-17"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-17"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-17"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-17",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-17",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-17"
+        },
+        "device": {
+          "reference": "Device/acme-device-17"
+        },
+        "effectiveDateTime": "2026-11-04T08:17:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 120,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 81,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-17"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-17",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-17",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-17"
+        },
+        "device": {
+          "reference": "Device/acme-device-17"
+        },
+        "effectiveDateTime": "2026-11-04T08:17:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "-0.749 -0.83 -0.783 -0.602 -0.479 -0.21 0.009 0.235 0.531 0.678 0.76 0.776 0.722 0.612 0.482 0.227 -0.001 -0.276 -0.494 -0.703 -0.769 -0.771 -0.713 -0.63 -0.423 -0.189 0.001 0.277 0.458 0.695 0.76 0.797 0.74 0.668 0.482 0.183 -0.02 -0.305 -0.485 -0.675"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-17"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-18",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-18",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-18"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic18",
+            "given": ["Vale"]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1988-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "vale.synthetic18@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-18"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-18",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-18",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-18"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-18"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-18",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-18",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-18"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-18"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-18"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-18"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-18",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-18",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-18"
+        },
+        "device": {
+          "reference": "Device/acme-device-18"
+        },
+        "effectiveDateTime": "2026-11-04T08:18:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 131,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 79,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-18"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-18",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-18",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-18"
+        },
+        "device": {
+          "reference": "Device/acme-device-18"
+        },
+        "effectiveDateTime": "2026-11-04T08:18:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "-0.638 -0.4 -0.166 0.063 0.3 0.545 0.686 0.789 0.801 0.764 0.571 0.43 0.213 -0.064 -0.345 -0.521 -0.68 -0.812 -0.822 -0.718 -0.625 -0.37 -0.188 0.045 0.283 0.53 0.697 0.754 0.802 0.703 0.582 0.389 0.199 -0.036 -0.302 -0.548 -0.692 -0.8 -0.8 -0.744"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-18"
+      }
+    },
+    {
+      "fullUrl": "Patient/acme-patient-19",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "acme-patient-19",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/patient",
+            "value": "acme-patient-19"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic19",
+            "given": ["Dale"]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1989-01-15",
+        "telecom": [
+          {
+            "system": "email",
+            "value": "dale.synthetic19@example.test"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": ["1 Example Way"],
+            "city": "Testville",
+            "state": "TS",
+            "postalCode": "00000"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/acme-patient-19"
+      }
+    },
+    {
+      "fullUrl": "DeviceDefinition/acme-cardio-patch-v2-19",
+      "resource": {
+        "resourceType": "DeviceDefinition",
+        "id": "acme-cardio-patch-v2-19",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device-definition",
+            "value": "acme-cardio-patch-v2-19"
+          }
+        ],
+        "manufacturerString": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DeviceDefinition/acme-cardio-patch-v2-19"
+      }
+    },
+    {
+      "fullUrl": "Device/acme-device-19",
+      "resource": {
+        "resourceType": "Device",
+        "id": "acme-device-19",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://acme-cardio.example/synthetic/device",
+            "value": "ACP-V2-19"
+          }
+        ],
+        "definition": {
+          "reference": "DeviceDefinition/acme-cardio-patch-v2-19"
+        },
+        "status": "active",
+        "manufacturer": "Acme Cardio",
+        "deviceName": [
+          {
+            "name": "Acme Cardio patch v2",
+            "type": "model-name"
+          }
+        ],
+        "modelNumber": "ACP-V2",
+        "type": {
+          "text": "Wearable cardiac patch"
+        },
+        "patient": {
+          "reference": "Patient/acme-patient-19"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/acme-device-19"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-bp-19",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-bp-19",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood Pressure"
+            }
+          ],
+          "text": "Blood Pressure"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-19"
+        },
+        "device": {
+          "reference": "Device/acme-device-19"
+        },
+        "effectiveDateTime": "2026-11-04T08:19:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 132,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 83,
+              "unit": "mm[Hg]",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-bp-19"
+      }
+    },
+    {
+      "fullUrl": "Observation/acme-ecg-19",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "acme-ecg-19",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "urn:iso:std:iso:11073:10101",
+              "code": "131328",
+              "display": "MDC_ECG_ELEC_POTL"
+            }
+          ],
+          "text": "ECG summary"
+        },
+        "subject": {
+          "reference": "Patient/acme-patient-19"
+        },
+        "device": {
+          "reference": "Device/acme-device-19"
+        },
+        "effectiveDateTime": "2026-11-04T08:19:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "urn:iso:std:iso:11073:10101",
+                  "code": "131329",
+                  "display": "MDC_ECG_ELEC_POTL_I"
+                }
+              ],
+              "text": "Lead I"
+            },
+            "valueSampledData": {
+              "origin": {
+                "value": 0,
+                "unit": "mV",
+                "system": "http://unitsofmeasure.org",
+                "code": "mV"
+              },
+              "period": 8,
+              "factor": 1,
+              "dimensions": 1,
+              "data": "0.093 0.324 0.601 0.675 0.801 0.802 0.695 0.582 0.347 0.093 -0.096 -0.394 -0.543 -0.732 -0.803 -0.751 -0.707 -0.538 -0.386 -0.161 0.132 0.344 0.573 0.715 0.827 0.805 0.736 0.595 0.372 0.121 -0.14 -0.391 -0.569 -0.693 -0.775 -0.786 -0.711 -0.568 -0.357 -0.168"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/acme-ecg-19"
+      }
+    }
+  ]
+}

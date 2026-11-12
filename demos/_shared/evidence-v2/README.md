@@ -82,4 +82,4 @@ Approval: <pending | approved by <name> (<role>) at <ISO time> | rejected by ...
 }
 ```
 
-`decision` is `approved` or `rejected`. `mode` says whether the decision was taken live (Grok Bot card) or in a key-free run. `record` binds the decision to the exact evidence bytes. Editing `EVIDENCE.md` or `trace.json` after approval breaks the digest. Approvals are never written back to Medplum.
+`decision` is `approved` or `rejected`. `mode` says whether the decision was taken live (Grok Bot card) or in a key-free run. `record` binds the decision to the exact evidence bytes. The `EVIDENCE.md` hash is taken with its `Approval:` line removed, so writing the decision into that line does not change the digest. `demos/approval-gate/gate.mjs` is the reference writer and verifier. Editing `EVIDENCE.md` or `trace.json` after approval breaks the digest. Approvals are never written back to Medplum.

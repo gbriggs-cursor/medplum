@@ -1,0 +1,14 @@
+++ node demos/approval-gate/gate.mjs build
+approval-gate: build pass (4 passed, 0 failed). Approval: pending
+approval-gate: record digest fe269f05ba221cd0b89523c5c75436650f3c43ef8605e88db32ebad4d00f6841
+++ node demos/approval-gate/gate.mjs verify
+approval-gate: no decision recorded (Approval: pending)
+++ node demos/approval-gate/gate.mjs approve --signer 'Self Test' --role 'pipeline self-test, not a human decision' --channel cli
+approval-gate: approved by Self Test (pipeline self-test, not a human decision); digest fe269f05ba221cd0b89523c5c75436650f3c43ef8605e88db32ebad4d00f6841
+++ node demos/approval-gate/gate.mjs verify
+approval-gate: VALID. approved by Self Test (pipeline self-test, not a human decision) at 2026-11-12T16:09:34.315Z; digest fe269f05ba221cd0b89523c5c75436650f3c43ef8605e88db32ebad4d00f6841
+++ sed -i 's/^Result: pass (4 passed/Result: pass (5 passed/' /tmp/ag2/EVIDENCE.md
+++ node demos/approval-gate/gate.mjs verify
+approval-gate: INVALID. Changed after the decision: EVIDENCE.md
+++ echo exit:1
+exit:1
