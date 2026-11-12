@@ -1,0 +1,1 @@
+Generated against the synthetic release records in `seed/release-records.json`. No live model call was recorded: `CURSOR_API_KEY` was not set. Passed and failed counts are not stored here. The replay runs the `assemble-dhf` tool, and that execution writes the evidence files. Named tests are not re-run.

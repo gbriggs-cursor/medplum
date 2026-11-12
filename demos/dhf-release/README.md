@@ -6,22 +6,23 @@
 
 ## Run it
 
-1. `demos/dhf-release/reset.sh` deletes `evidence/` (safe to re-run).
-2. From the repository root: `node demos/dhf-release/src/assemble.mjs`
+From the repository root, with no `CURSOR_API_KEY`:
+
+`node demos/dhf-release/src/demo.mjs`
+
+That prints `REPLAY (no key)`, replays the checked-in model turn, and executes the `assemble-dhf` tool. The tool writes `evidence/`. The first line of `EVIDENCE.md` and `DHF-INDEX.md`, and `trace.json` `"mode"`, are `REPLAY (no key)`. `DEMO_MODE=live` without `CURSOR_API_KEY` prints `BLOCKED` and exits 3. With `CURSOR_API_KEY` and `DEMO_MODE` unset, the same command runs `agent-sdk run` and does not label the files as a replay.
+
+1. `demos/dhf-release/reset.sh` deletes `evidence/` (safe to re-run). The demo command does this itself.
+2. `node demos/dhf-release/src/assemble.mjs` is the tool body. It does not re-run the named tests and it does not label a mode.
 3. Open `demos/dhf-release/evidence/DHF-INDEX.md` and `evidence/trace.json`. There is no `approval.json`.
-4. Optional agent runner, after `npm install` in `demos/dhf-release/runner`:
 
-```
-npx --yes "@grok/agent-sdk@0.6.0" tool call assemble-dhf --dir demos/dhf-release/runner --input '{}'
-```
-
-A model turn needs `CURSOR_API_KEY`. That secret is not set. The node script does not use it. `XAI_API_KEY` is not used.
+A live model turn needs `CURSOR_API_KEY`. That secret is not set. `XAI_API_KEY` is not used.
 
 ## What to click
 
-- `evidence/DHF-INDEX.md`: one row per release record, with the check result.
-- `evidence/trace.json`: `schema` `evidence-v2/trace`, `version` 2, one run, three rows.
-- `evidence/EVIDENCE.md`: six control lines, then `Trace:`. No `Approval:` line.
+- `evidence/EVIDENCE.md`: first line `REPLAY (no key)` after the key-free command, then the six control lines and `Trace:`. No `Approval:` line.
+- `evidence/DHF-INDEX.md`: first line `REPLAY (no key)` after the key-free command, then one row per release record.
+- `evidence/trace.json`: `mode` `REPLAY (no key)`, then `schema` `evidence-v2/trace`, `version` 2, one run, three rows.
 
 ## What the check is
 
