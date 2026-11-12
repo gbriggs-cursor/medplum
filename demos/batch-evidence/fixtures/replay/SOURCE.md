@@ -1,0 +1,1 @@
+Generated against the synthetic device-change batch in `seed/changes.json` and the cohort index (seed 20261104). No live model call was recorded: `CURSOR_API_KEY` was not set. Passed and failed counts are not stored here. The replay runs the `refresh-evidence` tool, and that execution writes the evidence files.

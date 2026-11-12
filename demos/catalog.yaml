@@ -92,7 +92,7 @@ stories:
     readiness: new
     runtime: 10 min
     wow: One command writes a single evidence v2 package whose trace has one row per device change, and a device missing from the cohort fails that row
-    trigger: Demo Setup runs demos/batch-evidence/src/refresh.mjs, or the @grok/agent-sdk runner tool refresh-evidence
+    trigger: Demo Setup runs node demos/batch-evidence/src/demo.mjs, which replays the model turn and executes refresh-evidence
     data_pack: P1 device cohort resource ids (20 patients, 20 devices, 40 observations, seed 20261104) copied from pull request 11, plus four synthetic changes in seed/changes.json. Every record is tagged synthetic.
     fallback:
       - 11
@@ -111,6 +111,7 @@ stories:
     card: demos/batch-evidence/story.yaml
     prompt: demos/batch-evidence/prompt.md
     readme: demos/batch-evidence/README.md
+<<<<<<< HEAD
   - id: bugbot-62304
     code: L4
     title: IEC 62304 Bugbot rules
@@ -163,6 +164,11 @@ stories:
     card: demos/complaint-capa/story.yaml
     prompt: demos/complaint-capa/prompt.md
     readme: demos/complaint-capa/README.md
+=======
+    offline: node demos/batch-evidence/src/demo.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: agent-sdk run calls the model, which calls refresh-evidence, and the evidence files are not labeled REPLAY (no key)."
+>>>>>>> origin/cursor/l14-batch-evidence-b9e2
   - id: device-evidence
     code: L3
     title: Traced build (device evidence)

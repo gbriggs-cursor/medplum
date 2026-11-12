@@ -15,4 +15,6 @@ Work in demos/batch-evidence/.
 4. If a cited device id is missing from seed/cohort-index.json, that trace row is
    fail and the batch result is fail. Say so.
 Open a draft PR against the default branch. Synthetic data only. No Jira writes.
+With no CURSOR_API_KEY, run `node demos/batch-evidence/src/demo.mjs`. The model turn is
+REPLAY (no key). The refresh-evidence tool still runs, and the evidence files carry that label.
 ```

@@ -6,20 +6,21 @@
 
 ## Run it
 
-1. `demos/batch-evidence/reset.sh` deletes `evidence/` (safe to re-run).
-2. From the repository root: `node demos/batch-evidence/src/refresh.mjs`
-3. Open `demos/batch-evidence/evidence/EVIDENCE.md` and `evidence/trace.json`. There is no `approval.json`. The script does not wait.
-4. Optional agent runner, after `npm install` in `demos/batch-evidence/runner`:
+From the repository root, with no `CURSOR_API_KEY`:
 
-```
-npx --yes "@grok/agent-sdk@0.6.0" tool call refresh-evidence --dir demos/batch-evidence/runner --input '{}'
-```
+`node demos/batch-evidence/src/demo.mjs`
 
-A model turn (`agent-sdk run`) needs `CURSOR_API_KEY`. The node script does not. `XAI_API_KEY` is not used.
+That prints `REPLAY (no key)`, replays the checked-in model turn, and executes the `refresh-evidence` tool. The tool writes `evidence/`. The first line of `EVIDENCE.md` and `trace.json` `"mode"` are `REPLAY (no key)`. `DEMO_MODE=live` without `CURSOR_API_KEY` prints `BLOCKED` and exits 3. With `CURSOR_API_KEY` and `DEMO_MODE` unset, the same command runs `agent-sdk run` and does not label the files as a replay.
+
+1. `demos/batch-evidence/reset.sh` deletes `evidence/` (safe to re-run). The demo command does this itself.
+2. `node demos/batch-evidence/src/refresh.mjs` is the tool body. It does not label a mode.
+3. Open `demos/batch-evidence/evidence/EVIDENCE.md` and `evidence/trace.json`. There is no `approval.json`.
+
+A live model turn needs `CURSOR_API_KEY`. That secret is not set. `XAI_API_KEY` is not used.
 
 ## What to click
 
-- `evidence/EVIDENCE.md`: six control lines, then `Trace:`. No `Approval:` line.
+- `evidence/EVIDENCE.md`: first line `REPLAY (no key)` after the key-free command, then the six control lines and `Trace:`. No `Approval:` line.
 - `evidence/trace.json`: `schema` `evidence-v2/trace`, `version` 2, one run, four rows (`req`, `risk`, `test`, `run`, `result`, `commit`).
 
 ## Cohort

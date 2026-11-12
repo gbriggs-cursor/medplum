@@ -8,7 +8,7 @@ runtime: 10 min
 environment: '67842161'
 
 persona: QA/RA lead at {prospect} who needs overnight evidence for a batch of device changes
-trigger: Demo Setup runs demos/batch-evidence/src/refresh.mjs, or the @grok/agent-sdk runner tool refresh-evidence
+trigger: Demo Setup runs node demos/batch-evidence/src/demo.mjs, which replays the model turn and executes refresh-evidence
 actors:
   - '@grok/agent-sdk runner'
   - evidence-package skill
@@ -26,6 +26,9 @@ reset: demos/batch-evidence/reset.sh
 fallback: [11]
 blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. No Jira writes. The runner reads the local git SHA and writes demos/batch-evidence/evidence/
 answer_key: answer-keys://batch-evidence/
+offline: node demos/batch-evidence/src/demo.mjs
+default_mode: replay
+live_mode_note: 'Live mode available once keys are added: agent-sdk run calls the model, which calls refresh-evidence, and the evidence files are not labeled REPLAY (no key).'
 
 variables:
   prospect: Acme Cardio
