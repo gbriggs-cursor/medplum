@@ -24,7 +24,9 @@ This is the default. It prints `REPLAY (no key)`, replays the checked-in turns i
 
 `DEMO_MODE=live` without `CURSOR_API_KEY` prints `BLOCKED` and exits 3, and the message points back at the command above. With `CURSOR_API_KEY` set, the script takes the live branch and leaves `prompt.md` unchanged. It does not launch the cloud agent itself.
 
-Scoring runs only when the private answer key is on the machine, at `$L13_ANSWER_KEYS_DIR` or `~/.cache/medplum-demos/answer-keys/analytics-10k` (`score.py` plus `answer-key-10k.json` or `answer-key-fixture-100.json`). That directory is `answer-keys://analytics-10k/`. It is not in this repo. Without it, the queries and findings still run and the score section says the key is absent.
+Every run writes `run/EVIDENCE.md`, whose first line is `REPLAY (no key)`, with HbA1c control for the month before and the month of the largest fall, labeled naive (SNOMED 44054006 only) and headline (SNOMED 44054006 or ICD-10-CM E11.9), each raw and converted. Both come from the shared definition (`demos/_shared/data-packs/synthea-analytics/README.md`, "Metrics").
+
+Scoring goes through `score.py`. It loads the private answer key from `--answer-key-dir`, `$L13_ANSWER_KEY_DIR`, or `~/.cache/medplum-demos/answer-keys/analytics-10k` (provisioned from `answer-keys://analytics-10k/`, not in this repo). Without the key it prints `answer key absent`, the run is unscored, and the command still exits 0.
 
 ## Run it live
 
@@ -36,7 +38,8 @@ Scoring runs only when the private answer key is on the machine, at `$L13_ANSWER
 
 ## What to click
 
-- `run/REPORT.md`: the `REPLAY (no key)` line, the answer, then the monthly table and the corrected metric.
+- `run/REPORT.md`: the `REPLAY (no key)` line, the answer, then the control table labeled naive and headline.
+- `run/EVIDENCE.md`: the labeled control table, findings and the score line.
 - `run/queries.sql`: every query the agent relied on.
 - The score line from Demo Setup.
 

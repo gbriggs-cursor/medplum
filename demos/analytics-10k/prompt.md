@@ -9,7 +9,9 @@ under 7%) dropping in {month}. Find out why, and back every claim with SQL.
 Data: the synthetic analytics pack in {data_dir} (analytics.duckdb, or the Parquet files in parquet/).
 If it is missing, say so and use demos/_shared/data-packs/synthea-analytics/fixture-100 instead.
 Read the schema in demos/_shared/data-packs/synthea-analytics/README.md. Use DuckDB (python3 -c "import duckdb").
-Do not look for or use any answer key.
+Do not look for or use any answer key. Do not open the Metrics section of that README, hba1c-control.sql,
+hba1c_control.py, test_hba1c_control.py, anything under evidence/, or demos/analytics-10k/replay.py,
+score.py and fixtures/: they are the scoring and replay reference, not part of the task.
 
 Work in demos/analytics-10k/run/.
 1. Reproduce the drop by month with SQL. Then find the root cause and show the corrected metric.

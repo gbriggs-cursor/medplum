@@ -1,0 +1,16 @@
+answer key absent
+ok   headline cohort: SNOMED 44054006 or ICD-10-CM E11.9, matched on system (n=6)
+ok   SNOMED-only cohort leaves out the ICD-10-CM patient (n=5)
+ok   6.9%, 52 mmol/mol and 6.5% are controlled; 7.0%, 7.1%, 53 mmol/mol are not (3)
+ok   control_pct = 3/6 rounded once (got 50.0)
+ok   raw threshold on stored values (2, 33.3)
+ok   mmol_rows (got 2)
+ok   53 mmol/mol converts to 7.00044 (got 7.00044)
+ok   unknown units convert to NULL
+ok   the next month is its own row
+ok   hba1c_control_monthly is the headline cohort only
+ok   synthea-analytics-100: views load (20 cohort-months)
+skip synthea-analytics-100: answer key absent, pinned values not checked
+ok   synthea-analytics-10k: views load (72 cohort-months)
+skip synthea-analytics-10k: answer key absent, pinned values not checked
+PASS: hba1c control (0 failed)

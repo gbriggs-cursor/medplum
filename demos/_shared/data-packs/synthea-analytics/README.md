@@ -60,3 +60,32 @@ Example:
 ```
 python3 -c "import duckdb; print(duckdb.sql(\"select count(*) from 'demos/_shared/data-packs/synthea-analytics/fixture-100/parquet/patients.parquet'\"))"
 ```
+
+## Metrics
+
+### HbA1c control (one definition, shared by L13 and G10)
+
+Every story that reports HbA1c control imports `hba1c-control.sql` (SQL) or `hba1c_control.py` (Python, also a command line that prints JSON). Do not re-implement it.
+
+| Part | Definition |
+| --- | --- |
+| Results counted | One row per HbA1c observation (LOINC `4548-4`), not one value per patient, with a numeric value and units `%` or `mmol/mol`. Other units are excluded. |
+| Headline cohort (`t2dm_value_set`) | Patients with a type 2 diabetes condition in the value set: SNOMED CT `44054006` or ICD-10-CM `E11.9`, matched on system and code. No living-patient filter and no other cohort filter. |
+| Naive cohort (`snomed_44054006`) | SNOMED CT `44054006` only. Reported beside the headline for comparison; label it "naive" wherever it is shown. |
+| Conversion | `%` rows are used as is. `mmol/mol` (IFCC) rows are converted to NGSP percent with `0.09148 * IFCC + 2.152`. The converted value is not rounded before the threshold. |
+| Controlled | Converted value `< 7` (strict). 7.0% is not controlled. |
+| Rate | `controlled rows / rows`, per calendar month of the observation date, rounded to one decimal once, after the counts. |
+| Raw rate | `control_pct_raw` applies the same threshold to the value as stored, ignoring units. |
+
+Python:
+
+```
+python3 demos/_shared/data-packs/synthea-analytics/hba1c_control.py <pack_dir> --from 2026-02 --to 2026-03 --cohort all
+python3 demos/_shared/data-packs/synthea-analytics/test_hba1c_control.py   # definition cases; pack values only with the private key
+```
+
+`hba1c_control.monthly(con, start, end, cohort=HEADLINE)` returns rows with `cohort, month, n, mmol_rows, controlled_n, control_pct, controlled_raw_n, control_pct_raw`. Pass `cohort=SNOMED_ONLY` for the naive cohort or `cohort=None` for both.
+
+SQL: create tables or views named `observations` and `conditions` (the schema above), then run `hba1c-control.sql`. It creates temp objects `hba1c_t2dm_value_set`, `hba1c_ngsp_pct(v, u)`, `hba1c_cohorts`, `hba1c_results`, `hba1c_control_monthly_by_cohort` (both cohorts, one row per cohort and month) and `hba1c_control_monthly` (headline cohort only). Temp objects load into a read-only `analytics.duckdb`.
+
+Pinned per-pack values are not in this repository. They live with the private answer key (`answer-keys://analytics-10k/`, `expected-metrics.json`); `test_hba1c_control.py` reads them from there when present and otherwise checks only that the views load.
