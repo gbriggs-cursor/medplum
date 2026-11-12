@@ -1,0 +1,1684 @@
+{
+  "seed": 20261112,
+  "synthetic": true,
+  "notes": [
+    {
+      "id": "P3-N-001",
+      "patient": "p3-001",
+      "template": 0,
+      "text": "Pt Dorothy Fitzroy (MRN HTEST-MRN-83467, DOB 09/06/1977) called about the Acme Cardio patch v2, SN ACP2-02961327. Reports redness under the adhesive. Callback (207) 555-0159.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 3,
+          "end": 18,
+          "value": "Dorothy Fitzroy"
+        },
+        {
+          "type": "MRN",
+          "start": 24,
+          "end": 39,
+          "value": "HTEST-MRN-83467"
+        },
+        {
+          "type": "DATE",
+          "start": 45,
+          "end": 55,
+          "value": "09/06/1977"
+        },
+        {
+          "type": "SERIAL",
+          "start": 99,
+          "end": 112,
+          "value": "ACP2-02961327"
+        },
+        {
+          "type": "PHONE",
+          "start": 159,
+          "end": 173,
+          "value": "(207) 555-0159"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-002",
+      "patient": "p3-001",
+      "template": 2,
+      "text": "Spoke with Dorothy at 760 Linden Way, Fairhaven MA 02747. Portal shows a blank Appointments page since the update. Insurance member ID HT-436973.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 11,
+          "end": 18,
+          "value": "Dorothy"
+        },
+        {
+          "type": "ADDRESS",
+          "start": 22,
+          "end": 36,
+          "value": "760 Linden Way"
+        },
+        {
+          "type": "CITY",
+          "start": 38,
+          "end": 47,
+          "value": "Fairhaven"
+        },
+        {
+          "type": "ZIP",
+          "start": 48,
+          "end": 56,
+          "value": "MA 02747"
+        },
+        {
+          "type": "MEMBER_ID",
+          "start": 135,
+          "end": 144,
+          "value": "HT-436973"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-003",
+      "patient": "p3-002",
+      "template": 1,
+      "text": "Okonkwo, James - DOB 1957-09-18 - readings stopped syncing on October 28, 2026. Their daughter Signe helped her re-pair it. Email james.okonkwo@example.net.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 0,
+          "end": 14,
+          "value": "Okonkwo, James"
+        },
+        {
+          "type": "DATE",
+          "start": 21,
+          "end": 31,
+          "value": "1957-09-18"
+        },
+        {
+          "type": "DATE",
+          "start": 62,
+          "end": 78,
+          "value": "October 28, 2026"
+        },
+        {
+          "type": "NAME",
+          "start": 95,
+          "end": 100,
+          "value": "Signe"
+        },
+        {
+          "type": "EMAIL",
+          "start": 130,
+          "end": 155,
+          "value": "james.okonkwo@example.net"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-004",
+      "patient": "p3-002",
+      "template": 3,
+      "text": "Mrs. Okonkwo says the two-factor code is always rejected. SSN on file 979-39-1235 (verify before reset). Alt number 413-555-0103.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 5,
+          "end": 12,
+          "value": "Okonkwo"
+        },
+        {
+          "type": "SSN",
+          "start": 70,
+          "end": 81,
+          "value": "979-39-1235"
+        },
+        {
+          "type": "PHONE",
+          "start": 116,
+          "end": 128,
+          "value": "413-555-0103"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-005",
+      "patient": "p3-003",
+      "template": 2,
+      "text": "Spoke with Priyanka at 60 Linden Way, Rockport ME 04885. Portal shows a blank Appointments page since the update. Insurance member ID HT-289328.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 11,
+          "end": 19,
+          "value": "Priyanka"
+        },
+        {
+          "type": "ADDRESS",
+          "start": 23,
+          "end": 36,
+          "value": "60 Linden Way"
+        },
+        {
+          "type": "CITY",
+          "start": 38,
+          "end": 46,
+          "value": "Rockport"
+        },
+        {
+          "type": "ZIP",
+          "start": 47,
+          "end": 55,
+          "value": "ME 04885"
+        },
+        {
+          "type": "MEMBER_ID",
+          "start": 134,
+          "end": 143,
+          "value": "HT-289328"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-006",
+      "patient": "p3-003",
+      "template": 4,
+      "text": "Caller: Priyanka Lindqvist, MRN: HTEST-MRN-90309. Wants to know if the patch is safe through airport security. Lives in Rockport. Prefers email priyanka.lindqvist@example.com.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 8,
+          "end": 26,
+          "value": "Priyanka Lindqvist"
+        },
+        {
+          "type": "MRN",
+          "start": 33,
+          "end": 48,
+          "value": "HTEST-MRN-90309"
+        },
+        {
+          "type": "CITY",
+          "start": 120,
+          "end": 128,
+          "value": "Rockport"
+        },
+        {
+          "type": "EMAIL",
+          "start": 144,
+          "end": 174,
+          "value": "priyanka.lindqvist@example.com"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-007",
+      "patient": "p3-004",
+      "template": 3,
+      "text": "Mrs. Brightwater says the two-factor code is always rejected. SSN on file 993-17-4011 (verify before reset). Alt number 508-555-0106.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 5,
+          "end": 16,
+          "value": "Brightwater"
+        },
+        {
+          "type": "SSN",
+          "start": 74,
+          "end": 85,
+          "value": "993-17-4011"
+        },
+        {
+          "type": "PHONE",
+          "start": 120,
+          "end": 132,
+          "value": "508-555-0106"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-008",
+      "patient": "p3-004",
+      "template": 0,
+      "text": "Pt Thaddeus Brightwater (MRN HTEST-MRN-73748, DOB 11/09/1938) called about the Acme Cardio patch v2, SN ACP2-81129547. Reports redness under the adhesive. Callback (508) 555-0106.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 3,
+          "end": 23,
+          "value": "Thaddeus Brightwater"
+        },
+        {
+          "type": "MRN",
+          "start": 29,
+          "end": 44,
+          "value": "HTEST-MRN-73748"
+        },
+        {
+          "type": "DATE",
+          "start": 50,
+          "end": 60,
+          "value": "11/09/1938"
+        },
+        {
+          "type": "SERIAL",
+          "start": 104,
+          "end": 117,
+          "value": "ACP2-81129547"
+        },
+        {
+          "type": "PHONE",
+          "start": 164,
+          "end": 178,
+          "value": "(508) 555-0106"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-009",
+      "patient": "p3-005",
+      "template": 4,
+      "text": "Caller: James Ellsworth, MRN: HTEST-MRN-72746. Wants to know if the patch is safe through airport security. Lives in Rockport. Prefers email james.ellsworth@example.com.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 8,
+          "end": 23,
+          "value": "James Ellsworth"
+        },
+        {
+          "type": "MRN",
+          "start": 30,
+          "end": 45,
+          "value": "HTEST-MRN-72746"
+        },
+        {
+          "type": "CITY",
+          "start": 117,
+          "end": 125,
+          "value": "Rockport"
+        },
+        {
+          "type": "EMAIL",
+          "start": 141,
+          "end": 168,
+          "value": "james.ellsworth@example.com"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-010",
+      "patient": "p3-005",
+      "template": 1,
+      "text": "Ellsworth, James - DOB 1961-12-02 - readings stopped syncing on February 13, 2026. Their husband Robert helped her re-pair it. Email james.ellsworth@example.com.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 0,
+          "end": 16,
+          "value": "Ellsworth, James"
+        },
+        {
+          "type": "DATE",
+          "start": 23,
+          "end": 33,
+          "value": "1961-12-02"
+        },
+        {
+          "type": "DATE",
+          "start": 64,
+          "end": 81,
+          "value": "February 13, 2026"
+        },
+        {
+          "type": "NAME",
+          "start": 97,
+          "end": 103,
+          "value": "Robert"
+        },
+        {
+          "type": "EMAIL",
+          "start": 133,
+          "end": 160,
+          "value": "james.ellsworth@example.com"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-011",
+      "patient": "p3-006",
+      "template": 0,
+      "text": "Pt Yusuf Delacroix (MRN HTEST-MRN-29139, DOB 11/06/1959) called about the Acme Cardio patch v2, SN ACP2-47076855. Reports redness under the adhesive. Callback (319) 555-0187.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 3,
+          "end": 18,
+          "value": "Yusuf Delacroix"
+        },
+        {
+          "type": "MRN",
+          "start": 24,
+          "end": 39,
+          "value": "HTEST-MRN-29139"
+        },
+        {
+          "type": "DATE",
+          "start": 45,
+          "end": 55,
+          "value": "11/06/1959"
+        },
+        {
+          "type": "SERIAL",
+          "start": 99,
+          "end": 112,
+          "value": "ACP2-47076855"
+        },
+        {
+          "type": "PHONE",
+          "start": 159,
+          "end": 173,
+          "value": "(319) 555-0187"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-012",
+      "patient": "p3-006",
+      "template": 2,
+      "text": "Spoke with Yusuf at 195 Quarry Road, Ashford CT 06252. Portal shows a blank Appointments page since the update. Insurance member ID HT-136728.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 11,
+          "end": 16,
+          "value": "Yusuf"
+        },
+        {
+          "type": "ADDRESS",
+          "start": 20,
+          "end": 35,
+          "value": "195 Quarry Road"
+        },
+        {
+          "type": "CITY",
+          "start": 37,
+          "end": 44,
+          "value": "Ashford"
+        },
+        {
+          "type": "ZIP",
+          "start": 45,
+          "end": 53,
+          "value": "CT 06252"
+        },
+        {
+          "type": "MEMBER_ID",
+          "start": 132,
+          "end": 141,
+          "value": "HT-136728"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-013",
+      "patient": "p3-007",
+      "template": 1,
+      "text": "Fitzroy, Linda - DOB 1988-03-25 - readings stopped syncing on October 17, 2026. Their son Walter helped her re-pair it. Email linda.fitzroy@example.org.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 0,
+          "end": 14,
+          "value": "Fitzroy, Linda"
+        },
+        {
+          "type": "DATE",
+          "start": 21,
+          "end": 31,
+          "value": "1988-03-25"
+        },
+        {
+          "type": "DATE",
+          "start": 62,
+          "end": 78,
+          "value": "October 17, 2026"
+        },
+        {
+          "type": "NAME",
+          "start": 90,
+          "end": 96,
+          "value": "Walter"
+        },
+        {
+          "type": "EMAIL",
+          "start": 126,
+          "end": 151,
+          "value": "linda.fitzroy@example.org"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-014",
+      "patient": "p3-007",
+      "template": 3,
+      "text": "Mrs. Fitzroy says the two-factor code is always rejected. SSN on file 914-35-7055 (verify before reset). Alt number 845-555-0193.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 5,
+          "end": 12,
+          "value": "Fitzroy"
+        },
+        {
+          "type": "SSN",
+          "start": 70,
+          "end": 81,
+          "value": "914-35-7055"
+        },
+        {
+          "type": "PHONE",
+          "start": 116,
+          "end": 128,
+          "value": "845-555-0193"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-015",
+      "patient": "p3-008",
+      "template": 2,
+      "text": "Spoke with Walter at 899 Maple Avenue, Rockport ME 04815. Portal shows a blank Appointments page since the update. Insurance member ID HT-917460.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 11,
+          "end": 17,
+          "value": "Walter"
+        },
+        {
+          "type": "ADDRESS",
+          "start": 21,
+          "end": 37,
+          "value": "899 Maple Avenue"
+        },
+        {
+          "type": "CITY",
+          "start": 39,
+          "end": 47,
+          "value": "Rockport"
+        },
+        {
+          "type": "ZIP",
+          "start": 48,
+          "end": 56,
+          "value": "ME 04815"
+        },
+        {
+          "type": "MEMBER_ID",
+          "start": 135,
+          "end": 144,
+          "value": "HT-917460"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-016",
+      "patient": "p3-008",
+      "template": 4,
+      "text": "Caller: Walter Quillan, MRN: HTEST-MRN-94213. Wants to know if the patch is safe through airport security. Lives in Rockport. Prefers email walter.quillan@example.org.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 8,
+          "end": 22,
+          "value": "Walter Quillan"
+        },
+        {
+          "type": "MRN",
+          "start": 29,
+          "end": 44,
+          "value": "HTEST-MRN-94213"
+        },
+        {
+          "type": "CITY",
+          "start": 116,
+          "end": 124,
+          "value": "Rockport"
+        },
+        {
+          "type": "EMAIL",
+          "start": 140,
+          "end": 166,
+          "value": "walter.quillan@example.org"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-017",
+      "patient": "p3-009",
+      "template": 3,
+      "text": "Mrs. Castellanos says the two-factor code is always rejected. SSN on file 916-79-8486 (verify before reset). Alt number 845-555-0190.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 5,
+          "end": 16,
+          "value": "Castellanos"
+        },
+        {
+          "type": "SSN",
+          "start": 74,
+          "end": 85,
+          "value": "916-79-8486"
+        },
+        {
+          "type": "PHONE",
+          "start": 120,
+          "end": 132,
+          "value": "845-555-0190"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-018",
+      "patient": "p3-009",
+      "template": 0,
+      "text": "Pt Dmitri Castellanos (MRN HTEST-MRN-62198, DOB 09/19/1958) called about the Acme Cardio patch v2, SN ACP2-26594636. Reports redness under the adhesive. Callback (845) 555-0190.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 3,
+          "end": 21,
+          "value": "Dmitri Castellanos"
+        },
+        {
+          "type": "MRN",
+          "start": 27,
+          "end": 42,
+          "value": "HTEST-MRN-62198"
+        },
+        {
+          "type": "DATE",
+          "start": 48,
+          "end": 58,
+          "value": "09/19/1958"
+        },
+        {
+          "type": "SERIAL",
+          "start": 102,
+          "end": 115,
+          "value": "ACP2-26594636"
+        },
+        {
+          "type": "PHONE",
+          "start": 162,
+          "end": 176,
+          "value": "(845) 555-0190"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-019",
+      "patient": "p3-010",
+      "template": 4,
+      "text": "Caller: Yusuf Calloway, MRN: HTEST-MRN-17370. Wants to know if the patch is safe through airport security. Lives in Glenwood. Prefers email yusuf.calloway@example.org.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 8,
+          "end": 22,
+          "value": "Yusuf Calloway"
+        },
+        {
+          "type": "MRN",
+          "start": 29,
+          "end": 44,
+          "value": "HTEST-MRN-17370"
+        },
+        {
+          "type": "CITY",
+          "start": 116,
+          "end": 124,
+          "value": "Glenwood"
+        },
+        {
+          "type": "EMAIL",
+          "start": 140,
+          "end": 166,
+          "value": "yusuf.calloway@example.org"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-020",
+      "patient": "p3-010",
+      "template": 1,
+      "text": "Calloway, Yusuf - DOB 1969-07-26 - readings stopped syncing on November 9, 2026. Their wife Linda helped her re-pair it. Email yusuf.calloway@example.org.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 0,
+          "end": 15,
+          "value": "Calloway, Yusuf"
+        },
+        {
+          "type": "DATE",
+          "start": 22,
+          "end": 32,
+          "value": "1969-07-26"
+        },
+        {
+          "type": "DATE",
+          "start": 63,
+          "end": 79,
+          "value": "November 9, 2026"
+        },
+        {
+          "type": "NAME",
+          "start": 92,
+          "end": 97,
+          "value": "Linda"
+        },
+        {
+          "type": "EMAIL",
+          "start": 127,
+          "end": 153,
+          "value": "yusuf.calloway@example.org"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-021",
+      "patient": "p3-011",
+      "template": 0,
+      "text": "Pt Tomasz Castellanos (MRN HTEST-MRN-92835, DOB 09/28/1950) called about the Acme Cardio patch v2, SN ACP2-62402008. Reports redness under the adhesive. Callback (207) 555-0143.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 3,
+          "end": 21,
+          "value": "Tomasz Castellanos"
+        },
+        {
+          "type": "MRN",
+          "start": 27,
+          "end": 42,
+          "value": "HTEST-MRN-92835"
+        },
+        {
+          "type": "DATE",
+          "start": 48,
+          "end": 58,
+          "value": "09/28/1950"
+        },
+        {
+          "type": "SERIAL",
+          "start": 102,
+          "end": 115,
+          "value": "ACP2-62402008"
+        },
+        {
+          "type": "PHONE",
+          "start": 162,
+          "end": 176,
+          "value": "(207) 555-0143"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-022",
+      "patient": "p3-011",
+      "template": 2,
+      "text": "Spoke with Tomasz at 809 Wexford Court, Cedar Falls IA 50688. Portal shows a blank Appointments page since the update. Insurance member ID HT-326846.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 11,
+          "end": 17,
+          "value": "Tomasz"
+        },
+        {
+          "type": "ADDRESS",
+          "start": 21,
+          "end": 38,
+          "value": "809 Wexford Court"
+        },
+        {
+          "type": "CITY",
+          "start": 40,
+          "end": 51,
+          "value": "Cedar Falls"
+        },
+        {
+          "type": "ZIP",
+          "start": 52,
+          "end": 60,
+          "value": "IA 50688"
+        },
+        {
+          "type": "MEMBER_ID",
+          "start": 139,
+          "end": 148,
+          "value": "HT-326846"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-023",
+      "patient": "p3-012",
+      "template": 1,
+      "text": "Calloway, Esperanza - DOB 1981-03-12 - readings stopped syncing on July 2, 2026. Their son Dorothy helped her re-pair it. Email esperanza.calloway@example.org.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 0,
+          "end": 19,
+          "value": "Calloway, Esperanza"
+        },
+        {
+          "type": "DATE",
+          "start": 26,
+          "end": 36,
+          "value": "1981-03-12"
+        },
+        {
+          "type": "DATE",
+          "start": 67,
+          "end": 79,
+          "value": "July 2, 2026"
+        },
+        {
+          "type": "NAME",
+          "start": 91,
+          "end": 98,
+          "value": "Dorothy"
+        },
+        {
+          "type": "EMAIL",
+          "start": 128,
+          "end": 158,
+          "value": "esperanza.calloway@example.org"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-024",
+      "patient": "p3-012",
+      "template": 3,
+      "text": "Mrs. Calloway says the two-factor code is always rejected. SSN on file 901-41-8600 (verify before reset). Alt number 617-555-0194.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 5,
+          "end": 13,
+          "value": "Calloway"
+        },
+        {
+          "type": "SSN",
+          "start": 71,
+          "end": 82,
+          "value": "901-41-8600"
+        },
+        {
+          "type": "PHONE",
+          "start": 117,
+          "end": 129,
+          "value": "617-555-0194"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-025",
+      "patient": "p3-013",
+      "template": 2,
+      "text": "Spoke with Ingrid at 619 Wexford Court, Glenwood IL 60411. Portal shows a blank Appointments page since the update. Insurance member ID HT-242198.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 11,
+          "end": 17,
+          "value": "Ingrid"
+        },
+        {
+          "type": "ADDRESS",
+          "start": 21,
+          "end": 38,
+          "value": "619 Wexford Court"
+        },
+        {
+          "type": "CITY",
+          "start": 40,
+          "end": 48,
+          "value": "Glenwood"
+        },
+        {
+          "type": "ZIP",
+          "start": 49,
+          "end": 57,
+          "value": "IL 60411"
+        },
+        {
+          "type": "MEMBER_ID",
+          "start": 136,
+          "end": 145,
+          "value": "HT-242198"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-026",
+      "patient": "p3-013",
+      "template": 4,
+      "text": "Caller: Ingrid Sorensen, MRN: HTEST-MRN-63826. Wants to know if the patch is safe through airport security. Lives in Glenwood. Prefers email ingrid.sorensen@example.com.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 8,
+          "end": 23,
+          "value": "Ingrid Sorensen"
+        },
+        {
+          "type": "MRN",
+          "start": 30,
+          "end": 45,
+          "value": "HTEST-MRN-63826"
+        },
+        {
+          "type": "CITY",
+          "start": 117,
+          "end": 125,
+          "value": "Glenwood"
+        },
+        {
+          "type": "EMAIL",
+          "start": 141,
+          "end": 168,
+          "value": "ingrid.sorensen@example.com"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-027",
+      "patient": "p3-014",
+      "template": 3,
+      "text": "Mrs. Marchetti says the two-factor code is always rejected. SSN on file 925-51-2594 (verify before reset). Alt number 617-555-0147.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 5,
+          "end": 14,
+          "value": "Marchetti"
+        },
+        {
+          "type": "SSN",
+          "start": 72,
+          "end": 83,
+          "value": "925-51-2594"
+        },
+        {
+          "type": "PHONE",
+          "start": 118,
+          "end": 130,
+          "value": "617-555-0147"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-028",
+      "patient": "p3-014",
+      "template": 0,
+      "text": "Pt Signe Marchetti (MRN HTEST-MRN-22591, DOB 06/07/1944) called about the Acme Cardio patch v2, SN ACP2-12482242. Reports redness under the adhesive. Callback (617) 555-0147.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 3,
+          "end": 18,
+          "value": "Signe Marchetti"
+        },
+        {
+          "type": "MRN",
+          "start": 24,
+          "end": 39,
+          "value": "HTEST-MRN-22591"
+        },
+        {
+          "type": "DATE",
+          "start": 45,
+          "end": 55,
+          "value": "06/07/1944"
+        },
+        {
+          "type": "SERIAL",
+          "start": 99,
+          "end": 112,
+          "value": "ACP2-12482242"
+        },
+        {
+          "type": "PHONE",
+          "start": 159,
+          "end": 173,
+          "value": "(617) 555-0147"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-029",
+      "patient": "p3-015",
+      "template": 4,
+      "text": "Caller: Susan Fitzroy, MRN: HTEST-MRN-33509. Wants to know if the patch is safe through airport security. Lives in Cedar Falls. Prefers email susan.fitzroy@example.com.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 8,
+          "end": 21,
+          "value": "Susan Fitzroy"
+        },
+        {
+          "type": "MRN",
+          "start": 28,
+          "end": 43,
+          "value": "HTEST-MRN-33509"
+        },
+        {
+          "type": "CITY",
+          "start": 115,
+          "end": 126,
+          "value": "Cedar Falls"
+        },
+        {
+          "type": "EMAIL",
+          "start": 142,
+          "end": 167,
+          "value": "susan.fitzroy@example.com"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-030",
+      "patient": "p3-015",
+      "template": 1,
+      "text": "Fitzroy, Susan - DOB 1965-09-11 - readings stopped syncing on April 4, 2026. Their son Walter helped her re-pair it. Email susan.fitzroy@example.com.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 0,
+          "end": 14,
+          "value": "Fitzroy, Susan"
+        },
+        {
+          "type": "DATE",
+          "start": 21,
+          "end": 31,
+          "value": "1965-09-11"
+        },
+        {
+          "type": "DATE",
+          "start": 62,
+          "end": 75,
+          "value": "April 4, 2026"
+        },
+        {
+          "type": "NAME",
+          "start": 87,
+          "end": 93,
+          "value": "Walter"
+        },
+        {
+          "type": "EMAIL",
+          "start": 123,
+          "end": 148,
+          "value": "susan.fitzroy@example.com"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-031",
+      "patient": "p3-016",
+      "template": 0,
+      "text": "Pt Margaret Haverford (MRN HTEST-MRN-21484, DOB 11/18/1942) called about the Acme Cardio patch v2, SN ACP2-37913473. Reports redness under the adhesive. Callback (207) 555-0142.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 3,
+          "end": 21,
+          "value": "Margaret Haverford"
+        },
+        {
+          "type": "MRN",
+          "start": 27,
+          "end": 42,
+          "value": "HTEST-MRN-21484"
+        },
+        {
+          "type": "DATE",
+          "start": 48,
+          "end": 58,
+          "value": "11/18/1942"
+        },
+        {
+          "type": "SERIAL",
+          "start": 102,
+          "end": 115,
+          "value": "ACP2-37913473"
+        },
+        {
+          "type": "PHONE",
+          "start": 162,
+          "end": 176,
+          "value": "(207) 555-0142"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-032",
+      "patient": "p3-016",
+      "template": 2,
+      "text": "Spoke with Margaret at 482 Harbor View Drive, Millbrook NY 12590. Portal shows a blank Appointments page since the update. Insurance member ID HT-723043.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 11,
+          "end": 19,
+          "value": "Margaret"
+        },
+        {
+          "type": "ADDRESS",
+          "start": 23,
+          "end": 44,
+          "value": "482 Harbor View Drive"
+        },
+        {
+          "type": "CITY",
+          "start": 46,
+          "end": 55,
+          "value": "Millbrook"
+        },
+        {
+          "type": "ZIP",
+          "start": 56,
+          "end": 64,
+          "value": "NY 12590"
+        },
+        {
+          "type": "MEMBER_ID",
+          "start": 143,
+          "end": 152,
+          "value": "HT-723043"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-033",
+      "patient": "p3-017",
+      "template": 1,
+      "text": "Brightwater, Dmitri - DOB 1980-06-03 - readings stopped syncing on June 1, 2026. Their husband Lorcan helped her re-pair it. Email dmitri.brightwater@example.net.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 0,
+          "end": 19,
+          "value": "Brightwater, Dmitri"
+        },
+        {
+          "type": "DATE",
+          "start": 26,
+          "end": 36,
+          "value": "1980-06-03"
+        },
+        {
+          "type": "DATE",
+          "start": 67,
+          "end": 79,
+          "value": "June 1, 2026"
+        },
+        {
+          "type": "NAME",
+          "start": 95,
+          "end": 101,
+          "value": "Lorcan"
+        },
+        {
+          "type": "EMAIL",
+          "start": 131,
+          "end": 161,
+          "value": "dmitri.brightwater@example.net"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-034",
+      "patient": "p3-017",
+      "template": 3,
+      "text": "Mrs. Brightwater says the two-factor code is always rejected. SSN on file 940-54-2887 (verify before reset). Alt number 508-555-0142.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 5,
+          "end": 16,
+          "value": "Brightwater"
+        },
+        {
+          "type": "SSN",
+          "start": 74,
+          "end": 85,
+          "value": "940-54-2887"
+        },
+        {
+          "type": "PHONE",
+          "start": 120,
+          "end": 132,
+          "value": "508-555-0142"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-035",
+      "patient": "p3-018",
+      "template": 2,
+      "text": "Spoke with James at 71 Juniper Street, Glenwood IL 60493. Portal shows a blank Appointments page since the update. Insurance member ID HT-339717.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 11,
+          "end": 16,
+          "value": "James"
+        },
+        {
+          "type": "ADDRESS",
+          "start": 20,
+          "end": 37,
+          "value": "71 Juniper Street"
+        },
+        {
+          "type": "CITY",
+          "start": 39,
+          "end": 47,
+          "value": "Glenwood"
+        },
+        {
+          "type": "ZIP",
+          "start": 48,
+          "end": 56,
+          "value": "IL 60493"
+        },
+        {
+          "type": "MEMBER_ID",
+          "start": 135,
+          "end": 144,
+          "value": "HT-339717"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-036",
+      "patient": "p3-018",
+      "template": 4,
+      "text": "Caller: James Nakamura, MRN: HTEST-MRN-12294. Wants to know if the patch is safe through airport security. Lives in Glenwood. Prefers email james.nakamura@example.com.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 8,
+          "end": 22,
+          "value": "James Nakamura"
+        },
+        {
+          "type": "MRN",
+          "start": 29,
+          "end": 44,
+          "value": "HTEST-MRN-12294"
+        },
+        {
+          "type": "CITY",
+          "start": 116,
+          "end": 124,
+          "value": "Glenwood"
+        },
+        {
+          "type": "EMAIL",
+          "start": 140,
+          "end": 166,
+          "value": "james.nakamura@example.com"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-037",
+      "patient": "p3-019",
+      "template": 3,
+      "text": "Mrs. Marchetti says the two-factor code is always rejected. SSN on file 963-34-4465 (verify before reset). Alt number 413-555-0159.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 5,
+          "end": 14,
+          "value": "Marchetti"
+        },
+        {
+          "type": "SSN",
+          "start": 72,
+          "end": 83,
+          "value": "963-34-4465"
+        },
+        {
+          "type": "PHONE",
+          "start": 118,
+          "end": 130,
+          "value": "413-555-0159"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-038",
+      "patient": "p3-019",
+      "template": 0,
+      "text": "Pt Rafael Marchetti (MRN HTEST-MRN-31187, DOB 02/02/1990) called about the Acme Cardio patch v2, SN ACP2-28728813. Reports redness under the adhesive. Callback (413) 555-0159.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 3,
+          "end": 19,
+          "value": "Rafael Marchetti"
+        },
+        {
+          "type": "MRN",
+          "start": 25,
+          "end": 40,
+          "value": "HTEST-MRN-31187"
+        },
+        {
+          "type": "DATE",
+          "start": 46,
+          "end": 56,
+          "value": "02/02/1990"
+        },
+        {
+          "type": "SERIAL",
+          "start": 100,
+          "end": 113,
+          "value": "ACP2-28728813"
+        },
+        {
+          "type": "PHONE",
+          "start": 160,
+          "end": 174,
+          "value": "(413) 555-0159"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-039",
+      "patient": "p3-020",
+      "template": 4,
+      "text": "Caller: Signe Quillan, MRN: HTEST-MRN-54081. Wants to know if the patch is safe through airport security. Lives in Glenwood. Prefers email signe.quillan@example.com.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 8,
+          "end": 21,
+          "value": "Signe Quillan"
+        },
+        {
+          "type": "MRN",
+          "start": 28,
+          "end": 43,
+          "value": "HTEST-MRN-54081"
+        },
+        {
+          "type": "CITY",
+          "start": 115,
+          "end": 123,
+          "value": "Glenwood"
+        },
+        {
+          "type": "EMAIL",
+          "start": 139,
+          "end": 164,
+          "value": "signe.quillan@example.com"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-040",
+      "patient": "p3-020",
+      "template": 1,
+      "text": "Quillan, Signe - DOB 1975-08-16 - readings stopped syncing on August 13, 2026. Their wife Robert helped her re-pair it. Email signe.quillan@example.com.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 0,
+          "end": 14,
+          "value": "Quillan, Signe"
+        },
+        {
+          "type": "DATE",
+          "start": 21,
+          "end": 31,
+          "value": "1975-08-16"
+        },
+        {
+          "type": "DATE",
+          "start": 62,
+          "end": 77,
+          "value": "August 13, 2026"
+        },
+        {
+          "type": "NAME",
+          "start": 90,
+          "end": 96,
+          "value": "Robert"
+        },
+        {
+          "type": "EMAIL",
+          "start": 126,
+          "end": 151,
+          "value": "signe.quillan@example.com"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-041",
+      "patient": "p3-021",
+      "template": 0,
+      "text": "Pt Robert Pemberton (MRN HTEST-MRN-59590, DOB 08/15/1950) called about the Acme Cardio patch v2, SN ACP2-90305386. Reports redness under the adhesive. Callback (207) 555-0183.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 3,
+          "end": 19,
+          "value": "Robert Pemberton"
+        },
+        {
+          "type": "MRN",
+          "start": 25,
+          "end": 40,
+          "value": "HTEST-MRN-59590"
+        },
+        {
+          "type": "DATE",
+          "start": 46,
+          "end": 56,
+          "value": "08/15/1950"
+        },
+        {
+          "type": "SERIAL",
+          "start": 100,
+          "end": 113,
+          "value": "ACP2-90305386"
+        },
+        {
+          "type": "PHONE",
+          "start": 160,
+          "end": 174,
+          "value": "(207) 555-0183"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-042",
+      "patient": "p3-021",
+      "template": 2,
+      "text": "Spoke with Robert at 701 Wexford Court, Glenwood IL 60486. Portal shows a blank Appointments page since the update. Insurance member ID HT-941612.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 11,
+          "end": 17,
+          "value": "Robert"
+        },
+        {
+          "type": "ADDRESS",
+          "start": 21,
+          "end": 38,
+          "value": "701 Wexford Court"
+        },
+        {
+          "type": "CITY",
+          "start": 40,
+          "end": 48,
+          "value": "Glenwood"
+        },
+        {
+          "type": "ZIP",
+          "start": 49,
+          "end": 57,
+          "value": "IL 60486"
+        },
+        {
+          "type": "MEMBER_ID",
+          "start": 136,
+          "end": 145,
+          "value": "HT-941612"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-043",
+      "patient": "p3-022",
+      "template": 1,
+      "text": "Pemberton, Susan - DOB 1949-12-01 - readings stopped syncing on January 19, 2026. Their wife Siobhan helped her re-pair it. Email susan.pemberton@example.com.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 0,
+          "end": 16,
+          "value": "Pemberton, Susan"
+        },
+        {
+          "type": "DATE",
+          "start": 23,
+          "end": 33,
+          "value": "1949-12-01"
+        },
+        {
+          "type": "DATE",
+          "start": 64,
+          "end": 80,
+          "value": "January 19, 2026"
+        },
+        {
+          "type": "NAME",
+          "start": 93,
+          "end": 100,
+          "value": "Siobhan"
+        },
+        {
+          "type": "EMAIL",
+          "start": 130,
+          "end": 157,
+          "value": "susan.pemberton@example.com"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-044",
+      "patient": "p3-022",
+      "template": 3,
+      "text": "Mrs. Pemberton says the two-factor code is always rejected. SSN on file 949-64-3955 (verify before reset). Alt number 508-555-0121.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 5,
+          "end": 14,
+          "value": "Pemberton"
+        },
+        {
+          "type": "SSN",
+          "start": 72,
+          "end": 83,
+          "value": "949-64-3955"
+        },
+        {
+          "type": "PHONE",
+          "start": 118,
+          "end": 130,
+          "value": "508-555-0121"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-045",
+      "patient": "p3-023",
+      "template": 2,
+      "text": "Spoke with Tomasz at 91 Bluebell Terrace, Millbrook NY 12580. Portal shows a blank Appointments page since the update. Insurance member ID HT-440284.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 11,
+          "end": 17,
+          "value": "Tomasz"
+        },
+        {
+          "type": "ADDRESS",
+          "start": 21,
+          "end": 40,
+          "value": "91 Bluebell Terrace"
+        },
+        {
+          "type": "CITY",
+          "start": 42,
+          "end": 51,
+          "value": "Millbrook"
+        },
+        {
+          "type": "ZIP",
+          "start": 52,
+          "end": 60,
+          "value": "NY 12580"
+        },
+        {
+          "type": "MEMBER_ID",
+          "start": 139,
+          "end": 148,
+          "value": "HT-440284"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-046",
+      "patient": "p3-023",
+      "template": 4,
+      "text": "Caller: Tomasz Castellanos, MRN: HTEST-MRN-99373. Wants to know if the patch is safe through airport security. Lives in Millbrook. Prefers email tomasz.castellanos@example.com.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 8,
+          "end": 26,
+          "value": "Tomasz Castellanos"
+        },
+        {
+          "type": "MRN",
+          "start": 33,
+          "end": 48,
+          "value": "HTEST-MRN-99373"
+        },
+        {
+          "type": "CITY",
+          "start": 120,
+          "end": 129,
+          "value": "Millbrook"
+        },
+        {
+          "type": "EMAIL",
+          "start": 145,
+          "end": 175,
+          "value": "tomasz.castellanos@example.com"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-047",
+      "patient": "p3-024",
+      "template": 3,
+      "text": "Mrs. Castellanos says the two-factor code is always rejected. SSN on file 960-59-4028 (verify before reset). Alt number 413-555-0149.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 5,
+          "end": 16,
+          "value": "Castellanos"
+        },
+        {
+          "type": "SSN",
+          "start": 74,
+          "end": 85,
+          "value": "960-59-4028"
+        },
+        {
+          "type": "PHONE",
+          "start": 120,
+          "end": 132,
+          "value": "413-555-0149"
+        }
+      ]
+    },
+    {
+      "id": "P3-N-048",
+      "patient": "p3-024",
+      "template": 0,
+      "text": "Pt Priyanka Castellanos (MRN HTEST-MRN-68050, DOB 01/09/1988) called about the Acme Cardio patch v2, SN ACP2-66248443. Reports redness under the adhesive. Callback (413) 555-0149.",
+      "spans": [
+        {
+          "type": "NAME",
+          "start": 3,
+          "end": 23,
+          "value": "Priyanka Castellanos"
+        },
+        {
+          "type": "MRN",
+          "start": 29,
+          "end": 44,
+          "value": "HTEST-MRN-68050"
+        },
+        {
+          "type": "DATE",
+          "start": 50,
+          "end": 60,
+          "value": "01/09/1988"
+        },
+        {
+          "type": "SERIAL",
+          "start": 104,
+          "end": 117,
+          "value": "ACP2-66248443"
+        },
+        {
+          "type": "PHONE",
+          "start": 164,
+          "end": 178,
+          "value": "(413) 555-0149"
+        }
+      ]
+    },
+    {
+      "id": "P3-R-001",
+      "patient": null,
+      "expect": "refuse",
+      "text": "Walk-in, no chart yet. Says the patch app crashes. Account 65897152, will bring paperwork.",
+      "spans": [
+        {
+          "type": "ACCOUNT",
+          "start": 59,
+          "end": 67,
+          "value": "65897152"
+        }
+      ]
+    },
+    {
+      "id": "P3-R-002",
+      "patient": null,
+      "expect": "refuse",
+      "text": "Traveller from abroad, patch will not pair. Reach on +44 20 7946 500 while in the UK.",
+      "spans": [
+        {
+          "type": "PHONE",
+          "start": 53,
+          "end": 68,
+          "value": "+44 20 7946 500"
+        }
+      ]
+    }
+  ]
+}

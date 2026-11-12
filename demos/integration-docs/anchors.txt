@@ -1,0 +1,9 @@
+# Source anchors the integration guide must be verified against. reset.sh fails if one goes stale.
+# <question> <path> [<text that must appear in that file>]
+1 packages/docs/docs/auth/client-credentials.md
+1 packages/server/src/oauth/token.ts handleClientCredentials
+2 packages/docs/docs/fhir-datastore/updating-data.md upsertResource
+2 packages/core/src/client.ts upsertResource
+3 packages/docs/docs/subscriptions/index.md
+3 packages/server/src/workers/subscription.ts X-Signature
+4 packages/docs/docs/api/fhir/operations/bulk-fhir.mdx

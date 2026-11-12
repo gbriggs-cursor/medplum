@@ -17,7 +17,11 @@ stories:
     data_pack: P2 synthea-analytics-10k, Synthea v3.3.0, 10,000 living patients, seed 20261112, end date 2026-10-01, every patient tagged synthetic + HTEST. P0 synthea-analytics-100 (seed 100) is the committed fixture
     fallback: []
     reset: demos/analytics-10k/reset.sh
+    offline: bash demos/analytics-10k/run.sh
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: a cloud agent runs prompt.md against the pack instead of the checked-in REPLAY turns."
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -27,9 +31,6 @@ stories:
     card: demos/analytics-10k/story.yaml
     prompt: demos/analytics-10k/prompt.md
     readme: demos/analytics-10k/README.md
-    offline: bash demos/analytics-10k/run.sh
-    default_mode: replay
-    live_mode_note: "Live mode available once keys are added: a cloud agent runs prompt.md against the pack instead of the checked-in REPLAY turns."
   - id: device-evidence
     code: L3
     title: Traced build (device evidence)
@@ -44,6 +45,7 @@ stories:
       - 11
     reset: demos/device-evidence/reset.sh
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -69,6 +71,7 @@ stories:
       - 13
     reset: demos/docs-from-questions/reset.sh
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -77,6 +80,61 @@ stories:
     card: demos/docs-from-questions/story.yaml
     prompt: demos/docs-from-questions/prompt.md
     readme: demos/docs-from-questions/README.md
+  - id: front-office-voice
+    code: G9
+    title: Voice front-office support
+    track: generic
+    stage: generic
+    readiness: new
+    runtime: 5 min live, plus agent time
+    wow: A front-desk manager's call becomes a ticket with no patient details, then a docs or fix PR
+    trigger: Presenter submits the {call} script on the L9 support form (demos/support-voice/server.mjs). Grok Voice is not connected
+    data_pack: Front-office profile (seed/front-office.json, same shape as demos/support-voice/prospects/foomedical.json) and three synthetic caller scripts (seed/calls.md). The server does not load this profile
+    fallback: []
+    reset: demos/front-office-voice/reset.sh
+    depends_on:
+      - L9
+      - L10
+      - L11
+    pending: []
+    offline: node demos/front-office-voice/run.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: Grok Voice takes the call and the L9 server can write a live GIO issue. Key-free mode replays the caller scripts, routes them against the staff articles in kb/staff, and writes OFFLINE dry-run JSON. The voice route returns 501 even when XAI_API_KEY is set."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:front-office-voice
+      - track:generic
+    card: demos/front-office-voice/story.yaml
+    prompt: demos/front-office-voice/prompt.md
+    readme: demos/front-office-voice/README.md
+  - id: integration-docs
+    code: G11
+    title: Integration docs for a partner
+    track: generic
+    stage: generic
+    readiness: new
+    runtime: 10-15 min
+    wow: Four partner questions become one integration guide where every claim links to the line of server code that backs it
+    trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+    data_pack: Four synthetic partner questions (seed/partner-questions.md) and the source anchors they must be verified against (anchors.txt)
+    fallback: []
+    reset: demos/integration-docs/reset.sh
+    offline: node demos/integration-docs/run.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: a cloud agent writes the integration guide from prompt.md. Key-free mode replays a recorded guide and checks it against anchors.txt."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:integration-docs
+      - track:generic
+    card: demos/integration-docs/story.yaml
+    prompt: demos/integration-docs/prompt.md
+    readme: demos/integration-docs/README.md
   - id: net-new-feature
     code: G1
     title: Net-new feature
@@ -92,6 +150,7 @@ stories:
       - 14
     reset: null
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -100,6 +159,85 @@ stories:
     card: demos/net-new-feature/story.yaml
     prompt: demos/net-new-feature/prompt.md
     readme: demos/net-new-feature/README.md
+  - id: phi-safe-dev
+    code: G8
+    title: PHI-safe debugging for practice software
+    track: generic
+    stage: generic
+    readiness: new
+    runtime: 10-15 min
+    wow: The agent reproduces the patient's bug on a synthetic twin and fixes it, and not one identifier from the ticket reaches Jira, code, or the PR
+    trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+    data_pack: One synthetic front-desk ticket with realistic-looking fake identifiers (seed/ticket.md, all HTEST) plus synthetic-twin Encounter fixtures the agent writes
+    fallback: []
+    reset: demos/phi-safe-dev/reset.sh
+    depends_on:
+      - L11
+    pending: []
+    offline: node demos/phi-safe-dev/run.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: a cloud agent runs prompt.md against the planted bug. Key-free mode replays that fix in a temp copy and writes an OFFLINE ticket."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:phi-safe-dev
+      - track:generic
+    card: demos/phi-safe-dev/story.yaml
+    prompt: demos/phi-safe-dev/prompt.md
+    readme: demos/phi-safe-dev/README.md
+  - id: phi-tripwire
+    code: L11
+    title: PHI tripwire
+    track: ls
+    stage: floor
+    readiness: new
+    runtime: 5 min
+    wow: A realistic note with a name, MRN, DOB, SSN and phone goes in; the ticket comes out with placeholders, and a note with an unknown identifier is refused outright
+    trigger: Presenter pastes a P3 note (node demos/phi-tripwire/scripts/tripwire.mjs --note {note})
+    data_pack: P3 PHI-like pack, demos/_shared/data-packs/p3-phi-like, seed 20261112 (24 patients, 50 notes, 213 planted identifiers), tagged synthetic + HTEST
+    fallback: []
+    reset: demos/phi-tripwire/reset.sh
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:phi-tripwire
+      - track:ls
+      - stage:floor
+    card: demos/phi-tripwire/story.yaml
+    prompt: demos/phi-tripwire/prompt.md
+    readme: demos/phi-tripwire/README.md
+  - id: practice-analytics
+    code: G10
+    title: Practice analytics on 10,000 patients
+    track: generic
+    stage: generic
+    readiness: new
+    runtime: 5-10 min
+    wow: A practice manager's three questions over 10,000 synthetic patients get answered with SQL, and the agent finds the planted cause on its own
+    trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+    data_pack: P2 synthea-analytics-10k from L13 (demos/analytics-10k). Parquet and analytics.duckdb unpack to ~/.cache/medplum-demos/synthea-analytics-10k. Committed fallback is demos/_shared/data-packs/synthea-analytics/fixture-100. This story adds only the practice-manager questions and the column contract
+    fallback: []
+    reset: demos/practice-analytics/reset.sh
+    depends_on:
+      - L13
+    pending: []
+    offline: node demos/practice-analytics/run.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: a cloud agent runs prompt.md against the P2 pack. Key-free mode reads question 1 from the shared HbA1c views on the P2 10k pack (fetched with fetch.sh), or the committed 100-patient fixture if the fetch or checksum fails."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:practice-analytics
+      - track:generic
+    card: demos/practice-analytics/story.yaml
+    prompt: demos/practice-analytics/prompt.md
+    readme: demos/practice-analytics/README.md
   - id: rebrand
     code: G3
     title: Prospect rebrand
@@ -113,6 +251,7 @@ stories:
     fallback: []
     reset: null
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -121,6 +260,56 @@ stories:
     card: demos/rebrand/story.yaml
     prompt: demos/rebrand/prompt.md
     readme: demos/rebrand/README.md
+  - id: speech-to-fhir
+    code: L10
+    title: Speech to FHIR (voice intake to QuestionnaireResponse)
+    track: ls
+    stage: post-market
+    readiness: new
+    runtime: 5 min
+    wow: What the caller said is a structured QuestionnaireResponse on the chart, and the Jira ticket carries none of their identity
+    trigger: A confirmed support intake (voice transcript or form) from L9 support-voice, or node demos/speech-to-fhir/scripts/run.mjs with a seeded transcript
+    data_pack: seed/questionnaire.json (Foo Medical support intake) and 3 synthetic transcripts in seed/transcripts.json; patients are created or matched by name + birth date and tagged synthetic + HTEST + demo-story speech-to-fhir
+    fallback: []
+    reset: demos/speech-to-fhir/reset.sh
+    automation: false
+    intake: true
+    labels:
+      - demo
+      - medplum
+      - story:speech-to-fhir
+      - track:ls
+      - stage:post-market
+      - support
+      - platform-demo
+    card: demos/speech-to-fhir/story.yaml
+    prompt: demos/speech-to-fhir/prompt.md
+    readme: demos/speech-to-fhir/README.md
+  - id: support-voice
+    code: L9
+    title: Voice patient support (Foo Medical)
+    track: ls
+    stage: post-market
+    readiness: adapt
+    runtime: 5 min live, plus agent time
+    wow: A patient asks about pairing a patch; a redacted GIO ticket appears and the bots turn it into a KB article or a fix PR
+    trigger: A synthetic patient calls (Grok Voice) or uses the support form; after a server-enforced read-back and confirm, a redacted GIO intake ticket is created
+    data_pack: P4 support KB (8 Foo Medical articles in kb/foomedical plus 9 Medplum docs listed in kb/medplum-docs.json) and 14 synthetic intakes in evals/cases.json
+    fallback: []
+    reset: demos/support-voice/reset.sh
+    automation: false
+    intake: true
+    labels:
+      - demo
+      - medplum
+      - story:support-voice
+      - track:ls
+      - stage:post-market
+      - support
+      - platform-demo
+    card: demos/support-voice/story.yaml
+    prompt: demos/support-voice/prompt.md
+    readme: demos/support-voice/README.md
   - id: ticket-to-pr
     code: G2
     title: Ticket-to-PR automation
@@ -137,6 +326,7 @@ stories:
       - 16
     reset: demos/ticket-to-pr/reset.sh
     automation: true
+    intake: false
     labels:
       - demo
       - medplum

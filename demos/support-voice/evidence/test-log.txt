@@ -1,0 +1,102 @@
+$ npm test
+ok 1 - redacts each identifier type with a typed placeholder
+ok 2 - known identifiers are typed and caught when only part of a name is repeated
+ok 3 - leaves product words and non-identifying numbers alone
+ok 4 - screen ignores placeholders and flags raw identifiers
+ok 5 - nothing is confirmed without the read-back token
+ok 6 - a confirmed draft cannot be submitted twice, and a decline writes nothing
+ok 7 - drafts expire and require every identity field
+ok 8 - GIO payload carries support labels, no automation labels, and no caller identity
+ok 9 - tripwire refuses a payload that still holds an identifier
+ok 10 - automation labels are refused on support tickets
+# pass 10
+# fail 0
+
+$ npm run eval
+pass  pair-new-phone           answered        KB-201
+pass  readings-missing         answered        KB-202
+pass  two-factor-rejected      answered        KB-102
+pass  forgot-password          answered        KB-101
+pass  reschedule               answered        KB-302
+pass  message-with-photo       answered        KB-301
+pass  caregiver-access         answered        KB-401
+pass  gap-airport              kb_gap          
+pass  gap-waterproof           kb_gap          
+pass  gap-tablet               kb_gap          
+pass  bug-appointments-blank   bug             
+pass  bug-duplicate-messages   bug             
+pass  urgent-chest-pain        urgent_clinical 
+pass  phi-in-description       answered        KB-202
+PASS: 14/14 cases
+EXIT:0
+
+$ node scripts/verify.mjs --kb-gap
+flow --kb-gap (gap-airport) -> run/outbox/INTAKE-<id>.json
+summary: [Foo Medical support] kb_gap: Can I wear the patch through airport security and on a plane?
+pass  draft read back
+pass  forged confirm refused (HTTP 409)
+pass  confirmed and submitted (HTTP 200)
+pass  triage = kb_gap (kb_gap)
+pass  ticket has no caller identity
+pass  ticket is GIO with support labels, never automatable
+pass  replayed confirm refused (HTTP 409)
+PASS: 7/7 checks
+EXIT:0
+$ node scripts/verify.mjs --bug
+flow --bug (bug-appointments-blank) -> run/outbox/INTAKE-<id>.json
+summary: [Foo Medical support] bug: Since the latest update the Appointments page is blank, even after I sign out an
+pass  draft read back
+pass  forged confirm refused (HTTP 409)
+pass  confirmed and submitted (HTTP 200)
+pass  triage = bug (bug)
+pass  ticket has no caller identity
+pass  ticket is GIO with support labels, never automatable
+pass  replayed confirm refused (HTTP 409)
+PASS: 7/7 checks
+EXIT:0
+$ node scripts/verify.mjs --answered
+flow --answered (phi-in-description) -> run/outbox/INTAKE-<id>.json
+summary: [Foo Medical support] answered: This is [NAME], [MRN], born [DATE]. Call me back at [PHONE] or [EMAIL]. My blood
+pass  draft read back
+pass  forged confirm refused (HTTP 409)
+pass  confirmed and submitted (HTTP 200)
+pass  triage = answered (answered)
+pass  ticket has no caller identity
+pass  ticket is GIO with support labels, never automatable
+pass  replayed confirm refused (HTTP 409)
+PASS: 7/7 checks
+EXIT:0
+$ node scripts/verify.mjs --urgent
+flow --urgent (urgent-chest-pain) -> run/outbox/INTAKE-<id>.json
+summary: [Foo Medical support] urgent_clinical: My patch keeps beeping and I have chest pain right now.
+pass  draft read back
+pass  forged confirm refused (HTTP 409)
+pass  confirmed and submitted (HTTP 200)
+pass  triage = urgent_clinical (urgent_clinical)
+pass  ticket has no caller identity
+pass  ticket is GIO with support labels, never automatable
+pass  replayed confirm refused (HTTP 409)
+PASS: 7/7 checks
+EXIT:0
+
+$ node demos/_shared/scripts/catalog.mjs --check
+ok  L3   device-evidence        ls       stage=03
+ok  G4   docs-from-questions    generic  stage=generic
+ok  G1   net-new-feature        generic  stage=generic
+ok  G3   rebrand                generic  stage=generic
+ok  L9   support-voice          ls       stage=post-market
+ok  G2   ticket-to-pr           generic  stage=generic
+PASS: 6 stories valid (6 passed, 0 failed), catalog.yaml up to date, no branch pinning
+EXIT:0
+
+$ cd agents/triage && npx agent-sdk validate --dir . --json
+{"version":1,"ok":true,"agents":[{"slug":"triage","diagnostics":[]}]}
+
+$ npx agent-sdk eval --dir . --no-stream triage/gap-airport   (CURSOR_API_KEY unset)
+FAIL  triage/gap-airport (0.0s) — Synthetic intake gap-airport is triaged as kb_gap.
+  ✗ succeeded (BDK needs a Cursor credential to run turns. Run `agent-sdk login` (or set CURSOR_API_KEY / CURSOR_API_KEY_FILE / CURSOR_SERVICE_ACCOUNT_KEY / pass serve({ apiKey })).)
+  ✗ calledTool(search_kb) (matched 0; called [])
+  ✗ calledTool(record_triage, {count=1, input={"category":"kb_gap"}, output={"recorded":true}}) (matched 0; called [])
+  ✓ check(satisfies)
+
+0 passed, 1 failed, 1 total
