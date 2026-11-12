@@ -56,6 +56,32 @@ stories:
     card: demos/audit-qa/story.yaml
     prompt: demos/audit-qa/prompt.md
     readme: demos/audit-qa/README.md
+  - id: batch-evidence
+    code: L14
+    title: Batch evidence
+    track: ls
+    stage: "05"
+    readiness: new
+    runtime: 10 min
+    wow: One command writes a single evidence v2 package whose trace has one row per device change, and a device missing from the cohort fails that row
+    trigger: Demo Setup runs demos/batch-evidence/src/refresh.mjs, or the @grok/agent-sdk runner tool refresh-evidence
+    data_pack: P1 device cohort resource ids (20 patients, 20 devices, 40 observations, seed 20261104) copied from pull request 11, plus four synthetic changes in seed/changes.json. Every record is tagged synthetic.
+    fallback:
+      - 11
+    reset: demos/batch-evidence/reset.sh
+    offline: null
+    default_mode: null
+    live_mode_note: null
+    automation: false
+    labels:
+      - demo
+      - medplum
+      - story:batch-evidence
+      - track:ls
+      - stage:05
+    card: demos/batch-evidence/story.yaml
+    prompt: demos/batch-evidence/prompt.md
+    readme: demos/batch-evidence/README.md
   - id: bugbot-62304
     code: L4
     title: IEC 62304 Bugbot rules
