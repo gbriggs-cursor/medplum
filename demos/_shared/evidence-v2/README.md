@@ -78,4 +78,4 @@ One row per traced test per run. `result` is `pass` or `fail`. Readers take the 
 }
 ```
 
-`decision` is `approved` or `rejected`. `record` binds the decision to the exact evidence bytes. Editing `EVIDENCE.md` or `trace.json` after approval breaks the digest. Approvals are never written back to Medplum.
+`decision` is `approved` or `rejected`. `record` binds the decision to the exact evidence bytes. The `EVIDENCE.md` hash is taken with its `Approval:` line removed, so writing the decision into that line does not change the digest. `demos/approval-gate/gate.mjs` is the reference writer and verifier. Editing `EVIDENCE.md` or `trace.json` after approval breaks the digest. Approvals are never written back to Medplum.
