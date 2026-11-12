@@ -1,0 +1,106 @@
+REPLAY (no key)
+pack: synthea-analytics-100 (fixture-100) at /agent/repos/medplum/demos/_shared/data-packs/synthea-analytics/fixture-100 via parquet
+turns: demos/analytics-10k/fixtures/replay/turns.json label=REPLAY (no key)
+
+--- user REPLAY (no key) ---
+Foo Medical's diabetes dashboard shows HbA1c control (share of type 2 diabetes patients' HbA1c results under 7%) dropping. Find out why, back every claim with SQL, and check the rest of the data for other problems that would distort a dashboard. Data is the local synthetic analytics pack.
+
+--- assistant REPLAY (no key) ---
+REPLAY (no key)
+
+I will measure monthly HbA1c control for type 2 diabetes (SNOMED 44054006) without assuming a unit, then split the same results by units. A jump in the average together with a new unit is a unit change, not a clinical change. The corrected value uses the IFCC conversion mmol/mol to NGSP percent: value / 10.929 + 2.15.
+
+OFFLINE monthly-naive (1 rows)
+month | n | avg_value | control_pct | units
+--- | --- | --- | --- | ---
+2026-05-01 | 2 | 6.85 | 50 | %
+
+OFFLINE monthly-units (8 rows)
+month | units | n | avg_value
+--- | --- | --- | ---
+2025-12-01 | % | 4 | 6.1
+2026-01-01 | % | 4 | 4.8
+2026-02-01 | % | 1 | 6.4
+2026-03-01 | % | 3 | 5.4
+2026-03-01 | mmol/mol | 1 | 44
+2026-04-01 | mmol/mol | 1 | 45
+2026-05-01 | % | 2 | 6.9
+2026-05-01 | mmol/mol | 2 | 27.5
+
+OFFLINE monthly-corrected (1 rows)
+month | corrected_control_pct | n
+--- | --- | ---
+2026-05-01 | 50 | 2
+
+OFFLINE unit-start (1 rows)
+start_date | n
+--- | ---
+2026-03-30 | 9
+
+OFFLINE unit-orgs (8 rows)
+organization_id
+---
+3e97ce4f-3ad7-3cea-883f-e2bb4ca89d83
+817f4acb-0184-3146-9ce0-87197d8f115a
+901c2d40-1ca3-3879-9a20-c663b8adc0a9
+936ceb96-2b12-371f-aa68-ee02a9c06f4c
+a2d45ee8-b930-3169-b612-f602961ad212
+b03b624d-c939-3688-986d-9555b8009a3b
+d17688c1-9cc8-3e68-980f-82fe1ed685fe
+d3085315-9893-34c7-8889-3a31dc17c2b0
+
+--- assistant REPLAY (no key) ---
+REPLAY (no key)
+
+I will look for other distortions: a second patient row with the same SSN and birth date, new diagnoses stored under a different code system, and a glucose meter model that stops sending readings for a run of days.
+
+OFFLINE duplicates (1 rows)
+ssn | birthdate | n | ids
+--- | --- | --- | ---
+999-10-8466 | 1982-11-18 | 2 | ['704b7b53-21ff-4b35-bd8f-057b9597b58b', 'd1e0303f-62e7-0cd8-a588-3dd21dc975f6']
+
+OFFLINE coding (1 rows)
+start_date | codes | n
+--- | --- | ---
+2025-12-23 | ['I10'] | 1
+
+OFFLINE device-days (1083 rows)
+model | reading_date | n
+--- | --- | ---
+GlucoSense G2 | 2025-10-01 | 10
+GlucoSense G2 | 2025-10-02 | 10
+GlucoSense G2 | 2025-10-03 | 10
+GlucoSense G2 | 2025-10-04 | 10
+GlucoSense G2 | 2025-10-05 | 10
+GlucoSense G2 | 2025-10-06 | 10
+GlucoSense G2 | 2025-10-07 | 10
+GlucoSense G2 | 2025-10-08 | 10
+GlucoSense G2 | 2025-10-09 | 10
+GlucoSense G2 | 2025-10-10 | 10
+GlucoSense G2 | 2025-10-11 | 10
+GlucoSense G2 | 2025-10-12 | 10
+GlucoSense G2 | 2025-10-13 | 10
+GlucoSense G2 | 2025-10-14 | 10
+GlucoSense G2 | 2025-10-15 | 10
+GlucoSense G2 | 2025-10-16 | 10
+GlucoSense G2 | 2025-10-17 | 10
+GlucoSense G2 | 2025-10-18 | 10
+GlucoSense G2 | 2025-10-19 | 10
+GlucoSense G2 | 2025-10-20 | 10
+GlucoSense G2 | 2025-10-21 | 10
+GlucoSense G2 | 2025-10-22 | 10
+GlucoSense G2 | 2025-10-23 | 10
+GlucoSense G2 | 2025-10-24 | 10
+... 1059 more rows
+
+OFFLINE answer: HbA1c control drops because 9 results switch to mmol/mol starting 2026-03-30 and the dashboard still treats every value as a percent.
+
+OFFLINE score.py (answer-key-fixture-100.json)
+miss  hba1c-unit-change    start 2026-03-08, org recall 0%
+found duplicate-patients   1 pairs, id recall 100%
+miss  coding-drift         start 2025-09-26
+found device-gap           GlucoSense G2 2026-01-09..2026-01-21
+SCORE: 2/4 (primary question missed)
+
+OFFLINE wrote demos/analytics-10k/run/findings.json and demos/analytics-10k/run/REPORT.md
+EXIT:0
