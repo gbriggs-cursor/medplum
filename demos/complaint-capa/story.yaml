@@ -1,0 +1,47 @@
+id: complaint-capa
+code: L16
+title: Complaint to CAPA
+track: ls
+stage: post-market
+readiness: new
+runtime: 5 min
+environment: '67842161'
+
+persona: Complaint-handling lead at {prospect}
+trigger: Presenter pastes prompt.md into the complaint-clerk Grok Bot. The bot reads the fixture complaint and files a complaint record and a reportability assessment. It does not wait for approval.
+actors:
+  - Grok Bot (complaint clerk; not created or edited by this change)
+  - Atlassian connector (create GIO issues only)
+surface: GIO board and demos/complaint-capa/run/complaint.yaml
+data_pack: Synthetic complaint fixture standing in for an L9 intake ticket, plus a fictional complaint SOP, in demos/complaint-capa/seed/. Tagged HTEST. Subject id SP-014 only. No patient name or date of birth.
+artifact: A complaint record with a reportability call and a CAPA recommendation, status ready-for-review, and new GIO tickets. Nothing is submitted outside the demo.
+gate: Presenter shows the reportability call and the CAPA recommendation. On-stage only. A reviewer may override either later; the run does not wait.
+gate_blocks: false
+wow: The bot files a complaint record and a reportability assessment, ready for review
+proof:
+  - demos/complaint-capa/run/complaint.yaml with reportability, capa, and submitted_externally false
+  - GIO ticket keys created for this run, or jira_key null plus the connector blocker
+  - The cited SOP section id
+reset: demos/complaint-capa/reset.sh
+fallback: []
+fallback_note: >-
+  No earlier pull request has run this story. L9 has not filed a ticket. The seed complaint is a
+  fixture, not a live intake.
+blast_radius: >-
+  When the bot runs, it creates new GIO tickets and does not change status or comment on existing
+  tickets. No regulator, email, or Slack submission. No GitHub writes. No write-back to Medplum.
+  This change itself writes nothing to Jira.
+answer_key: answer-keys://complaint-capa/
+offline: node demos/complaint-capa/offline.mjs
+default_mode: replay
+live_mode_note: >-
+  Live mode available once keys are added: the complaint-clerk bot reads prompt.md and creates GIO
+  issues through the Atlassian connector. This runner does not call the bot.
+
+variables:
+  prospect: Acme Cardio
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:complaint-capa', 'track:ls', 'stage:post-market']

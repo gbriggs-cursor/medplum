@@ -22,7 +22,7 @@ All data is synthetic. All stories run in cloud agent environment `67842161`, us
 | Field | Holds |
 | --- | --- |
 | `id`, `code`, `title` | Folder name, catalog code (G1, L3, ...), display title. |
-| `track`, `stage` | `generic` or `ls`; `generic`, one factory stage `01`-`07`, or `01-07` for the composite factory walk. |
+| `track`, `stage` | `generic` or `ls`; `generic`, one factory stage `01`-`07`, `01-07` for the composite factory walk, or `post-market`. |
 | `readiness`, `runtime`, `environment` | `exists`, `adapt`, `new`, or `planned`; minutes; always `67842161`. |
 | `persona` | Who it is for. Uses `{prospect}`. |
 | `trigger` | What starts it. |
@@ -41,7 +41,7 @@ All data is synthetic. All stories run in cloud agent environment `67842161`, us
 | `answer_key` | Optional. `answer-keys://<story>/` (see below). |
 | `offline` | Command from the repo root that runs the story with no API keys. Prints `REPLAY (no key)` or `OFFLINE` and exits 0. |
 | `default_mode` | `replay` or `offline`. The default demo path is key-free. |
-| `live_mode_note` | One line: `Live mode available once keys are added: ...`. |
+| `live_mode_note` | One line starting `Live mode available once keys are added:`. |
 
 ## Personas
 
