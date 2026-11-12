@@ -199,3 +199,25 @@ stories:
     card: demos/ticket-to-pr/story.yaml
     prompt: demos/ticket-to-pr/prompt.md
     readme: demos/ticket-to-pr/README.md
+  - id: verify-loop
+    code: L5
+    title: Verify loop
+    track: ls
+    stage: "05"
+    readiness: new
+    runtime: 15-20 min
+    wow: CI goes red on a planted regression, the remediation agent fixes the source without touching a test, and the trace matrix turns green
+    trigger: Presenter runs demos/verify-loop/run.sh (or pastes prompt.md into a cloud agent started from the default branch)
+    data_pack: None beyond packages/core fixtures. Planted regression in demos/verify-loop/regression.patch; traced tests in trace-spec.json
+    fallback: []
+    reset: demos/verify-loop/reset.sh
+    automation: false
+    labels:
+      - demo
+      - medplum
+      - story:verify-loop
+      - track:ls
+      - stage:05
+    card: demos/verify-loop/story.yaml
+    prompt: demos/verify-loop/prompt.md
+    readme: demos/verify-loop/README.md
