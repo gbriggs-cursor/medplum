@@ -27,10 +27,12 @@ function run(args, extra = {}) {
 test('key-free run writes an OFFLINE ticket and keeps the planted identifiers out', () => {
   const { status, output } = run(['--note', 'P3-N-001']);
   assert.equal(status, 0, output);
-  assert.match(output, /^OFFLINE$/m);
+  assert.match(output, /^OFFLINE \(no key\)$/m);
   const note = loadPack().notes.find((n) => n.id === 'P3-N-001');
-  const ticket = JSON.parse(readFileSync(new URL('../run/outbox/P3-N-001.json', import.meta.url), 'utf8'));
-  assert.equal(ticket.mode, 'OFFLINE');
+  const raw = readFileSync(new URL('../run/outbox/P3-N-001.json', import.meta.url), 'utf8');
+  assert.equal(raw.split('\n')[0], 'OFFLINE (no key)');
+  const ticket = JSON.parse(raw.slice(raw.indexOf('\n') + 1));
+  assert.equal(ticket.mode, 'OFFLINE (no key)');
   assert.equal(ticket.fields.project.key, 'GIO');
   const text = JSON.stringify(ticket);
   for (const span of note.spans) {
