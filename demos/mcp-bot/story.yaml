@@ -1,0 +1,39 @@
+id: mcp-bot
+code: L15
+title: Medplum MCP plus Bot and Subscription
+track: ls
+stage: '03'
+readiness: new
+runtime: 15 min
+environment: '67842161'
+
+persona: Software lead at {prospect} connecting an agent to Foo Medical and a pairing Task
+trigger: Demo Setup runs the bot unit test and demos/mcp-bot/scripts/probe-mcp.mjs against the local server
+actors:
+  - Cursor cloud agent
+  - Medplum MCP
+  - Medplum Bot
+  - Subscription
+surface: Foo Medical Tasks created from a synthetic device-pairing Observation
+data_pack: One synthetic Observation in seed/pairing-observation.json, tagged synthetic and HTEST, for an Acme Cardio patch. No real patient.
+artifact: Bot handler, Subscription resource, and the MCP probe transcript
+gate: Presenter shows the Task. No approval wait
+gate_blocks: false
+wow: A synthetic pairing Observation becomes a Task. The MCP connection is probed and the result is reported as it happened
+proof:
+  - Vitest output for the bot
+  - probe-mcp.mjs transcript
+  - Draft PR link
+reset: demos/mcp-bot/reset.sh
+fallback: []
+fallback_note: No earlier draft PR for this MCP and pairing-bot story. Pull request 11 is the device cohort, not this bot.
+blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. The probe reads the local Medplum server and writes nothing. No Jira writes
+answer_key: answer-keys://mcp-bot/
+
+variables:
+  prospect: Acme Cardio
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:mcp-bot', 'track:ls', 'stage:03']
