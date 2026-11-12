@@ -15,6 +15,16 @@ All data is synthetic. Foo Medical and Acme Cardio are fictional.
 5. The GIO ticket is built with labels `demo, medplum, story:support-voice, track:ls, stage:post-market, support, platform-demo`. Never `automatable`. A PHI tripwire refuses the write if any identifier remains.
 6. The Ticket Triage bot handles `kb_gap` (KB article PR, then Escalated) and the Fix Orchestrator handles `bug` (cloud agent, fix PR). Both bots need the changes listed in the PR description before they act on GIO.
 
+## Key-free (no API keys)
+
+This is the default. It replays a checked-in call and the triage agent's `record_triage` turn (`fixtures/replay/call.json`, labeled `REPLAY (no key)`), redacts that text for real, and writes the GIO payload to an `OFFLINE` file. It does not call Grok Voice, the agent, or Jira.
+
+```bash
+node demos/support-voice/scripts/offline.mjs
+```
+
+`DEMO_MODE=live` without `XAI_API_KEY`, `CURSOR_API_KEY`, `JIRA_BASE_URL`, `JIRA_EMAIL`, and `JIRA_API_KEY` prints `BLOCKED` and exits 3. With those set, the same command uses the existing live Jira create and does not print a replay label. `DEMO_MODE=replay` stays on the key-free path even if the keys are set.
+
 ## Run it
 
 ```bash

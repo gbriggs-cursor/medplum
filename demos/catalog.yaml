@@ -150,6 +150,9 @@ stories:
     card: demos/support-voice/story.yaml
     prompt: demos/support-voice/prompt.md
     readme: demos/support-voice/README.md
+    offline: node demos/support-voice/scripts/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: this command creates the GIO issue from the same synthetic call instead of writing the OFFLINE file. Grok Voice and the triage agent are still not called from this repo."
   - id: ticket-to-pr
     code: G2
     title: Ticket-to-PR automation
