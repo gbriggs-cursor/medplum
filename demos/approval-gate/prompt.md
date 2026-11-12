@@ -2,6 +2,8 @@
 
 Variables: `{prospect}` (default `Acme Cardio`), `{signer}` (default `Dana Reviewer`), `{role}` (default `Design review lead`). On stage, use the real approver's name and role.
 
+These prompts are live mode, and no keys are needed. The key-free default without a cloud agent is `demos/approval-gate/offline.sh`.
+
 ## 1. Build the evidence (never waits for approval)
 
 ```

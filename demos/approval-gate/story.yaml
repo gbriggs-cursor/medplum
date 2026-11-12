@@ -8,7 +8,7 @@ runtime: 5 min
 environment: '67842161'
 
 persona: Design review lead or QA/RA approver at {prospect}
-trigger: Presenter pastes prompt.md part 1 into a new cloud agent started from the default branch
+trigger: Presenter runs the offline command (no keys), or pastes prompt.md part 1 into a new cloud agent started from the default branch for live mode
 actors:
   - Cursor cloud agent (builds evidence, opens the draft PR, records the decision)
   - Grok Bot (shows the approval card on stage)
@@ -23,8 +23,11 @@ proof:
   - Draft PR link with Approval pending, then a commit with approval.json
   - gate.mjs verify output VALID, then INVALID after a tamper edit
 reset: demos/approval-gate/reset.sh
+offline: demos/approval-gate/offline.sh
+default_mode: offline
+live_mode_note: 'Live mode available once keys are added: none are needed for the gate itself. Live mode is prompt.md in a cloud agent, with Grok Bot posting APPROVAL-CARD.md and the decision recorded with --channel grok-bot. The Grok Bot card post has not been run yet'
 fallback: [11]
-fallback_note: PR #11 shows the same cohort's v1 evidence package (no approval). There is no recorded approval take yet.
+fallback_note: The offline command is the default and runs everything except the Grok Bot post. PR #11 shows the same cohort's v1 evidence package (no approval)
 blast_radius: Local working tree and one GitHub draft PR in gbriggs-cursor/medplum. No Jira writes. Nothing is written back to Medplum
 
 variables:
