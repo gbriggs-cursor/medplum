@@ -1,0 +1,30 @@
+{
+  "description": "Synthetic caller transcripts as a speech-to-text engine would return them. Every person is invented.",
+  "transcripts": [
+    {
+      "id": "pairing",
+      "text": "Hi, I'm calling Foo Medical support. My name is Dana Whitfield, born July 2nd, 1958. I got a new phone and my Acme Cardio patch won't pair with it. You can call me back at (617) 555-0100.",
+      "expect": {
+        "caller-name": "Dana Whitfield",
+        "birth-date": "1958-07-02",
+        "callback": "+1-617-555-0100",
+        "product": "patch"
+      }
+    },
+    {
+      "id": "appointments-blank",
+      "text": "Hello, this is Ellen Fitzgerald. Date of birth 10/28/1961. Since the latest update the Appointments page is blank, even after I sign out and back in.",
+      "expect": { "caller-name": "Ellen Fitzgerald", "birth-date": "1961-10-28", "product": "appointments" }
+    },
+    {
+      "id": "airport",
+      "text": "Um, hi. I am Sam Kowalski and I was born on 1977-04-22. Can I wear the patch through airport security and on a plane? My number is 413 555 0177.",
+      "expect": {
+        "caller-name": "Sam Kowalski",
+        "birth-date": "1977-04-22",
+        "callback": "+1-413-555-0177",
+        "product": "patch"
+      }
+    }
+  ]
+}

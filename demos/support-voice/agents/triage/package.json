@@ -1,0 +1,23 @@
+{
+  "name": "foomedical-support-triage",
+  "private": true,
+  "type": "module",
+  "description": "Triages redacted Foo Medical support intakes against the Foo Medical + Medplum docs KB and records a GIO ticket.",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "validate": "agent-sdk validate --dir .",
+    "eval": "agent-sdk eval --dir . --no-stream",
+    "eval:list": "agent-sdk eval --dir . --list"
+  },
+  "dependencies": {
+    "@grok/agent-sdk": "0.6.0",
+    "zod": "4.1.12"
+  },
+  "devDependencies": {
+    "@types/node": "22.14.0",
+    "typescript": "5.9.3"
+  }
+}

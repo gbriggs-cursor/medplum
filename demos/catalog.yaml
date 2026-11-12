@@ -18,6 +18,7 @@ stories:
     fallback: []
     reset: demos/analytics-10k/reset.sh
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -41,6 +42,7 @@ stories:
       - 11
     reset: demos/device-evidence/reset.sh
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -66,6 +68,7 @@ stories:
       - 13
     reset: demos/docs-from-questions/reset.sh
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -89,10 +92,9 @@ stories:
     depends_on:
       - L9
       - L11
-    pending:
-      - L9
-      - L11
+    pending: []
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -114,6 +116,7 @@ stories:
     fallback: []
     reset: demos/integration-docs/reset.sh
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -137,6 +140,7 @@ stories:
       - 14
     reset: null
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -159,9 +163,9 @@ stories:
     reset: demos/phi-safe-dev/reset.sh
     depends_on:
       - L11
-    pending:
-      - L11
+    pending: []
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -170,6 +174,29 @@ stories:
     card: demos/phi-safe-dev/story.yaml
     prompt: demos/phi-safe-dev/prompt.md
     readme: demos/phi-safe-dev/README.md
+  - id: phi-tripwire
+    code: L11
+    title: PHI tripwire
+    track: ls
+    stage: floor
+    readiness: new
+    runtime: 5 min
+    wow: A realistic note with a name, MRN, DOB, SSN and phone goes in; the ticket comes out with placeholders, and a note with an unknown identifier is refused outright
+    trigger: Presenter pastes a P3 note (node demos/phi-tripwire/scripts/tripwire.mjs --note {note})
+    data_pack: P3 PHI-like pack, demos/_shared/data-packs/p3-phi-like, seed 20261112 (24 patients, 50 notes, 213 planted identifiers), tagged synthetic + HTEST
+    fallback: []
+    reset: demos/phi-tripwire/reset.sh
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:phi-tripwire
+      - track:ls
+      - stage:floor
+    card: demos/phi-tripwire/story.yaml
+    prompt: demos/phi-tripwire/prompt.md
+    readme: demos/phi-tripwire/README.md
   - id: practice-analytics
     code: G10
     title: Practice analytics on 10,000 patients
@@ -186,6 +213,7 @@ stories:
       - L13
     pending: []
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -207,6 +235,7 @@ stories:
     fallback: []
     reset: null
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -215,6 +244,56 @@ stories:
     card: demos/rebrand/story.yaml
     prompt: demos/rebrand/prompt.md
     readme: demos/rebrand/README.md
+  - id: speech-to-fhir
+    code: L10
+    title: Speech to FHIR (voice intake to QuestionnaireResponse)
+    track: ls
+    stage: post-market
+    readiness: new
+    runtime: 5 min
+    wow: What the caller said is a structured QuestionnaireResponse on the chart, and the Jira ticket carries none of their identity
+    trigger: A confirmed support intake (voice transcript or form) from L9 support-voice, or node demos/speech-to-fhir/scripts/run.mjs with a seeded transcript
+    data_pack: seed/questionnaire.json (Foo Medical support intake) and 3 synthetic transcripts in seed/transcripts.json; patients are created or matched by name + birth date and tagged synthetic + HTEST + demo-story speech-to-fhir
+    fallback: []
+    reset: demos/speech-to-fhir/reset.sh
+    automation: false
+    intake: true
+    labels:
+      - demo
+      - medplum
+      - story:speech-to-fhir
+      - track:ls
+      - stage:post-market
+      - support
+      - platform-demo
+    card: demos/speech-to-fhir/story.yaml
+    prompt: demos/speech-to-fhir/prompt.md
+    readme: demos/speech-to-fhir/README.md
+  - id: support-voice
+    code: L9
+    title: Voice patient support (Foo Medical)
+    track: ls
+    stage: post-market
+    readiness: adapt
+    runtime: 5 min live, plus agent time
+    wow: A patient asks about pairing a patch; a redacted GIO ticket appears and the bots turn it into a KB article or a fix PR
+    trigger: A synthetic patient calls (Grok Voice) or uses the support form; after a server-enforced read-back and confirm, a redacted GIO intake ticket is created
+    data_pack: P4 support KB (8 Foo Medical articles in kb/foomedical plus 9 Medplum docs listed in kb/medplum-docs.json) and 14 synthetic intakes in evals/cases.json
+    fallback: []
+    reset: demos/support-voice/reset.sh
+    automation: false
+    intake: true
+    labels:
+      - demo
+      - medplum
+      - story:support-voice
+      - track:ls
+      - stage:post-market
+      - support
+      - platform-demo
+    card: demos/support-voice/story.yaml
+    prompt: demos/support-voice/prompt.md
+    readme: demos/support-voice/README.md
   - id: ticket-to-pr
     code: G2
     title: Ticket-to-PR automation
@@ -231,6 +310,7 @@ stories:
       - 16
     reset: demos/ticket-to-pr/reset.sh
     automation: true
+    intake: false
     labels:
       - demo
       - medplum

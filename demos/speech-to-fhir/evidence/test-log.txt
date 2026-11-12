@@ -1,0 +1,58 @@
+$ npm test
+ok 1 - extracts identity and issue from transcript pairing
+ok 2 - extracts identity and issue from transcript appointments-blank
+ok 3 - extracts identity and issue from transcript airport
+ok 4 - date forms a speech engine returns
+ok 5 - a transcript without a birth date is reported, not guessed
+ok 6 - QuestionnaireResponse links the patient, answers by linkId, and is tagged synthetic
+# pass 6
+# fail 0
+
+$ ../support-voice: npm test && npm run eval
+# pass 11
+# fail 0
+PASS: 14/14 cases
+
+$ ./reset.sh
+speech-to-fhir reset: deleted 1 QuestionnaireResponse
+speech-to-fhir reset: deleted 1 Patient
+
+$ node scripts/run.mjs --transcript pairing
+transcript: Hi, I'm calling Foo Medical support. My name is Dana Whitfield, born July 2nd, 1958. I got a new phone and my Acme Cardio patch won't pair with it. You can call me back at (617) 555-0100.
+extracted:  {"caller-name":"Dana Whitfield","birth-date":"1958-07-02","callback":"+1-617-555-0100","product":"patch","issue":"I got a new phone and my Acme Cardio patch won't pair with it."}
+triage:     answered (KB-201)
+Medplum:    Questionnaire/1f2a575b-0c71-44b1-bda2-bad57d16d69e, Patient/c49b5828-2485-40f3-914a-0265709cf237, QuestionnaireResponse/00ff09d3-477d-4b2b-9b8e-7a44b135ece0 ($validate: no errors)
+chart:      1 support intake response(s) on Patient/c49b5828-2485-40f3-914a-0265709cf237; newest is intake INTAKE-7adc9cc7
+GIO ticket: dry-run demos/support-voice/run/outbox/INTAKE-7adc9cc7.json; identity in ticket: none
+app:        http://localhost:3000/QuestionnaireResponse/00ff09d3-477d-4b2b-9b8e-7a44b135ece0
+EXIT:0
+
+$ node scripts/run.mjs --transcript appointments-blank
+transcript: Hello, this is Ellen Fitzgerald. Date of birth 10/28/1961. Since the latest update the Appointments page is blank, even after I sign out and back in.
+extracted:  {"caller-name":"Ellen Fitzgerald","birth-date":"1961-10-28","product":"appointments","issue":"Since the latest update the Appointments page is blank, even after I sign out and back in."}
+triage:     bug
+Medplum:    Questionnaire/1f2a575b-0c71-44b1-bda2-bad57d16d69e, Patient/44ff0d7e-a4fe-48c2-ad01-c5b18134d03d, QuestionnaireResponse/72f3607a-60c1-4640-899e-8a43505bc4f2 ($validate: no errors)
+chart:      1 support intake response(s) on Patient/44ff0d7e-a4fe-48c2-ad01-c5b18134d03d; newest is intake INTAKE-988c2de8
+GIO ticket: dry-run demos/support-voice/run/outbox/INTAKE-988c2de8.json; identity in ticket: none
+app:        http://localhost:3000/QuestionnaireResponse/72f3607a-60c1-4640-899e-8a43505bc4f2
+EXIT:0
+
+$ node scripts/run.mjs --transcript airport
+transcript: Um, hi. I am Sam Kowalski and I was born on 1977-04-22. Can I wear the patch through airport security and on a plane? My number is 413 555 0177.
+extracted:  {"caller-name":"Sam Kowalski","birth-date":"1977-04-22","callback":"+1-413-555-0177","product":"patch","issue":"Can I wear the patch through airport security and on a plane?"}
+triage:     kb_gap
+Medplum:    Questionnaire/1f2a575b-0c71-44b1-bda2-bad57d16d69e, Patient/d829dabf-bd59-4ef1-9012-94f8c83389cd, QuestionnaireResponse/970f94e9-9eb8-4edf-9e04-4d4a186dfbc5 ($validate: no errors)
+chart:      1 support intake response(s) on Patient/d829dabf-bd59-4ef1-9012-94f8c83389cd; newest is intake INTAKE-b59e3ae3
+GIO ticket: dry-run demos/support-voice/run/outbox/INTAKE-b59e3ae3.json; identity in ticket: none
+app:        http://localhost:3000/QuestionnaireResponse/970f94e9-9eb8-4edf-9e04-4d4a186dfbc5
+EXIT:0
+
+$ ./reset.sh (second run)
+speech-to-fhir reset: deleted 3 QuestionnaireResponse
+speech-to-fhir reset: deleted 3 Patient
+speech-to-fhir reset: deleted 0 QuestionnaireResponse
+speech-to-fhir reset: deleted 0 Patient
+
+$ node demos/_shared/scripts/catalog.mjs --check
+PASS: 7 stories valid (7 passed, 0 failed), catalog.yaml up to date, no branch pinning
+EXIT:0
