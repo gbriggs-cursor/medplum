@@ -39,13 +39,25 @@ All data is synthetic. All stories run in cloud agent environment `67842161`, us
 | `variables` | Prompt variables and defaults. `prospect` defaults to Acme Cardio or Foo Medical. |
 | `jira` | `project: GIO`, `automation`, and the labels from `_shared/labels.md`. |
 | `answer_key` | Optional. `answer-keys://<story>/` (see below). |
-| `offline` | Command from the repo root that runs the story with no API keys. Prints `REPLAY (no key)` or `OFFLINE` and exits 0. |
+| `depends_on` | Optional. Other stories this one reuses, by catalog `code`, each with `provides` (what it uses) and optional `workstream` and `planned_path`. A code with no card yet is listed under `pending` in the catalog. |
+| `offline` | Command from the repo root that runs the story with no API keys. Prints `REPLAY (no key)` or `OFFLINE (no key)` and exits 0. |
 | `default_mode` | `replay` or `offline`. The default demo path is key-free. |
 | `live_mode_note` | One line starting `Live mode available once keys are added:`. |
 
 ## Personas
 
 Defaults use the generic account: Acme Cardio (device maker) and Foo Medical (patient portal). A real company name appears only when a run sets `{prospect}` to that prospect.
+
+## Generic healthcare-SaaS track
+
+For prospects that are neither GxP nor device makers (for example a practice-management software company). All four use `track:generic` and default to Foo Medical.
+
+| Code | Story | Reuses | Runs today |
+| --- | --- | --- | --- |
+| G8 | `phi-safe-dev` | L11 `demos/_shared/phi/redact.mjs` | `node demos/phi-safe-dev/run.mjs` (REPLAY, no key) |
+| G9 | `front-office-voice` | L9 `demos/support-voice`, L11 redact | `node demos/front-office-voice/run.mjs` (REPLAY callers, OFFLINE ticket) |
+| G10 | `practice-analytics` | L13 `fixture-100` | `node demos/practice-analytics/run.mjs` (REPLAY). The 10k pack is not required |
+| G11 | `integration-docs` | Source anchors in `anchors.txt` | `node demos/integration-docs/run.mjs` (REPLAY guide, OFFLINE anchor check) |
 
 ## Answer keys
 
@@ -63,6 +75,7 @@ On-stage approvals are recorded in the story's evidence package (`approval.json`
 ```
 node demos/_shared/scripts/catalog.mjs          # validate and rewrite catalog.yaml
 node demos/_shared/scripts/catalog.mjs --check  # validate and fail if catalog.yaml is stale
+node demos/_shared/scripts/catalog.mjs --preflight <story>  # fail with the exact blocker if a dependency has not landed
 ```
 
 The check fails on a missing field, a label outside the taxonomy, automation labels on a non-automation story, a non-generic default persona, a prompt variable with no default, a missing or non-executable reset script, a gate that blocks, or branch pinning anywhere under `demos/` or `.cursor/`.

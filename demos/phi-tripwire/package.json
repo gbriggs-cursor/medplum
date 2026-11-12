@@ -1,0 +1,16 @@
+{
+  "name": "demo-phi-tripwire",
+  "private": true,
+  "type": "module",
+  "description": "PHI tripwire on the P3 PHI-like pack: redact with chart context, screen twice, dry-run GIO ticket or refuse.",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "eval": "node scripts/eval.mjs",
+    "start": "node scripts/tripwire.mjs",
+    "seed": "node scripts/seed.mjs",
+    "reset": "./reset.sh"
+  }
+}

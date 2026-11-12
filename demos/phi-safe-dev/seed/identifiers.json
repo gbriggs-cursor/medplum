@@ -1,0 +1,19 @@
+{
+  "note": "Synthetic (HTEST) identifiers from seed/ticket.md. check-no-phi.mjs fails if any appears in the change.",
+  "identifiers": [
+    "Marisol",
+    "Quintero-Hale",
+    "Quintero",
+    "02/29/1964",
+    "1964-02-29",
+    "FMD-TEST-004821",
+    "004821",
+    "(555) 010-4477",
+    "555-010-4477",
+    "5550104477",
+    "marisol.qh@example.test",
+    "HTEST-77120",
+    "Ilse",
+    "Varga-Moreau"
+  ]
+}

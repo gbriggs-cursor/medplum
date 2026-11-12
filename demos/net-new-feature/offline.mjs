@@ -1,6 +1,6 @@
 import { existsSync } from 'node:fs';
 
-console.log('OFFLINE');
+console.log('OFFLINE (no key)');
 if (!existsSync('demos/net-new-feature/prompt.md')) {
   console.error('net-new-feature: missing prompt.md');
   process.exit(1);

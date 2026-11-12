@@ -1,0 +1,27 @@
+{
+  "label": "REPLAY (no key)",
+  "note": "Synthetic office staff. Played as the caller because Grok Voice is not connected. Not loaded by demos/support-voice/server.mjs.",
+  "calls": [
+    {
+      "id": "reschedule",
+      "caller_name": "Dana Pell",
+      "dob": "1981-04-03",
+      "product": "appointments",
+      "issue": "How do I move a patient's cleaning to next Tuesday without losing the reminder?"
+    },
+    {
+      "id": "kb_gap",
+      "caller_name": "Sam Okada",
+      "dob": "1976-11-19",
+      "product": "portal",
+      "issue": "Does Foo Medical run insurance eligibility checks before the visit, or do we still call the payer?"
+    },
+    {
+      "id": "bug",
+      "caller_name": "Priya Shah",
+      "dob": "1990-06-08",
+      "product": "appointments",
+      "issue": "A patient told us she never got her six-month recall reminder. She had her cleaning on August 31st."
+    }
+  ]
+}

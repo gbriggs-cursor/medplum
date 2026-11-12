@@ -1,0 +1,131 @@
+{
+  "resourceType": "Questionnaire",
+  "url": "https://foomedical.example/fhir/Questionnaire/support-intake",
+  "version": "1",
+  "name": "FooMedicalSupportIntake",
+  "title": "Foo Medical patient support intake",
+  "status": "active",
+  "subjectType": ["Patient"],
+  "meta": {
+    "tag": [
+      {
+        "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+        "code": "synthetic",
+        "display": "Synthetic demo data"
+      },
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+        "code": "HTEST",
+        "display": "test health data"
+      },
+      { "system": "https://medplum.com/fhir/CodeSystem/demo-story", "code": "speech-to-fhir" }
+    ]
+  },
+  "item": [
+    { "linkId": "intake-id", "text": "Support intake id", "type": "string", "readOnly": true },
+    {
+      "linkId": "channel",
+      "text": "Channel",
+      "type": "choice",
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "https://foomedical.example/fhir/CodeSystem/support-channel",
+            "code": "voice",
+            "display": "Voice"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://foomedical.example/fhir/CodeSystem/support-channel",
+            "code": "form",
+            "display": "Web form"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "caller",
+      "text": "Caller",
+      "type": "group",
+      "item": [
+        { "linkId": "caller-name", "text": "Name", "type": "string", "required": true },
+        { "linkId": "birth-date", "text": "Date of birth", "type": "date", "required": true },
+        { "linkId": "callback", "text": "Callback number", "type": "string" }
+      ]
+    },
+    {
+      "linkId": "product",
+      "text": "Product",
+      "type": "choice",
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "https://foomedical.example/fhir/CodeSystem/support-product",
+            "code": "portal",
+            "display": "Patient portal"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://foomedical.example/fhir/CodeSystem/support-product",
+            "code": "patch",
+            "display": "Acme Cardio patch v2"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://foomedical.example/fhir/CodeSystem/support-product",
+            "code": "messages",
+            "display": "Messages"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://foomedical.example/fhir/CodeSystem/support-product",
+            "code": "appointments",
+            "display": "Appointments"
+          }
+        }
+      ]
+    },
+    { "linkId": "issue", "text": "What is the problem?", "type": "text", "required": true },
+    {
+      "linkId": "triage",
+      "text": "Triage outcome",
+      "type": "choice",
+      "readOnly": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "https://foomedical.example/fhir/CodeSystem/support-triage",
+            "code": "answered",
+            "display": "Answered from the KB"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://foomedical.example/fhir/CodeSystem/support-triage",
+            "code": "kb_gap",
+            "display": "KB gap"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://foomedical.example/fhir/CodeSystem/support-triage",
+            "code": "bug",
+            "display": "Product bug"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://foomedical.example/fhir/CodeSystem/support-triage",
+            "code": "urgent_clinical",
+            "display": "Urgent clinical"
+          }
+        }
+      ]
+    },
+    { "linkId": "jira-ticket", "text": "GIO ticket (redacted copy)", "type": "string", "readOnly": true }
+  ]
+}

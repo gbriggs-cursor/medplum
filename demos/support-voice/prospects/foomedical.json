@@ -1,0 +1,29 @@
+{
+  "id": "foomedical",
+  "name": "Foo Medical",
+  "support_line": "Foo Medical patient support",
+  "products": [
+    { "id": "portal", "name": "Foo Medical patient portal", "surface": "examples/foomedical" },
+    {
+      "id": "patch",
+      "name": "Acme Cardio patch v2",
+      "surface": "Bluetooth BP + ECG wearable, synced through the Foo Medical app"
+    },
+    { "id": "messages", "name": "Messages", "surface": "examples/foomedical Messages (Communication threads)" },
+    { "id": "appointments", "name": "Appointments", "surface": "examples/foomedical Appointments (Appointment, Slot)" }
+  ],
+  "voice_keyterms": [
+    "Foo Medical",
+    "Acme Cardio",
+    "patch v2",
+    "pairing",
+    "Bluetooth",
+    "Messages",
+    "Appointments",
+    "care team",
+    "two-factor",
+    "MyChart"
+  ],
+  "disclaimer": "This is a demo line for Foo Medical, a fictional clinic. Use made-up details only. This line does not give medical advice. If you think you have an emergency, hang up and call 911.",
+  "greeting": "Thanks for calling Foo Medical patient support. I can help with the portal, your Acme Cardio patch, Messages, or Appointments."
+}

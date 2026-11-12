@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 
-console.log('OFFLINE');
+console.log('OFFLINE (no key)');
 const readme = readFileSync('demos/factory-e2e/README.md', 'utf8');
 if (readme.includes('pending on Giovanni')) {
   console.error('factory-e2e: runbook still uses the old key blocker wording');

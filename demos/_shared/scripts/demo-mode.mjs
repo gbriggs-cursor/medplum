@@ -78,3 +78,25 @@ export function writeText(path, text) {
   mkdirSync(dirname(path), { recursive: true });
   writeFileSync(path, text);
 }
+
+export function resolveDemoMode(liveKeys, keyFreeCommand) {
+  const requested = process.env.DEMO_MODE;
+  const missing = liveKeys.filter((key) => !process.env[key]);
+  if (requested === 'live') {
+    if (missing.length) {
+      console.log(
+        `BLOCKED: live mode needs ${missing.join(', ')}. Unset DEMO_MODE (or set DEMO_MODE=replay) to run REPLAY (no key) mode: ${keyFreeCommand}`
+      );
+      process.exit(3);
+    }
+    return 'live';
+  }
+  if (requested === 'replay' || requested === 'offline') {
+    return 'keyfree';
+  }
+  if (requested) {
+    console.log(`BLOCKED: unknown DEMO_MODE=${requested}. Use replay, offline, or live.`);
+    process.exit(3);
+  }
+  return missing.length === 0 ? 'live' : 'keyfree';
+}

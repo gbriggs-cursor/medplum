@@ -3,8 +3,11 @@
 //
 //   node demos/_shared/scripts/catalog.mjs          validate, then write catalog.yaml
 //   node demos/_shared/scripts/catalog.mjs --check  validate, and fail if catalog.yaml is stale
+//   node demos/_shared/scripts/catalog.mjs --preflight <story>
+//                                                    validate, then fail with the exact blocker if a
+//                                                    story's `depends_on` codes have not landed yet
 //
-// Exit code 1 on any validation error or a stale catalog.
+// Exit code 1 on any validation error, a stale catalog, or a failed preflight.
 
 import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
@@ -15,11 +18,13 @@ const demosDir = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const repoRoot = join(demosDir, '..');
 const catalogPath = join(demosDir, 'catalog.yaml');
 const checkOnly = process.argv.includes('--check');
+const preflightIdx = process.argv.indexOf('--preflight');
+const preflightStory = preflightIdx === -1 ? undefined : process.argv[preflightIdx + 1];
 
 const ENVIRONMENT = '67842161';
 const JIRA_PROJECT = 'GIO';
 const TRACKS = ['generic', 'ls'];
-const STAGES = ['generic', '01', '02', '03', '04', '05', '06', '07', '01-07', 'post-market', 'analytics'];
+const STAGES = ['generic', '01', '02', '03', '04', '05', '06', '07', '01-07', 'post-market', 'analytics', 'floor'];
 const READINESS = ['exists', 'adapt', 'new', 'planned'];
 const DEFAULT_MODES = ['replay', 'offline'];
 const LIVE_NOTE_PREFIX = 'Live mode available once keys are added:';
@@ -28,6 +33,7 @@ const BASE_LABELS = ['demo', 'medplum'];
 const AUTOMATION_LABELS = ['automatable', 'agent-safe'];
 // The ticket-to-PR automation was proven on tickets that also carried `maintenance`.
 const LEGACY_LABELS = ['maintenance'];
+const INTAKE_LABELS = ['support', 'platform-demo'];
 
 const REQUIRED_TEXT = [
   'id',
@@ -155,6 +161,8 @@ function validateStory(dir) {
   }
 
   validateGate(where, card);
+  validateKeyFree(where, card);
+  validateDependsOn(where, card);
   validateVariables(where, dir, card);
   validateJira(where, dir, card);
   validateOffline(where, card);
@@ -183,6 +191,57 @@ function validateGate(where, card) {
   if (card.gate_blocks !== false) {
     err(where, '`gate_blocks` must be false: gates are an on-stage moment and never block a run');
   }
+}
+
+// A dependency names another story by catalog code, so it resolves once that story's card lands,
+// whatever folder it ends up in.
+function validateKeyFree(where, card) {
+  const present = ['offline', 'default_mode', 'live_mode_note'].filter((key) => card[key] !== undefined);
+  if (present.length === 0) {
+    return;
+  }
+  if (present.length !== 3) {
+    err(where, 'key-free stories need `offline`, `default_mode`, and `live_mode_note` together');
+    return;
+  }
+  if (typeof card.offline !== 'string' || !card.offline.trim()) {
+    err(where, '`offline` must be the key-free command');
+  }
+  if (!['replay', 'offline', 'live'].includes(card.default_mode)) {
+    err(where, '`default_mode` must be replay, offline, or live');
+  }
+  if (
+    typeof card.live_mode_note !== 'string' ||
+    !card.live_mode_note.startsWith('Live mode available once keys are added:')
+  ) {
+    err(where, '`live_mode_note` must start with "Live mode available once keys are added:"');
+  }
+}
+
+function validateDependsOn(where, card) {
+  if (card.depends_on === undefined) {
+    return;
+  }
+  if (!Array.isArray(card.depends_on)) {
+    err(where, '`depends_on` must be a list');
+    return;
+  }
+  for (const dep of card.depends_on) {
+    if (!dep || typeof dep !== 'object' || !/^[GL]\d+$/.test(dep.code ?? '')) {
+      err(where, '`depends_on` entries need a catalog `code` like L9');
+      continue;
+    }
+    if (dep.code === card.code) {
+      err(where, `\`depends_on\` cannot name the story's own code ${dep.code}`);
+    }
+    if (typeof dep.provides !== 'string' || !dep.provides.trim()) {
+      err(where, `\`depends_on\` ${dep.code} needs \`provides\` (what this story uses from it)`);
+    }
+  }
+}
+
+function pendingDeps(card, codes) {
+  return (card.depends_on ?? []).filter((dep) => !codes.has(dep.code));
 }
 
 function validateVariables(where, dir, card) {
@@ -237,13 +296,25 @@ function validateJira(where, dir, card) {
       err(where, `${label} fires the ticket-to-PR automation; only use it with \`jira.automation: true\``);
     }
   }
-  const allowed = new Set([...expected, ...AUTOMATION_LABELS, ...LEGACY_LABELS]);
+  const intake = jira.intake === true;
+  if (intake && automated) {
+    err(where, 'intake stories are triaged by bots and can never fire the automation');
+  }
+  for (const label of INTAKE_LABELS) {
+    if (intake && !labels.includes(label)) {
+      err(where, `intake stories need the ${label} label`);
+    }
+  }
+  const allowed = new Set([...expected, ...AUTOMATION_LABELS, ...LEGACY_LABELS, ...INTAKE_LABELS]);
   for (const label of labels) {
     if (!allowed.has(label)) {
       err(where, `label ${label} is not in demos/_shared/labels.md`);
     }
     if (LEGACY_LABELS.includes(label) && !automated) {
       err(where, `${label} is only for automation stories`);
+    }
+    if (INTAKE_LABELS.includes(label) && !intake) {
+      err(where, `${label} is only for intake stories (\`jira.intake: true\`)`);
     }
   }
 }
@@ -284,7 +355,7 @@ function scanBranchPinning() {
   }
 }
 
-function buildCatalog(cards) {
+function buildCatalog(cards, codes) {
   const stories = cards.map((c) => ({
     id: c.id,
     code: c.code,
@@ -298,10 +369,17 @@ function buildCatalog(cards) {
     data_pack: c.data_pack,
     fallback: c.fallback,
     reset: c.reset ?? null,
+    ...(c.depends_on
+      ? {
+          depends_on: c.depends_on.map((d) => d.code),
+          pending: pendingDeps(c, codes).map((d) => d.code),
+        }
+      : {}),
     offline: c.offline ?? null,
     default_mode: c.default_mode ?? null,
     live_mode_note: c.live_mode_note ?? null,
     automation: c.jira?.automation === true,
+    intake: c.jira?.intake === true,
     labels: c.jira?.labels ?? [],
     card: `demos/${c.id}/story.yaml`,
     prompt: `demos/${c.id}/prompt.md`,
@@ -338,10 +416,34 @@ for (const card of cards) {
 }
 scanBranchPinning();
 
-const next = buildCatalog(cards);
+if (preflightStory !== undefined && !errors.length) {
+  const card = cards.find((c) => c.id === preflightStory || c.code === preflightStory);
+  if (!card) {
+    console.error(`FAIL: no story ${preflightStory} in demos/`);
+    process.exit(1);
+  }
+  const pending = pendingDeps(card, codes);
+  for (const dep of card.depends_on ?? []) {
+    const state = pending.includes(dep) ? 'PENDING' : 'landed ';
+    console.log(`${state} ${dep.code.padEnd(4)} ${dep.provides}${dep.planned_path ? ` (${dep.planned_path})` : ''}`);
+  }
+  if (pending.length) {
+    console.error(
+      `BLOCKED: ${card.code} ${card.id} needs ${pending.map((d) => d.code).join(', ')} to land first. ` +
+        'Show the fallback, or run the story in its documented stub mode.'
+    );
+    process.exit(1);
+  }
+  console.log(`READY: ${card.code} ${card.id}. Next: ${card.reset ?? 'no reset needed'}, then prompt.md`);
+  process.exit(0);
+}
+
+const next = buildCatalog(cards, codes);
 const current = existsSync(catalogPath) ? readFileSync(catalogPath, 'utf8') : '';
 for (const c of cards) {
-  console.log(`ok  ${c.code.padEnd(4)} ${c.id.padEnd(22)} ${c.track.padEnd(8)} stage=${c.stage}`);
+  const pending = pendingDeps(c, codes).map((d) => d.code);
+  const note = pending.length ? `  stubbed until ${pending.join(', ')}` : '';
+  console.log(`ok  ${c.code.padEnd(4)} ${c.id.padEnd(22)} ${c.track.padEnd(8)} stage=${c.stage}${note}`);
 }
 if (errors.length) {
   if (!checkOnly) {
