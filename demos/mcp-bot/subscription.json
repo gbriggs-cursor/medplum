@@ -1,0 +1,27 @@
+{
+  "resourceType": "Subscription",
+  "status": "active",
+  "reason": "Create a Task when a synthetic Acme Cardio device-pairing Observation is created",
+  "criteria": "Observation?code=https://acme-cardio.example/synthetic/observation|device-pairing",
+  "channel": {
+    "type": "rest-hook",
+    "endpoint": "Bot/pairing-task",
+    "payload": "application/fhir+json"
+  },
+  "meta": {
+    "tag": [
+      {
+        "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+        "code": "synthetic",
+        "display": "Synthetic"
+      }
+    ],
+    "security": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+        "code": "HTEST",
+        "display": "test health data"
+      }
+    ]
+  }
+}
