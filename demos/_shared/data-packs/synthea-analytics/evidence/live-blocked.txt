@@ -1,0 +1,2 @@
+BLOCKED: live mode needs CURSOR_API_KEY. Unset DEMO_MODE (or set DEMO_MODE=replay) to run REPLAY (no key) mode: bash demos/analytics-10k/run.sh
+EXIT:3
