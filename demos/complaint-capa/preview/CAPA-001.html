@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>CAPA-001 CMP-001</title>
+  <style>
+    :root { color-scheme: light; }
+    body { margin: 0; font: 16px/1.45 "Segoe UI", sans-serif; background: #f4f6f8; color: #1c2430; }
+    main { max-width: 760px; margin: 32px auto; background: #fff; border: 1px solid #d5dde6; border-radius: 12px; overflow: hidden; }
+    .banner { background: #7a4b00; color: #fff; padding: 12px 20px; }
+    header { padding: 20px 20px 0; }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    .pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 4px; }
+    .pill { border-radius: 999px; padding: 4px 10px; background: #e7eef6; font-weight: 600; }
+    .pill.open { background: #d9f2e3; }
+    .pill.hold { background: #fff3d6; }
+    section { padding: 8px 20px 20px; }
+    h2 { margin: 16px 0 8px; font-size: 16px; }
+    p { margin: 0 0 8px; }
+    dl { margin: 0; }
+    .row { display: grid; grid-template-columns: 180px 1fr; gap: 8px; padding: 6px 0; border-top: 1px solid #e6edf3; }
+    dt { color: #526173; }
+    dd { margin: 0; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="banner">DEMO — synthetic data only (HTEST). Fictional device software; not a marketed or cleared device. Nothing submitted outside the demo.</div>
+    <header>
+      <h1>CAPA-001 for CMP-001</h1>
+      <div class="pills">
+        <span class="pill open">capa: open</span>
+        <span class="pill">reportability: no</span>
+        <span class="pill hold">status: ready-for-review</span>
+        <span class="pill">submitted_externally: false</span>
+      </div>
+    </header>
+    <section>
+      <h2>CAPA rationale</h2>
+      <p>CMP-SOP-3 (malfunction alleged, no injury, displayed measurement disputed) sets CAPA: open. CMP-SOP-4 does not apply because the complaint is not a pairing failure only; it also disputes a displayed 90/50 mmHg reading against a home cuff.</p>
+      <h2>Reportability rationale</h2>
+      <p>CMP-SOP-3 is the first matching section. CMP-SOP-1 (death) and CMP-SOP-2 (serious injury) do not apply because no injury was reported. The complaint alleges a malfunction (repeated &quot;pairing failed&quot;) and disputes a displayed measurement (90/50 mmHg vs. a home cuff), with no injury alleged.</p>
+      <h2>Complaint</h2>
+      <p>SP-014 reported that the patch showed &quot;pairing failed&quot; three times on 2026-11-04, then displayed 90/50 mmHg. SP-014 said a home cuff at the same sitting showed a different number. No injury was reported. The patch kept displaying later readings.</p>
+      <h2>Review</h2>
+      <p>A reviewer may change reportability or capa later. This run does not wait.</p>
+      <dl>
+        <div class="row"><dt>CAPA id</dt><dd>CAPA-001</dd></div>
+<div class="row"><dt>Complaint</dt><dd>CMP-001</dd></div>
+<div class="row"><dt>Complaint ticket</dt><dd>GIO-45</dd></div>
+<div class="row"><dt>Synthetic subject</dt><dd>SP-014</dd></div>
+<div class="row"><dt>Device</dt><dd>Acme Cardio patch v2</dd></div>
+<div class="row"><dt>Event date</dt><dd>2026-11-04</dd></div>
+<div class="row"><dt>Displayed reading</dt><dd>90/50 mmHg</dd></div>
+<div class="row"><dt>Comparison</dt><dd>home cuff</dd></div>
+<div class="row"><dt>Pairing failures</dt><dd>3</dd></div>
+<div class="row"><dt>SOP section</dt><dd>CMP-SOP-3</dd></div>
+<div class="row"><dt>CAPA decision</dt><dd>open</dd></div>
+<div class="row"><dt>Reportability</dt><dd>no</dd></div>
+<div class="row"><dt>Status</dt><dd>ready-for-review</dd></div>
+<div class="row"><dt>Submitted externally</dt><dd>false</dd></div>
+<div class="row"><dt>Synthetic</dt><dd>true</dd></div>
+<div class="row"><dt>HTEST</dt><dd>true</dd></div>
+<div class="row"><dt>Source fixture</dt><dd>demos/complaint-capa/seed/complaint.md</dd></div>
+      </dl>
+    </section>
+  </main>
+</body>
+</html>

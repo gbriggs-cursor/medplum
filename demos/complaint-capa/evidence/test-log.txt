@@ -1,0 +1,14 @@
+
+> @medplum/complaint-capa-demo@5.2.14 test
+> vitest run
+
+
+ RUN  v4.1.12 /agent/repos/medplum/demos/complaint-capa
+
+
+ Test Files  1 passed (1)
+      Tests  7 passed (7)
+   Start at  16:36:19
+   Duration  141ms (transform 39ms, setup 0ms, import 52ms, tests 6ms, environment 0ms)
+
+EXIT:0

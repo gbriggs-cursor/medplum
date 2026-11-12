@@ -1,0 +1,15 @@
+{
+  "name": "@medplum/complaint-capa-demo",
+  "version": "5.2.14",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "open": "tsx src/cli.ts",
+    "test": "vitest run"
+  },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  }
+}
