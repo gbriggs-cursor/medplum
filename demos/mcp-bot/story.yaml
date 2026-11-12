@@ -8,7 +8,7 @@ runtime: 15 min
 environment: '67842161'
 
 persona: Software lead at {prospect} connecting an agent to Foo Medical and a pairing Task
-trigger: Demo Setup runs the bot unit test and demos/mcp-bot/scripts/probe-mcp.mjs against the local server
+trigger: Demo Setup runs node demos/mcp-bot/scripts/offline.mjs. That replays the model turn and creates the Task on the local server.
 actors:
   - Cursor cloud agent
   - Medplum MCP
@@ -23,12 +23,16 @@ wow: A synthetic pairing Observation becomes a Task. The MCP connection is probe
 proof:
   - Vitest output for the bot
   - probe-mcp.mjs transcript
+  - offline.mjs Task id
   - Draft PR link
 reset: demos/mcp-bot/reset.sh
 fallback: []
 fallback_note: No earlier draft PR for this MCP and pairing-bot story. Pull request 11 is the device cohort, not this bot.
-blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. The probe reads the local Medplum server and writes nothing. No Jira writes
+blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. The offline command creates one synthetic Observation and one Task on the local server. No Jira writes
 answer_key: answer-keys://mcp-bot/
+offline: node demos/mcp-bot/scripts/offline.mjs
+default_mode: offline
+live_mode_note: 'Live mode available once keys are added: the model turn is not replayed, and this command still probes MCP and creates the Task on the local server.'
 
 variables:
   prospect: Acme Cardio

@@ -12,6 +12,7 @@
   "botLambdaRoleArn": "",
   "botLambdaLayerName": "medplum-bot-layer",
   "vmContextBotsEnabled": true,
+  "mcpEnabled": true,
   "defaultBotRuntimeVersion": "vmcontext",
   "allowedOrigins": "*",
   "introspectionEnabled": true,
