@@ -19,7 +19,8 @@ const checkOnly = process.argv.includes('--check');
 const ENVIRONMENT = '67842161';
 const JIRA_PROJECT = 'GIO';
 const TRACKS = ['generic', 'ls'];
-const STAGES = ['generic', '01', '02', '03', '04', '05', '06', '07'];
+// `analytics` stories sit around the factory stages rather than in them.
+const STAGES = ['generic', '01', '02', '03', '04', '05', '06', '07', 'analytics'];
 const READINESS = ['exists', 'adapt', 'new', 'planned'];
 const GENERIC_PROSPECTS = ['Acme Cardio', 'Foo Medical'];
 const BASE_LABELS = ['demo', 'medplum'];
