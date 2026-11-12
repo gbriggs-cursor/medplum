@@ -1,0 +1,5 @@
+{
+  "name": "@medplum-demo/complaint-capa",
+  "private": true,
+  "type": "module"
+}
