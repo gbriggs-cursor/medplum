@@ -1,0 +1,39 @@
+{
+  "label": "REPLAY (no key)",
+  "source": "Generated from demos/requirements-clerk/seed against the requirements-clerk skill. Not a live bot call.",
+  "skipped": ["Aside: portal header color is a brand remark, not a design input."],
+  "requirements": [
+    {
+      "req_id": "REQ-010",
+      "title": "ECG summary on screen within 5 seconds",
+      "design_input": "The software shall show the 30-second ECG summary from the {prospect} patch v2 within 5 seconds of the bundle being stored.",
+      "source": "meeting-notes.md, ECG summary",
+      "acceptance": "Store a synthetic bundle and confirm the 30-second ECG summary is on screen within 5 seconds.",
+      "safety_class": null
+    },
+    {
+      "req_id": "REQ-011",
+      "title": "Alert on two high systolic readings",
+      "design_input": "The software shall show a visible alert when systolic blood pressure from the {prospect} patch v2 is at or above 180 mmHg on two consecutive readings.",
+      "source": "meeting-notes.md, High systolic reading",
+      "acceptance": "Feed two consecutive synthetic readings at 180 mmHg and confirm a visible alert. Do not assign a safety class here.",
+      "safety_class": null
+    },
+    {
+      "req_id": "REQ-012",
+      "title": "Record version and commit in the evidence package",
+      "design_input": "The software shall record the software version and the commit of the ECG parser in the evidence package for each verification run.",
+      "source": "meeting-notes.md, Verification record",
+      "acceptance": "Run one synthetic verification and confirm the evidence package contains the software version and the commit.",
+      "safety_class": null
+    },
+    {
+      "req_id": "REQ-013",
+      "title": "Pairing failure message without a patient identifier",
+      "design_input": "The software shall show a pairing-failure message that includes the synthetic error code and the next step, and that includes no patient name, date of birth, or other patient identifier.",
+      "source": "meeting-notes.md, Pairing failure",
+      "acceptance": "Trigger a synthetic pairing failure and confirm the message has the error code and the next step, and no patient name or date of birth.",
+      "safety_class": null
+    }
+  ]
+}

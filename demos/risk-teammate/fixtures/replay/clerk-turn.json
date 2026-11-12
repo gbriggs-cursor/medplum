@@ -1,0 +1,15 @@
+{
+  "label": "REPLAY (no key)",
+  "source": "Generated from the hazard seed using the risk-teammate skill's fictional severity rule. A missed alert at or above 180 mmHg makes serious injury plausible in this fiction, so severity is 3 and the class is C. Not a live model call and not an ISO 14971 determination.",
+  "id": "HAZ-002",
+  "req_id": "REQ-011",
+  "hazard": "A systolic reading at or above 180 mmHg is stored without the visible alert",
+  "situation": "A clinician looks at the {prospect} patch panel and no alert is shown",
+  "harm": "A high systolic reading is missed in the fictional clinic workflow, and serious injury is a plausible outcome",
+  "sequence": "Two consecutive readings meet the threshold and the software stores them without showing the alert",
+  "severity": 3,
+  "probability": 2,
+  "safety_class": "C",
+  "risk_control": "Show the alert when the second consecutive reading meets the threshold. Not implemented in this run.",
+  "status": "ready-for-review"
+}

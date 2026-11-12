@@ -1,0 +1,15 @@
+{
+  "label": "OFFLINE",
+  "read": "Checked-in GIO search fixture. Not a live Jira response.",
+  "jql": "project = GIO AND summary ~ \"HAZ-001\" ORDER BY key ASC",
+  "issues": [
+    {
+      "key": "GIO-FIXTURE-HAZ-001",
+      "fields": {
+        "summary": "HAZ-001 REQ-001",
+        "status": { "name": "To Do" },
+        "labels": ["demo", "medplum", "story:risk-teammate", "track:ls", "stage:02"]
+      }
+    }
+  ]
+}

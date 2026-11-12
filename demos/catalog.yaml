@@ -118,6 +118,9 @@ stories:
     card: demos/requirements-clerk/story.yaml
     prompt: demos/requirements-clerk/prompt.md
     readme: demos/requirements-clerk/README.md
+    offline: node demos/requirements-clerk/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: the requirements-clerk bot reads prompt.md and creates GIO issues through the Atlassian connector. This runner does not call the bot."
   - id: risk-teammate
     code: L2
     title: Risk teammate
@@ -140,6 +143,9 @@ stories:
     card: demos/risk-teammate/story.yaml
     prompt: demos/risk-teammate/prompt.md
     readme: demos/risk-teammate/README.md
+    offline: node demos/risk-teammate/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: the risk-teammate bot reads prompt.md and creates one GIO issue through the Atlassian connector. This runner does not call the bot."
   - id: ticket-to-pr
     code: G2
     title: Ticket-to-PR automation
