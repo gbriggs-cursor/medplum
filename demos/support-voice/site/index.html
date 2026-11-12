@@ -163,6 +163,7 @@
     </header>
     <main>
       <section class="card">
+        <p id="mode-banner" class="disclaimer hidden"></p>
         <p id="greeting"></p>
         <p class="disclaimer" id="disclaimer"></p>
       </section>
@@ -226,6 +227,15 @@
           $('greeting').textContent = p.greeting;
           $('disclaimer').textContent = p.disclaimer;
         });
+      fetch('/api/mode')
+        .then((r) => r.json())
+        .then((m) => {
+          if (m.mode !== 'REPLAY (no key)') {
+            return;
+          }
+          $('mode-banner').textContent = 'REPLAY (no key): voice is a checked-in call. Jira: OFFLINE.';
+          $('mode-banner').classList.remove('hidden');
+        });
 
       $('intake').addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -261,8 +271,9 @@
         $('category').className = 'pill ' + out.category;
         $('spoken').textContent = out.spoken;
         const t = out.ticket;
+        const jira = t.mode === 'live' ? t.key : t.mode === 'OFFLINE' ? `OFFLINE: ${t.file}` : `dry-run: ${t.file}`;
         $('ticket').textContent =
-          `${out.id}. GIO ticket ${t.mode === 'live' ? t.key : 'dry-run: ' + t.file}. ${out.redaction.total} identifier(s) redacted before Jira.`;
+          `${out.id}. GIO ticket ${jira}. ${out.redaction.total} identifier(s) redacted before Jira.`;
         $('result').classList.remove('hidden');
       }
       $('yes').addEventListener('click', () => confirm(true));

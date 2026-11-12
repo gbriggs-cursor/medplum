@@ -6,9 +6,17 @@ import { readFileSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { applyDemoMode } from '../_shared/demo-mode.mjs';
 import { createIntakeStore, IntakeError } from './lib/intake.mjs';
 import { searchKb } from './lib/kb.mjs';
 import { submit } from './lib/pipeline.mjs';
+
+const offlineCommand = 'node demos/support-voice/scripts/offline.mjs';
+const demoMode = applyDemoMode({
+  needs: ['XAI_API_KEY', 'CURSOR_API_KEY', 'JIRA'],
+  offlineCommand,
+  kind: 'REPLAY (no key)',
+});
 
 const storyDir = dirname(fileURLToPath(import.meta.url));
 const arg = (name, fallback) => {
@@ -55,6 +63,12 @@ const server = createServer(async (req, res) => {
     if (req.method === 'GET' && url.pathname === '/api/prospect') {
       return send(res, 200, prospect);
     }
+    if (req.method === 'GET' && url.pathname === '/api/mode') {
+      return send(res, 200, {
+        mode: demoMode === 'key-free' ? 'REPLAY (no key)' : 'live',
+        jira: demoMode === 'key-free' ? 'OFFLINE' : liveJira ? 'live' : 'dry-run',
+      });
+    }
     if (req.method === 'GET' && url.pathname === '/api/kb/search') {
       return send(res, 200, searchKb(url.searchParams.get('q') ?? '', { audience: 'patient', limit: 3 }));
     }
@@ -67,7 +81,11 @@ const server = createServer(async (req, res) => {
       if (result.state !== 'confirmed') {
         return send(res, 200, { id, state: result.state });
       }
-      const out = await submit(result.intake, { intakeId: id, live: liveJira });
+      const out = await submit(result.intake, {
+        intakeId: id,
+        live: liveJira && demoMode === 'live',
+        offline: demoMode === 'key-free',
+      });
       return send(res, 200, {
         id,
         state: 'submitted',
@@ -79,6 +97,14 @@ const server = createServer(async (req, res) => {
       });
     }
     if (req.method === 'POST' && url.pathname === '/api/voice/session') {
+      if (demoMode === 'key-free') {
+        const replay = JSON.parse(readFileSync(join(storyDir, 'fixtures', 'replay', 'call.json'), 'utf8'));
+        return send(res, 200, {
+          mode: 'REPLAY (no key)',
+          message: 'REPLAY (no key): checked-in call fixtures/replay/call.json. No live voice session is opened.',
+          transcript: replay.call.transcript,
+        });
+      }
       if (!process.env.XAI_API_KEY) {
         return send(res, 503, { error: 'voice_unavailable', message: 'XAI_API_KEY is not set. Use the form path.' });
       }
@@ -105,6 +131,6 @@ const server = createServer(async (req, res) => {
 
 server.listen(port, '127.0.0.1', () => {
   console.log(
-    `Foo Medical support on http://127.0.0.1:${port} (Jira: ${liveJira ? 'live' : 'dry-run to run/outbox/'})`
+    `Foo Medical support on http://127.0.0.1:${port} (Jira: ${demoMode === 'key-free' ? 'OFFLINE' : liveJira ? 'live' : 'dry-run to run/outbox/'})`
   );
 });

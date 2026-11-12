@@ -95,19 +95,21 @@ export function assertSafe(payload, known = []) {
 }
 
 /**
- * Dry run (default) writes the payload to run/outbox/. Live needs --live plus JIRA_BASE_URL, JIRA_EMAIL and
- * JIRA_API_KEY, creates the issue, and never changes status or adds comments.
+ * Dry run (default) writes the payload to run/outbox/. Key-free mode writes the same payload with mode OFFLINE.
+ * Live needs --live plus JIRA_BASE_URL, JIRA_EMAIL and JIRA_API_KEY, creates the issue, and never changes status
+ * or adds comments.
  * @param {object} payload
- * @param {{ live?: boolean, env?: Record<string, string | undefined>, name?: string }} [options]
+ * @param {{ live?: boolean, offline?: boolean, env?: Record<string, string | undefined>, name?: string }} [options]
  */
-export async function writeGioIssue(payload, { live = false, env = process.env, name } = {}) {
+export async function writeGioIssue(payload, { live = false, offline = false, env = process.env, name } = {}) {
   assertSafe(payload);
   if (!live) {
     const dir = join(storyDir, 'run', 'outbox');
     mkdirSync(dir, { recursive: true });
     const file = join(dir, `${name ?? Date.now()}.json`);
-    writeFileSync(file, JSON.stringify(payload, null, 2) + '\n');
-    return { mode: 'dry-run', file: file.slice(storyDir.length + 1) };
+    const body = offline ? { mode: 'OFFLINE', ...payload } : payload;
+    writeFileSync(file, JSON.stringify(body, null, 2) + '\n');
+    return { mode: offline ? 'OFFLINE' : 'dry-run', file: file.slice(storyDir.length + 1) };
   }
   const missing = ['JIRA_BASE_URL', 'JIRA_EMAIL', 'JIRA_API_KEY'].filter((k) => !env[k]);
   if (missing.length) {

@@ -39,6 +39,9 @@ All data is synthetic. All stories run in cloud agent environment `67842161`, us
 | `variables` | Prompt variables and defaults. `prospect` defaults to Acme Cardio or Foo Medical. |
 | `jira` | `project: GIO`, `automation`, and the labels from `_shared/labels.md`. |
 | `answer_key` | Optional. `answer-keys://<story>/` (see below). |
+| `offline` | Command from the repo root that runs the story with no API keys. Prints `REPLAY (no key)` or `OFFLINE` and exits 0. |
+| `default_mode` | `replay`, `offline`, or `live`. The default demo path is key-free. |
+| `live_mode_note` | What changes once keys exist. Starts with `Live mode available once keys are added:`. |
 
 ## Personas
 
