@@ -6,17 +6,28 @@
 import { randomUUID } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { applyDemoMode } from '../../_shared/demo-mode.mjs';
 import { extractIntake } from '../lib/extract.mjs';
 import { connect, seedQuestionnaire } from '../lib/medplum.mjs';
 import { recordIntake } from '../lib/record.mjs';
 import { QUESTIONNAIRE_URL } from '../lib/to-questionnaire-response.mjs';
 
+const offlineCommand = 'node demos/speech-to-fhir/scripts/run.mjs';
+const mode = applyDemoMode({
+  needs: ['XAI_API_KEY'],
+  offlineCommand,
+  kind: 'REPLAY (no key)',
+});
+
 const arg = (name) => {
   const i = process.argv.indexOf(name);
   return i > 0 ? process.argv[i + 1] : undefined;
 };
-const { transcripts } = JSON.parse(readFileSync(new URL('../seed/transcripts.json', import.meta.url), 'utf8'));
-const text = arg('--text') ?? transcripts.find((t) => t.id === (arg('--transcript') ?? 'pairing'))?.text;
+const replay = mode === 'key-free' && !arg('--text');
+const source = replay ? '../fixtures/replay/transcripts.json' : '../seed/transcripts.json';
+const { transcripts } = JSON.parse(readFileSync(new URL(source, import.meta.url), 'utf8'));
+const transcriptId = arg('--transcript') ?? 'pairing';
+const text = arg('--text') ?? transcripts.find((t) => t.id === transcriptId)?.text;
 if (!text) {
   console.error('Unknown transcript. Use --transcript pairing|appointments-blank|airport or --text "..."');
   process.exit(2);
@@ -40,9 +51,14 @@ const intake = {
   transcript: text,
 };
 
+if (replay) {
+  console.log('REPLAY (no key)');
+  console.log(`REPLAY (no key): transcript ${transcriptId} from demos/speech-to-fhir/fixtures/replay/transcripts.json`);
+}
+
 const medplum = await connect();
 const questionnaire = await seedQuestionnaire(medplum);
-const out = await recordIntake(medplum, intake, { intakeId });
+const out = await recordIntake(medplum, intake, { intakeId, offline: mode === 'key-free' });
 const onChart = await medplum.searchResources('QuestionnaireResponse', {
   subject: `Patient/${out.patient.id}`,
   questionnaire: QUESTIONNAIRE_URL,
@@ -53,6 +69,9 @@ const leaked = [intake.caller_name, ...intake.caller_name.split(' '), intake.dob
   (s) => s && ticket.includes(s)
 );
 
+if (mode === 'key-free') {
+  console.log('OFFLINE');
+}
 console.log(`transcript: ${text}`);
 console.log(`extracted:  ${JSON.stringify({ ...fields, missing: undefined })}`);
 console.log(`triage:     ${out.decision.category}${out.decision.article ? ` (${out.decision.article})` : ''}`);

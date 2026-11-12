@@ -1,0 +1,25 @@
+{
+  "label": "REPLAY (no key)",
+  "synthetic": true,
+  "note": "Checked-in stand-in for a Grok Voice call and the triage agent's record_triage turn. No key is used to read this file.",
+  "call": {
+    "id": "replay-pair-new-phone",
+    "channel": "voice",
+    "caller_name": "Dana Whitfield",
+    "dob": "1958-07-02",
+    "callback": "(617) 555-0100",
+    "issue": "I got a new phone and my Acme Cardio patch won't pair with it.",
+    "transcript": "Hi, I'm calling Foo Medical support. My name is Dana Whitfield, born July 2nd, 1958. I got a new phone and my Acme Cardio patch won't pair with it. You can call me back at (617) 555-0100."
+  },
+  "agent": {
+    "label": "REPLAY (no key)",
+    "tool": "record_triage",
+    "input": {
+      "category": "answered",
+      "product": "patch",
+      "article": "KB-201",
+      "reason": "The caller cannot pair the Acme Cardio patch with a new phone. KB-201 covers pairing.",
+      "redacted_issue": "I got a new phone and my Acme Cardio patch won't pair with it."
+    }
+  }
+}

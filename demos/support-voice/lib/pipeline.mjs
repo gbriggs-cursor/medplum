@@ -11,8 +11,8 @@ export function prepare(intake, { intakeId } = {}) {
   return { redactedIssue, decision, payload, redaction };
 }
 
-export async function submit(intake, { intakeId, live = false, env } = {}) {
+export async function submit(intake, { intakeId, live = false, offline = false, env } = {}) {
   const prepared = prepare(intake, { intakeId });
-  const written = await writeGioIssue(prepared.payload, { live, env, name: intakeId });
+  const written = await writeGioIssue(prepared.payload, { live: live && !offline, offline, env, name: intakeId });
   return { ...prepared, written };
 }

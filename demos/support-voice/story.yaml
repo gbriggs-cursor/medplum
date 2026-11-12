@@ -29,7 +29,10 @@ proof:
 reset: demos/support-voice/reset.sh
 fallback: []
 fallback_note: No earlier Medplum-repo run exists. The Nightwing repo's runs are not referenced here; show the offline verify output instead
-blast_radius: One new GIO ticket per call (status never changed by this story); bots may open one draft PR. Jira writes are dry-run unless JIRA_* is set and the server runs with --live-jira
+blast_radius: One new GIO ticket per call (status never changed by this story); bots may open one draft PR. Key-free runs write an OFFLINE ticket file. Live Jira creates an issue only when the keys are set and the server runs with --live-jira
+offline: node demos/support-voice/scripts/offline.mjs
+default_mode: replay
+live_mode_note: 'Live mode available once keys are added: this command creates the GIO issue from the same synthetic call instead of writing the OFFLINE file. Grok Voice and the triage agent are still not called from this repo.'
 
 variables:
   prospect: Foo Medical
