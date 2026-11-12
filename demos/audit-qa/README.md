@@ -6,20 +6,18 @@
 
 ## Preflight
 
-Stop, and name the blocker, when the audit Q&A Grok Bot is missing. This folder does not create or edit a bot.
+No API key and no bot are required. L7 has not produced an index. `seed/trace-index.yaml` is a hand-written stand-in. Do not describe it as a live design-history file.
 
-No Atlassian connector is required. The bot does not write tickets.
-
-L7 has not produced an index. `seed/trace-index.yaml` is a hand-written stand-in. Do not describe it as a live design-history file.
-
-The run does not wait on an approval card. The approval in the default row is part of the fixture.
+The approval in the default row is part of the fixture. The run does not wait for a new one.
 
 ## Run it
 
-1. `demos/audit-qa/reset.sh` (safe to re-run). It only checks that the index is present.
-2. Paste `prompt.md` into the audit Q&A bot. `{prospect}` defaults to Acme Cardio. `{requirement_id}` defaults to REQ-012.
-3. While it runs, this is factory stage 07 Release, asked after the index exists.
-4. Read the answer against the REQ-012 row in the index.
+1. `demos/audit-qa/reset.sh` (safe to re-run). It does not call Jira.
+2. From the repo root, with no keys set: `node demos/audit-qa/offline.mjs`. The answer is labeled `REPLAY (no key)`.
+3. While it runs, this is factory stage 07 Release, asked against the fixture index.
+4. Read `run/answer.md` against the REQ-012 row in the index.
+
+Live mode available once keys are added: paste `prompt.md` into the audit Q&A bot. `{prospect}` defaults to Acme Cardio. `{requirement_id}` defaults to REQ-012. This folder does not create or edit that bot. `DEMO_MODE=live` with no keys prints `BLOCKED` and points back at the command above.
 
 Optional second question, same bot, same index: ask for REQ-011. The risk, test, run, and approval on that row are null. The answer should say those links are not in the index.
 

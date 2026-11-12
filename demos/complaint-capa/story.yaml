@@ -32,6 +32,11 @@ blast_radius: >-
   tickets. No regulator, email, or Slack submission. No GitHub writes. No write-back to Medplum.
   This change itself writes nothing to Jira.
 answer_key: answer-keys://complaint-capa/
+offline: node demos/complaint-capa/offline.mjs
+default_mode: replay
+live_mode_note: >-
+  Live mode available once keys are added: the complaint-clerk bot reads prompt.md and creates GIO
+  issues through the Atlassian connector. This runner does not call the bot.
 
 variables:
   prospect: Acme Cardio

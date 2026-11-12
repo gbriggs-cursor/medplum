@@ -1,0 +1,6 @@
+{
+  "label": "OFFLINE",
+  "read": "Checked-in GIO search fixture. Not a live Jira response.",
+  "jql": "project = GIO AND labels = story:complaint-capa ORDER BY key ASC",
+  "issues": []
+}

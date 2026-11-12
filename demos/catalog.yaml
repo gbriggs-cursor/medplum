@@ -27,6 +27,9 @@ stories:
     card: demos/audit-qa/story.yaml
     prompt: demos/audit-qa/prompt.md
     readme: demos/audit-qa/README.md
+    offline: node demos/audit-qa/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: the audit Q&A bot reads prompt.md and answers from the trace index. This runner does not call the bot."
   - id: complaint-capa
     code: L16
     title: Complaint to CAPA
@@ -49,6 +52,9 @@ stories:
     card: demos/complaint-capa/story.yaml
     prompt: demos/complaint-capa/prompt.md
     readme: demos/complaint-capa/README.md
+    offline: node demos/complaint-capa/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: the complaint-clerk bot reads prompt.md and creates GIO issues through the Atlassian connector. This runner does not call the bot."
   - id: device-evidence
     code: L3
     title: Traced build (device evidence)

@@ -28,6 +28,11 @@ fallback_note: >-
   seed file as a live design-history file.
 blast_radius: No writes. The bot reads the fixture and answers in chat. No Jira, no GitHub, no Medplum write-back.
 answer_key: answer-keys://audit-qa/
+offline: node demos/audit-qa/offline.mjs
+default_mode: replay
+live_mode_note: >-
+  Live mode available once keys are added: the audit Q&A bot reads prompt.md and answers from the
+  trace index. This runner does not call the bot.
 
 variables:
   prospect: Acme Cardio
