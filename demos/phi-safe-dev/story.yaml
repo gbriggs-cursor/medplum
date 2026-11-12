@@ -1,0 +1,44 @@
+id: phi-safe-dev
+code: G8
+title: PHI-safe debugging for practice software
+track: generic
+stage: generic
+readiness: new
+runtime: 10-15 min
+environment: '67842161'
+
+persona: Engineering lead at {prospect}, a practice-management software company whose support tickets arrive full of patient details
+trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+actors:
+  - Cursor cloud agent
+  - PHI redaction step from the PHI tripwire story (L11), once it lands
+  - check-no-phi.mjs diff tripwire
+surface: Hygiene recall list over FHIR Encounter resources (demos/phi-safe-dev/app/recall.mjs)
+data_pack: One synthetic front-desk ticket with realistic-looking fake identifiers (seed/ticket.md, all HTEST) plus synthetic-twin Encounter fixtures the agent writes
+artifact: Draft PR with a failing-then-passing synthetic-twin test, the fix, a redacted ticket summary, and check-no-phi.mjs output in the PR body
+gate: Presenter runs check-no-phi.mjs on the PR diff live. On-stage only
+gate_blocks: false
+wow: The agent reproduces the patient's bug on a synthetic twin and fixes it, and not one identifier from the ticket reaches Jira, code, or the PR
+proof:
+  - Draft PR link
+  - node --test output, failing before the fix and passing after
+  - check-no-phi.mjs PASS on the PR diff and PR body
+reset: demos/phi-safe-dev/reset.sh
+fallback: []
+fallback_note: No recorded run yet. After the first live run, add its PR number here
+blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. Jira write happens only after L11 lands, and only with the redacted summary
+depends_on:
+  - code: L11
+    workstream: B
+    planned_path: demos/support-voice/
+    provides: Redaction step that strips identifiers before a Jira write. Until it lands the story runs without any Jira write
+
+variables:
+  prospect: Foo Medical
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:phi-safe-dev', 'track:generic']
+
+answer_key: answer-keys://phi-safe-dev/

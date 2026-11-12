@@ -1,0 +1,36 @@
+id: integration-docs
+code: G11
+title: Integration docs for a partner
+track: generic
+stage: generic
+readiness: new
+runtime: 10-15 min
+environment: '67842161'
+
+persona: Partner engineering or developer relations lead at {prospect}, a healthcare SaaS company whose partners integrate over FHIR
+trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+actors:
+  - Cursor cloud agent
+  - Bugbot
+surface: packages/docs/docs/integration/, auth (client credentials), upsert, Subscriptions webhooks, and bulk export in the Medplum source
+data_pack: Four synthetic partner questions (seed/partner-questions.md) and the source anchors they must be verified against (anchors.txt)
+artifact: Draft docs PR with one integration guide, an index link and sidebar entry, a claim-to-source table and a drafted partner reply in the PR body
+gate: Presenter opens the webhook-signature claim and its backing line in subscription.ts. On-stage only
+gate_blocks: false
+wow: Four partner questions become one integration guide where every claim links to the line of server code that backs it
+proof:
+  - Draft PR link
+  - Claim-to-source table in the PR body
+  - Sidebar and index diff
+reset: demos/integration-docs/reset.sh
+fallback: []
+fallback_note: No recorded run yet. After the first live run, add its PR number here
+blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. The partner reply is drafted, never sent
+
+variables:
+  prospect: Foo Medical
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:integration-docs', 'track:generic']

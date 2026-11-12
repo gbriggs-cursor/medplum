@@ -1,0 +1,43 @@
+id: practice-analytics
+code: G10
+title: Practice analytics on 10,000 patients
+track: generic
+stage: generic
+readiness: planned
+runtime: 5-10 min
+environment: '67842161'
+
+persona: Product or analytics lead at {prospect}, a practice software company whose customers ask why their quality and visit numbers moved
+trigger: Presenter runs the L13 '@grok/agent-sdk' runner with prompt.md, or pastes prompt.md into a cloud agent started from the default branch
+actors:
+  - '@grok/agent-sdk analytics runner (L13)'
+  - Cursor cloud agent (fallback trigger)
+  - DuckDB
+surface: 10k-patient Synthea population in DuckDB/Parquet (P2, from L13), queried as a practice's patient panel
+data_pack: P2 analytics pack from L13, 10k Synthea patients with planted anomalies; this story adds only the practice-manager questions (seed/questions.md) and the data contract (seed/data-contract.md)
+artifact: A short findings report in the PR (or SDK run output) with one SQL query and result per question, and the answer-key score for the planted anomaly
+gate: Presenter reveals the answer-key score after the agent commits to its answer. On-stage only
+gate_blocks: false
+wow: A practice manager's three questions over 10,000 synthetic patients get answered with SQL, and the agent finds the planted cause on its own
+proof:
+  - Findings report with SQL and results for all three questions
+  - Answer-key score for question 1
+  - Draft PR link or SDK run log
+reset: demos/practice-analytics/reset.sh
+fallback: []
+fallback_note: No recorded run yet. Use the L13 fallback once its card lands
+blast_radius: Local DuckDB reads only, plus an optional GitHub draft PR in gbriggs-cursor/medplum. No Jira writes
+depends_on:
+  - code: L13
+    workstream: C
+    provides: P2 analytics pack (10k Synthea in DuckDB/Parquet with planted anomalies), the '@grok/agent-sdk' runner, and the answer-key scorer
+
+variables:
+  prospect: Foo Medical
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:practice-analytics', 'track:generic']
+
+answer_key: answer-keys://practice-analytics/

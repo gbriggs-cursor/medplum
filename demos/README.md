@@ -39,10 +39,22 @@ All data is synthetic. All stories run in cloud agent environment `67842161`, us
 | `variables` | Prompt variables and defaults. `prospect` defaults to Acme Cardio or Foo Medical. |
 | `jira` | `project: GIO`, `automation`, and the labels from `_shared/labels.md`. |
 | `answer_key` | Optional. `answer-keys://<story>/` (see below). |
+| `depends_on` | Optional. Other stories this one reuses, by catalog `code`, each with `provides` (what it uses) and optional `workstream` and `planned_path`. A code with no card yet is listed under `pending` in the catalog, and the story runs in its documented stub mode until it lands. |
 
 ## Personas
 
 Defaults use the generic account: Acme Cardio (device maker) and Foo Medical (patient portal). A real company name appears only when a run sets `{prospect}` to that prospect.
+
+## Generic healthcare-SaaS track
+
+For prospects that are neither GxP nor device makers (for example a practice-management software company). All four use `track:generic` and default to Foo Medical.
+
+| Code | Story | Reuses | Runs today |
+| --- | --- | --- | --- |
+| G8 | `phi-safe-dev` | L11 redaction before Jira | Yes, without the Jira write |
+| G9 | `front-office-voice` | L9 support-voice line, L11 redaction | No, stubbed until L9 and L11 land |
+| G10 | `practice-analytics` | L13 Synthea DuckDB pack and SDK runner | No, stubbed until L13 lands |
+| G11 | `integration-docs` | Nothing | Yes |
 
 ## Answer keys
 
@@ -60,6 +72,7 @@ On-stage approvals are recorded in the story's evidence package (`approval.json`
 ```
 node demos/_shared/scripts/catalog.mjs          # validate and rewrite catalog.yaml
 node demos/_shared/scripts/catalog.mjs --check  # validate and fail if catalog.yaml is stale
+node demos/_shared/scripts/catalog.mjs --preflight <story>  # fail with the exact blocker if a dependency has not landed
 ```
 
 The check fails on a missing field, a label outside the taxonomy, automation labels on a non-automation story, a non-generic default persona, a prompt variable with no default, a missing or non-executable reset script, a gate that blocks, or branch pinning anywhere under `demos/` or `.cursor/`.

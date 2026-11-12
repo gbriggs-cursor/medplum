@@ -52,6 +52,54 @@ stories:
     card: demos/docs-from-questions/story.yaml
     prompt: demos/docs-from-questions/prompt.md
     readme: demos/docs-from-questions/README.md
+  - id: front-office-voice
+    code: G9
+    title: Voice front-office support
+    track: generic
+    stage: generic
+    readiness: planned
+    runtime: 5 min live, plus agent time
+    wow: A front-desk manager's phone call becomes a redacted ticket and a docs or fix PR within minutes, with no one opening Jira or Cursor
+    trigger: Presenter calls the Grok Voice line from the support-voice story (L9) using the front-office profile, playing one of the scripted synthetic callers
+    data_pack: Front-office profile and three synthetic caller scripts (seed/front-office-profile.md, seed/calls.md); no real callers or numbers
+    fallback: []
+    reset: demos/front-office-voice/reset.sh
+    depends_on:
+      - L9
+      - L11
+    pending:
+      - L9
+      - L11
+    automation: false
+    labels:
+      - demo
+      - medplum
+      - story:front-office-voice
+      - track:generic
+    card: demos/front-office-voice/story.yaml
+    prompt: demos/front-office-voice/prompt.md
+    readme: demos/front-office-voice/README.md
+  - id: integration-docs
+    code: G11
+    title: Integration docs for a partner
+    track: generic
+    stage: generic
+    readiness: new
+    runtime: 10-15 min
+    wow: Four partner questions become one integration guide where every claim links to the line of server code that backs it
+    trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+    data_pack: Four synthetic partner questions (seed/partner-questions.md) and the source anchors they must be verified against (anchors.txt)
+    fallback: []
+    reset: demos/integration-docs/reset.sh
+    automation: false
+    labels:
+      - demo
+      - medplum
+      - story:integration-docs
+      - track:generic
+    card: demos/integration-docs/story.yaml
+    prompt: demos/integration-docs/prompt.md
+    readme: demos/integration-docs/README.md
   - id: net-new-feature
     code: G1
     title: Net-new feature
@@ -75,6 +123,56 @@ stories:
     card: demos/net-new-feature/story.yaml
     prompt: demos/net-new-feature/prompt.md
     readme: demos/net-new-feature/README.md
+  - id: phi-safe-dev
+    code: G8
+    title: PHI-safe debugging for practice software
+    track: generic
+    stage: generic
+    readiness: new
+    runtime: 10-15 min
+    wow: The agent reproduces the patient's bug on a synthetic twin and fixes it, and not one identifier from the ticket reaches Jira, code, or the PR
+    trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+    data_pack: One synthetic front-desk ticket with realistic-looking fake identifiers (seed/ticket.md, all HTEST) plus synthetic-twin Encounter fixtures the agent writes
+    fallback: []
+    reset: demos/phi-safe-dev/reset.sh
+    depends_on:
+      - L11
+    pending:
+      - L11
+    automation: false
+    labels:
+      - demo
+      - medplum
+      - story:phi-safe-dev
+      - track:generic
+    card: demos/phi-safe-dev/story.yaml
+    prompt: demos/phi-safe-dev/prompt.md
+    readme: demos/phi-safe-dev/README.md
+  - id: practice-analytics
+    code: G10
+    title: Practice analytics on 10,000 patients
+    track: generic
+    stage: generic
+    readiness: planned
+    runtime: 5-10 min
+    wow: A practice manager's three questions over 10,000 synthetic patients get answered with SQL, and the agent finds the planted cause on its own
+    trigger: Presenter runs the L13 '@grok/agent-sdk' runner with prompt.md, or pastes prompt.md into a cloud agent started from the default branch
+    data_pack: P2 analytics pack from L13, 10k Synthea patients with planted anomalies; this story adds only the practice-manager questions (seed/questions.md) and the data contract (seed/data-contract.md)
+    fallback: []
+    reset: demos/practice-analytics/reset.sh
+    depends_on:
+      - L13
+    pending:
+      - L13
+    automation: false
+    labels:
+      - demo
+      - medplum
+      - story:practice-analytics
+      - track:generic
+    card: demos/practice-analytics/story.yaml
+    prompt: demos/practice-analytics/prompt.md
+    readme: demos/practice-analytics/README.md
   - id: rebrand
     code: G3
     title: Prospect rebrand

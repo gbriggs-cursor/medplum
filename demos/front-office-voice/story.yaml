@@ -1,0 +1,49 @@
+id: front-office-voice
+code: G9
+title: Voice front-office support
+track: generic
+stage: generic
+readiness: planned
+runtime: 5 min live, plus agent time
+environment: '67842161'
+
+persona: Head of support or product at {prospect}, a practice-management software company whose customers' front desks call in all day
+trigger: Presenter calls the Grok Voice line from the support-voice story (L9) using the front-office profile, playing one of the scripted synthetic callers
+actors:
+  - Grok Voice intake with two-phase confirm (L9)
+  - PHI redaction before the Jira write (L11)
+  - '@grok/agent-sdk triage against the knowledge base (L9)'
+  - Ticket Triage and Fix Orchestrator Grok Bots (L9)
+  - Cursor cloud agent
+surface: Foo Medical portal (Appointments, Messages) and the front-office help articles in the support knowledge base (P4, from L9)
+data_pack: Front-office profile and three synthetic caller scripts (seed/front-office-profile.md, seed/calls.md); no real callers or numbers
+artifact: GIO intake ticket with identifiers redacted, then either a KB article PR (kb_gap call) or a fix PR (bug call), plus the triage note
+gate: Presenter reads the two-phase confirm aloud before the ticket is written. On-stage only; the confirm is the caller's, not an approval wait
+gate_blocks: false
+wow: A front-desk manager's phone call becomes a redacted ticket and a docs or fix PR within minutes, with no one opening Jira or Cursor
+proof:
+  - GIO ticket link with no caller identifiers in it
+  - KB article draft PR or fix draft PR link
+  - Triage note on the ticket
+reset: demos/front-office-voice/reset.sh
+fallback: []
+fallback_note: No recorded run in this repo yet. Use the L9 support-voice fallback once its card lands
+blast_radius: One GIO intake ticket (labels below, never automatable) and one GitHub draft PR in gbriggs-cursor/medplum. No Jira status changes from this story
+depends_on:
+  - code: L9
+    workstream: B
+    planned_path: demos/support-voice/
+    provides: Voice intake site, two-phase confirm, SDK triage, both Grok Bots, and a prospect-profile slot to load the front-office profile into
+  - code: L11
+    workstream: B
+    planned_path: demos/support-voice/
+    provides: Redaction of caller name and date of birth before the Jira write
+
+variables:
+  prospect: Foo Medical
+  call: reschedule
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:front-office-voice', 'track:generic']
