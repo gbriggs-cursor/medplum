@@ -1,0 +1,17 @@
+{
+  "name": "batch-evidence",
+  "private": true,
+  "type": "module",
+  "description": "Refreshes synthetic evidence packages for a batch of Acme Cardio device changes.",
+  "scripts": {
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@grok/agent-sdk": "0.6.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "typescript": "6.0.3"
+  }
+}
