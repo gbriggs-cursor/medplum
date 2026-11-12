@@ -60,3 +60,41 @@ Example:
 ```
 python3 -c "import duckdb; print(duckdb.sql(\"select count(*) from 'demos/_shared/data-packs/synthea-analytics/fixture-100/parquet/patients.parquet'\"))"
 ```
+
+## Metrics
+
+### HbA1c control (one definition, shared by L13 and G10)
+
+Every story that reports HbA1c control imports `hba1c-control.sql` (SQL) or `hba1c_control.py` (Python, also a command line that prints JSON). Do not re-implement it.
+
+| Part | Definition |
+| --- | --- |
+| Results counted | One row per HbA1c observation (LOINC `4548-4`), not one value per patient, with a numeric value and units `%` or `mmol/mol`. Other units are excluded. |
+| Cohort | Patients with a type 2 diabetes condition, SNOMED CT `44054006`. No living-patient filter and no other cohort filter. |
+| Conversion | `%` rows are used as is. `mmol/mol` (IFCC) rows are converted to NGSP percent with `0.09148 * IFCC + 2.152`. The converted value is not rounded before the threshold. |
+| Controlled | Converted value `< 7` (strict). 7.0% is not controlled. 52 mmol/mol (6.909%) is controlled. 53 mmol/mol (7.00044%) is not. |
+| Rate | `controlled rows / rows`, per calendar month of the observation date, rounded to one decimal once, after the counts. |
+| Naive rate | `control_pct_naive` applies the threshold to the raw value and ignores units. It is what a dashboard that never converts reports. |
+
+Python:
+
+```
+python3 demos/_shared/data-packs/synthea-analytics/hba1c_control.py ~/.cache/medplum-demos/synthea-analytics-10k --from 2026-02 --to 2026-04
+python3 demos/_shared/data-packs/synthea-analytics/test_hba1c_control.py   # boundary cases, fixture-100, and the 10k pack if installed
+```
+
+SQL: create tables or views named `observations` and `conditions` (the schema above), then run `hba1c-control.sql`. It creates temp objects `hba1c_ngsp_pct(v, u)`, `hba1c_t2dm_results` and `hba1c_control_monthly` (columns `month, n, mmol_rows, controlled_n, control_pct, control_pct_naive`). Temp objects load into a read-only `analytics.duckdb`.
+
+Expected values are pinned in `hba1c-control.expected.json`. On the 10k pack (`synthea-analytics-10k`, tarball sha256 `5f803a52...0cef`):
+
+| Month | Rows | mmol/mol rows | Controlled | Control | Naive |
+| --- | --- | --- | --- | --- | --- |
+| 2026-02 | 217 | 0 | 210 | 96.8% | 96.8% |
+| 2026-03 | 213 | 73 | 199 | **93.4%** | 68.1% |
+| 2026-04 | 226 | 82 | 212 | 93.8% | 65.9% |
+
+`fixture-100` has no type 2 diabetes HbA1c rows in 2026-03, so there is nothing to report there.
+
+Why two stories once disagreed (93.9% vs 93.4%): L13 converted with `IFCC / 10.929 + 2.15`, which turns 53 mmol/mol into 6.99948 and counts it as under 7. The NGSP equation above gives 7.00044. Exactly one March row has 53 mmol/mol, so March was 200/213 vs 199/213. Denominator, cohort, per-observation counting, rounding and the strict `< 7` were already identical. Rows and transcript: `evidence/hba1c-formula-comparison.txt`.
+
+Known limits of this definition on the planted packs. The cohort uses the SNOMED code only, so a patient whose diabetes is recorded under another code system (for example ICD-10-CM `E11.9`), or only on a second patient record, is not in it. Adding `E11.9` gives 93.0% (199/214) for March. The same definition on the data before any anomaly was planted gives 93.1% (202/217). Both stories use the SNOMED-only cohort so their numbers stay comparable.

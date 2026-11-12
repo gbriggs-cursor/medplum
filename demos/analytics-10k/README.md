@@ -24,7 +24,7 @@ This is the default. It prints `REPLAY (no key)`, replays the checked-in turns i
 
 `DEMO_MODE=live` without `CURSOR_API_KEY` prints `BLOCKED` and exits 3, and the message points back at the command above. With `CURSOR_API_KEY` set, the script takes the live branch and leaves `prompt.md` unchanged. It does not launch the cloud agent itself.
 
-Scoring runs only when the private answer key is on the machine, at `$L13_ANSWER_KEYS_DIR` or `~/.cache/medplum-demos/answer-keys/analytics-10k` (`score.py` plus `answer-key-10k.json` or `answer-key-fixture-100.json`). That directory is `answer-keys://analytics-10k/`. It is not in this repo. Without it, the queries and findings still run and the score section says the key is absent.
+Scoring runs only when the private answer key is on the machine, at `$L13_ANSWER_KEYS_DIR` or `~/.cache/medplum-demos/answer-keys/analytics-10k` (`score.py` plus `answer-key-10k.json` or `answer-key-fixture-100.json`). That directory is `answer-keys://analytics-10k/`. It is not in this repo. Without it, the queries and findings still run and the score section says the key is absent. With the key, the score also has a `CONTROL` line: the answer must state the March control rate from the shared HbA1c definition (`demos/_shared/data-packs/synthea-analytics/README.md`, "Metrics"). On the 10k pack that is 93.4% (199/213).
 
 ## Run it live
 

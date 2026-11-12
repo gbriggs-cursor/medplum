@@ -1,7 +1,7 @@
 {
   "label": "REPLAY (no key)",
   "sdk": "@grok/agent-sdk",
-  "source": "Checked-in turns for key-free mode. Not a capture of a live model call. The SQL is executed locally against whichever pack is installed.",
+  "source": "Checked-in turns for key-free mode. Not a capture of a live model call. The SQL is executed locally against whichever pack is installed. HbA1c control comes from the shared definition (hba1c-control.sql).",
   "turns": [
     {
       "role": "user",
@@ -9,19 +9,15 @@
     },
     {
       "role": "assistant",
-      "content": "REPLAY (no key)\n\nI will measure monthly HbA1c control for type 2 diabetes (SNOMED 44054006) without assuming a unit, then split the same results by units. A jump in the average together with a new unit is a unit change, not a clinical change. The corrected value uses the IFCC conversion mmol/mol to NGSP percent: value / 10.929 + 2.15.",
+      "content": "REPLAY (no key)\n\nI will measure monthly HbA1c control for type 2 diabetes (SNOMED 44054006) with the shared definition in demos/_shared/data-packs/synthea-analytics/hba1c-control.sql: one row per observation, converted to NGSP percent first (mmol/mol rows: 0.09148 * IFCC + 2.152), controlled means under 7 (strict). The same view also reports the naive rate that applies the threshold to raw values, so a unit change shows up as a sharp drop in the naive rate with a new unit beside it.",
       "queries": [
         {
-          "id": "monthly-naive",
-          "sql": "select date_trunc('month', date)::date as month, count(*) as n, round(avg(value_num), 2) as avg_value, round(100.0 * avg(case when value_num < 7 then 1 else 0 end), 1) as control_pct, string_agg(distinct units, ',') as units from observations where code = '4548-4' and patient in (select patient from conditions where code = '44054006') and date >= '2025-12-01' and date < '2026-06-01' group by 1 order by 1"
+          "id": "monthly-control",
+          "sql": "select month, n, mmol_rows, controlled_n, control_pct, control_pct_naive from hba1c_control_monthly where month >= '2025-12-01' and month < '2026-06-01' order by month"
         },
         {
           "id": "monthly-units",
           "sql": "select date_trunc('month', date)::date as month, units, count(*) as n, round(avg(value_num), 1) as avg_value from observations where code = '4548-4' and date >= '2025-12-01' and date < '2026-06-01' group by 1, 2 order by 1, 2"
-        },
-        {
-          "id": "monthly-corrected",
-          "sql": "select date_trunc('month', date)::date as month, round(100.0 * avg(case when (case when units = 'mmol/mol' then value_num / 10.929 + 2.15 else value_num end) < 7 then 1 else 0 end), 1) as corrected_control_pct, count(*) as n from observations where code = '4548-4' and patient in (select patient from conditions where code = '44054006') and date >= '2025-12-01' and date < '2026-06-01' group by 1 order by 1"
         },
         {
           "id": "unit-start",

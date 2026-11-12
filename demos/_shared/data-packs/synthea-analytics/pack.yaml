@@ -30,4 +30,12 @@ packs:
       status: published as a prerelease; fetch.sh verified against this URL on 2026-11-12 (evidence/fetch-verify-release-run.txt)
     install_path: ~/.cache/medplum-demos/synthea-analytics-10k
 
+metrics:
+  hba1c_control:
+    definition: README.md#metrics
+    sql: hba1c-control.sql
+    python: hba1c_control.py
+    expected: hba1c-control.expected.json
+    test: test_hba1c_control.py
+
 answer_key: answer-keys://analytics-10k/

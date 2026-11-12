@@ -1,0 +1,22 @@
+{
+  "metric": "hba1c_control_monthly",
+  "definition": "README.md#metrics",
+  "packs": {
+    "synthea-analytics-10k": {
+      "cohort_rows": 7441,
+      "controlled_rows": 7063,
+      "months": {
+        "2026-02": { "n": 217, "mmol_rows": 0, "controlled_n": 210, "control_pct": 96.8, "control_pct_naive": 96.8 },
+        "2026-03": { "n": 213, "mmol_rows": 73, "controlled_n": 199, "control_pct": 93.4, "control_pct_naive": 68.1 },
+        "2026-04": { "n": 226, "mmol_rows": 82, "controlled_n": 212, "control_pct": 93.8, "control_pct_naive": 65.9 }
+      }
+    },
+    "synthea-analytics-100": {
+      "cohort_rows": 12,
+      "controlled_rows": 5,
+      "months": {
+        "2026-03": null
+      }
+    }
+  }
+}

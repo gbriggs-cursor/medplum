@@ -11,20 +11,10 @@ import os
 import subprocess
 import sys
 
-TABLES = [
-    "patients",
-    "organizations",
-    "providers",
-    "encounters",
-    "conditions",
-    "observations",
-    "medications",
-    "devices",
-    "device_readings",
-]
-
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, "..", ".."))
+SHARED = os.path.join(REPO, "demos", "_shared", "data-packs", "synthea-analytics")
+sys.path.insert(0, SHARED)
 TURNS = os.path.join(HERE, "fixtures", "replay", "turns.json")
 RUN = os.path.join(HERE, "run")
 LABEL = "REPLAY (no key)"
@@ -41,23 +31,9 @@ def resolve_pack():
         if os.path.exists(manifest):
             pack = json.load(open(manifest)).get("pack", pack)
         return candidate, pack, "installed"
-    fixture = os.path.join(REPO, "demos", "_shared", "data-packs", "synthea-analytics", "fixture-100")
+    fixture = os.path.join(SHARED, "fixture-100")
     pack = json.load(open(os.path.join(fixture, "MANIFEST.json"))).get("pack", "synthea-analytics-100")
     return fixture, pack, "fixture-100"
-
-
-def connect(pack_dir):
-    import duckdb
-
-    duck = os.path.join(pack_dir, "analytics.duckdb")
-    if os.path.exists(duck):
-        return duckdb.connect(duck, read_only=True), "analytics.duckdb"
-    parquet = os.path.join(pack_dir, "parquet")
-    con = duckdb.connect()
-    for table in TABLES:
-        path = os.path.join(parquet, f"{table}.parquet")
-        con.execute(f"create view {table} as select * from '{path}'")
-    return con, "parquet"
 
 
 def cell(value):
@@ -146,14 +122,16 @@ def key_file(pack):
 
 def main():
     try:
-        import duckdb  # noqa: F401
+        import hba1c_control as shared
     except ImportError:
         print("replay: DuckDB is not installed. Run demos/_shared/data-packs/synthea-analytics/install.sh at environment build time.", file=sys.stderr)
         sys.exit(1)
 
     doc = json.load(open(TURNS))
     pack_dir, pack, source = resolve_pack()
-    con, store = connect(pack_dir)
+    con = shared.connect(pack_dir)
+    shared.install(con)
+    store = "analytics.duckdb" if os.path.exists(os.path.join(pack_dir, "analytics.duckdb")) else "parquet"
     print(LABEL)
     print(f"pack: {pack} ({source}) at {pack_dir} via {store}")
     print(f"turns: {os.path.relpath(TURNS, REPO)} label={doc['label']}")
@@ -183,24 +161,23 @@ def main():
     unit = results["unit-start"][0]
     start = unit["start_date"]
     orgs = [row["organization_id"] for row in results["unit-orgs"]]
-    naive = results["monthly-naive"]
-    corrected = {row["month"]: row["corrected_control_pct"] for row in results["monthly-corrected"]}
-    drop = ""
-    if start is not None and naive:
-        cut = start.replace(day=1) if hasattr(start, "replace") else start
-        before = [row for row in naive if row["month"] < cut]
-        after = [row for row in naive if row["month"] >= cut]
-        if before and after:
-            prev, nxt = before[-1], after[0]
-            fixed = corrected.get(nxt["month"])
-            drop = (
-                f" Naive control goes from {prev['control_pct']}% in {cell(prev['month'])} "
-                f"to {nxt['control_pct']}% in {cell(nxt['month'])}."
-                f" Corrected ({fixed}%) stays with the earlier months."
-            )
+    monthly = results["monthly-control"]
+    ym = lambda d: cell(d)[:7]
     if start is None:
         answer = "No HbA1c results in mmol/mol turned up in this pack, so the unit-change explanation is not supported here."
     else:
+        cut = start.replace(day=1)
+        before = [row for row in monthly if row["month"] < cut]
+        after = [row for row in monthly if row["month"] >= cut]
+        if before and after:
+            prev, nxt = before[-1], after[0]
+            drop = (
+                f" Naive control goes from {prev['control_pct_naive']}% in {ym(prev['month'])} "
+                f"to {nxt['control_pct_naive']}% in {ym(nxt['month'])}. Converted to percent first, "
+                f"{ym(nxt['month'])} control is {nxt['control_pct']}% ({nxt['controlled_n']}/{nxt['n']})."
+            )
+        else:
+            drop = " This pack has no type 2 diabetes HbA1c results in the months around the change, so control is not recomputed here."
         answer = (
             f"HbA1c control drops because {unit['n']} results switch to mmol/mol starting {cell(start)} "
             f"and the dashboard still treats every value as a percent.{drop}"
@@ -222,7 +199,7 @@ def main():
                 "start_date": cell(start),
                 "end_date": None,
                 "entities": orgs,
-                "sql": [q["sql"] for q in query_log if q["id"] in ("monthly-naive", "unit-start", "unit-orgs", "monthly-corrected")],
+                "sql": [q["sql"] for q in query_log if q["id"] in ("monthly-control", "unit-start", "unit-orgs")],
             }
         )
     if dup_ids:
@@ -266,6 +243,8 @@ def main():
         json.dump(payload, fh, indent=2)
         fh.write("\n")
     with open(os.path.join(RUN, "queries.sql"), "w") as fh:
+        fh.write("-- shared HbA1c control definition (demos/_shared/data-packs/synthea-analytics/hba1c-control.sql)\n")
+        fh.write(open(shared.SQL_PATH).read().rstrip() + "\n\n")
         for query in query_log:
             fh.write(f"-- {query['id']}\n{query['sql']};\n\n")
 
@@ -279,7 +258,11 @@ def main():
     score_py = os.path.join(keys, "score.py") if keys else ""
     key_path = os.path.join(keys, key_file(pack)) if keys else ""
     if keys and os.path.isfile(score_py) and os.path.isfile(key_path):
-        proc = subprocess.run([sys.executable, score_py, key_path, findings_path], capture_output=True, text=True)
+        proc = subprocess.run(
+            [sys.executable, score_py, key_path, findings_path, "--pack-dir", pack_dir, "--shared-dir", SHARED],
+            capture_output=True,
+            text=True,
+        )
         score_text = (proc.stdout or "") + (proc.stderr or "")
         print(f"\nOFFLINE score.py ({os.path.basename(key_path)})")
         print(score_text.rstrip())

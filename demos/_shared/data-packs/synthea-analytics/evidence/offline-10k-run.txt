@@ -8,17 +8,17 @@ Foo Medical's diabetes dashboard shows HbA1c control (share of type 2 diabetes p
 --- assistant REPLAY (no key) ---
 REPLAY (no key)
 
-I will measure monthly HbA1c control for type 2 diabetes (SNOMED 44054006) without assuming a unit, then split the same results by units. A jump in the average together with a new unit is a unit change, not a clinical change. The corrected value uses the IFCC conversion mmol/mol to NGSP percent: value / 10.929 + 2.15.
+I will measure monthly HbA1c control for type 2 diabetes (SNOMED 44054006) with the shared definition in demos/_shared/data-packs/synthea-analytics/hba1c-control.sql: one row per observation, converted to NGSP percent first (mmol/mol rows: 0.09148 * IFCC + 2.152), controlled means under 7 (strict). The same view also reports the naive rate that applies the threshold to raw values, so a unit change shows up as a sharp drop in the naive rate with a new unit beside it.
 
-OFFLINE monthly-naive (6 rows)
-month | n | avg_value | control_pct | units
---- | --- | --- | --- | ---
-2025-12-01 | 205 | 4.2 | 97.1 | %
-2026-01-01 | 241 | 4.28 | 95.9 | %
-2026-02-01 | 217 | 4.29 | 96.8 | %
-2026-03-01 | 213 | 10.76 | 68.1 | mmol/mol,%
-2026-04-01 | 226 | 11.03 | 65.9 | mmol/mol,%
-2026-05-01 | 208 | 12.76 | 58.2 | mmol/mol,%
+OFFLINE monthly-control (6 rows)
+month | n | mmol_rows | controlled_n | control_pct | control_pct_naive
+--- | --- | --- | --- | --- | ---
+2025-12-01 | 205 | 0 | 199 | 97.1 | 97.1
+2026-01-01 | 241 | 0 | 231 | 95.9 | 95.9
+2026-02-01 | 217 | 0 | 210 | 96.8 | 96.8
+2026-03-01 | 213 | 73 | 199 | 93.4 | 68.1
+2026-04-01 | 226 | 82 | 212 | 93.8 | 65.9
+2026-05-01 | 208 | 93 | 193 | 92.8 | 58.2
 
 OFFLINE monthly-units (9 rows)
 month | units | n | avg_value
@@ -32,16 +32,6 @@ month | units | n | avg_value
 2026-04-01 | mmol/mol | 342 | 26
 2026-05-01 | % | 441 | 4.7
 2026-05-01 | mmol/mol | 327 | 24.2
-
-OFFLINE monthly-corrected (6 rows)
-month | corrected_control_pct | n
---- | --- | ---
-2025-12-01 | 97.1 | 205
-2026-01-01 | 95.9 | 241
-2026-02-01 | 96.8 | 217
-2026-03-01 | 93.9 | 213
-2026-04-01 | 95.6 | 226
-2026-05-01 | 94.2 | 208
 
 OFFLINE unit-start (1 rows)
 start_date | n
@@ -114,7 +104,7 @@ ssn | birthdate | n | ids
 OFFLINE coding (1 rows)
 start_date | codes | n
 --- | --- | ---
-2025-10-21 | ['R73.03', 'I10', 'E11.9'] | 66
+2025-10-21 | ['I10', 'E11.9', 'R73.03'] | 66
 
 OFFLINE device-days (1083 rows)
 model | reading_date | n
@@ -145,7 +135,7 @@ GlucoSense G2 | 2025-10-23 | 1582
 GlucoSense G2 | 2025-10-24 | 1582
 ... 1059 more rows
 
-OFFLINE answer: HbA1c control drops because 2126 results switch to mmol/mol starting 2026-03-07 and the dashboard still treats every value as a percent. Naive control goes from 96.8% in 2026-02-01 to 68.1% in 2026-03-01. Corrected (93.9%) stays with the earlier months.
+OFFLINE answer: HbA1c control drops because 2126 results switch to mmol/mol starting 2026-03-07 and the dashboard still treats every value as a percent. Naive control goes from 96.8% in 2026-02 to 68.1% in 2026-03. Converted to percent first, 2026-03 control is 93.4% (199/213).
 
 OFFLINE score.py (answer-key-10k.json)
 found hba1c-unit-change    start 2026-03-07, org recall 91%
@@ -153,6 +143,7 @@ found duplicate-patients   120 pairs, id recall 100%
 found coding-drift         start 2025-10-20
 found device-gap           GlucoSense G3 Plus 2026-01-16..2026-01-28
 SCORE: 4/4 (primary question answered)
+CONTROL: ok expected 93.4% (199/213) for 2026-03 by the shared definition
 
 OFFLINE wrote demos/analytics-10k/run/findings.json and demos/analytics-10k/run/REPORT.md
 EXIT:0

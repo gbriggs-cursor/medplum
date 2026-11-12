@@ -8,12 +8,12 @@ Foo Medical's diabetes dashboard shows HbA1c control (share of type 2 diabetes p
 --- assistant REPLAY (no key) ---
 REPLAY (no key)
 
-I will measure monthly HbA1c control for type 2 diabetes (SNOMED 44054006) without assuming a unit, then split the same results by units. A jump in the average together with a new unit is a unit change, not a clinical change. The corrected value uses the IFCC conversion mmol/mol to NGSP percent: value / 10.929 + 2.15.
+I will measure monthly HbA1c control for type 2 diabetes (SNOMED 44054006) with the shared definition in demos/_shared/data-packs/synthea-analytics/hba1c-control.sql: one row per observation, converted to NGSP percent first (mmol/mol rows: 0.09148 * IFCC + 2.152), controlled means under 7 (strict). The same view also reports the naive rate that applies the threshold to raw values, so a unit change shows up as a sharp drop in the naive rate with a new unit beside it.
 
-OFFLINE monthly-naive (1 rows)
-month | n | avg_value | control_pct | units
---- | --- | --- | --- | ---
-2026-05-01 | 2 | 6.85 | 50 | %
+OFFLINE monthly-control (1 rows)
+month | n | mmol_rows | controlled_n | control_pct | control_pct_naive
+--- | --- | --- | --- | --- | ---
+2026-05-01 | 2 | 0 | 1 | 50 | 50
 
 OFFLINE monthly-units (8 rows)
 month | units | n | avg_value
@@ -26,11 +26,6 @@ month | units | n | avg_value
 2026-04-01 | mmol/mol | 1 | 45
 2026-05-01 | % | 2 | 6.9
 2026-05-01 | mmol/mol | 2 | 27.5
-
-OFFLINE monthly-corrected (1 rows)
-month | corrected_control_pct | n
---- | --- | ---
-2026-05-01 | 50 | 2
 
 OFFLINE unit-start (1 rows)
 start_date | n
@@ -93,7 +88,7 @@ GlucoSense G2 | 2025-10-23 | 10
 GlucoSense G2 | 2025-10-24 | 10
 ... 1059 more rows
 
-OFFLINE answer: HbA1c control drops because 9 results switch to mmol/mol starting 2026-03-30 and the dashboard still treats every value as a percent.
+OFFLINE answer: HbA1c control drops because 9 results switch to mmol/mol starting 2026-03-30 and the dashboard still treats every value as a percent. This pack has no type 2 diabetes HbA1c results in the months around the change, so control is not recomputed here.
 
 OFFLINE score.py (answer-key-fixture-100.json)
 miss  hba1c-unit-change    start 2026-03-08, org recall 0%
@@ -101,6 +96,7 @@ found duplicate-patients   1 pairs, id recall 100%
 miss  coding-drift         start 2025-09-26
 found device-gap           GlucoSense G2 2026-01-09..2026-01-21
 SCORE: 2/4 (primary question missed)
+CONTROL: n/a, no type 2 diabetes HbA1c rows in 2026-03 in this pack
 
 OFFLINE wrote demos/analytics-10k/run/findings.json and demos/analytics-10k/run/REPORT.md
 EXIT:0
