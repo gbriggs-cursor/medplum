@@ -18,6 +18,9 @@ stories:
     fallback:
       - 11
     reset: demos/device-evidence/reset.sh
+    offline: node demos/device-evidence/offline.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: a cloud agent generates the cohort, parser, tests, and evidence PR."
     automation: false
     labels:
       - demo
@@ -43,6 +46,9 @@ stories:
       - 8
       - 13
     reset: demos/docs-from-questions/reset.sh
+    offline: node demos/docs-from-questions/offline.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: a cloud agent writes the docs PR from the seeded questions."
     automation: false
     labels:
       - demo
@@ -78,6 +84,9 @@ stories:
       - 36
       - 37
     reset: demos/factory-e2e/reset.sh
+    offline: node demos/factory-e2e/offline.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: the presenter can start the live agent, voice, and Jira paths named in this runbook."
     automation: false
     labels:
       - demo
@@ -102,6 +111,9 @@ stories:
       - 10
       - 14
     reset: null
+    offline: node demos/net-new-feature/offline.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: a cloud agent runs demos/net-new-feature/prompt.md and opens a draft PR."
     automation: false
     labels:
       - demo
@@ -123,6 +135,9 @@ stories:
     data_pack: Brand kit committed under demos/rebrand/brand/<brand_kit>/ (default acme-cardio, fictional). No network fetch
     fallback: []
     reset: null
+    offline: node demos/rebrand/offline.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: a cloud agent applies the committed Acme Cardio brand kit and opens a draft PR."
     automation: false
     labels:
       - demo
@@ -147,6 +162,9 @@ stories:
       - 9
       - 16
     reset: demos/ticket-to-pr/reset.sh
+    offline: node demos/ticket-to-pr/offline.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: Demo Setup creates the GIO ticket and automation d5489670 opens the draft PR."
     automation: true
     labels:
       - demo

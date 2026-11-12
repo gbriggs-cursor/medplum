@@ -23,6 +23,9 @@ proof:
   - Before/after screenshots
   - Contrast table in the PR body
 reset: null
+offline: node demos/rebrand/offline.mjs
+default_mode: offline
+live_mode_note: 'Live mode available once keys are added: a cloud agent applies the committed Acme Cardio brand kit and opens a draft PR.'
 fallback: []
 fallback_note: >-
   The recorded rebrands (PR #7, PR #12) name a real prospect and are not shown under the generic

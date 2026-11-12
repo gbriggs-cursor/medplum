@@ -21,6 +21,8 @@ const JIRA_PROJECT = 'GIO';
 const TRACKS = ['generic', 'ls'];
 const STAGES = ['generic', '01', '02', '03', '04', '05', '06', '07', '01-07'];
 const READINESS = ['exists', 'adapt', 'new', 'planned'];
+const DEFAULT_MODES = ['replay', 'offline'];
+const LIVE_NOTE_PREFIX = 'Live mode available once keys are added:';
 const GENERIC_PROSPECTS = ['Acme Cardio', 'Foo Medical'];
 const BASE_LABELS = ['demo', 'medplum'];
 const AUTOMATION_LABELS = ['automatable', 'agent-safe'];
@@ -155,6 +157,7 @@ function validateStory(dir) {
   validateGate(where, card);
   validateVariables(where, dir, card);
   validateJira(where, dir, card);
+  validateOffline(where, card);
 
   for (const doc of ['README.md', 'prompt.md']) {
     if (!existsSync(join(demosDir, dir, doc))) {
@@ -162,6 +165,18 @@ function validateStory(dir) {
     }
   }
   return card;
+}
+
+function validateOffline(where, card) {
+  if (typeof card.offline !== 'string' || !card.offline.trim()) {
+    err(where, '`offline` must be a non-empty command run from the repo root');
+  }
+  if (!DEFAULT_MODES.includes(card.default_mode)) {
+    err(where, '`default_mode` must be replay or offline: the default demo path is key-free');
+  }
+  if (typeof card.live_mode_note !== 'string' || !card.live_mode_note.startsWith(LIVE_NOTE_PREFIX)) {
+    err(where, `\`live_mode_note\` must start with "${LIVE_NOTE_PREFIX}"`);
+  }
 }
 
 function validateGate(where, card) {
@@ -283,6 +298,9 @@ function buildCatalog(cards) {
     data_pack: c.data_pack,
     fallback: c.fallback,
     reset: c.reset ?? null,
+    offline: c.offline ?? null,
+    default_mode: c.default_mode ?? null,
+    live_mode_note: c.live_mode_note ?? null,
     automation: c.jira?.automation === true,
     labels: c.jira?.labels ?? [],
     card: `demos/${c.id}/story.yaml`,
