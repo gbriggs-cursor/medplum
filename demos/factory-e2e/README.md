@@ -175,9 +175,11 @@ Jira was dry-run only. The Grok Bot PHI screen is not built. The tripwire reads 
 
 Enables `mcpEnabled` in `packages/server/medplum.config.json`. Stacked on PR #35.
 
-Recorded: the route is mounted. An unauthenticated probe of `/mcp/stream`, `/mcp/sse`, and `/api/mcp/stream` returns 401 Unauthorized (previously 404).
+Recorded: the route is mounted. The first probe sent no token: `/mcp/stream`, `/mcp/sse`, and `/api/mcp/stream` returned 401 Unauthorized (previously 404). That 401 is the no-token run, not a verdict on the route.
 
-An admin-token rerun is in progress and is not recorded yet.
+Recorded, admin rerun: the probe logged in as `admin@example.com` on port 8103 and sent the seeded admin access token, which the script does not print. `GET /mcp/stream`, `/mcp/sse`, and `/api/mcp/stream` returned 200. `MCP_CONNECT` listed tools `search`, `fetch`, and `fhir-request`. Exit code 0.
+
+Not run: no live bot or Subscription was installed against this MCP endpoint. Do not say a bot connected through MCP. `mcpEnabled` is set only in the demo server config on PR #37, not on `main`.
 
 ## 15. Healthcare SaaS — PR #22
 
