@@ -8,3 +8,4 @@
 **/mock/src/mocks/**/*.json
 **/packages/definitions/src/fhir/**/*
 packages/server/binary/**/*
+demos/_shared/data-packs/p3-phi-like/*.json
