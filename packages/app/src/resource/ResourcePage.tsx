@@ -26,6 +26,10 @@ import { cleanResource } from './utils';
 function getTabs(resourceType: string): string[] {
   const result = ['Timeline'];
 
+  if (resourceType === 'Patient') {
+    result.push('Dental');
+  }
+
   if (resourceType === 'Bot') {
     result.push('Editor', 'Subscriptions');
   }

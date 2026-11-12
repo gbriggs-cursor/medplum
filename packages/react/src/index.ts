@@ -51,6 +51,7 @@ export * from './Container/Container';
 export * from './DateTimeInput/DateTimeInput';
 export * from './DateTimeInput/DateTimeInput.utils';
 export * from './DefaultResourceTimeline/DefaultResourceTimeline';
+export * from './DentalRecall/DentalRecall';
 export * from './DescriptionList/DescriptionList';
 export * from './DiagnosticReportDisplay/DiagnosticReportDisplay';
 export * from './Document/Document';
