@@ -4,7 +4,19 @@
 
 **Wow line:** "{signer} approved, and approval.json now holds who, what the signature means, when, and a hash of the exact evidence. Change one character in the evidence and the approval no longer verifies."
 
-## Run it
+## Run it (default: OFFLINE (no key))
+
+```bash
+demos/approval-gate/offline.sh
+```
+
+It needs no keys. It resets, builds the evidence, prints the approval card here instead of having Grok Bot post it, and records the decision for `APPROVER_NAME` and `APPROVER_ROLE` (defaults `Dana Reviewer`, `Design review lead`) on channel `offline-cli`. Then it runs verify (VALID), edits `EVIDENCE.md` (INVALID), and restores it (VALID). The tests, `trace.json`, the sha256 record and verify are the same code as in live mode. Every file is labeled: `EVIDENCE.md` and `APPROVAL-CARD.md` start with `Mode: OFFLINE (no key)`, and `trace.json` and `approval.json` have `"mode": "offline"`. It exits 0 and ends with a `PASS: OFFLINE (no key)` line.
+
+To show the decision live on stage, have the approver say the words and run `approve` yourself instead of the script's step 4. The commands are on the card.
+
+## Live mode
+
+No env key is needed. The only thing live mode adds is the Grok Bot card post, which hasn't been run yet. `DEMO_MODE=live demos/approval-gate/offline.sh` builds with `Mode: live` and stops at `Approval: pending`.
 
 1. Start a cloud agent in environment `67842161` from the default branch and paste part 1 of `prompt.md`. It builds the evidence and opens a draft PR with `Approval: pending`. Nothing waits.
 2. Show `APPROVAL-CARD.md`, which Grok Bot posts as the approval card.
