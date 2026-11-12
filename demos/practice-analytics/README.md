@@ -4,20 +4,21 @@
 
 **Wow line:** "Three questions, 10,000 patients, every answer backed by a query. And it found the real cause of the HbA1c drop without being told."
 
-## Status
+## Run it
 
-**Stubbed until L13 lands** (workstream C: the P2 Synthea pack in DuckDB, the `@grok/agent-sdk` runner and the answer-key scorer). This folder holds only the practice-manager framing: questions, data contract, card, prompt and talk track. Check with:
+L13 is on this branch: `demos/analytics-10k` and `demos/_shared/data-packs/synthea-analytics`. Check with:
 
 ```
 node demos/_shared/scripts/catalog.mjs --preflight practice-analytics
 ```
 
-## Run it (once L13 has landed)
+1. `demos/practice-analytics/reset.sh` checks that dependency, clears `run/`, and prints the questions.
+2. The 10k pack was generated on [PR #33](https://github.com/gbriggs-cursor/medplum/pull/33): 10,000 living patients, and `verify.py` passed there. It unpacks to `~/.cache/medplum-demos/synthea-analytics-10k`. If that directory is missing, the prompt uses the committed 100-patient fixture and says so.
+3. Start a cloud agent in environment `67842161` from the default branch and paste `prompt.md`.
+4. Walk the three answers and their SQL in `run/findings.md`.
+5. Gate: Demo Setup scores `run/findings.json` with `answer-keys://analytics-10k/` and the presenter reveals the score. Questions 2 and 3 are not scored.
 
-1. `demos/practice-analytics/reset.sh` checks the dependency, clears `run/`, and prints the questions.
-2. Run the L13 SDK runner with `prompt.md`, or paste it into a cloud agent in environment `67842161`.
-3. Walk the three answers and their SQL in `run/findings.md`.
-4. Gate: reveal the answer-key score for question 1.
+A live agent run of this prompt has not been done yet.
 
 ## What to click
 
@@ -26,8 +27,8 @@ node demos/_shared/scripts/catalog.mjs --preflight practice-analytics
 
 ## Fallback
 
-None in this repo yet. Use the L13 fallback once its card lands.
+No recorded G10 run yet. Run the same prompt against `demos/_shared/data-packs/synthea-analytics/fixture-100`.
 
 ## Reset
 
-`reset.sh` deletes `demos/practice-analytics/run/`. Safe to re-run.
+`reset.sh` deletes `demos/practice-analytics/run/`. Safe to re-run. It does not touch the pack.

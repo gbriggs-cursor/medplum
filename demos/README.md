@@ -53,7 +53,7 @@ For prospects that are neither GxP nor device makers (for example a practice-man
 | --- | --- | --- | --- |
 | G8 | `phi-safe-dev` | L11 redaction before Jira | Yes, without the Jira write |
 | G9 | `front-office-voice` | L9 support-voice line, L11 redaction | No, stubbed until L9 and L11 land |
-| G10 | `practice-analytics` | L13 Synthea DuckDB pack and SDK runner | No, stubbed until L13 lands |
+| G10 | `practice-analytics` | L13 pack at `demos/_shared/data-packs/synthea-analytics` | Yes. Preflight is READY. A live agent run is still unverified |
 | G11 | `integration-docs` | Nothing | Yes |
 
 ## Answer keys

@@ -175,17 +175,16 @@ stories:
     title: Practice analytics on 10,000 patients
     track: generic
     stage: generic
-    readiness: planned
+    readiness: new
     runtime: 5-10 min
     wow: A practice manager's three questions over 10,000 synthetic patients get answered with SQL, and the agent finds the planted cause on its own
-    trigger: Presenter runs the L13 '@grok/agent-sdk' runner with prompt.md, or pastes prompt.md into a cloud agent started from the default branch
-    data_pack: P2 analytics pack from L13, 10k Synthea patients with planted anomalies; this story adds only the practice-manager questions (seed/questions.md) and the data contract (seed/data-contract.md)
+    trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+    data_pack: P2 synthea-analytics-10k from L13 (demos/analytics-10k). Parquet and analytics.duckdb unpack to ~/.cache/medplum-demos/synthea-analytics-10k. Committed fallback is demos/_shared/data-packs/synthea-analytics/fixture-100. This story adds only the practice-manager questions and the column contract
     fallback: []
     reset: demos/practice-analytics/reset.sh
     depends_on:
       - L13
-    pending:
-      - L13
+    pending: []
     automation: false
     labels:
       - demo
