@@ -6,7 +6,7 @@ import { writeIntake } from './medplum.mjs';
  * Confirmed intake -> QuestionnaireResponse on the chart (identity stays in Medplum) -> redacted GIO ticket that
  * points at the response by id only.
  */
-export async function recordIntake(medplum, intake, { intakeId, live = false } = {}) {
+export async function recordIntake(medplum, intake, { intakeId, live = false, offline = false } = {}) {
   const prepared = prepare(intake, { intakeId });
   const fields = {
     'caller-name': intake.caller_name,
@@ -22,6 +22,6 @@ export async function recordIntake(medplum, intake, { intakeId, live = false } =
     triage: prepared.decision.category,
   });
   prepared.payload.fields.description += `\nChart: QuestionnaireResponse/${questionnaireResponse.id} (caller identity is kept in Medplum only)`;
-  const written = await writeGioIssue(prepared.payload, { live, name: intakeId });
+  const written = await writeGioIssue(prepared.payload, { live: live && !offline, offline, name: intakeId });
   return { ...prepared, written, patient, questionnaireResponse };
 }

@@ -125,6 +125,9 @@ stories:
     card: demos/speech-to-fhir/story.yaml
     prompt: demos/speech-to-fhir/prompt.md
     readme: demos/speech-to-fhir/README.md
+    offline: node demos/speech-to-fhir/scripts/run.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: the command reads the seeded transcript and does not print a replay label. Extraction, server validation, and the Medplum write are the same either way. This repo still does not open a live voice session."
   - id: support-voice
     code: L9
     title: Voice patient support (Foo Medical)
