@@ -1,0 +1,40 @@
+id: rebrand
+code: G3
+title: Prospect rebrand
+track: generic
+stage: generic
+readiness: adapt
+runtime: 15-20 min
+environment: '67842161'
+
+persona: Product or brand owner at {prospect} who needs a white-label patient portal
+trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+actors:
+  - Cursor cloud agent (Plan mode, then Agent)
+  - Bugbot
+surface: examples/foomedical theme, logo, header, footer, favicon, and copy
+data_pack: Brand kit committed under demos/rebrand/brand/<brand_kit>/ (default acme-cardio, fictional). No network fetch
+artifact: Draft PR rebranding Foo Medical with centralized theme tokens and a WCAG AA contrast table
+gate: Presenter shows before/after screenshots. On-stage only
+gate_blocks: false
+wow: Foo Medical becomes the prospect's portal from a committed brand kit, with a contrast table
+proof:
+  - Draft PR link
+  - Before/after screenshots
+  - Contrast table in the PR body
+reset: null
+fallback: []
+fallback_note: >-
+  The recorded rebrands (PR #7, PR #12) name a real prospect and are not shown under the generic
+  persona. Show them only when that prospect is the audience. A prospect kit must be committed under
+  demos/rebrand/brand/<slug>/ before the run; the environment blocks outside brand sites.
+blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. No network fetch, no Jira writes
+
+variables:
+  prospect: Acme Cardio
+  brand_kit: acme-cardio
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:rebrand', 'track:generic']

@@ -1,0 +1,35 @@
+id: docs-from-questions
+code: G4
+title: Docs from repeat questions
+track: generic
+stage: generic
+readiness: exists
+runtime: 10 min
+environment: '67842161'
+
+persona: Developer relations or support lead at {prospect}
+trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+actors:
+  - Cursor cloud agent
+  - Bugbot
+surface: packages/docs/docs/ how-to pages and packages/docs/sidebars.ts
+data_pack: Three synthetic repeat support questions in demos/docs-from-questions/seed/questions.md
+artifact: Draft docs PR with one new how-to, corrections verified against source, a sidebar entry, and drafted replies in the PR body
+gate: Presenter reads one drafted reply aloud. On-stage only; replies are never posted
+gate_blocks: false
+wow: Three repeat support questions become one docs PR, verified against the code
+proof:
+  - Draft PR link
+  - Drafted replies in the PR body
+  - Sidebar diff
+reset: demos/docs-from-questions/reset.sh
+fallback: [3, 8, 13]
+blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. Replies are drafted, never sent
+
+variables:
+  prospect: Foo Medical
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:docs-from-questions', 'track:generic']
