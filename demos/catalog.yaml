@@ -5,6 +5,31 @@ jira_project: GIO
 default_prospect: Acme Cardio
 answer_keys: answer-keys:// resolves to a separate private repo (placeholder; see demos/README.md)
 stories:
+  - id: analytics-10k
+    code: L13
+    title: 10k-patient investigation
+    track: ls
+    stage: analytics
+    readiness: new
+    runtime: 5-10 min
+    wow: '"Why did A1c control drop in March?" The agent finds the root cause in 10,000 patients and backs it with SQL'
+    trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+    data_pack: P2 synthea-analytics-10k, Synthea v3.3.0, 10,000 living patients, seed 20261112, end date 2026-10-01, every patient tagged synthetic + HTEST. P0 synthea-analytics-100 (seed 100) is the committed fixture
+    fallback: []
+    reset: demos/analytics-10k/reset.sh
+    offline: null
+    default_mode: null
+    live_mode_note: null
+    automation: false
+    labels:
+      - demo
+      - medplum
+      - story:analytics-10k
+      - track:ls
+      - stage:analytics
+    card: demos/analytics-10k/story.yaml
+    prompt: demos/analytics-10k/prompt.md
+    readme: demos/analytics-10k/README.md
   - id: approval-gate
     code: L6
     title: Design review gate
@@ -171,6 +196,9 @@ stories:
     fallback:
       - 11
     reset: demos/dhf-release/reset.sh
+    offline: null
+    default_mode: null
+    live_mode_note: null
     automation: false
     labels:
       - demo
