@@ -1,0 +1,149 @@
+---
+sidebar_position: 4
+title: Modeling Dental Data
+keywords:
+  - dental
+  - tooth numbering
+  - CDT
+  - treatment plan
+  - hygiene recall
+  - periodontal charting
+  - Procedure
+  - CarePlan
+  - Observation
+tags:
+  - charting
+---
+
+import ExampleCode from '!!raw-loader!@site/../examples/src/charting/dental-data-model.ts';
+import MedplumCodeBlock from '@site/src/components/MedplumCodeBlock';
+
+# Modeling Dental Data
+
+Dental software teams building on Medplum usually ask the same questions: where the tooth number goes, how to store CDT procedure codes, what a treatment plan is in FHIR, how to drive hygiene recalls, and how to store a perio chart. This page answers each one with FHIR R4 resources and short [`MedplumClient`](/docs/sdk/core.medplumclient) samples.
+
+FHIR R4 has no dental-specific clinical resources, and no dental implementation guide is assumed here. Some of what follows is defined by the FHIR specification, and some is a modeling pattern we recommend. Each section says which is which:
+
+- **Standard**: the element, code system, or binding is defined in the FHIR R4 specification.
+- **Recommendation**: a pattern that uses standard resources in a way FHIR allows but does not prescribe. Validate it with your trading partners and any implementation guide you must conform to.
+
+All identifiers, codes, and patients in the samples are synthetic.
+
+| Question                      | Resource                                                                                                                                           | Status            |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- |
+| Which tooth, which surface?   | `bodySite` on [`Procedure`](/docs/api/fhir/resources/procedure), `ServiceRequest`, `Observation`                                                   | Mixed (see below) |
+| Where do CDT codes go?        | `Procedure.code` (done) and `ServiceRequest.code` (planned)                                                                                        | Recommendation    |
+| What is a treatment plan?     | [`CarePlan`](/docs/api/fhir/resources/careplan) referencing `ServiceRequest` activities                                                            | Recommendation    |
+| How do recalls work?          | [`ServiceRequest`](/docs/api/fhir/resources/servicerequest) with a due date, fulfilled by an [`Appointment`](/docs/api/fhir/resources/appointment) | Recommendation    |
+| How do I store a perio chart? | [`Observation`](/docs/api/fhir/resources/observation) per tooth, grouped by a panel `Observation`                                                  | Recommendation    |
+
+## Code Systems Used on This Page
+
+<MedplumCodeBlock language="ts" selectBlocks="systems">
+  {ExampleCode}
+</MedplumCodeBlock>
+
+`FDI_TOOTH` and `FDI_SURFACE` are code systems published with FHIR R4: [Oral Site Codes](http://hl7.org/fhir/R4/valueset-tooth.html) (`http://terminology.hl7.org/CodeSystem/ex-tooth`) and [Surface Codes](http://hl7.org/fhir/R4/valueset-surface.html) (`http://terminology.hl7.org/CodeSystem/FDI-surface`). Both have `draft` status in R4, and their own descriptions say they include "a smattering" of FDI codes. The tooth system has the two-digit permanent tooth codes `11`–`48`, single-digit codes `1`–`8`, and `0` for the oral cavity. It has no two-digit codes for primary (deciduous) teeth. The surface system has `M`, `O`, `I`, `D`, `B`, `V`, `L`, `MO`, `DO`, `DI`, and `MOD`. If you need codes these systems lack, define them in your own [`CodeSystem`](/docs/terminology/local-codes).
+
+The other four URIs are placeholders under `example.com`. Replace them with canonical URIs your organization controls, except for CDT (see [CDT Procedure Codes](#cdt-procedure-codes)).
+
+## Tooth Numbering and Surfaces
+
+**Standard:** FHIR R4 binds tooth and surface codes in exactly one place: billing. [`Claim.item.bodySite`](http://hl7.org/fhir/R4/claim.html) has an example binding to the Oral Site Codes value set, and `Claim.item.subSite` has an example binding to Surface Codes. `ExplanationOfBenefit.item` uses the same bindings. The R4 Claim Information Category codes also include `missingtooth` for reporting missing teeth in `Claim.supportingInfo`.
+
+On the clinical side, `Procedure.bodySite`, `ServiceRequest.bodySite`, and `Observation.bodySite` are `CodeableConcept` elements with an example binding to the [SNOMED CT Body Structures](http://hl7.org/fhir/R4/valueset-body-site.html) value set. Example bindings are not required, so you may use the FDI codes there instead.
+
+**Recommendation:**
+
+- Code the tooth with the FDI system so the same coding can be copied into `Claim.item.bodySite` when you bill.
+- If your users work in the US Universal Numbering System (1–32), add a second `coding` in the same `CodeableConcept` from a local code system. FHIR R4 does not publish a Universal Numbering code system. Store the mapping (for example, Universal `#30` = FDI `46`, the lower right first molar) in a [`ConceptMap`](/docs/api/fhir/resources/conceptmap) or in application code. Do not ask clinicians to pick both.
+- Record one tooth per `Procedure` or `ServiceRequest`. Put the tooth `CodeableConcept` and the surface `CodeableConcept` in `bodySite` together. R4 `Procedure` has no `subSite` element, so when one resource covers several teeth there is no standard way to say which surface belongs to which tooth.
+- If you need a persistent, per-tooth record (an implant, a crown history), consider a [`BodyStructure`](/docs/api/fhir/resources/bodystructure) resource and reference it from `Procedure` or `ServiceRequest` with the R4 extension `http://hl7.org/fhir/StructureDefinition/procedure-targetBodyStructure`.
+
+<MedplumCodeBlock language="ts" selectBlocks="toothSite">
+  {ExampleCode}
+</MedplumCodeBlock>
+
+## CDT Procedure Codes
+
+The Current Dental Terminology (CDT) is the American Dental Association's code set for dental procedures. The HL7 v2 coding system table ([`v2-0396`](http://terminology.hl7.org/CodeSystem/v2-0396)) lists it as `CD2` ("CDT-2 Codes"). CDT is owned by the ADA, so check its license terms before you load CDT codes and descriptors into a Medplum `CodeSystem`.
+
+**Standard:** `Procedure.code` and `ServiceRequest.code` are `CodeableConcept` elements with example bindings. Any code system is allowed. For billing, `Claim.item.productOrService` carries the procedure code.
+
+**Not verified here:** FHIR R4 does not define a canonical system URI for CDT. Look up the URI listed for CDT in the current [HL7 Terminology (THO)](https://terminology.hl7.org/) release, or the one required by your payer or implementation guide, and use it in place of the `CDT` placeholder. The CDT codes in the samples (such as `EXAMPLE-PROPHY-ADULT`) are synthetic stand-ins, not real CDT codes.
+
+**Recommendation:** use the same CDT coding in three places:
+
+| Stage                         | Resource         | `status`              |
+| ----------------------------- | ---------------- | --------------------- |
+| Planned or proposed treatment | `ServiceRequest` | `draft` then `active` |
+| Treatment performed           | `Procedure`      | `completed`           |
+| Treatment billed              | `Claim.item`     | n/a                   |
+
+Link the `Procedure` to the request it fulfills with `Procedure.basedOn`. R4 allows `basedOn` to reference a `CarePlan` or a `ServiceRequest`.
+
+<MedplumCodeBlock language="ts" selectBlocks="recordProcedure">
+  {ExampleCode}
+</MedplumCodeBlock>
+
+## Treatment Plans as CarePlan
+
+**Standard:** `CarePlan.activity.reference` can point at a `ServiceRequest`, and `CarePlan.status` and `CarePlan.intent` use the required R4 value sets (`draft | active | on-hold | revoked | completed | entered-in-error | unknown` and `proposal | plan | order | option`).
+
+**Recommendation:**
+
+- Create one `CarePlan` per treatment plan presented to the patient, with `status: 'draft'` and `intent: 'proposal'`.
+- Create one `ServiceRequest` per planned procedure (CDT code + tooth + surfaces) and reference each from `CarePlan.activity.reference`. Do not use inline `activity.detail` for these, because you will search and update planned procedures on their own. R4 does not allow `reference` and `detail` on the same activity.
+- Create the plan and its requests in a single [FHIR transaction](/docs/fhir-datastore/fhir-batch-requests) so that a partial plan is never saved. The `urn:uuid` references are rewritten to real ids when the transaction commits.
+- When the patient accepts, set the `CarePlan` and its `ServiceRequest`s to `active`. If you present alternatives, create one draft `CarePlan` per alternative and revoke the ones that are declined.
+
+<MedplumCodeBlock language="ts" selectBlocks="treatmentPlan">
+  {ExampleCode}
+</MedplumCodeBlock>
+
+<MedplumCodeBlock language="ts" selectBlocks="acceptPlan">
+  {ExampleCode}
+</MedplumCodeBlock>
+
+For goals, care teams, and plan review, see [Care Plans, Goals, and Progress](/docs/careplans/care-plans-and-goals).
+
+## Hygiene Recalls
+
+**Standard:** `ServiceRequest.occurrence[x]` (a `dateTime`, `Period`, or `Timing`) records when a service should happen, and the `occurrence` search parameter searches it. `Appointment.basedOn` references the `ServiceRequest` an appointment fulfills, searchable with `based-on`.
+
+**Recommendation:**
+
+- Represent each recall as an `active` `ServiceRequest` with `intent: 'plan'`, a recall category from your own code system, the recall procedure code, and the due date in `occurrenceDateTime`. Use `occurrencePeriod` if your practice tracks a due window instead of a single date.
+- Build the recall list by searching for active recall requests due on or before a date.
+- When the patient books, create an `Appointment` with `basedOn` pointing at the recall. Use [Medplum Scheduling](/docs/scheduling) to find and book open slots.
+- After the visit, mark the recall `completed` and create the next one. A new resource per recall cycle keeps a history of what was due and when it was met.
+
+<MedplumCodeBlock language="ts" selectBlocks="recall">
+  {ExampleCode}
+</MedplumCodeBlock>
+
+## Periodontal Charting
+
+**Standard:** `Observation.component` holds several values that share one `Observation.code`, subject, and time. `Observation.hasMember` groups related observations into a panel. The `exam` code from the R4 Observation Category code system is for "observations generated by physical exam findings ... and use of simple instruments". UCUM (`http://unitsofmeasure.org`) code `mm` expresses millimeters.
+
+**Recommendation:**
+
+- Create one panel `Observation` per perio exam, with `hasMember` pointing to one `Observation` per tooth.
+- On each tooth `Observation`, set `bodySite` to the FDI tooth and add one `component` per site and measure: probing depth as `valueQuantity` in `mm` and bleeding on probing as `valueBoolean`. Add recession, mobility, or furcation as more components.
+- Code the measures and the six probing sites (`MB`, `B`, `DB`, `ML`, `L`, `DL`) from your own code system. This page does not assign LOINC or SNOMED CT codes to perio measures. If you need interoperable codes, look them up in the terminology itself and confirm them with your trading partners.
+- Save the whole exam in one transaction.
+
+<MedplumCodeBlock language="ts" selectBlocks="perio">
+  {ExampleCode}
+</MedplumCodeBlock>
+
+R4 does not define a `body-site` search parameter on `Observation`, so search perio data by `subject`, `code`, and `date`, then filter by tooth in your application.
+
+## Sources
+
+The FHIR elements, bindings, value sets, code systems, extensions, and search parameters cited on this page were checked against the FHIR R4 (v4.0.1) definitions that ship in [`@medplum/definitions`](https://github.com/medplum/medplum/tree/main/packages/definitions).
+
+- FHIR R4 resources: [Procedure](http://hl7.org/fhir/R4/procedure.html), [ServiceRequest](http://hl7.org/fhir/R4/servicerequest.html), [CarePlan](http://hl7.org/fhir/R4/careplan.html), [Appointment](http://hl7.org/fhir/R4/appointment.html), [Observation](http://hl7.org/fhir/R4/observation.html), [Claim](http://hl7.org/fhir/R4/claim.html), [BodyStructure](http://hl7.org/fhir/R4/bodystructure.html)
+- FHIR R4 value sets: [Oral Site Codes](http://hl7.org/fhir/R4/valueset-tooth.html), [Surface Codes](http://hl7.org/fhir/R4/valueset-surface.html), [SNOMED CT Body Structures](http://hl7.org/fhir/R4/valueset-body-site.html)
+- HL7 v2 coding system table: [`http://terminology.hl7.org/CodeSystem/v2-0396`](http://terminology.hl7.org/CodeSystem/v2-0396)
+- Medplum docs: [Local Codes](/docs/terminology/local-codes), [FHIR Batch Requests](/docs/fhir-datastore/fhir-batch-requests), [Care Plans, Goals, and Progress](/docs/careplans/care-plans-and-goals), [Scheduling](/docs/scheduling), [Chart Data Model](/docs/charting/chart-data-model), [Billing](/docs/billing)
