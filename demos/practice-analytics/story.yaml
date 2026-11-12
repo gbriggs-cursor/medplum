@@ -8,7 +8,7 @@ runtime: 5-10 min
 environment: '67842161'
 offline: node demos/practice-analytics/run.mjs
 default_mode: replay
-live_mode_note: 'Live mode available once keys are added: a cloud agent runs prompt.md against the P2 pack. Key-free mode replays the recorded analysis of the committed 100-patient fixture.'
+live_mode_note: 'Live mode available once keys are added: a cloud agent runs prompt.md against the P2 pack. Key-free mode re-runs the recorded analysis on the P2 10k pack (fetched with fetch.sh), or the committed 100-patient fixture if the fetch or checksum fails.'
 
 persona: Product or analytics lead at {prospect}, a practice software company whose customers ask why their quality and visit numbers moved
 trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
@@ -28,7 +28,7 @@ proof:
   - Score from answer-keys://analytics-10k/ on question 1
 reset: demos/practice-analytics/reset.sh
 fallback: []
-fallback_note: No recorded G10 run yet. If the 10k pack is not on the machine, run the same prompt against demos/_shared/data-packs/synthea-analytics/fixture-100
+fallback_note: No recorded live agent run. run.mjs replays the analysis on the 10k pack, falling back to demos/_shared/data-packs/synthea-analytics/fixture-100 if fetch.sh fails
 blast_radius: Local DuckDB reads only, plus a GitHub draft PR in gbriggs-cursor/medplum. No Jira writes
 depends_on:
   - code: L13

@@ -4,6 +4,7 @@
   "calls": [
     {
       "id": "reschedule",
+      "expect": "answered",
       "caller_name": "Dana Pell",
       "dob": "1981-04-03",
       "product": "appointments",
@@ -11,6 +12,7 @@
     },
     {
       "id": "kb_gap",
+      "expect": "kb_gap",
       "caller_name": "Sam Okada",
       "dob": "1976-11-19",
       "product": "portal",
@@ -18,10 +20,11 @@
     },
     {
       "id": "bug",
+      "expect": "bug",
       "caller_name": "Priya Shah",
       "dob": "1990-06-08",
-      "product": "appointments",
-      "issue": "A patient told us she never got her six-month recall reminder. She had her cleaning on August 31st."
+      "product": "recall",
+      "issue": "Our recall list shows the wrong date for cleanings on the 31st. A patient seen August 31st lands on the March list instead of February, so she never got her reminder."
     }
   ]
 }

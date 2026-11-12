@@ -1,15 +1,16 @@
 #!/usr/bin/env node
-// Key-free path for G9. Replays the caller scripts through the L9 confirm, redact, and triage pipeline.
-// The ticket is OFFLINE dry-run JSON. No voice session and no Jira HTTP.
+// Key-free path for G9. Replays the caller scripts through the L9 confirm and redaction, then the
+// front-office route. The ticket is OFFLINE dry-run JSON. No voice session and no Jira HTTP.
 //   node demos/front-office-voice/run.mjs
 
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { redact } from '../_shared/phi/redact.mjs';
 import { resolveDemoMode } from '../_shared/scripts/demo-mode.mjs';
 import { createIntakeStore } from '../support-voice/lib/intake.mjs';
-import { assertSafe } from '../support-voice/lib/jira.mjs';
-import { prepare } from '../support-voice/lib/pipeline.mjs';
+import { assertSafe, buildGioIssue } from '../support-voice/lib/jira.mjs';
+import { routeFrontOffice } from './lib/route.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const command = 'node demos/front-office-voice/run.mjs';
@@ -43,27 +44,41 @@ for (const call of calls) {
     console.error(`${call.id}: confirm did not complete`);
     process.exit(1);
   }
-  const prepared = prepare(confirmed.intake, { intakeId: drafted.id });
-  assertSafe(prepared.payload, [call.caller_name, call.dob]);
+  const intake = confirmed.intake;
+  const known = [intake.caller_name, intake.dob, intake.callback].filter(Boolean);
+  const decision = routeFrontOffice({ issue: redact(intake.issue, { known }).text, product: intake.product });
+  const { payload, redaction } = buildGioIssue(intake, decision, { intakeId: drafted.id });
+  assertSafe(payload, known);
+  const ok = decision.category === call.expect;
   results.push({
     call: call.id,
     intakeId: drafted.id,
-    category: prepared.decision.category,
-    reason: prepared.decision.reason,
-    redaction: prepared.redaction,
-    ticket: prepared.payload,
+    expected: call.expect,
+    category: decision.category,
+    article: decision.article,
+    reason: decision.reason,
+    kb: decision.kb,
+    redaction,
+    ticket: payload,
   });
-  console.log(`REPLAY (no key): ${call.id} confirmed. Triage ${prepared.decision.category}.`);
+  console.log(
+    `REPLAY (no key): ${call.id} confirmed. Route ${decision.category}${decision.article ? ` (${decision.article})` : ''}, intended ${call.expect}: ${ok ? 'match' : 'MISMATCH'}. ${decision.reason}`
+  );
 }
+const mismatches = results.filter((r) => r.category !== r.expected);
 
 const ticket = {
   label: 'OFFLINE',
   mode: 'OFFLINE',
   project: 'GIO',
   action: 'dry-run',
-  note: 'Not sent to Jira. Built by the L9 pipeline from replayed caller scripts.',
+  note: 'Not sent to Jira. Replayed caller scripts, L9 confirm and redaction, front-office route.',
   results,
 };
 const path = join(outDir, 'jira.json');
 writeFileSync(path, JSON.stringify(ticket, null, 2) + '\n');
 console.log(`OFFLINE: dry-run ticket ${path}`);
+if (mismatches.length) {
+  console.error(`REPLAY (no key): ${mismatches.length} caller(s) did not land on the intended route`);
+  process.exit(1);
+}

@@ -13,29 +13,28 @@ They may mention a patient while describing a problem. The line must never ask f
 
 ## Products
 
-| Product | What callers ask about |
-| --- | --- |
-| Appointments | Rescheduling, double-booked chairs, reminder texts not sending |
-| Recall reminders | Six-month hygiene recalls, patients missing from a recall list |
-| Patient portal | Login problems, intake forms, a broken link in a reminder |
-| Messages | Secure messages not reaching the practice inbox |
+| Product               | What callers ask about                                               |
+| --------------------- | -------------------------------------------------------------------- |
+| Appointments          | Rescheduling, double-booked chairs, reminder texts not sending       |
+| Recall reminders      | Six-month hygiene recalls, patients missing from a recall list       |
+| Patient portal        | Login problems, intake forms, a broken link in a reminder            |
+| Messages              | Secure messages not reaching the practice inbox                      |
 | Insurance and billing | Whether eligibility checks are supported, where a claim status shows |
 
 ## Voice keyterms
 
 recall list, hygiene recall, chair, operatory, reschedule, intake form, eligibility check, portal, reminder text
 
-## Intended routes
+## Routes
 
-These are the routes the scripts aim at. They have not been run through the server for this story. The P4
-KB under `demos/support-voice/kb/foomedical/` is written for patients (portal, patch, messages, appointments),
-not for a practice's front desk, so a script may not land on the route below.
+The front-office route (`lib/route.mjs`) answers from the staff articles in `kb/staff/` (FO-101 to FO-104), not from
+L9's patient articles. Bug and clinical signals use L9's triage rules unchanged.
 
-| Intent | Route | Outcome |
-| --- | --- | --- |
-| how-to the docs already answer | answer on the form | No ticket |
-| how-to the docs do not answer | `kb_gap` | Dry-run ticket |
-| product bug | `bug` | Dry-run ticket |
+| Intent                         | Route      | Outcome        |
+| ------------------------------ | ---------- | -------------- |
+| how-to a staff article covers  | `answered` | No ticket      |
+| how-to no staff article covers | `kb_gap`   | Dry-run ticket |
+| product bug                    | `bug`      | Dry-run ticket |
 
 ## Disclaimer
 
