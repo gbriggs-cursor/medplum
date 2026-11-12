@@ -1,0 +1,40 @@
+id: phi-tripwire
+code: L11
+title: PHI tripwire
+track: ls
+stage: floor
+readiness: new
+runtime: 5 min
+environment: '67842161'
+
+persona: Privacy officer or QA/RA lead at {prospect}
+trigger: Presenter pastes a P3 note (node demos/phi-tripwire/scripts/tripwire.mjs --note {note})
+actors:
+  - Redaction step (demos/_shared/phi/redact.mjs) with chart context
+  - PHI tripwire (pattern screen + strict screen + no-chart-context rule)
+  - Grok Bot PHI screen (bot side, not changed here)
+surface: Pasted support note, its redacted GIO ticket (dry-run), and the P3 patient it belongs to
+data_pack: P3 PHI-like pack, demos/_shared/data-packs/p3-phi-like, seed 20261112 (24 patients, 50 notes, 213 planted identifiers), tagged synthetic + HTEST
+artifact: Dry-run GIO ticket JSON in run/outbox/ with typed placeholders, or a refusal with the reason; scripts/eval.mjs scorecard
+gate: The tripwire result is shown on stage. A refusal routes to a human; it never waits on approval
+gate_blocks: false
+wow: A realistic note with a name, MRN, DOB, SSN and phone goes in; the ticket comes out with placeholders, and a note with an unknown identifier is refused outright
+proof:
+  - node demos/phi-tripwire/scripts/eval.mjs scorecard (0 identifiers in allowed tickets)
+  - node demos/phi-tripwire/scripts/tripwire.mjs --note P3-N-001 and --note P3-R-001 output
+reset: demos/phi-tripwire/reset.sh
+fallback: []
+fallback_note: New story, no earlier run. Show the eval scorecard from the evidence log
+blast_radius: None outside this repo. Key-free runs write an OFFLINE ticket file and do not post to Jira. The optional seed writes tagged Patients to the local Medplum server
+offline: node demos/phi-tripwire/scripts/tripwire.mjs --note P3-N-001
+default_mode: offline
+live_mode_note: 'Live mode available once keys are added: the ticket file is the same redacted payload without the OFFLINE label. This story still does not post to Jira.'
+
+variables:
+  prospect: Foo Medical
+  note: P3-N-001
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:phi-tripwire', 'track:ls', 'stage:floor']

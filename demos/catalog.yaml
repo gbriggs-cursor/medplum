@@ -78,6 +78,32 @@ stories:
     card: demos/net-new-feature/story.yaml
     prompt: demos/net-new-feature/prompt.md
     readme: demos/net-new-feature/README.md
+  - id: phi-tripwire
+    code: L11
+    title: PHI tripwire
+    track: ls
+    stage: floor
+    readiness: new
+    runtime: 5 min
+    wow: A realistic note with a name, MRN, DOB, SSN and phone goes in; the ticket comes out with placeholders, and a note with an unknown identifier is refused outright
+    trigger: Presenter pastes a P3 note (node demos/phi-tripwire/scripts/tripwire.mjs --note {note})
+    data_pack: P3 PHI-like pack, demos/_shared/data-packs/p3-phi-like, seed 20261112 (24 patients, 50 notes, 213 planted identifiers), tagged synthetic + HTEST
+    fallback: []
+    reset: demos/phi-tripwire/reset.sh
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:phi-tripwire
+      - track:ls
+      - stage:floor
+    card: demos/phi-tripwire/story.yaml
+    prompt: demos/phi-tripwire/prompt.md
+    readme: demos/phi-tripwire/README.md
+    offline: node demos/phi-tripwire/scripts/tripwire.mjs --note P3-N-001
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: the ticket file is the same redacted payload without the OFFLINE label. This story still does not post to Jira."
   - id: rebrand
     code: G3
     title: Prospect rebrand

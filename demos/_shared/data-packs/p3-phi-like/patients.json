@@ -1,0 +1,2112 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "meta": {
+    "tag": [
+      {
+        "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+        "code": "synthetic",
+        "display": "Synthetic demo data"
+      },
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+        "code": "HTEST",
+        "display": "test health data"
+      },
+      {
+        "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+        "code": "p3-phi-like"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:p3-001",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-001"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-001"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-83467"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "995-44-2335"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Dorothy"
+            ],
+            "family": "Fitzroy"
+          }
+        ],
+        "birthDate": "1977-09-06",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(207) 555-0159"
+          },
+          {
+            "system": "email",
+            "value": "dorothy.fitzroy@example.org"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "760 Linden Way"
+            ],
+            "city": "Fairhaven",
+            "state": "MA",
+            "postalCode": "02747"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "son"
+              }
+            ],
+            "name": {
+              "given": [
+                "Priyanka"
+              ],
+              "family": "Fitzroy"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-002",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-002"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-002"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-20612"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "979-39-1235"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "James"
+            ],
+            "family": "Okonkwo"
+          }
+        ],
+        "birthDate": "1957-09-18",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(413) 555-0103"
+          },
+          {
+            "system": "email",
+            "value": "james.okonkwo@example.net"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "361 Orchard Lane"
+            ],
+            "city": "Fairhaven",
+            "state": "MA",
+            "postalCode": "02701"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "daughter"
+              }
+            ],
+            "name": {
+              "given": [
+                "Signe"
+              ],
+              "family": "Okonkwo"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-003",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-003"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-003"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-90309"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "981-18-9224"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Priyanka"
+            ],
+            "family": "Lindqvist"
+          }
+        ],
+        "birthDate": "1938-02-02",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(845) 555-0194"
+          },
+          {
+            "system": "email",
+            "value": "priyanka.lindqvist@example.com"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "60 Linden Way"
+            ],
+            "city": "Rockport",
+            "state": "ME",
+            "postalCode": "04885"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "husband"
+              }
+            ],
+            "name": {
+              "given": [
+                "Lorcan"
+              ],
+              "family": "Lindqvist"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-004",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-004"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-004"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-73748"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "993-17-4011"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Thaddeus"
+            ],
+            "family": "Brightwater"
+          }
+        ],
+        "birthDate": "1938-11-09",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(508) 555-0106"
+          },
+          {
+            "system": "email",
+            "value": "thaddeus.brightwater@example.org"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "354 Juniper Street"
+            ],
+            "city": "Cedar Falls",
+            "state": "IA",
+            "postalCode": "50677"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "son"
+              }
+            ],
+            "name": {
+              "given": [
+                "Kwame"
+              ],
+              "family": "Brightwater"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-005",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-005"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-005"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-72746"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "994-33-5600"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "James"
+            ],
+            "family": "Ellsworth"
+          }
+        ],
+        "birthDate": "1961-12-02",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(617) 555-0196"
+          },
+          {
+            "system": "email",
+            "value": "james.ellsworth@example.com"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "526 Wexford Court"
+            ],
+            "city": "Rockport",
+            "state": "ME",
+            "postalCode": "04859"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "husband"
+              }
+            ],
+            "name": {
+              "given": [
+                "Robert"
+              ],
+              "family": "Ellsworth"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-006",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-006"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-006"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-29139"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "965-22-7636"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Yusuf"
+            ],
+            "family": "Delacroix"
+          }
+        ],
+        "birthDate": "1959-11-06",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(319) 555-0187"
+          },
+          {
+            "system": "email",
+            "value": "yusuf.delacroix@example.com"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "195 Quarry Road"
+            ],
+            "city": "Ashford",
+            "state": "CT",
+            "postalCode": "06252"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "husband"
+              }
+            ],
+            "name": {
+              "given": [
+                "Susan"
+              ],
+              "family": "Delacroix"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-007",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-007"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-007"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-94633"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "914-35-7055"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Linda"
+            ],
+            "family": "Fitzroy"
+          }
+        ],
+        "birthDate": "1988-03-25",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(845) 555-0193"
+          },
+          {
+            "system": "email",
+            "value": "linda.fitzroy@example.org"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "309 Bluebell Terrace"
+            ],
+            "city": "Cedar Falls",
+            "state": "IA",
+            "postalCode": "50626"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "son"
+              }
+            ],
+            "name": {
+              "given": [
+                "Walter"
+              ],
+              "family": "Fitzroy"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-008",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-008"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-008"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-94213"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "938-15-5512"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Walter"
+            ],
+            "family": "Quillan"
+          }
+        ],
+        "birthDate": "1957-12-22",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(845) 555-0143"
+          },
+          {
+            "system": "email",
+            "value": "walter.quillan@example.org"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "899 Maple Avenue"
+            ],
+            "city": "Rockport",
+            "state": "ME",
+            "postalCode": "04815"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "daughter"
+              }
+            ],
+            "name": {
+              "given": [
+                "Yusuf"
+              ],
+              "family": "Quillan"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-009",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-009"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-009"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-62198"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "916-79-8486"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Dmitri"
+            ],
+            "family": "Castellanos"
+          }
+        ],
+        "birthDate": "1958-09-19",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(845) 555-0190"
+          },
+          {
+            "system": "email",
+            "value": "dmitri.castellanos@example.net"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "416 Harbor View Drive"
+            ],
+            "city": "Ashford",
+            "state": "CT",
+            "postalCode": "06200"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "daughter"
+              }
+            ],
+            "name": {
+              "given": [
+                "Oluwaseun"
+              ],
+              "family": "Castellanos"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-010",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-010"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-010"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-17370"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "971-16-6961"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Yusuf"
+            ],
+            "family": "Calloway"
+          }
+        ],
+        "birthDate": "1969-07-26",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(617) 555-0124"
+          },
+          {
+            "system": "email",
+            "value": "yusuf.calloway@example.org"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "633 Bluebell Terrace"
+            ],
+            "city": "Glenwood",
+            "state": "IL",
+            "postalCode": "60440"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "wife"
+              }
+            ],
+            "name": {
+              "given": [
+                "Linda"
+              ],
+              "family": "Calloway"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-011",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-011"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-011"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-92835"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "988-31-2453"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Tomasz"
+            ],
+            "family": "Castellanos"
+          }
+        ],
+        "birthDate": "1950-09-28",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(207) 555-0143"
+          },
+          {
+            "system": "email",
+            "value": "tomasz.castellanos@example.net"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "809 Wexford Court"
+            ],
+            "city": "Cedar Falls",
+            "state": "IA",
+            "postalCode": "50688"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "wife"
+              }
+            ],
+            "name": {
+              "given": [
+                "Thaddeus"
+              ],
+              "family": "Castellanos"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-012",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-012"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-012"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-90966"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "901-41-8600"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Esperanza"
+            ],
+            "family": "Calloway"
+          }
+        ],
+        "birthDate": "1981-03-12",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(617) 555-0194"
+          },
+          {
+            "system": "email",
+            "value": "esperanza.calloway@example.org"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "66 Wexford Court"
+            ],
+            "city": "Cedar Falls",
+            "state": "IA",
+            "postalCode": "50608"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "son"
+              }
+            ],
+            "name": {
+              "given": [
+                "Dorothy"
+              ],
+              "family": "Calloway"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-013",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-013"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-013"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-63826"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "907-25-2562"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Ingrid"
+            ],
+            "family": "Sorensen"
+          }
+        ],
+        "birthDate": "1949-12-01",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(617) 555-0154"
+          },
+          {
+            "system": "email",
+            "value": "ingrid.sorensen@example.com"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "619 Wexford Court"
+            ],
+            "city": "Glenwood",
+            "state": "IL",
+            "postalCode": "60411"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "husband"
+              }
+            ],
+            "name": {
+              "given": [
+                "Anika"
+              ],
+              "family": "Sorensen"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-014",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-014"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-014"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-22591"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "925-51-2594"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Signe"
+            ],
+            "family": "Marchetti"
+          }
+        ],
+        "birthDate": "1944-06-07",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(617) 555-0147"
+          },
+          {
+            "system": "email",
+            "value": "signe.marchetti@example.com"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "498 Orchard Lane"
+            ],
+            "city": "Cedar Falls",
+            "state": "IA",
+            "postalCode": "50603"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "wife"
+              }
+            ],
+            "name": {
+              "given": [
+                "Tomasz"
+              ],
+              "family": "Marchetti"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-015",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-015"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-015"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-33509"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "912-84-5254"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Susan"
+            ],
+            "family": "Fitzroy"
+          }
+        ],
+        "birthDate": "1965-09-11",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(508) 555-0118"
+          },
+          {
+            "system": "email",
+            "value": "susan.fitzroy@example.com"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "310 Linden Way"
+            ],
+            "city": "Cedar Falls",
+            "state": "IA",
+            "postalCode": "50639"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "son"
+              }
+            ],
+            "name": {
+              "given": [
+                "Walter"
+              ],
+              "family": "Fitzroy"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-016",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-016"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-016"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-21484"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "977-65-8598"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Margaret"
+            ],
+            "family": "Haverford"
+          }
+        ],
+        "birthDate": "1942-11-18",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(207) 555-0142"
+          },
+          {
+            "system": "email",
+            "value": "margaret.haverford@example.org"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "482 Harbor View Drive"
+            ],
+            "city": "Millbrook",
+            "state": "NY",
+            "postalCode": "12590"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "son"
+              }
+            ],
+            "name": {
+              "given": [
+                "Linda"
+              ],
+              "family": "Haverford"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-017",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-017"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-017"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-33227"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "940-54-2887"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Dmitri"
+            ],
+            "family": "Brightwater"
+          }
+        ],
+        "birthDate": "1980-06-03",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(508) 555-0142"
+          },
+          {
+            "system": "email",
+            "value": "dmitri.brightwater@example.net"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "540 Bluebell Terrace"
+            ],
+            "city": "Fairhaven",
+            "state": "MA",
+            "postalCode": "02779"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "husband"
+              }
+            ],
+            "name": {
+              "given": [
+                "Lorcan"
+              ],
+              "family": "Brightwater"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-018",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-018"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-018"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-12294"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "910-16-8036"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "James"
+            ],
+            "family": "Nakamura"
+          }
+        ],
+        "birthDate": "1980-09-25",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(319) 555-0104"
+          },
+          {
+            "system": "email",
+            "value": "james.nakamura@example.com"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "71 Juniper Street"
+            ],
+            "city": "Glenwood",
+            "state": "IL",
+            "postalCode": "60493"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "son"
+              }
+            ],
+            "name": {
+              "given": [
+                "Priyanka"
+              ],
+              "family": "Nakamura"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-019",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-019"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-019"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-31187"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "963-34-4465"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Rafael"
+            ],
+            "family": "Marchetti"
+          }
+        ],
+        "birthDate": "1990-02-02",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(413) 555-0159"
+          },
+          {
+            "system": "email",
+            "value": "rafael.marchetti@example.net"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "791 Quarry Road"
+            ],
+            "city": "Glenwood",
+            "state": "IL",
+            "postalCode": "60475"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "son"
+              }
+            ],
+            "name": {
+              "given": [
+                "Esperanza"
+              ],
+              "family": "Marchetti"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-020",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-020"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-020"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-54081"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "970-84-2339"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Signe"
+            ],
+            "family": "Quillan"
+          }
+        ],
+        "birthDate": "1975-08-16",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(508) 555-0197"
+          },
+          {
+            "system": "email",
+            "value": "signe.quillan@example.com"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "425 Juniper Street"
+            ],
+            "city": "Glenwood",
+            "state": "IL",
+            "postalCode": "60451"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "wife"
+              }
+            ],
+            "name": {
+              "given": [
+                "Robert"
+              ],
+              "family": "Quillan"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-021",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-021"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-021"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-59590"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "942-14-2941"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Robert"
+            ],
+            "family": "Pemberton"
+          }
+        ],
+        "birthDate": "1950-08-15",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(207) 555-0183"
+          },
+          {
+            "system": "email",
+            "value": "robert.pemberton@example.net"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "701 Wexford Court"
+            ],
+            "city": "Glenwood",
+            "state": "IL",
+            "postalCode": "60486"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "son"
+              }
+            ],
+            "name": {
+              "given": [
+                "Thaddeus"
+              ],
+              "family": "Pemberton"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-022",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-022"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-022"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-10255"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "949-64-3955"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Susan"
+            ],
+            "family": "Pemberton"
+          }
+        ],
+        "birthDate": "1949-12-01",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(508) 555-0121"
+          },
+          {
+            "system": "email",
+            "value": "susan.pemberton@example.com"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "179 Bluebell Terrace"
+            ],
+            "city": "Cedar Falls",
+            "state": "IA",
+            "postalCode": "50616"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "wife"
+              }
+            ],
+            "name": {
+              "given": [
+                "Siobhan"
+              ],
+              "family": "Pemberton"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-023",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-023"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-023"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-99373"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "927-36-3354"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Tomasz"
+            ],
+            "family": "Castellanos"
+          }
+        ],
+        "birthDate": "1971-06-01",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(319) 555-0160"
+          },
+          {
+            "system": "email",
+            "value": "tomasz.castellanos@example.com"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "91 Bluebell Terrace"
+            ],
+            "city": "Millbrook",
+            "state": "NY",
+            "postalCode": "12580"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "daughter"
+              }
+            ],
+            "name": {
+              "given": [
+                "Kwame"
+              ],
+              "family": "Castellanos"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:p3-024",
+      "request": {
+        "method": "POST",
+        "url": "Patient",
+        "ifNoneExist": "identifier=https://foomedical.example/synthetic/p3|p3-024"
+      },
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic demo data"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            },
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/demo-story",
+              "code": "p3-phi-like"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foomedical.example/synthetic/p3",
+            "value": "p3-024"
+          },
+          {
+            "system": "https://foomedical.example/mrn",
+            "value": "HTEST-MRN-68050"
+          },
+          {
+            "system": "http://hl7.org/fhir/sid/us-ssn",
+            "value": "960-59-4028"
+          }
+        ],
+        "name": [
+          {
+            "given": [
+              "Priyanka"
+            ],
+            "family": "Castellanos"
+          }
+        ],
+        "birthDate": "1988-01-09",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "(413) 555-0149"
+          },
+          {
+            "system": "email",
+            "value": "priyanka.castellanos@example.org"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "969 Quarry Road"
+            ],
+            "city": "Cedar Falls",
+            "state": "IA",
+            "postalCode": "50660"
+          }
+        ],
+        "contact": [
+          {
+            "relationship": [
+              {
+                "text": "wife"
+              }
+            ],
+            "name": {
+              "given": [
+                "Henry"
+              ],
+              "family": "Castellanos"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
