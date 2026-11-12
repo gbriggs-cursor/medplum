@@ -36,7 +36,7 @@ stories:
     readiness: new
     runtime: 5-10 min
     wow: One command builds the design history index and a trace matrix from the synthetic release records
-    trigger: Demo Setup runs demos/dhf-release/src/assemble.mjs, or the @grok/agent-sdk runner tool assemble-dhf
+    trigger: Demo Setup runs node demos/dhf-release/src/demo.mjs, which replays the model turn and executes assemble-dhf
     data_pack: Three synthetic release records in seed/release-records.json. Record one cites the P1 cohort counts from pull request 11. No patient bundle is copied.
     fallback:
       - 11
@@ -51,6 +51,9 @@ stories:
     card: demos/dhf-release/story.yaml
     prompt: demos/dhf-release/prompt.md
     readme: demos/dhf-release/README.md
+    offline: node demos/dhf-release/src/demo.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: agent-sdk run calls the model, which calls assemble-dhf, and the evidence files are not labeled REPLAY (no key)."
   - id: docs-from-questions
     code: G4
     title: Docs from repeat questions
