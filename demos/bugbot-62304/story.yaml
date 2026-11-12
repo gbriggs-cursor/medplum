@@ -1,0 +1,36 @@
+id: bugbot-62304
+code: L4
+title: IEC 62304 Bugbot rules
+track: ls
+stage: '04'
+readiness: adapt
+runtime: 10 min
+environment: '67842161'
+
+persona: QA/RA lead for medical device software at {prospect}
+trigger: Presenter pastes prompt.md part 1 into a new cloud agent started from the default branch
+actors:
+  - Cursor cloud agent
+  - Bugbot (rules in .cursor/BUGBOT.md, section "IEC 62304")
+surface: packages/react/src/PatientSummary/Vitals.utils.ts (class C item SI-01)
+data_pack: P5 regulatory seed in demos/_shared/regulatory/ (software items, REQ-001 to REQ-006, RISK-001 to RISK-004, SOUP list)
+artifact: Draft PR whose evidence/EVIDENCE.md gains a Trace line after Bugbot flags it
+gate: Presenter shows the Bugbot high-risk flag, then the cleared review. On-stage only
+gate_blocks: false
+wow: Bugbot flags a class C change high risk for a missing trace ID, the agent adds it, and the flag clears
+proof:
+  - Draft PR link
+  - Bugbot comment starting "Class C:"
+  - Follow-up commit adding the Trace line and Bugbot's clean re-review
+reset: null
+fallback: []
+fallback_note: New story with no recorded take yet. Record one before showing it live, then list that PR number here.
+blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. No Jira writes
+
+variables:
+  prospect: Acme Cardio
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:bugbot-62304', 'track:ls', 'stage:04']
