@@ -19,13 +19,15 @@ const checkOnly = process.argv.includes('--check');
 const ENVIRONMENT = '67842161';
 const JIRA_PROJECT = 'GIO';
 const TRACKS = ['generic', 'ls'];
-const STAGES = ['generic', '01', '02', '03', '04', '05', '06', '07'];
+// post-market and floor sit around the factory (voice support, PHI controls), not inside 01-07.
+const STAGES = ['generic', '01', '02', '03', '04', '05', '06', '07', 'post-market', 'floor'];
 const READINESS = ['exists', 'adapt', 'new', 'planned'];
 const GENERIC_PROSPECTS = ['Acme Cardio', 'Foo Medical'];
 const BASE_LABELS = ['demo', 'medplum'];
 const AUTOMATION_LABELS = ['automatable', 'agent-safe'];
 // The ticket-to-PR automation was proven on tickets that also carried `maintenance`.
 const LEGACY_LABELS = ['maintenance'];
+const INTAKE_LABELS = ['support', 'platform-demo'];
 
 const REQUIRED_TEXT = [
   'id',
@@ -222,13 +224,25 @@ function validateJira(where, dir, card) {
       err(where, `${label} fires the ticket-to-PR automation; only use it with \`jira.automation: true\``);
     }
   }
-  const allowed = new Set([...expected, ...AUTOMATION_LABELS, ...LEGACY_LABELS]);
+  const intake = jira.intake === true;
+  if (intake && automated) {
+    err(where, 'intake stories are triaged by bots and can never fire the automation');
+  }
+  for (const label of INTAKE_LABELS) {
+    if (intake && !labels.includes(label)) {
+      err(where, `intake stories need the ${label} label`);
+    }
+  }
+  const allowed = new Set([...expected, ...AUTOMATION_LABELS, ...LEGACY_LABELS, ...INTAKE_LABELS]);
   for (const label of labels) {
     if (!allowed.has(label)) {
       err(where, `label ${label} is not in demos/_shared/labels.md`);
     }
     if (LEGACY_LABELS.includes(label) && !automated) {
       err(where, `${label} is only for automation stories`);
+    }
+    if (INTAKE_LABELS.includes(label) && !intake) {
+      err(where, `${label} is only for intake stories (\`jira.intake: true\`)`);
     }
   }
 }
@@ -284,6 +298,7 @@ function buildCatalog(cards) {
     fallback: c.fallback,
     reset: c.reset ?? null,
     automation: c.jira?.automation === true,
+    intake: c.jira?.intake === true,
     labels: c.jira?.labels ?? [],
     card: `demos/${c.id}/story.yaml`,
     prompt: `demos/${c.id}/prompt.md`,

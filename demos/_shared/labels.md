@@ -14,12 +14,16 @@ Every demo ticket lives on the **GIO** board. Stories are told apart by labels, 
 | `stage:<01-07>` | life-sciences tickets only | Factory stage: 01 Requirement, 02 Risk, 03 Build, 04 Review, 05 Verify, 06 Approve, 07 Release. Generic stories carry no stage label. |
 | `automatable` | automation stories only | Fires the ticket-to-PR automation. |
 | `agent-safe` | automation stories only | Fires the ticket-to-PR automation. |
+| `stage:post-market` or `stage:floor` | life-sciences tickets around the factory | Post-market (voice support, complaints) or the factory floor (PHI controls). |
+| `support` | intake stories only | Patient or customer support intake, triaged by the Ticket Triage bot. |
+| `platform-demo` | intake stories only | Marks intake tickets that the Grok Bots act on for platform demos. |
 | `maintenance` | automation stories only (legacy) | Present on GIO-40 to GIO-43, which proved automation `d5489670`. Keep it on ticket-to-PR tickets until that automation's label filter is confirmed. |
 
 ## Rules
 
 - Add `automatable` and `agent-safe` only when the card sets `jira.automation: true`. On any other ticket the automation would fire a second, unwanted cloud agent.
-- Never put `automatable` on intake or support tickets (for example voice intake). Those are triaged by bots, not by the automation.
+- Never put `automatable` on intake or support tickets (for example voice intake). Those are triaged by bots, not by the automation. Intake cards set `jira.intake: true`; the checker then requires `support` and `platform-demo` and refuses `jira.automation: true`.
+- Intake ticket text is redacted before the Jira write (`demos/_shared/phi/redact.mjs`), and the write is refused if an identifier remains.
 - Ticket titles use the generic account (Acme Cardio / Foo Medical) unless the run names a prospect.
 - Demo Setup creates tickets with exactly the labels on the card. It never changes ticket status.
 
@@ -27,6 +31,12 @@ Every demo ticket lives on the **GIO** board. Stories are told apart by labels, 
 
 ```
 demo, medplum, story:ticket-to-pr, track:generic, automatable, agent-safe, maintenance
+```
+
+## Example: voice support intake
+
+```
+demo, medplum, story:support-voice, track:ls, stage:post-market, support, platform-demo
 ```
 
 ## Example: life-sciences build stage
