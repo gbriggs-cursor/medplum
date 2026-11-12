@@ -15,8 +15,22 @@ These drafts are separate. They are not one traced requirement. Do not present a
 3. For each stop, say the recorded lines, then the not-run lines. Skip a live re-run when the PR says that run did not happen.
 4. At L6, show the approval card and continue. The card never blocks the next stage.
 5. A live agent, if one is started on a later day, starts from the default branch.
+6. Default path, no keys: `node demos/factory-e2e/offline.mjs`. For the whole catalog: `node demos/_shared/scripts/smoke-offline.mjs`.
 
 `answer-keys://factory-e2e/` is a placeholder. The private answer-key repo does not exist.
+
+## Key-free default
+
+Env `67842161` has no `CURSOR_API_KEY`, `XAI_API_KEY`, or Jira keys. Each card's `default_mode` is `replay` or `offline`. The `BLOCKED` text stays for a forced live run. Live mode available once keys are added:
+
+| Code | What changes once keys exist |
+| --- | --- |
+| G1 | A cloud agent runs `demos/net-new-feature/prompt.md` and opens a draft PR. |
+| G2 | Demo Setup creates the GIO ticket and automation `d5489670` opens the draft PR. |
+| G3 | A cloud agent applies the committed Acme Cardio brand kit and opens a draft PR. |
+| G4 | A cloud agent writes the docs PR from the seeded questions. |
+| L3 | A cloud agent generates the cohort, parser, tests, and evidence PR. |
+| L8 | The presenter can start the live agent, voice, and Jira paths named below. |
 
 ## Order
 
@@ -83,9 +97,9 @@ What to show: part 1 of `demos/bugbot-62304/prompt.md` asks for a class C change
 
 Stage 05. This is the failure loop. A planted regression fails CI, a remediation step fixes `packages/core/src/search/match.ts`, and CI is run again. The loop returns to stage 03 Build. The room then continues to approve.
 
-Recorded, reference rehearsal (`REMEDIATOR=reference`, labeled a pipeline self-test in the evidence): run-1 on the planted tree was **51 passed, 3 failed**, REQ-004 RED. The guard accepted `packages/core/src/search/match.ts`. Run-2 was **54 passed, 0 failed**, REQ-004 and REQ-005 GREEN. A guard negative test that edited `match.test.ts` printed `REJECTED` and exited 1. With no credential, `demos/verify-loop/run.sh` exited 3, `BLOCKED`, before planting anything (pending on Giovanni). `npx @grok/agent-sdk@0.6.0 validate` returned ok. Catalog check passed for 6 stories.
+Recorded, reference rehearsal (`REMEDIATOR=reference`, labeled a pipeline self-test in the evidence): run-1 on the planted tree was **51 passed, 3 failed**, REQ-004 RED. The guard accepted `packages/core/src/search/match.ts`. Run-2 was **54 passed, 0 failed**, REQ-004 and REQ-005 GREEN. A guard negative test that edited `match.test.ts` printed `REJECTED` and exited 1. With no credential, `demos/verify-loop/run.sh` exited 3, `BLOCKED`, before planting anything (live mode available once keys are added). `npx @grok/agent-sdk@0.6.0 validate` returned ok. Catalog check passed for 6 stories.
 
-Not run: the agent remediation path has never run. `CURSOR_API_KEY` is the blocker (pending on Giovanni). Untested: the agent's fix quality, whether Vitest runs inside the SDK sandbox, and the `--json` shape of `agent-sdk run` beyond `ok` and `sessionId`. The committed evidence is the reference self-test. "CI" here is `ci.mjs`. GitHub Actions has not run, and no Actions workflow was added. `answer-keys://verify-loop/` is a placeholder. With shell enabled, the agent could still read files outside its workspace; writes are sandboxed and the guard keeps changes in source. The fallback is empty until a live take is recorded.
+Not run: the agent remediation path has never run. `CURSOR_API_KEY` is the blocker (live mode available once keys are added). Untested: the agent's fix quality, whether Vitest runs inside the SDK sandbox, and the `--json` shape of `agent-sdk run` beyond `ok` and `sessionId`. The committed evidence is the reference self-test. "CI" here is `ci.mjs`. GitHub Actions has not run, and no Actions workflow was added. `answer-keys://verify-loop/` is a placeholder. With shell enabled, the agent could still read files outside its workspace; writes are sandboxed and the guard keeps changes in source. The fallback is empty until a live take is recorded.
 
 Say this on stage: the red-to-green counts are the rehearsal. The remediation agent has not run.
 
@@ -105,7 +119,7 @@ Stage 07. A design-history index from three synthetic release records.
 
 Recorded: `node --test` passed 3 of 3. Catalog check passed for 6 stories. `tsc --noEmit` exited 0. `agent-sdk validate` returned ok. `agent-sdk tool call assemble-dhf` returned pass, 3 passed, 0 failed, on commit `220b09fb2d4dca951fdaedf9a8d765afb5db1a89`, and wrote `DHF-INDEX.md`, `EVIDENCE.md`, `trace.json`, and `test-log.txt`. `reset.sh` twice; the second run printed `already clean`. `agent-sdk eval --list` shows `smoke/assemble`. Record one cites the PR #11 cohort counts (20 patients, 20 devices, 40 observations, seed 20261104). The bundle was not copied. `approval.json` is not written. The named tests were not re-run.
 
-Not run: model turns were not run. `CURSOR_API_KEY` is not set (pending on Giovanni). The earlier credential check returned "Not signed in to Cursor." `agent-sdk run` on the L14 runner failed with `BDK needs a Cursor credential to run turns`. The L7 smoke eval was not executed. `XAI_API_KEY` is not set, and this story does not use it. No Jira writes.
+Not run: model turns were not run. `CURSOR_API_KEY` is not set (live mode available once keys are added). The earlier credential check returned "Not signed in to Cursor." `agent-sdk run` on the L14 runner failed with `BDK needs a Cursor credential to run turns`. The L7 smoke eval was not executed. `XAI_API_KEY` is not set, and this story does not use it. No Jira writes.
 
 ## 8. Batch evidence — L14 on PR #30
 
@@ -113,7 +127,7 @@ Sits on stages 05–07. One evidence folder for four synthetic device changes. S
 
 Recorded: `node --test` passed 3 of 3. Catalog check passed for 6 stories. `tsc --noEmit` exited 0. `agent-sdk validate` returned ok. `agent-sdk tool call refresh-evidence` returned pass, 4 passed, 0 failed, on commit `614acbf34a654d8e4b83daa516739aeaae491dd9`. `reset.sh` twice; the second run printed `already clean`. `approval.json` is not written. The FHIR bundle from PR #11 was not copied, and that PR's tests were not re-run. The trace shape follows PR #21. The gate that writes `approval.json` is PR #23.
 
-Not run: `agent-sdk whoami` failed with "Not signed in to Cursor." `agent-sdk run` failed on the missing `CURSOR_API_KEY` (pending on Giovanni). The smoke eval `smoke/refresh` was not executed. No Jira writes. `XAI_API_KEY` is not set, and this story does not use it.
+Not run: `agent-sdk whoami` failed with "Not signed in to Cursor." `agent-sdk run` failed on the missing `CURSOR_API_KEY` (live mode available once keys are added). The smoke eval `smoke/refresh` was not executed. No Jira writes. `XAI_API_KEY` is not set, and this story does not use it.
 
 ## 9. Audit question, then complaint — PR #28
 
@@ -151,7 +165,7 @@ Foo Medical patient support. The caller confirms a read-back, the server redacts
 
 Recorded: `npm test` 10 passed, 0 failed. `npm run eval` 14/14 (the first run was 12/14; brand-word coverage and triage-on-raw-text were fixed in code, and thresholds were not loosened). `npm run demo:verify` for `--kb-gap`, `--bug`, `--answered`, and `--urgent` was 7/7 checks each. Catalog check passed for 6 stories. Negative catalog checks exited 1. `agent-sdk validate`, `tsc --noEmit`, and the `search_kb` / `record_triage` tool calls returned ok. The browser form flow was exercised (read-back, then a submitted `kb_gap` with 2 identifiers redacted).
 
-Not run: model evals were not run. `agent-sdk eval` stops with `BDK needs a Cursor credential to run turns` because `CURSOR_API_KEY` is unset (pending on Giovanni). Only the deterministic harness is green. Grok Voice is stubbed. No `XAI_API_KEY` is set (pending on Giovanni). `POST /api/voice/session` returns 503 without the key and 501 with it. The form path is the working path. No Jira write was made. There are no `JIRA_*` keys (pending on Giovanni). Only the dry-run path was run. Bots `790429ca` and `67f664f8` are not repointed and must not be. The kb-gap and bug handoffs were not exercised. This PR still has the older redactor rule; the digit requirement for labelled IDs landed on PR #31.
+Not run: model evals were not run. `agent-sdk eval` stops with `BDK needs a Cursor credential to run turns` because `CURSOR_API_KEY` is unset (live mode available once keys are added). Only the deterministic harness is green. Grok Voice is stubbed. No `XAI_API_KEY` is set (live mode available once keys are added). `POST /api/voice/session` returns 503 without the key and 501 with it. The form path is the working path. No Jira write was made. There are no `JIRA_*` keys (live mode available once keys are added). Only the dry-run path was run. Bots `790429ca` and `67f664f8` are not repointed and must not be. The kb-gap and bug handoffs were not exercised. This PR still has the older redactor rule; the digit requirement for labelled IDs landed on PR #31.
 
 If those bots are ever rehomed, the PR says they would watch GIO for `story:support-voice` plus `support`, ignore `automatable`, target this repo and environment `67842161`, put KB article pull requests under `demos/support-voice/kb/foomedical/` against the default branch, act without an approval wait, treat ticket text as redacted, and use GitHub only.
 
@@ -161,7 +175,7 @@ A confirmed intake becomes a `QuestionnaireResponse` on the synthetic patient's 
 
 Recorded: `npm test` 6 passed, 0 failed. `node scripts/run.mjs` for transcripts `pairing`, `appointments-blank`, and `airport` against the local server on port 8103: 3 of 3, `$validate` returned no errors, the response was found by subject and questionnaire search, and the ticket held no identity. A form submit wrote the response, and the dry-run ticket held `Chart: QuestionnaireResponse/<id>` and neither the name nor the birth date. `reset.sh` deleted 3 patients and 3 responses, then 0 and 0. Support-voice regression: `npm test` 11 passed, eval 14/14. Catalog check passed for 7 stories.
 
-Not run: Grok Voice is stubbed. No `XAI_API_KEY` (pending on Giovanni), so the input is seeded transcripts and typed text. No live speech was tested. Extraction is regex; spelled-out digits and a name given without "my name is" are not handled. No Jira writes; the ticket is dry-run JSON in `demos/support-voice/run/outbox/` only. The run used the local dev server and the seeded admin login. It was not run against a hosted project or a patient-scoped AccessPolicy. A patient-chart screenshot was not included because that path is not an app route. Bots `790429ca` and `67f664f8` were not touched and were not exercised.
+Not run: Grok Voice is stubbed. No `XAI_API_KEY` (live mode available once keys are added), so the input is seeded transcripts and typed text. No live speech was tested. Extraction is regex; spelled-out digits and a name given without "my name is" are not handled. No Jira writes; the ticket is dry-run JSON in `demos/support-voice/run/outbox/` only. The run used the local dev server and the seeded admin login. It was not run against a hosted project or a patient-scoped AccessPolicy. A patient-chart screenshot was not included because that path is not an app route. Bots `790429ca` and `67f664f8` were not touched and were not exercised.
 
 ## 13. PHI tripwire — L11 on PR #36
 

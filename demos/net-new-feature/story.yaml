@@ -23,6 +23,9 @@ proof:
   - Vitest output in the transcript
   - Screenshot of the Devices tab
 reset: null
+offline: node demos/net-new-feature/offline.mjs
+default_mode: offline
+live_mode_note: 'Live mode available once keys are added: a cloud agent runs demos/net-new-feature/prompt.md and opens a draft PR.'
 fallback: [10, 14]
 blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. No Jira writes
 

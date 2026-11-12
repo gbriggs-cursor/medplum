@@ -23,6 +23,9 @@ proof:
   - Drafted replies in the PR body
   - Sidebar diff
 reset: demos/docs-from-questions/reset.sh
+offline: node demos/docs-from-questions/offline.mjs
+default_mode: offline
+live_mode_note: 'Live mode available once keys are added: a cloud agent writes the docs PR from the seeded questions.'
 fallback: [3, 8, 13]
 blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. Replies are drafted, never sent
 

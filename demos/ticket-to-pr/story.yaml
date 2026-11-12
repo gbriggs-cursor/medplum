@@ -24,6 +24,9 @@ proof:
   - Draft PR link opened by cursor[bot] citing that key
   - Test output in the PR body
 reset: demos/ticket-to-pr/reset.sh
+offline: node demos/ticket-to-pr/offline.mjs
+default_mode: offline
+live_mode_note: 'Live mode available once keys are added: Demo Setup creates the GIO ticket and automation d5489670 opens the draft PR.'
 fallback: [4, 9, 16]
 blast_radius: One new GIO ticket (created by Demo Setup, status never changed) and one GitHub draft PR
 
