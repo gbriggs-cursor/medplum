@@ -1,0 +1,65 @@
+TAP version 13
+# Subtest: CMP-001 does not confirm 90/50 mmHg taken after pairing failed
+ok 1 - CMP-001 does not confirm 90/50 mmHg taken after pairing failed
+  ---
+  duration_ms: 0.542323
+  type: 'test'
+  ...
+# Subtest: a later paired reading remains the confirmed display
+ok 2 - a later paired reading remains the confirmed display
+  ---
+  duration_ms: 0.250902
+  type: 'test'
+  ...
+# Subtest: an unpaired sample is withheld when the subject did not dispute it
+ok 3 - an unpaired sample is withheld when the subject did not dispute it
+  ---
+  duration_ms: 0.08111
+  type: 'test'
+  ...
+# Subtest: a paired sample is withheld when the subject disputed it
+ok 4 - a paired sample is withheld when the subject disputed it
+  ---
+  duration_ms: 0.077078
+  type: 'test'
+  ...
+# Subtest: CMP-001 is CMP-SOP-3, not reportable, with CAPA open
+ok 5 - CMP-001 is CMP-SOP-3, not reportable, with CAPA open
+  ---
+  duration_ms: 1.123003
+  type: 'test'
+  ...
+# Subtest: a pairing-only complaint stays on CMP-SOP-4 and does not open a CAPA
+ok 6 - a pairing-only complaint stays on CMP-SOP-4 and does not open a CAPA
+  ---
+  duration_ms: 0.131103
+  type: 'test'
+  ...
+# Subtest: a death allegation matches CMP-SOP-1 before a disputed measurement
+ok 7 - a death allegation matches CMP-SOP-1 before a disputed measurement
+  ---
+  duration_ms: 0.0868
+  type: 'test'
+  ...
+# Subtest: a serious injury matches CMP-SOP-2 when no death is alleged
+ok 8 - a serious injury matches CMP-SOP-2 when no death is alleged
+  ---
+  duration_ms: 0.078264
+  type: 'test'
+  ...
+# Subtest: a disputed measurement with no malfunction matches no section
+ok 9 - a disputed measurement with no malfunction matches no section
+  ---
+  duration_ms: 0.27233
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 77.064745
+EXIT:0
