@@ -25,7 +25,10 @@ proof:
 reset: demos/phi-tripwire/reset.sh
 fallback: []
 fallback_note: New story, no earlier run. Show the eval scorecard from the evidence log
-blast_radius: None outside this repo. Jira is dry-run only; the optional seed writes tagged Patients to the local Medplum server
+blast_radius: None outside this repo. Key-free runs write an OFFLINE ticket file and do not post to Jira. The optional seed writes tagged Patients to the local Medplum server
+offline: node demos/phi-tripwire/scripts/tripwire.mjs --note P3-N-001
+default_mode: offline
+live_mode_note: 'Live mode available once keys are added: the ticket file is the same redacted payload without the OFFLINE label. This story still does not post to Jira.'
 
 variables:
   prospect: Foo Medical

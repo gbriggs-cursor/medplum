@@ -101,6 +101,9 @@ stories:
     card: demos/phi-tripwire/story.yaml
     prompt: demos/phi-tripwire/prompt.md
     readme: demos/phi-tripwire/README.md
+    offline: node demos/phi-tripwire/scripts/tripwire.mjs --note P3-N-001
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: the ticket file is the same redacted payload without the OFFLINE label. This story still does not post to Jira."
   - id: rebrand
     code: G3
     title: Prospect rebrand
