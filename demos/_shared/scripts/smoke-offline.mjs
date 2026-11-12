@@ -4,7 +4,7 @@
 //   node demos/_shared/scripts/smoke-offline.mjs
 //
 // Exit 0 when every story prints REPLAY (no key) or OFFLINE (no key) and exits 0.
-// Commands come from each story.yaml. catalog.yaml on the framework branch does not copy them.
+// The command is the `offline` field in demos/<story>/story.yaml.
 
 import { spawn } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
