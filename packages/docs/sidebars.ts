@@ -94,6 +94,7 @@ const sidebars: SidebarsConfig = {
         { type: 'doc', id: 'charting/designing-charting' },
         { type: 'doc', id: 'charting/visit-templates' },
         { type: 'doc', id: 'charting/chart-data-model' },
+        { type: 'doc', id: 'charting/dental-data-model' },
       ],
     },
     {
