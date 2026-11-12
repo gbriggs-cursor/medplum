@@ -1,7 +1,7 @@
 
  RUN  v4.1.12 /agent/repos/medplum/packages/core
 
- ❯ |@medplum/core| src/search/match.test.ts (54 tests | 3 failed) 490ms
+ ❯ |@medplum/core| src/search/match.test.ts (54 tests | 3 failed) 472ms
      ✓ Matches resource type 1ms
      ✓ Matches _id 1ms
      ✓ Unknown filter 0ms
@@ -38,7 +38,7 @@
          ✓ true 0ms
          ✓ false 0ms
          ✓ lt 2025-05-15T12:00:00.000Z 0ms
-         × le 2025-05-15T12:00:00.000Z 1ms
+         × le 2025-05-15T12:00:00.000Z 0ms
          ✓ ge 2025-05-15T12:00:00.000Z 0ms
          ✓ gt 2025-05-15T12:00:00.000Z 0ms
          ✓ lt 2025-05-15T12:00:01.000Z 0ms
@@ -59,8 +59,8 @@
 
  Test Files  1 failed (1)
       Tests  3 failed | 51 passed (54)
-   Start at  16:06:09
-   Duration  1.21s (transform 211ms, setup 218ms, import 33ms, tests 490ms, environment 374ms)
+   Start at  21:04:46
+   Duration  1.22s (transform 219ms, setup 231ms, import 33ms, tests 472ms, environment 380ms)
 
 JSON report written to /agent/repos/medplum/demos/verify-loop/self-test/evidence/run-1.vitest.json
 

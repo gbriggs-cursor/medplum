@@ -1,4 +1,5 @@
 {
+  "mode": "offline",
   "schema": "evidence-v2/trace",
   "version": 2,
   "story": "verify-loop",
@@ -7,8 +8,9 @@
     {
       "id": "run-1",
       "label": "planted regression",
+      "mode": "offline",
       "command": "npx vitest run src/search/match.test.ts (in packages/core)",
-      "date": "2026-11-12T16:06:10.264Z",
+      "date": "2026-11-12T21:04:47.306Z",
       "tree": "repository",
       "passed": 51,
       "failed": 3,
@@ -16,9 +18,10 @@
     },
     {
       "id": "run-2",
-      "label": "after remediation (reference)",
+      "label": "after remediation (OFFLINE reference remediator)",
+      "mode": "offline",
       "command": "npx vitest run src/search/match.test.ts (in packages/core)",
-      "date": "2026-11-12T16:06:12.092Z",
+      "date": "2026-11-12T21:04:49.251Z",
       "tree": "repository",
       "passed": 54,
       "failed": 0,
@@ -32,7 +35,7 @@
       "test": "Search matching Date equals true",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -40,7 +43,7 @@
       "test": "Search matching Date equals false",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -48,7 +51,7 @@
       "test": "Search matching Date not equals true",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -56,7 +59,7 @@
       "test": "Search matching Date not equals false",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -64,7 +67,7 @@
       "test": "Search matching Date greater than true",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -72,7 +75,7 @@
       "test": "Search matching Date greater than false",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -80,7 +83,7 @@
       "test": "Search matching Date greater than same value",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -88,7 +91,7 @@
       "test": "Search matching Date greater than or equals true",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -96,7 +99,7 @@
       "test": "Search matching Date greater than or equals false",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -104,7 +107,7 @@
       "test": "Search matching Date greater than or equals same value",
       "run": "run-1",
       "result": "fail",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -112,7 +115,7 @@
       "test": "Search matching Date less than true",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -120,7 +123,7 @@
       "test": "Search matching Date less than false",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -128,7 +131,7 @@
       "test": "Search matching Date less than same value",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -136,7 +139,7 @@
       "test": "Search matching Date less than or equals true",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -144,7 +147,7 @@
       "test": "Search matching Date less than or equals false",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -152,7 +155,7 @@
       "test": "Search matching Date less than or equals same value",
       "run": "run-1",
       "result": "fail",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -160,7 +163,7 @@
       "test": "Search matching Period start and end lt 2025-05-15T12:00:00.000Z",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -168,7 +171,7 @@
       "test": "Search matching Period start and end le 2025-05-15T12:00:00.000Z",
       "run": "run-1",
       "result": "fail",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -176,7 +179,7 @@
       "test": "Search matching Period start and end ge 2025-05-15T12:00:00.000Z",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -184,7 +187,7 @@
       "test": "Search matching Period start and end gt 2025-05-15T12:00:00.000Z",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -192,7 +195,7 @@
       "test": "Search matching Period start and end lt 2025-05-15T12:00:01.000Z",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -200,7 +203,7 @@
       "test": "Search matching Period start and end le 2025-05-15T12:00:01.000Z",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -208,7 +211,7 @@
       "test": "Search matching Period start and end ge 2025-05-15T12:00:01.000Z",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -216,7 +219,7 @@
       "test": "Search matching Period start and end gt 2025-05-15T12:00:01.000Z",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -224,7 +227,7 @@
       "test": "Search matching Period start and end gt 2025-05-01",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -232,7 +235,7 @@
       "test": "Search matching Period start and end gt 2025-06-01",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-005",
@@ -240,7 +243,7 @@
       "test": "Search matching Matches _id",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-005",
@@ -248,7 +251,7 @@
       "test": "Search matching Token filter",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-005",
@@ -256,7 +259,7 @@
       "test": "Search matching Reference filter",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-005",
@@ -264,7 +267,7 @@
       "test": "Search matching Token equals",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-005",
@@ -272,7 +275,7 @@
       "test": "Search matching Token not equals",
       "run": "run-1",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -280,7 +283,7 @@
       "test": "Search matching Date equals true",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -288,7 +291,7 @@
       "test": "Search matching Date equals false",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -296,7 +299,7 @@
       "test": "Search matching Date not equals true",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -304,7 +307,7 @@
       "test": "Search matching Date not equals false",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -312,7 +315,7 @@
       "test": "Search matching Date greater than true",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -320,7 +323,7 @@
       "test": "Search matching Date greater than false",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -328,7 +331,7 @@
       "test": "Search matching Date greater than same value",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -336,7 +339,7 @@
       "test": "Search matching Date greater than or equals true",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -344,7 +347,7 @@
       "test": "Search matching Date greater than or equals false",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -352,7 +355,7 @@
       "test": "Search matching Date greater than or equals same value",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -360,7 +363,7 @@
       "test": "Search matching Date less than true",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -368,7 +371,7 @@
       "test": "Search matching Date less than false",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -376,7 +379,7 @@
       "test": "Search matching Date less than same value",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -384,7 +387,7 @@
       "test": "Search matching Date less than or equals true",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -392,7 +395,7 @@
       "test": "Search matching Date less than or equals false",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -400,7 +403,7 @@
       "test": "Search matching Date less than or equals same value",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -408,7 +411,7 @@
       "test": "Search matching Period start and end lt 2025-05-15T12:00:00.000Z",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -416,7 +419,7 @@
       "test": "Search matching Period start and end le 2025-05-15T12:00:00.000Z",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -424,7 +427,7 @@
       "test": "Search matching Period start and end ge 2025-05-15T12:00:00.000Z",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -432,7 +435,7 @@
       "test": "Search matching Period start and end gt 2025-05-15T12:00:00.000Z",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -440,7 +443,7 @@
       "test": "Search matching Period start and end lt 2025-05-15T12:00:01.000Z",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -448,7 +451,7 @@
       "test": "Search matching Period start and end le 2025-05-15T12:00:01.000Z",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -456,7 +459,7 @@
       "test": "Search matching Period start and end ge 2025-05-15T12:00:01.000Z",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -464,7 +467,7 @@
       "test": "Search matching Period start and end gt 2025-05-15T12:00:01.000Z",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -472,7 +475,7 @@
       "test": "Search matching Period start and end gt 2025-05-01",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-004",
@@ -480,7 +483,7 @@
       "test": "Search matching Period start and end gt 2025-06-01",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-005",
@@ -488,7 +491,7 @@
       "test": "Search matching Matches _id",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-005",
@@ -496,7 +499,7 @@
       "test": "Search matching Token filter",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-005",
@@ -504,7 +507,7 @@
       "test": "Search matching Reference filter",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-005",
@@ -512,7 +515,7 @@
       "test": "Search matching Token equals",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     },
     {
       "req": "REQ-005",
@@ -520,8 +523,8 @@
       "test": "Search matching Token not equals",
       "run": "run-2",
       "result": "pass",
-      "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+      "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
     }
   ],
-  "commit": "0b6ad2a430d63c5767e809e342fab5b074385bbd"
+  "commit": "4193d4408f41dfe0089695082a98512d1a72e13e"
 }

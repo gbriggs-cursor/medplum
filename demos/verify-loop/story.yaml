@@ -8,7 +8,7 @@ runtime: 15-20 min
 environment: '67842161'
 
 persona: QA/RA lead for medical device software at {prospect}
-trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch; it runs demos/verify-loop/run.sh
+trigger: Presenter runs demos/verify-loop/run.sh (or pastes prompt.md into a cloud agent started from the default branch)
 actors:
   - verify-loop CI (demos/verify-loop/ci.mjs)
   - Agent SDK remediation agent (demos/verify-loop/remediator, @grok/agent-sdk 0.6.0)
@@ -26,7 +26,12 @@ proof:
   - Draft PR link with the evidence
 reset: demos/verify-loop/reset.sh
 fallback: []
-fallback_note: New story with no recorded take yet. `REMEDIATOR=reference demos/verify-loop/run.sh` replays the red-to-green matrix in about 5 seconds with no model, labeled as a pipeline self-test.
+fallback_note: No live agent take exists yet (no key). The `offline` command is the default path and runs the real red-to-green matrix in about 5 seconds, labeled OFFLINE (no key).
+offline: DEMO_MODE=offline demos/verify-loop/run.sh
+default_mode: offline
+live_mode_note: >-
+  Live mode available once keys are added: with CURSOR_API_KEY set, run.sh auto-selects the @grok/agent-sdk
+  remediator instead of the OFFLINE reference remediator. The plant, CI runs, guard, and trace matrix are unchanged.
 blast_radius: Local working tree and one GitHub draft PR in gbriggs-cursor/medplum. No Jira writes. The remediation agent runs sandboxed with no network
 answer_key: answer-keys://verify-loop/
 

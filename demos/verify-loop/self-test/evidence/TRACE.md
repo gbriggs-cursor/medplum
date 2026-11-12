@@ -1,11 +1,13 @@
+Mode: OFFLINE (no key)
+
 # Trace matrix
 
-Story: verify-loop. Synthetic: true. Commit: 0b6ad2a430d63c5767e809e342fab5b074385bbd
+Story: verify-loop. Synthetic: true. Commit: 4193d4408f41dfe0089695082a98512d1a72e13e
 
 | Run | Label | Tree | Passed | Failed |
 | --- | --- | --- | --- | --- |
 | run-1 | planted regression | repository | 51 | 3 |
-| run-2 | after remediation (reference) | repository | 54 | 0 |
+| run-2 | after remediation (OFFLINE reference remediator) | repository | 54 | 0 |
 
 | Requirement | Risk | run-1 | run-2 |
 | --- | --- | --- | --- |

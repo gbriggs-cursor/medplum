@@ -12,9 +12,10 @@ All three are synthetic-only. A story stops instead of writing them when its dat
 
 ## `EVIDENCE.md`
 
-The six lines from `demos/_shared/skills/evidence-package/SKILL.md`, in that order, then optional v2 lines:
+An optional first line, `Mode:`, names how the evidence was produced: `live`, `OFFLINE (no key)`, or `REPLAY (no key)`. Key-free runs must write it. Then come the six lines from `demos/_shared/skills/evidence-package/SKILL.md`, in that order, followed by the optional v2 lines:
 
 ```
+Mode: <live | OFFLINE (no key) | REPLAY (no key)>
 Requirement: <sentence>
 Change: <what changed>
 Test: <command>
@@ -33,6 +34,7 @@ Approval: <pending | approved by <name> (<role>) at <ISO time> | rejected by ...
 {
   "schema": "evidence-v2/trace",
   "version": 2,
+  "mode": "<live | offline | replay>",
   "story": "<story id>",
   "synthetic": true,
   "commit": "<full sha of the commit under test>",
@@ -40,6 +42,7 @@ Approval: <pending | approved by <name> (<role>) at <ISO time> | rejected by ...
     {
       "id": "run-1",
       "label": "<why this run happened>",
+      "mode": "<live | offline | replay>",
       "command": "<test command>",
       "date": "<ISO 8601>",
       "tree": "<repository | remediation workspace>",
@@ -54,7 +57,7 @@ Approval: <pending | approved by <name> (<role>) at <ISO time> | rejected by ...
 }
 ```
 
-One row per traced test per run. `result` is `pass` or `fail`. Readers take the last run as current.
+`mode` is required. Key-free runs use `offline` or `replay`, and readers must show it next to the results. One row per traced test per run. `result` is `pass` or `fail`. Readers take the last run as current.
 
 ## `approval.json`
 
@@ -62,6 +65,7 @@ One row per traced test per run. `result` is `pass` or `fail`. Readers take the 
 {
   "schema": "evidence-v2/approval",
   "version": 2,
+  "mode": "<live | offline | replay>",
   "story": "<story id>",
   "synthetic": true,
   "commit": "<full sha the decision applies to>",
@@ -78,4 +82,4 @@ One row per traced test per run. `result` is `pass` or `fail`. Readers take the 
 }
 ```
 
-`decision` is `approved` or `rejected`. `record` binds the decision to the exact evidence bytes. The `EVIDENCE.md` hash is taken with its `Approval:` line removed, so writing the decision into that line does not change the digest. `demos/approval-gate/gate.mjs` is the reference writer and verifier. Editing `EVIDENCE.md` or `trace.json` after approval breaks the digest. Approvals are never written back to Medplum.
+`decision` is `approved` or `rejected`. `mode` says whether the decision was taken live (Grok Bot card) or in a key-free run. `record` binds the decision to the exact evidence bytes. The `EVIDENCE.md` hash is taken with its `Approval:` line removed, so writing the decision into that line does not change the digest. `demos/approval-gate/gate.mjs` is the reference writer and verifier. Editing `EVIDENCE.md` or `trace.json` after approval breaks the digest. Approvals are never written back to Medplum.

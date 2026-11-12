@@ -5,8 +5,8 @@
 
  Test Files  1 passed (1)
       Tests  54 passed (54)
-   Start at  16:06:10
-   Duration  1.18s (transform 212ms, setup 224ms, import 33ms, tests 464ms, environment 375ms)
+   Start at  21:04:47
+   Duration  1.25s (transform 192ms, setup 205ms, import 36ms, tests 464ms, environment 446ms)
 
 JSON report written to /agent/repos/medplum/demos/verify-loop/self-test/evidence/run-2.vitest.json
 EXIT:0
