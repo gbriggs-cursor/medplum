@@ -16,7 +16,7 @@ import {
   convertToSearchableTokens,
 } from './ir';
 import type { Filter, SearchRequest } from './search';
-import { Operator, splitSearchOnComma } from './search';
+import { escapeSearchValue, Operator, splitSearchOnComma } from './search';
 
 /**
  * Determines if the resource matches the search request.
@@ -66,7 +66,8 @@ function matchesSearchFilter(resource: Resource, searchRequest: SearchRequest, f
     case 'uri':
       return matchesStringFilter(typedValues, filter);
     case 'token':
-      return matchesTokenFilter(typedValues, filter);
+      // meta.project is a bare id. Server search strips a Type/ prefix before comparing.
+      return matchesTokenFilter(typedValues, filter.code === '_project' ? normalizeProjectFilter(filter) : filter);
     case 'date':
       return matchesDateFilter(typedValues, filter);
     default:
@@ -113,6 +114,14 @@ function matchesReferenceFilter(searchParam: SearchParameter, typedValues: Typed
   // If "not equals" and no matches, then return true
   // If "equals" and no matches, then return false
   return negated;
+}
+
+function normalizeProjectFilter(filter: Filter): Filter {
+  const value = splitSearchOnComma(filter.value)
+    .map((part) => (part.includes('/') ? (part.split('/').pop() ?? '') : part))
+    .map((part) => escapeSearchValue(part))
+    .join(',');
+  return value === filter.value ? filter : { ...filter, value };
 }
 
 function matchesTokenFilter(typedValues: TypedValue[], filter: Filter): boolean {

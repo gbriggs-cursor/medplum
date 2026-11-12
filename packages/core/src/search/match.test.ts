@@ -942,6 +942,43 @@ describe('Search matching', () => {
     expect(matchesSearchRequest(resource2, search3)).toBe(false);
   });
 
+  test('_project accepts Project/<uuid> the same as a bare id', () => {
+    const projectA = '11111111-1111-4111-8111-111111111111';
+    const projectB = '22222222-2222-4222-8222-222222222222';
+    const patientA: Patient = {
+      resourceType: 'Patient',
+      id: 'patient-a',
+      meta: { project: projectA },
+    };
+    const patientB: Patient = {
+      resourceType: 'Patient',
+      id: 'patient-b',
+      meta: { project: projectB },
+    };
+    const unassigned: Patient = { resourceType: 'Patient', id: 'patient-c' };
+
+    const matchesProject = (patient: Patient, value: string, operator = Operator.EQUALS): boolean =>
+      matchesSearchRequest(patient, {
+        resourceType: 'Patient',
+        filters: [{ code: '_project', operator, value }],
+      });
+
+    expect(matchesProject(patientA, projectA)).toBe(true);
+    expect(matchesProject(patientA, `Project/${projectA}`)).toBe(true);
+    expect(matchesProject(patientB, projectA)).toBe(false);
+    expect(matchesProject(patientB, `Project/${projectA}`)).toBe(false);
+    expect(matchesProject(unassigned, projectA)).toBe(false);
+    expect(matchesProject(unassigned, `Project/${projectA}`)).toBe(false);
+
+    expect(matchesProject(patientA, `Project/${projectA}`, Operator.NOT_EQUALS)).toBe(false);
+    expect(matchesProject(patientB, `Project/${projectA}`, Operator.NOT_EQUALS)).toBe(true);
+
+    const eitherProject = `Project/${projectA},Project/${projectB}`;
+    expect(matchesProject(patientA, eitherProject)).toBe(true);
+    expect(matchesProject(patientB, eitherProject)).toBe(true);
+    expect(matchesProject(unassigned, eitherProject)).toBe(false);
+  });
+
   test('Identifier', () => {
     const identifier = '1234567890';
 
