@@ -1,0 +1,14 @@
+{
+  "name": "demo-speech-to-fhir",
+  "private": true,
+  "type": "module",
+  "description": "Voice intake transcript to a validated QuestionnaireResponse on the synthetic patient's chart.",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "start": "node scripts/run.mjs",
+    "reset": "./reset.sh"
+  }
+}
