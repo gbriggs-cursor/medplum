@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Key-free path for G10. Uses the P2 10k pack (fetched with the shared fetch.sh and verified), or the
-// committed 100-patient fixture if the download or checksum fails. Re-runs the recorded SQL, checks it
-// against the REPLAY answers for that dataset, and writes run/findings.json and run/EVIDENCE.md.
+// committed 100-patient fixture if the download or checksum fails. Question 1 is a select from the shared
+// views hba1c_control_monthly (headline) and hba1c_control_monthly_by_cohort (naive SNOMED-only).
 //   node demos/practice-analytics/run.mjs
 
 import { spawnSync } from 'node:child_process';
@@ -17,9 +17,7 @@ const command = 'node demos/practice-analytics/run.mjs';
 const mode = resolveDemoMode(['CURSOR_API_KEY'], command);
 
 if (mode === 'live') {
-  console.log(
-    'LIVE: prompt.md is unchanged. A cloud agent runs it against the P2 pack. This command does not call the Cursor API.'
-  );
+  console.log('LIVE: a cloud agent runs prompt.md against the P2 pack. This command does not call the Cursor API.');
   process.exit(0);
 }
 
@@ -55,6 +53,15 @@ function pickDataset() {
   return { id: 'p2-10k', path: p2, why: 'cached P2 pack, verify.py PASS' };
 }
 
+function formatRow(row) {
+  if (!row) {
+    return 'no March 2026 rows';
+  }
+  const [, n, controlled, pct, rawN, rawPct] = row;
+  const one = (value) => Number(value).toFixed(1);
+  return `${one(pct)}% (${controlled}/${n}); without conversion ${one(rawPct)}% (${rawN}/${n})`;
+}
+
 const picked = pickDataset();
 if (picked.id === null) {
   const recorded = analysis.datasets['p2-10k'];
@@ -72,17 +79,36 @@ if (picked.id === 'p0-100') {
 console.log(`OFFLINE DATASET: ${dataset.name} (${picked.why})`);
 
 const script = `
-import json, sys, duckdb
-queries = json.loads(sys.argv[1])
+import json, sys
+sys.path.insert(0, sys.argv[1])
+import hba1c_control as h
 pack = sys.argv[2]
-con = duckdb.connect()
+queries = json.loads(sys.argv[3])
+con = h.connect(pack)
+h.install(con)
+
 def cell(v):
-    if isinstance(v, float) or type(v).__name__ == 'Decimal':
+    if hasattr(v, "isoformat"):
+        return v.isoformat()[:7]
+    if isinstance(v, float) or type(v).__name__ == "Decimal":
         return round(float(v), 1)
     return int(v) if isinstance(v, int) else v
-print(json.dumps({k: [[cell(c) for c in r] for r in con.sql(q.replace('PACK', pack)).fetchall()] for k, q in queries.items()}))
+
+def rows(sql):
+    return [[cell(c) for c in r] for r in con.execute(sql).fetchall()]
+
+march = "month = date '2026-03-01'"
+cols = "strftime(month, '%Y-%m'), n, controlled_n, control_pct, controlled_raw_n, control_pct_raw"
+out = {
+    "headline": rows(f"select {cols} from hba1c_control_monthly where {march}"),
+    "headline_by_cohort": rows(f"select {cols} from hba1c_control_monthly_by_cohort where cohort = 't2dm_value_set' and {march}"),
+    "naive": rows(f"select {cols} from hba1c_control_monthly_by_cohort where cohort = 'snomed_44054006' and {march}"),
+}
+for key, sql in queries.items():
+    out[key] = rows(sql)
+print(json.dumps(out))
 `;
-const ran = spawnSync('python3', ['-c', script, JSON.stringify(analysis.queries), picked.path], {
+const ran = spawnSync('python3', ['-c', script, packDir, picked.path, JSON.stringify(analysis.queries)], {
   encoding: 'utf8',
   maxBuffer: 1 << 24,
 });
@@ -91,22 +117,32 @@ if (ran.status !== 0) {
   process.exit(1);
 }
 const got = JSON.parse(ran.stdout);
+if (JSON.stringify(got.headline) !== JSON.stringify(got.headline_by_cohort)) {
+  console.error('OFFLINE: hba1c_control_monthly disagrees with the headline rows of hba1c_control_monthly_by_cohort');
+  process.exit(1);
+}
+for (const key of ['headline', 'naive']) {
+  if (JSON.stringify(got[key]) !== JSON.stringify(dataset.march[key])) {
+    console.error(`OFFLINE: ${key} on ${picked.id} drifted from the recording: ${JSON.stringify(got[key])}`);
+    process.exit(1);
+  }
+}
 for (const [k, want] of Object.entries(dataset.rows)) {
   if (JSON.stringify(got[k]) !== JSON.stringify(want)) {
     console.error(`OFFLINE: ${k} on ${picked.id} drifted from the recorded rows: ${JSON.stringify(got[k])}`);
     process.exit(1);
   }
 }
-console.log(`OFFLINE: re-ran ${Object.keys(dataset.rows).length} queries on ${picked.id}. Rows match the recording.`);
-
-const monthly = got.q1_monthly;
-for (const [mon, n, mmol, naive, normalized] of monthly) {
-  console.log(`OFFLINE ${picked.id} ${mon}: n=${n} mmol/mol=${mmol} naive=${naive}% normalized=${normalized}%`);
-}
-const [[firstMmol, mmolRows]] = got.q1_unit_change;
 console.log(
-  `OFFLINE ${picked.id}: HbA1c in mmol/mol from ${firstMmol} (${mmolRows} rows). Converted with NGSP = 0.09148 * IFCC + 2.152 before the 7% threshold.`
+  `OFFLINE: re-ran the shared views and ${Object.keys(dataset.rows).length} other queries on ${picked.id}. Rows match the recording.`
 );
+
+const headline = got.headline[0] ?? null;
+const naive = got.naive[0] ?? null;
+const headlineLabel = 'headline (hba1c_control_monthly, SNOMED 44054006 or ICD-10-CM E11.9)';
+const naiveLabel = 'naive (hba1c_control_monthly_by_cohort, SNOMED 44054006 only)';
+console.log(`OFFLINE ${picked.id} ${headlineLabel}: March 2026 ${formatRow(headline)}`);
+console.log(`OFFLINE ${picked.id} ${naiveLabel}: March 2026 ${formatRow(naive)}`);
 for (const [k, v] of Object.entries(dataset.answers)) {
   console.log(`REPLAY (no key) ${k.toUpperCase()} [${picked.id}]: ${v}`);
 }
@@ -117,19 +153,28 @@ const findings = {
   mode: 'REPLAY (no key)',
   dataset: dataset.name,
   answer: dataset.answers.q1,
-  findings: [{ ...dataset.finding, sql: [analysis.queries.q1_unit_change, analysis.queries.q1_monthly] }],
+  findings: [
+    {
+      title: 'March 2026 HbA1c control, headline and naive',
+      summary: dataset.answers.q1,
+      start_date: null,
+      end_date: null,
+      entities: ['44054006', 'E11.9', '4548-4'],
+      sql: [
+        "select * from hba1c_control_monthly where month = date '2026-03-01'",
+        "select * from hba1c_control_monthly_by_cohort where cohort = 'snomed_44054006' and month = date '2026-03-01'",
+      ],
+    },
+  ],
 };
 writeFileSync(join(outDir, 'findings.json'), JSON.stringify(findings, null, 2) + '\n');
 const evidence = [
   `REPLAY (no key) / OFFLINE evidence. Dataset: ${dataset.name}.`,
   '',
   `- Dataset choice: ${picked.why}.`,
-  `- Control: ${analysis.control}.`,
-  `- HbA1c in mmol/mol from ${firstMmol}, ${mmolRows} rows.`,
-  ...monthly.map(
-    ([mon, n, mmol, naive, normalized]) =>
-      `- ${mon}: n=${n}, mmol/mol rows=${mmol}, naive ${naive}%, normalized ${normalized}%`
-  ),
+  '- Definition: demos/_shared/data-packs/synthea-analytics/hba1c-control.sql',
+  `- ${headlineLabel}: March 2026 ${formatRow(headline)}`,
+  `- ${naiveLabel}: March 2026 ${formatRow(naive)}`,
   `- Q2: ${dataset.answers.q2}`,
   `- Q3: ${dataset.answers.q3}`,
   '- Answer-key scorer (answer-keys://analytics-10k/): not run. The private keys are not on this machine.',
