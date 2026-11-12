@@ -1,3 +1,5 @@
+Mode: OFFLINE (no key). The approval card is shown locally instead of by Grok Bot. Tests, trace, and the sha256 binding are real.
+
 # Approval card: design review
 
 Story: approval-gate (stage 06 Approve). Synthetic: true.
@@ -8,19 +10,19 @@ Story: approval-gate (stage 06 Approve). Synthetic: true.
 | Trace | REQ-001, RISK-002, RISK-001 |
 | Result | pass (4 passed, 0 failed) |
 | Data | 20 synthetic patients, 20 devices, seed 20261104 |
-| Commit | `6fbbd73020941d69d469b6515f0e44608b400dba` |
-| Record digest | `dafb8e8049627a1a72669ed416f0bce97c46d4fb6c183ceb03d16a21c0c59e91` |
+| Commit | `3aa9dd53d8ee74dd6050fccafcc4c230b7b1782a` |
+| Record digest | `4e0a0a669870374082b351b07e8f68e720b83f7264aad31f0a65a0309a1ccf4d` |
 
 Approving means: the evidence above shows the design input is met. The decision is bound to this digest; any later edit to EVIDENCE.md or trace.json invalidates it.
 
 Approve:
 
 ```
-node demos/approval-gate/gate.mjs approve --signer "<name>" --role "<role>" --channel grok-bot
+node demos/approval-gate/gate.mjs approve --signer "<name>" --role "<role>" --channel offline-cli
 ```
 
 Reject:
 
 ```
-node demos/approval-gate/gate.mjs approve --decision rejected --signer "<name>" --role "<role>" --channel grok-bot
+node demos/approval-gate/gate.mjs approve --decision rejected --signer "<name>" --role "<role>" --channel offline-cli
 ```

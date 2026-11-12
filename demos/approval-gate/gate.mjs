@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Design review gate on evidence v2 for the P1 device cohort.
 //
-//   node demos/approval-gate/gate.mjs build
+//   node demos/approval-gate/gate.mjs build [--mode live|offline]
 //   node demos/approval-gate/gate.mjs approve --signer "<name>" --role "<role>" [--decision approved|rejected]
 //                                             [--meaning "<text>"] [--channel grok-bot|cli]
 //   node demos/approval-gate/gate.mjs verify
@@ -39,6 +39,17 @@ const arg = (name, fallback) => {
   const i = process.argv.indexOf(`--${name}`);
   return i > 0 ? process.argv[i + 1] : fallback;
 };
+const MODES = { live: 'live', offline: 'OFFLINE (no key)', replay: 'REPLAY (no key)' };
+const envMode = process.env.DEMO_MODE === 'replay' ? 'offline' : process.env.DEMO_MODE;
+const requestedMode = arg('mode', envMode || 'live');
+if (!MODES[requestedMode]) {
+  console.error('approval-gate: --mode must be live or offline');
+  process.exit(2);
+}
+const modeLine = (mode) =>
+  mode === 'live'
+    ? 'Mode: live'
+    : 'Mode: OFFLINE (no key). The approval card is shown locally instead of by Grok Bot. Tests, trace, and the sha256 binding are real.';
 const git = (...a) => execFileSync('git', a, { cwd: repoRoot, encoding: 'utf8' }).trim();
 const sha256 = (text) => createHash('sha256').update(text).digest('hex');
 const withoutApproval = (md) =>
@@ -110,12 +121,24 @@ function build() {
       commit,
     };
   });
-  const trace = { schema: 'evidence-v2/trace', version: 2, story: STORY, synthetic: true, commit, runs: [run], rows };
+  const mode = requestedMode;
+  run.mode = mode;
+  const trace = {
+    mode,
+    schema: 'evidence-v2/trace',
+    version: 2,
+    story: STORY,
+    synthetic: true,
+    commit,
+    runs: [run],
+    rows,
+  };
   writeFileSync(join(out, 'trace.json'), `${JSON.stringify(trace, null, 2)}\n`);
 
   const ids = [...new Set(rows.flatMap((x) => [x.req, x.risk]))].join(', ');
   const result = run.failed === 0 && r.status === 0 ? 'pass' : 'fail';
   const md = [
+    modeLine(mode),
     `Requirement: ${REQUIREMENT}`,
     `Change: ${arg('change', `P1 device cohort (${pack}, seed ${manifest.seed}): ECG summary parser and Foo Medical vitals ingest`)}`,
     `Test: ${run.command}`,
@@ -140,6 +163,8 @@ function build() {
 
   const rec = record();
   const card = [
+    `${modeLine(mode)}`,
+    '',
     '# Approval card: design review',
     '',
     `Story: ${STORY} (stage 06 Approve). Synthetic: true.`,
@@ -158,18 +183,20 @@ function build() {
     'Approve:',
     '',
     '```',
-    'node demos/approval-gate/gate.mjs approve --signer "<name>" --role "<role>" --channel grok-bot',
+    `node demos/approval-gate/gate.mjs approve --signer "<name>" --role "<role>" --channel ${mode === 'live' ? 'grok-bot' : 'offline-cli'}`,
     '```',
     '',
     'Reject:',
     '',
     '```',
-    'node demos/approval-gate/gate.mjs approve --decision rejected --signer "<name>" --role "<role>" --channel grok-bot',
+    `node demos/approval-gate/gate.mjs approve --decision rejected --signer "<name>" --role "<role>" --channel ${mode === 'live' ? 'grok-bot' : 'offline-cli'}`,
     '```',
     '',
   ].join('\n');
   writeFileSync(join(out, 'APPROVAL-CARD.md'), card);
-  console.log(`approval-gate: build ${result} (${run.passed} passed, ${run.failed} failed). Approval: pending`);
+  console.log(
+    `approval-gate: ${MODES[mode]} build ${result} (${run.passed} passed, ${run.failed} failed). Approval: pending`
+  );
   console.log(`approval-gate: record digest ${rec.digest}`);
   process.exit(result === 'pass' ? 0 : 1);
 }
@@ -187,8 +214,10 @@ function approve() {
     process.exit(1);
   }
   const trace = JSON.parse(readFileSync(join(out, 'trace.json'), 'utf8'));
+  const mode = trace.mode ?? 'live';
   const decidedAt = new Date().toISOString();
   const approval = {
+    mode,
     schema: 'evidence-v2/approval',
     version: 2,
     story: STORY,
@@ -198,7 +227,7 @@ function approve() {
     meaning: arg('meaning', `Design review ${decision === 'approved' ? 'passed' : 'failed'} for REQ-001`),
     signer: { name: signer, role },
     decided_at: decidedAt,
-    channel: arg('channel', 'cli'),
+    channel: arg('channel', mode === 'live' ? 'cli' : 'offline-cli'),
     record: record(),
   };
   writeFileSync(join(out, 'approval.json'), `${JSON.stringify(approval, null, 2)}\n`);
@@ -208,7 +237,7 @@ function approve() {
     `Approval: ${decision} by ${signer} (${role}) at ${decidedAt}`
   );
   writeFileSync(mdPath, md);
-  console.log(`approval-gate: ${decision} by ${signer} (${role}); digest ${approval.record.digest}`);
+  console.log(`approval-gate: ${MODES[mode]} ${decision} by ${signer} (${role}); digest ${approval.record.digest}`);
 }
 
 function verify() {
@@ -225,7 +254,7 @@ function verify() {
     process.exit(1);
   }
   console.log(
-    `approval-gate: VALID. ${approval.decision} by ${approval.signer.name} (${approval.signer.role}) at ${approval.decided_at}; digest ${now.digest}`
+    `approval-gate: ${MODES[approval.mode ?? 'live']} VALID. ${approval.decision} by ${approval.signer.name} (${approval.signer.role}) at ${approval.decided_at}; digest ${now.digest}`
   );
 }
 
