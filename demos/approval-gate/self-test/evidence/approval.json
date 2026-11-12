@@ -1,0 +1,24 @@
+{
+  "mode": "offline",
+  "schema": "evidence-v2/approval",
+  "version": 2,
+  "story": "approval-gate",
+  "synthetic": true,
+  "commit": "3aa9dd53d8ee74dd6050fccafcc4c230b7b1782a",
+  "decision": "approved",
+  "meaning": "Design review passed for REQ-001 (OFFLINE (no key) run)",
+  "signer": {
+    "name": "Self Test",
+    "role": "pipeline self-test, not a human decision"
+  },
+  "decided_at": "2026-11-12T21:06:38.550Z",
+  "channel": "offline-cli",
+  "record": {
+    "algorithm": "sha256",
+    "files": {
+      "EVIDENCE.md": "a8632706673f1c3b6cc8cc0904eff348e096ddcd5e5229e79db681dc89d9cd3f",
+      "trace.json": "0180f3b7acef5834da146bc1700b4d642c2da32148fa1a01e0f027344f0fb13d"
+    },
+    "digest": "4e0a0a669870374082b351b07e8f68e720b83f7264aad31f0a65a0309a1ccf4d"
+  }
+}
