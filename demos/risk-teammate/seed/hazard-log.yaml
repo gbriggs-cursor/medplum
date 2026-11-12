@@ -1,0 +1,20 @@
+product: "{prospect} patch v2 software"
+synthetic: true
+htest: true
+fiction: Fictional device software for this demo. Not a marketed or cleared device.
+note: Rows here are fixtures. They were not filed by a bot run in this repository.
+next_id: HAZ-002
+hazards:
+  - id: HAZ-001
+    req_id: REQ-001
+    fixture: true
+    hazard: ECG summary is associated with a different synthetic subject than the blood-pressure panel
+    situation: A clinician reads the summary while the chart for another subject is open
+    harm: Delayed recognition of an abnormal strip in the fictional clinic workflow
+    sequence: The subject id is dropped on ingest, and the next summary attaches to the open chart
+    severity: 2
+    probability: 1
+    safety_class: B
+    risk_control: Reject a summary that arrives without a subject id
+    status: filed
+    jira_key: null

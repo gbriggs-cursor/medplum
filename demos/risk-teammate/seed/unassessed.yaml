@@ -1,0 +1,13 @@
+product: "{prospect} patch v2 software"
+synthetic: true
+htest: true
+fiction: >-
+  Fixture standing in for a design input the requirements clerk would file.
+  The clerk does not have to run first. No hazard and no safety class are
+  stored here.
+req_id: REQ-011
+design_input: >-
+  The software shall show a visible alert when systolic blood pressure from
+  the {prospect} patch v2 is at or above 180 mmHg on two consecutive readings.
+hazard: null
+safety_class: null

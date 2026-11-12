@@ -1,0 +1,15 @@
+{
+  "label": "OFFLINE",
+  "read": "Checked-in GIO search fixture. Not a live Jira response.",
+  "jql": "project = GIO AND summary ~ \"REQ-001\" ORDER BY key ASC",
+  "issues": [
+    {
+      "key": "GIO-FIXTURE-001",
+      "fields": {
+        "summary": "REQ-001 Ingest and display patch blood-pressure panels and ECG summaries",
+        "status": { "name": "To Do" },
+        "labels": ["demo", "medplum", "story:device-evidence", "track:ls", "stage:03"]
+      }
+    }
+  ]
+}

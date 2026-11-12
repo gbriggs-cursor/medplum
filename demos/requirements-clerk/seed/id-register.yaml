@@ -1,0 +1,9 @@
+product: "{prospect} patch v2 software"
+synthetic: true
+htest: true
+fiction: Fictional device software for this demo. Not a marketed or cleared device.
+allocated:
+  - id: REQ-001
+    title: Ingest and display patch blood-pressure panels and ECG summaries
+    note: Already traced by the device-evidence story. Do not file it again.
+next_id: REQ-010
