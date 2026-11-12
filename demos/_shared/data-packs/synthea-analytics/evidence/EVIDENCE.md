@@ -25,3 +25,18 @@ verify.py synthea-analytics-10k: PASS: synthea-analytics-10k (0 failed)
 fetch.sh (release URL): curl: (22) The requested URL returned error: 404  (release not published)
 fetch.sh (L13_P2_URL=file://...tar.gz): PASS: synthea-analytics-10k (0 failed)
 ```
+
+## Release fetch (published asset, 2026-11-12)
+
+Requirement: the published P2 release asset downloads, matches the sha256 pinned in pack.yaml, and verifies.
+Change: none (the release was published by a maintainer; fetch.sh and pack.yaml are unchanged in this step).
+Test: ./fetch.sh with no overrides (default URL and sha256 from pack.yaml), then python3 verify.py on the unpacked pack.
+Result: pass (fetch.sh exit 0, verify 28 checks, 0 failed). Raw output: evidence/fetch-verify-release-run.txt
+Synthetic: true
+
+| Requirement | Test | Run | Result |
+| --- | --- | --- | --- |
+| Release URL returns 200 | curl -L the release URL | 2026-11-12, env 67842161 | pass (200) |
+| Downloaded tarball matches pinned sha256 | fetch.sh sha256 check | 2026-11-12 | pass (5f803a52...0cef) |
+| Unpacked P2 pack matches manifest, Parquet and analytics.duckdb agree | fetch.sh runs verify.py; standalone verify.py | 2026-11-12 | pass (28 checks, 0 failed) |
+| Planted tables are queryable from the built DB | duckdb CLI count on analytics.duckdb | 2026-11-12 | pass (patients 11842; HbA1c 4548-4 rows 25263) |

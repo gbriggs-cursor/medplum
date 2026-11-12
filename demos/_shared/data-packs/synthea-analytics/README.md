@@ -20,7 +20,7 @@ FETCH_P2=1 demos/_shared/data-packs/synthea-analytics/install.sh # also fetch an
 
 `install.sh` installs `openjdk-21-jre-headless` with apt if Java is missing, downloads the pinned Synthea jar to `~/.cache/medplum-demos/synthea/` and checks its sha256, installs `duckdb==1.1.3` with pip, and puts the DuckDB CLI in `~/.local/bin`. It reaches github.com and pypi.org, so run it while building the environment, never during a demo.
 
-`fetch.sh` downloads `synthea-analytics-10k.tar.gz` from release `data-p2-synthea-analytics-10k-v1`, checks the sha256 in `pack.yaml`, unpacks it, builds `analytics.duckdb`, and runs `verify.py`. **The release is not published yet**, so `fetch.sh` currently fails with a 404. Until it is, build P2 locally (below) or set `L13_P2_URL` to another copy of the tarball.
+`fetch.sh` downloads `synthea-analytics-10k.tar.gz` from the prerelease `data-p2-synthea-analytics-10k-v1` on gbriggs-cursor/medplum, checks the sha256 in `pack.yaml`, unpacks it, builds `analytics.duckdb`, and runs `verify.py`. It was run end to end against the published URL on 2026-11-12 (output in `evidence/fetch-verify-release-run.txt`). To use another copy, set `L13_P2_URL` and `L13_P2_SHA256`.
 
 ## Build from scratch
 

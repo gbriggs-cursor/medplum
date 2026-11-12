@@ -27,7 +27,7 @@ packs:
       repo: gbriggs-cursor/medplum
       tag: data-p2-synthea-analytics-10k-v1
       url: https://github.com/gbriggs-cursor/medplum/releases/download/data-p2-synthea-analytics-10k-v1/synthea-analytics-10k.tar.gz
-      status: not published (the building agent had no release permission); see README.md
+      status: published as a prerelease; fetch.sh verified against this URL on 2026-11-12 (evidence/fetch-verify-release-run.txt)
     install_path: ~/.cache/medplum-demos/synthea-analytics-10k
 
 answer_key: answer-keys://analytics-10k/
