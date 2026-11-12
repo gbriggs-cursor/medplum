@@ -6,16 +6,16 @@ All data is synthetic. All stories run in cloud agent environment `67842161`, us
 
 ## Layout
 
-| Path | Purpose |
-| --- | --- |
-| `catalog.yaml` | Generated index of every story. Do not edit by hand. |
-| `<story>/story.yaml` | The story card (fields below). |
-| `<story>/README.md` | Talk track: setup line, wow line, what to click, fallback. |
-| `<story>/prompt.md` | Exact prompt, with `{prospect}` and other variables. Defaults live in the card. |
-| `<story>/seed/`, `<story>/reset.sh` | Seed data and an idempotent reset. Only where the story seeds data. |
-| `_shared/labels.md` | Jira label taxonomy. |
-| `_shared/skills/` | Shared skills (for example `evidence-package`). |
-| `_shared/scripts/catalog.mjs` | Validates every card and rebuilds `catalog.yaml`. |
+| Path                                | Purpose                                                                         |
+| ----------------------------------- | ------------------------------------------------------------------------------- |
+| `catalog.yaml`                      | Generated index of every story. Do not edit by hand.                            |
+| `<story>/story.yaml`                | The story card (fields below).                                                  |
+| `<story>/README.md`                 | Talk track: setup line, wow line, what to click, fallback.                      |
+| `<story>/prompt.md`                 | Exact prompt, with `{prospect}` and other variables. Defaults live in the card. |
+| `<story>/seed/`, `<story>/reset.sh` | Seed data and an idempotent reset. Only where the story seeds data.             |
+| `_shared/labels.md`                 | Jira label taxonomy.                                                            |
+| `_shared/skills/`                   | Shared skills (for example `evidence-package`).                                 |
+| `_shared/scripts/catalog.mjs`       | Validates every card and rebuilds `catalog.yaml`.                               |
 
 ## Story card fields
 
@@ -39,7 +39,7 @@ All data is synthetic. All stories run in cloud agent environment `67842161`, us
 | `variables` | Prompt variables and defaults. `prospect` defaults to Acme Cardio or Foo Medical. |
 | `jira` | `project: GIO`, `automation`, and the labels from `_shared/labels.md`. |
 | `answer_key` | Optional. `answer-keys://<story>/` (see below). |
-| `depends_on` | Optional. Other stories this one reuses, by catalog `code`, each with `provides` (what it uses) and optional `workstream` and `planned_path`. A code with no card yet is listed under `pending` in the catalog. |
+| `depends_on` | Optional. Other stories this one reuses, by catalog `code`, each with `provides` (what it uses) and optional `workstream` and `planned_path`. A code with no card yet is listed under `pending` in the catalog, and the story runs in its documented stub mode until it lands. |
 | `offline` | Command from the repo root that runs the story with no API keys. Prints `REPLAY (no key)` or `OFFLINE (no key)` and exits 0. |
 | `default_mode` | `replay` or `offline`. The default demo path is key-free. |
 | `live_mode_note` | One line starting `Live mode available once keys are added:`. |
@@ -52,12 +52,12 @@ Defaults use the generic account: Acme Cardio (device maker) and Foo Medical (pa
 
 For prospects that are neither GxP nor device makers (for example a practice-management software company). All four use `track:generic` and default to Foo Medical.
 
-| Code | Story | Reuses | Runs today |
-| --- | --- | --- | --- |
-| G8 | `phi-safe-dev` | L11 `demos/_shared/phi/redact.mjs` | `node demos/phi-safe-dev/run.mjs` (REPLAY, no key) |
-| G9 | `front-office-voice` | L9 `demos/support-voice`, L11 redact | `node demos/front-office-voice/run.mjs` (REPLAY callers, OFFLINE ticket) |
-| G10 | `practice-analytics` | L13 `fixture-100` | `node demos/practice-analytics/run.mjs` (REPLAY). The 10k pack is not required |
-| G11 | `integration-docs` | Source anchors in `anchors.txt` | `node demos/integration-docs/run.mjs` (REPLAY guide, OFFLINE anchor check) |
+| Code | Story                | Reuses                                                                | Runs today                                                                 |
+| ---- | -------------------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| G8   | `phi-safe-dev`       | L11 `demos/_shared/phi/redact.mjs`                                    | `node demos/phi-safe-dev/run.mjs` (REPLAY, no key)                         |
+| G9   | `front-office-voice` | L9 `demos/support-voice`, L11 redact                                  | `node demos/front-office-voice/run.mjs` (REPLAY callers, OFFLINE ticket)   |
+| G10  | `practice-analytics` | L13 shared HbA1c views; P2 10k pack, `fixture-100` if the fetch fails | `node demos/practice-analytics/run.mjs` (REPLAY)                           |
+| G11  | `integration-docs`   | Source anchors in `anchors.txt`                                       | `node demos/integration-docs/run.mjs` (REPLAY guide, OFFLINE anchor check) |
 
 ## Answer keys
 

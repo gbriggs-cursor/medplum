@@ -4,7 +4,7 @@
 
 **Wow line:** "Three questions, 10,000 patients, every answer backed by a query. And it found the real cause of the HbA1c drop without being told."
 
-Key-free (no `CURSOR_API_KEY`): `node demos/practice-analytics/run.mjs`. It uses the P2 10k pack, running the shared `fetch.sh` (release `data-p2-synthea-analytics-10k-v1`, sha256 from `pack.yaml`) if the pack is not cached. It falls back to `fixture-100` only if the download, checksum, or `verify.py` fails. It re-runs the recorded SQL, checks the rows against `fixtures/replay/analysis.json`, and prints `OFFLINE DATASET:` with the dataset that produced the numbers. HbA1c in mmol/mol is converted to percent (NGSP = 0.09148 * IFCC + 2.152) before the 7% threshold. It writes `run/findings.json` and `run/EVIDENCE.md`. `evidence/EVIDENCE.md` is the committed 10k run. `DEMO_MODE=live` without the key prints BLOCKED and exits 3.
+Key-free (no `CURSOR_API_KEY`): `node demos/practice-analytics/run.mjs`. It uses the P2 10k pack, running the shared `fetch.sh` (release `data-p2-synthea-analytics-10k-v1`, sha256 from `pack.yaml`) if the pack is not cached. It falls back to `fixture-100` only if the download, checksum, or `verify.py` fails. Question 1 is a select from the shared views: `hba1c_control_monthly` for the headline cohort (SNOMED 44054006 or ICD-10-CM E11.9) and `hba1c_control_monthly_by_cohort` for the naive cohort (SNOMED 44054006 only). Each line is labeled. It prints `REPLAY (no key)` and `OFFLINE DATASET:` with the dataset that produced the numbers. It writes `run/findings.json` and `run/EVIDENCE.md`. `evidence/EVIDENCE.md` is the committed 10k run. `DEMO_MODE=live` without the key prints BLOCKED and exits 3.
 
 ## Run it
 
@@ -29,7 +29,7 @@ A live agent run of this prompt has not been done yet.
 
 ## Fallback
 
-No recorded live agent run. `run.mjs` replays the recorded analysis (10k pack, or `fixture-100` if P2 cannot be fetched). On `fixture-100` there is no type 2 HbA1c result from January to April 2026, so question 1 shows only the unit change.
+No recorded live agent run. `run.mjs` replays the recorded analysis (10k pack, or `fixture-100` if P2 cannot be fetched). On `fixture-100`, March 2026 has no rows in either cohort, so question 1 reports that.
 
 ## Reset
 

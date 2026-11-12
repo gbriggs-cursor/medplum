@@ -8,7 +8,7 @@ runtime: 5-10 min
 environment: '67842161'
 offline: node demos/practice-analytics/run.mjs
 default_mode: replay
-live_mode_note: 'Live mode available once keys are added: a cloud agent runs prompt.md against the P2 pack. Key-free mode re-runs the recorded analysis on the P2 10k pack (fetched with fetch.sh), or the committed 100-patient fixture if the fetch or checksum fails.'
+live_mode_note: 'Live mode available once keys are added: a cloud agent runs prompt.md against the P2 pack. Key-free mode reads question 1 from the shared HbA1c views on the P2 10k pack (fetched with fetch.sh), or the committed 100-patient fixture if the fetch or checksum fails.'
 
 persona: Product or analytics lead at {prospect}, a practice software company whose customers ask why their quality and visit numbers moved
 trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
