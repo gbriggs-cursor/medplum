@@ -1,0 +1,39 @@
+id: audit-qa
+code: L17
+title: Audit-ready Q&A
+track: ls
+stage: '07'
+readiness: new
+runtime: 3 min
+environment: '67842161'
+
+persona: QA lead preparing an audit of device software at {prospect}
+trigger: Presenter pastes prompt.md into the audit Q&A Grok Bot and asks for one requirement id. The bot answers from the trace index only.
+actors:
+  - Grok Bot (audit Q&A; not created or edited by this change)
+surface: The bot's answer in chat, sourced only from demos/audit-qa/seed/trace-index.yaml
+data_pack: Hand-written trace index standing in for an L7 DHF index. Requirement, risk, test, run, result, approval, and commit rows for a few REQ ids. All rows are fixtures and were not executed here.
+artifact: A chat answer that quotes the index for {requirement_id} and says when a link is missing. No files and no tickets are written.
+gate: Presenter reads the five links for the default requirement. On-stage only. The recorded approval is already in the fixture; the run does not wait for a new one.
+gate_blocks: false
+wow: Asking for REQ-012 returns the requirement, risk, test, run, and approval from the index
+proof:
+  - The bot's answer quoting REQ-012's requirement, risk, test, run, result, approval, and commit from the index
+  - An explicit statement that the row is a fixture and was not executed in this repository
+  - For a requirement with a null link, the answer says that link is not in the index
+reset: demos/audit-qa/reset.sh
+fallback: []
+fallback_note: >-
+  No earlier pull request has run this story. L7 has not built a trace index. Do not treat the
+  seed file as a live design-history file.
+blast_radius: No writes. The bot reads the fixture and answers in chat. No Jira, no GitHub, no Medplum write-back.
+answer_key: answer-keys://audit-qa/
+
+variables:
+  prospect: Acme Cardio
+  requirement_id: REQ-012
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:audit-qa', 'track:ls', 'stage:07']

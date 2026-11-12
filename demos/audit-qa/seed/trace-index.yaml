@@ -1,0 +1,87 @@
+product: "{prospect} patch v2 software"
+synthetic: true
+htest: true
+fiction: Fictional device software for this demo. Not a marketed or cleared device.
+source: Hand-written fixture standing in for an L7 design-history index. Not produced by an L7 run. Not produced by the risk-teammate bot.
+executed: false
+note: A pass result or an approval below is data in this file. It is not a test this repository ran and not a signature anyone collected.
+rows:
+  - req_id: REQ-010
+    fixture: true
+    executed: false
+    requirement: >-
+      The software shall show the 30-second ECG summary from the {prospect}
+      patch v2 within 5 seconds of the bundle being stored.
+    risk: null
+    test:
+      name: ecg summary appears within 5 seconds
+      command: node --test demos/audit-qa/seed/not-present/req-010.test.mjs
+      note: Recorded name only. That file is not in this repository.
+    run: 2026-11-04
+    result: pass
+    approval: null
+    commit:
+      sha: "0000000000000000000000000000000000000010"
+      note: Fixture identifier. Not a git object.
+
+  - req_id: REQ-011
+    fixture: true
+    executed: false
+    requirement: >-
+      The software shall show a visible alert when systolic blood pressure
+      from the {prospect} patch v2 is at or above 180 mmHg on two consecutive
+      readings.
+    risk: null
+    test: null
+    run: null
+    result: null
+    approval: null
+    commit: null
+
+  - req_id: REQ-012
+    fixture: true
+    executed: false
+    requirement: >-
+      The software shall record the software version and the commit of the
+      ECG parser in the evidence package for each verification run.
+    risk:
+      id: HAZ-012
+      hazard: The evidence package has no commit, so the tested build cannot be named
+      situation: An auditor asks which software produced a recorded result
+      harm: The fictional design history cannot be reconstructed. No patient harm is alleged.
+      severity: 1
+      probability: 2
+      safety_class: A
+      status: filed
+    test:
+      name: evidence package includes version and commit
+      command: node --test demos/audit-qa/seed/not-present/req-012.test.mjs
+      note: Recorded name only. That file is not in this repository.
+    run: 2026-11-04
+    result: pass
+    approval:
+      who: QA reviewer (synthetic role)
+      meaning: Approve the verification record for REQ-012
+      when: 2026-11-04T15:00:00Z
+      record_hash: sha256:8ca6a1980369705db866e0705f6318376d76a96a3791a52f044cc44128237729
+      hash_input: |
+        req_id=REQ-012
+        who=QA reviewer (synthetic role)
+        meaning=Approve the verification record for REQ-012
+        when=2026-11-04T15:00:00Z
+      written_back_to_medplum: false
+      note: Hash of hash_input, computed when this fixture was written. Not a live signature.
+    commit:
+      sha: "0000000000000000000000000000000000000012"
+      note: Fixture identifier. Not a git object.
+
+  - req_id: REQ-099
+    fixture: true
+    executed: false
+    requirement: The software shall display the clinic office hours on the portal footer.
+    risk: null
+    test: null
+    run: null
+    result: null
+    approval: null
+    commit: null
