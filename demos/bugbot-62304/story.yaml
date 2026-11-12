@@ -28,8 +28,7 @@ fallback_note: No live Bugbot take exists (Bugbot is not enabled here). The REPL
 offline: node demos/bugbot-62304/offline.mjs
 default_mode: replay
 live_mode_note: >-
-  Live mode available once Bugbot is enabled on gbriggs-cursor/medplum (a repository setting, not an env key):
-  Bugbot reviews the agent's draft PR instead of the replayed review. The seed check and rule evaluation are unchanged.
+  Live mode available once keys are added: none is needed for the seed check or rule evaluation, but live mode also needs Bugbot enabled on gbriggs-cursor/medplum. That is a repository setting, not a key. With it on, Bugbot reviews the agent's draft PR instead of the replayed review.
 blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. No Jira writes
 
 variables:
