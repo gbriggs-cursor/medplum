@@ -12,7 +12,8 @@ When it exits 0, show demos/verify-loop/evidence/TRACE.md and the first nine lin
 demos/verify-loop/evidence/EVIDENCE.md. Commit the source change (if any) and the evidence folder
 with git add -f demos/verify-loop/evidence, and open a draft PR against the default branch titled
 "Verify loop: planted date-boundary regression fixed by the remediation agent".
-If it exits 3, report the blocker line verbatim and stop.
+If it exits 3, report the BLOCKED line verbatim, then run DEMO_MODE=offline demos/verify-loop/run.sh
+and show its OFFLINE (no key) evidence the same way, saying it is OFFLINE.
 ```
 
 The remediation agent's own instructions are in `remediator/bot/instructions.md`. The script sends it the failing test names and the CI log.

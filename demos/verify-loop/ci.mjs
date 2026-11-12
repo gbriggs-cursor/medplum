@@ -21,13 +21,15 @@ const arg = (name, fallback) => {
 };
 const root = resolve(arg('root', repoRoot));
 const label = arg('label', 'ci');
+const mode = arg('mode', 'offline');
+const MODE_LABEL = { live: 'live', offline: 'OFFLINE (no key)', replay: 'REPLAY (no key)' };
 const out = resolve(arg('out', join(here, 'evidence')));
 mkdirSync(out, { recursive: true });
 
 const tracePath = join(out, 'trace.json');
-const trace = existsSync(tracePath)
-  ? JSON.parse(readFileSync(tracePath, 'utf8'))
-  : { schema: 'evidence-v2/trace', version: 2, story: spec.story, synthetic: true, runs: [], rows: [] };
+const fresh = { mode, schema: 'evidence-v2/trace', version: 2, story: spec.story, synthetic: true, runs: [], rows: [] };
+const trace = existsSync(tracePath) ? JSON.parse(readFileSync(tracePath, 'utf8')) : fresh;
+trace.mode = mode;
 
 const commit = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: repoRoot, encoding: 'utf8' }).trim();
 const runId = `run-${trace.runs.length + 1}`;
@@ -72,6 +74,7 @@ for (const r of spec.requirements) {
 const run = {
   id: runId,
   label,
+  mode,
   command,
   date: new Date().toISOString(),
   tree: root === repoRoot ? 'repository' : 'remediation workspace',
@@ -87,7 +90,7 @@ writeFileSync(join(out, 'TRACE.md'), renderMatrix(trace));
 
 const failing = assertions.filter((a) => a.status !== 'passed').map((a) => a.fullName);
 writeFileSync(join(out, `${runId}.failing.txt`), failing.map((n) => `- ${n}\n`).join(''));
-console.log(`verify-loop ${runId} (${label}): ${run.passed} passed, ${run.failed} failed`);
+console.log(`verify-loop ${MODE_LABEL[mode]} ${runId} (${label}): ${run.passed} passed, ${run.failed} failed`);
 for (const name of failing) {
   console.log(`  FAIL ${name}`);
 }
@@ -100,6 +103,8 @@ process.exit(run.failed === 0 && result.status === 0 ? 0 : 1);
 
 function renderMatrix(t) {
   const lines = [
+    `Mode: ${MODE_LABEL[t.mode]}`,
+    '',
     '# Trace matrix',
     '',
     `Story: ${t.story}. Synthetic: true. Commit: ${t.commit}`,

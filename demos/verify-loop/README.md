@@ -16,17 +16,33 @@
 | 6 CI green | `ci.mjs` again | `54 passed, 0 failed`, REQ-004 GREEN |
 | 7 Evidence | `evidence.mjs` | `EVIDENCE.md`, `trace.json`, `TRACE.md` |
 
-## Run it
+## Run it (default: OFFLINE (no key))
 
-1. Make sure environment `67842161` has `CURSOR_API_KEY` as a secret (the remediation agent needs it for model turns).
-2. Start a cloud agent from the default branch and paste `prompt.md`. Or run `demos/verify-loop/run.sh` yourself.
-3. Show `evidence/TRACE.md` (run-1 red, run-2 green) and `evidence/guard.json`.
+```
+DEMO_MODE=offline demos/verify-loop/run.sh
+```
 
-Exit codes: `0` green, `1` still red, `3` blocked (no credential), `4` guard rejected a test or non-source change, `5` the planted regression was not caught.
+No key is needed. The regression is planted and both test runs are real (`51 passed, 3 failed`, then `54 passed, 0 failed`). The guard and the trace matrix are real too. Only step 4 differs: the reference remediator reverses the planted patch instead of an agent writing a fix. Every banner, run label, and evidence file says `OFFLINE (no key)`. Don't present it as the agent's fix.
 
-## Rehearse without a model
+Show `evidence/TRACE.md` (run-1 red, run-2 green) and `evidence/guard.json`.
 
-`REMEDIATOR=reference demos/verify-loop/run.sh` reverses the patch instead of calling the agent. It proves the plant, CI, guard, and matrix in about 5 seconds. The evidence labels it "pipeline self-test, not an agent". Don't present it as the agent's fix.
+There's no `REPLAY (no key)` agent fixture, because no key was ever available to record a real agent fix. `DEMO_MODE=replay` runs OFFLINE and says so.
+
+## Modes
+
+| `DEMO_MODE` | Remediation | Needs |
+| --- | --- | --- |
+| unset (auto) | the agent when a Cursor key is present, otherwise OFFLINE | nothing |
+| `offline` or `replay` | OFFLINE reference remediator | nothing |
+| `live` | `@grok/agent-sdk` remediator | `CURSOR_API_KEY`. Without it, the script exits 3 with a `BLOCKED` line that points to the offline command |
+
+`REMEDIATOR=reference` still works as an alias for OFFLINE.
+
+Exit codes: `0` green, `1` still red, `2` usage, `3` blocked (live mode without a key), `4` guard rejected a test or non-source change, `5` the planted regression was not caught.
+
+## Live mode (once keys are added)
+
+With `CURSOR_API_KEY` available, `demos/verify-loop/run.sh` picks the agent on its own. You can also start a cloud agent from the default branch and paste `prompt.md`.
 
 ## Answer key
 
