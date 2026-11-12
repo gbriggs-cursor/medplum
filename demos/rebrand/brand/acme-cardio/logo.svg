@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="48" viewBox="0 0 240 48" role="img" aria-label="Acme Cardio Companion">
+  <path d="M24 42 C10 32 4 24 4 15 A10 10 0 0 1 24 10 A10 10 0 0 1 44 15 C44 24 38 32 24 42 Z" fill="#B3261E"/>
+  <polyline points="8,24 16,24 20,16 26,32 30,22 40,22" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="54" y="22" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700" fill="#1B1B1F">Acme Cardio</text>
+  <text x="54" y="40" font-family="Inter, system-ui, sans-serif" font-size="13" fill="#5F5E66">Companion</text>
+</svg>

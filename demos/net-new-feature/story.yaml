@@ -1,0 +1,36 @@
+id: net-new-feature
+code: G1
+title: Net-new feature
+track: generic
+stage: generic
+readiness: exists
+runtime: 10-15 min
+environment: '67842161'
+
+persona: Engineering lead at a digital health company ({prospect})
+trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+actors:
+  - Cursor cloud agent (Plan mode, then Agent)
+  - Bugbot
+surface: packages/react (new component) and the packages/app patient Devices tab
+data_pack: Synthetic Device + Observation fixture the agent writes under demos/_shared/data/ (tagged synthetic)
+artifact: Draft PR with a new @medplum/react component, a patient tab, Vitest tests, and an evidence/EVIDENCE.md
+gate: Presenter shows the plan before execution. On-stage only
+gate_blocks: false
+wow: A new @medplum/react component appears live in the app's Devices tab, built from a one-line idea
+proof:
+  - Draft PR link
+  - Vitest output in the transcript
+  - Screenshot of the Devices tab
+reset: null
+fallback: [10, 14]
+blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. No Jira writes
+
+variables:
+  prospect: Foo Medical
+  feature_idea: a patient Devices tab that lists connected Device resources and charts the last 30 days of readings
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:net-new-feature', 'track:generic']

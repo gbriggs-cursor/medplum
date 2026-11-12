@@ -1,0 +1,38 @@
+id: device-evidence
+code: L3
+title: Traced build (device evidence)
+track: ls
+stage: '03'
+readiness: adapt
+runtime: 15 min
+environment: '67842161'
+
+persona: QA/RA or software lead for a connected cardiac device at {prospect}
+trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+actors:
+  - Cursor cloud agent
+  - evidence-package skill
+  - Bugbot
+surface: Foo Medical vitals and a new ECG summary parser loaded through MockClient
+data_pack: P1 device cohort, 20 synthetic patients on the Acme Cardio patch v2 (BP + ECG), seed 20261104, every resource tagged synthetic + HTEST
+artifact: Draft PR with the generated bundle, manifest.json, ECG parser, Vitest tests, coverage, and evidence/EVIDENCE.md with a requirement-to-test-to-run-to-result table
+gate: Presenter walks the trace table in EVIDENCE.md. On-stage only
+gate_blocks: false
+wow: The agent builds the ECG parser with unit tests and carries the requirement ID from data to evidence
+proof:
+  - Draft PR link
+  - manifest.json counts (20 patients, 20 devices) and seed
+  - evidence/EVIDENCE.md with Result pass and a count
+reset: demos/device-evidence/reset.sh
+fallback: [11]
+blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. No Jira writes
+
+variables:
+  prospect: Acme Cardio
+  seed: '20261104'
+  requirement_id: REQ-001
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:device-evidence', 'track:ls', 'stage:03']

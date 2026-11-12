@@ -1,0 +1,36 @@
+id: ticket-to-pr
+code: G2
+title: Ticket-to-PR automation
+track: generic
+stage: generic
+readiness: exists
+runtime: 15-25 min
+environment: '67842161'
+
+persona: Platform or KTLO engineering manager at {prospect}
+trigger: Demo Setup creates a GIO ticket from seed/ticket.md with the automation labels; automation d5489670 starts a cloud agent
+actors:
+  - Jira automation d5489670
+  - Cursor cloud agent
+  - Bugbot
+surface: packages/core search matching, packages/mock MockClient, packages/fhir-router MemoryRepository
+data_pack: None. The ticket text in seed/ticket.md describes a real MockClient search gap
+artifact: Draft PR that cites the GIO ticket, with a regression test and an evidence/EVIDENCE.md
+gate: Presenter shows the PR body citing the ticket. On-stage only
+gate_blocks: false
+wow: A new Jira ticket turns into a draft PR with nobody touching Cursor
+proof:
+  - GIO ticket key
+  - Draft PR link opened by cursor[bot] citing that key
+  - Test output in the PR body
+reset: demos/ticket-to-pr/reset.sh
+fallback: [4, 9, 16]
+blast_radius: One new GIO ticket (created by Demo Setup, status never changed) and one GitHub draft PR
+
+variables:
+  prospect: Acme Cardio
+
+jira:
+  project: GIO
+  automation: true
+  labels: [demo, medplum, 'story:ticket-to-pr', 'track:generic', automatable, agent-safe, maintenance]
