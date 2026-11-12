@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Writes evidence/EVIDENCE.md (evidence v2) from the runs recorded in trace.json.
 //
-//   node demos/verify-loop/evidence.mjs --out <evidence dir> --remediator <agent|reference>
+//   node demos/verify-loop/evidence.mjs --out <evidence dir> --mode <live|offline>
 
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync } from 'node:fs';
@@ -12,7 +12,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, '..', '..');
 const arg = (name) => process.argv[process.argv.indexOf(`--${name}`) + 1];
 const out = resolve(arg('out'));
-const remediator = arg('remediator');
+const mode = arg('mode');
 
 const spec = JSON.parse(readFileSync(join(here, 'trace-spec.json'), 'utf8'));
 const trace = JSON.parse(readFileSync(join(out, 'trace.json'), 'utf8'));
@@ -24,9 +24,13 @@ const git = (...a) => execFileSync('git', a, { cwd: repoRoot, encoding: 'utf8' }
 const netDiff = git('diff', '--stat', 'HEAD', '--', 'packages/');
 
 const who =
-  remediator === 'agent'
+  mode === 'live'
     ? 'Agent SDK remediator (demos/verify-loop/remediator, @grok/agent-sdk 0.6.0)'
-    : 'reference remediator (reversed the planted patch; pipeline self-test, not an agent)';
+    : 'OFFLINE (no key) reference remediator (reversed the planted patch; not an agent)';
+const modeLine =
+  mode === 'live'
+    ? 'Mode: live (Agent SDK remediator)'
+    : 'Mode: OFFLINE (no key). Reference remediator, not an agent. The plant, both test runs, the guard, and the trace are real.';
 const files = guard.changed.map((c) => c.file).join(', ');
 const change = netDiff
   ? `${who} changed ${files}; net diff from the base commit: ${netDiff.split('\n').pop().trim()}`
@@ -34,6 +38,7 @@ const change = netDiff
 const ids = spec.requirements.flatMap((r) => [r.req, r.risk]).join(', ');
 
 const lines = [
+  modeLine,
   `Requirement: ${spec.requirements.map((r) => `${r.req}: ${r.text}`).join(' ')}`,
   `Change: ${change}`,
   `Test: node demos/verify-loop/ci.mjs (${last.command})`,
