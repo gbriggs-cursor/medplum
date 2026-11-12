@@ -97,12 +97,14 @@ export function buildTicket(noteId, result) {
   return payload;
 }
 
-/** Dry run only: this story never writes to Jira. Key-free mode labels the file OFFLINE. */
-export function writeTicket(noteId, payload, { offline = false } = {}) {
+/** Dry run only: this story never writes to Jira. `label` is the file's first line when keys are absent. */
+export function writeTicket(noteId, payload, { offline = false, label } = {}) {
   const dir = join(storyDir, 'run', 'outbox');
   mkdirSync(dir, { recursive: true });
   const file = join(dir, `${noteId}.json`);
-  const body = offline ? { mode: 'OFFLINE', ...payload } : payload;
-  writeFileSync(file, JSON.stringify(body, null, 2) + '\n');
+  const mode = label ?? (offline ? 'OFFLINE' : undefined);
+  const body = mode ? { mode, ...payload } : payload;
+  const json = JSON.stringify(body, null, 2) + '\n';
+  writeFileSync(file, label ? `${label}\n${json}` : json);
   return file.slice(storyDir.length + 1);
 }

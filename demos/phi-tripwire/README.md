@@ -15,7 +15,7 @@ All data is synthetic (P3 pack, `demos/_shared/data-packs/p3-phi-like`).
 
 ## Key-free (no API keys)
 
-This is the default. There is no model step. The Jira step writes `run/outbox/<note>.json` with `"mode": "OFFLINE"` and does not call Jira.
+This is the default. There is no model step. With the Jira keys unset, the banner and the first line of `run/outbox/<note>.json` say `OFFLINE (no key)`. The story does not call Jira.
 
 ```bash
 node demos/phi-tripwire/scripts/tripwire.mjs --note P3-N-001
