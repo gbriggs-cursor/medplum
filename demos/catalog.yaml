@@ -5,6 +5,29 @@ jira_project: GIO
 default_prospect: Acme Cardio
 answer_keys: answer-keys:// resolves to a separate private repo (placeholder; see demos/README.md)
 stories:
+  - id: approval-gate
+    code: L6
+    title: Design review gate
+    track: ls
+    stage: "06"
+    readiness: new
+    runtime: 5 min
+    wow: A human approves on stage, approval.json records signer, meaning, and time against the evidence digest, and editing the evidence afterwards makes verify fail
+    trigger: Presenter pastes prompt.md part 1 into a new cloud agent started from the default branch
+    data_pack: P1 device cohort in demos/_shared/data-packs/p1-device-cohort (20 synthetic patients, Acme Cardio patch v2, seed 20261104, from PR
+    fallback:
+      - 11
+    reset: demos/approval-gate/reset.sh
+    automation: false
+    labels:
+      - demo
+      - medplum
+      - story:approval-gate
+      - track:ls
+      - stage:06
+    card: demos/approval-gate/story.yaml
+    prompt: demos/approval-gate/prompt.md
+    readme: demos/approval-gate/README.md
   - id: bugbot-62304
     code: L4
     title: IEC 62304 Bugbot rules
