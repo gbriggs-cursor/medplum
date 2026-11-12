@@ -97,9 +97,9 @@ stories:
     fallback:
       - 11
     reset: demos/batch-evidence/reset.sh
-    offline: null
-    default_mode: null
-    live_mode_note: null
+    offline: node demos/batch-evidence/src/demo.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: agent-sdk run calls the model, which calls refresh-evidence, and the evidence files are not labeled REPLAY (no key)."
     automation: false
     intake: false
     labels:
@@ -111,7 +111,6 @@ stories:
     card: demos/batch-evidence/story.yaml
     prompt: demos/batch-evidence/prompt.md
     readme: demos/batch-evidence/README.md
-<<<<<<< HEAD
   - id: bugbot-62304
     code: L4
     title: IEC 62304 Bugbot rules
@@ -164,11 +163,6 @@ stories:
     card: demos/complaint-capa/story.yaml
     prompt: demos/complaint-capa/prompt.md
     readme: demos/complaint-capa/README.md
-=======
-    offline: node demos/batch-evidence/src/demo.mjs
-    default_mode: replay
-    live_mode_note: "Live mode available once keys are added: agent-sdk run calls the model, which calls refresh-evidence, and the evidence files are not labeled REPLAY (no key)."
->>>>>>> origin/cursor/l14-batch-evidence-b9e2
   - id: device-evidence
     code: L3
     title: Traced build (device evidence)

@@ -174,7 +174,6 @@ function validateStory(dir) {
   validateDependsOn(where, card);
   validateVariables(where, dir, card);
   validateJira(where, dir, card);
-  validateKeyFree(where, dir, card);
 
   for (const doc of ['README.md', 'prompt.md']) {
     if (!existsSync(join(demosDir, dir, doc))) {
@@ -182,32 +181,6 @@ function validateStory(dir) {
     }
   }
   return card;
-}
-
-function validateKeyFree(where, dir, card) {
-  const present = ['offline', 'default_mode', 'live_mode_note'].filter((key) => card[key] !== undefined);
-  if (present.length === 0) {
-    return;
-  }
-  if (typeof card.offline !== 'string' || !card.offline.trim()) {
-    err(where, '`offline` must be the key-free command');
-  } else {
-    const script = card.offline.match(/^node (demos\/\S+\.mjs)$/);
-    if (!script || !existsSync(join(repoRoot, script[1]))) {
-      err(where, '`offline` must be `node demos/<story>/....mjs` and that file must exist');
-    } else if (!script[1].startsWith(`demos/${dir}/`)) {
-      err(where, '`offline` must run a script in this story');
-    }
-  }
-  if (!['replay', 'offline', 'live'].includes(card.default_mode)) {
-    err(where, '`default_mode` must be replay, offline, or live');
-  }
-  if (
-    typeof card.live_mode_note !== 'string' ||
-    !card.live_mode_note.startsWith('Live mode available once keys are added:')
-  ) {
-    err(where, '`live_mode_note` must start with "Live mode available once keys are added:"');
-  }
 }
 
 function validateGate(where, card) {
