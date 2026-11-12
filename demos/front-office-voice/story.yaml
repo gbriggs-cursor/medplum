@@ -3,41 +3,44 @@ code: G9
 title: Voice front-office support
 track: generic
 stage: generic
-readiness: planned
+readiness: new
 runtime: 5 min live, plus agent time
 environment: '67842161'
 
 persona: Head of support or product at {prospect}, a practice-management software company whose customers' front desks call in all day
-trigger: Presenter calls the Grok Voice line from the support-voice story (L9) using the front-office profile, playing one of the scripted synthetic callers
+trigger: Presenter submits the {call} script on the L9 support form (demos/support-voice/server.mjs). Grok Voice is not connected
 actors:
-  - Grok Voice intake with two-phase confirm (L9)
-  - PHI redaction before the Jira write (L11)
-  - '@grok/agent-sdk triage against the knowledge base (L9)'
-  - Ticket Triage and Fix Orchestrator Grok Bots (L9)
-  - Cursor cloud agent
-surface: Foo Medical portal (Appointments, Messages) and the front-office help articles in the support knowledge base (P4, from L9)
-data_pack: Front-office profile and three synthetic caller scripts (seed/front-office-profile.md, seed/calls.md); no real callers or numbers
-artifact: GIO intake ticket with identifiers redacted, then either a KB article PR (kb_gap call) or a fix PR (bug call), plus the triage note
-gate: Presenter reads the two-phase confirm aloud before the ticket is written. On-stage only; the confirm is the caller's, not an approval wait
+  - L9 support form and two-phase confirm (demos/support-voice/server.mjs)
+  - Redaction in demos/_shared/phi/redact.mjs and the L11 tripwire (demos/phi-tripwire)
+  - L9 offline triage (demos/support-voice)
+  - L10 QuestionnaireResponse path (demos/speech-to-fhir), only when the server is started with --medplum
+surface: The L9 support form, the dry-run ticket in demos/support-voice/run/outbox/, and the Foo Medical KB under demos/support-voice/kb/foomedical
+data_pack: Front-office profile (seed/front-office.json, same shape as demos/support-voice/prospects/foomedical.json) and three synthetic caller scripts (seed/calls.md). The server does not load this profile
+artifact: A redacted dry-run ticket JSON from the L9 server. Not a live GIO issue
+gate: Presenter reads the two-phase confirm aloud before the dry-run ticket is written. On-stage only
 gate_blocks: false
-wow: A front-desk manager's phone call becomes a redacted ticket and a docs or fix PR within minutes, with no one opening Jira or Cursor
+wow: A front-desk manager's call becomes a ticket with no patient details, then a docs or fix PR
 proof:
-  - GIO ticket link with no caller identifiers in it
-  - KB article draft PR or fix draft PR link
-  - Triage note on the ticket
+  - Preflight READY for L9, L10, and L11
+  - Dry-run ticket JSON in demos/support-voice/run/outbox/ with no caller identifiers, after someone runs the form
+  - A live GIO ticket or a draft PR only if a later run produces one
 reset: demos/front-office-voice/reset.sh
 fallback: []
-fallback_note: No recorded run in this repo yet. Use the L9 support-voice fallback once its card lands
-blast_radius: One GIO intake ticket (labels below, never automatable) and one GitHub draft PR in gbriggs-cursor/medplum. No Jira status changes from this story
+fallback_note: No recorded G9 run. L9's offline checks are the landed path; a live agent run of this prompt has not happened
+blast_radius: No live Jira write. demos/support-voice/server.mjs writes dry-run JSON unless started with --live-jira, which this story does not do. No Jira status changes. The dry-run ticket uses L9's labels (story:support-voice), not the labels on this card
 depends_on:
   - code: L9
     workstream: B
-    planned_path: demos/support-voice/
-    provides: Voice intake site, two-phase confirm, SDK triage, both Grok Bots, and a prospect-profile slot to load the front-office profile into
+    planned_path: demos/support-voice
+    provides: Support form, two-phase confirm, offline triage, and dry-run outbox. server.mjs loads only prospects/foomedical.json. POST /api/voice/session returns 503 without XAI_API_KEY
+  - code: L10
+    workstream: B
+    planned_path: demos/speech-to-fhir
+    provides: A confirmed intake written as a QuestionnaireResponse when the L9 server is started with --medplum. Needs a local Medplum server. Jira stays dry-run
   - code: L11
     workstream: B
-    planned_path: demos/support-voice/
-    provides: Redaction of caller name and date of birth before the Jira write
+    planned_path: demos/phi-tripwire
+    provides: Redaction in demos/_shared/phi/redact.mjs, the tripwire in demos/phi-tripwire, and the P3 pack at demos/_shared/data-packs/p3-phi-like. Jira output is dry-run JSON only
 
 variables:
   prospect: Foo Medical

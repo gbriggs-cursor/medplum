@@ -10,9 +10,9 @@ Rules: never copy a name, date of birth, MRN, phone, email, member ID or clinici
 code, tests, fixtures, commit messages, Jira, or the PR. Work only on synthetic twins: invented patient IDs
 that reproduce the same shape of data (dates, statuses, codes), tagged synthetic + HTEST.
 
-1. Write a redacted one-paragraph summary of the ticket. If the PHI redaction step from story L11 exists in
-   this repository (see demos/catalog.yaml), run the summary through it and file it as a GIO ticket with the
-   labels on demos/phi-safe-dev/story.yaml. If it does not exist, skip Jira entirely.
+1. Write a one-paragraph summary and redact it with redact() from demos/_shared/phi/redact.mjs (story L11,
+   demos/phi-tripwire). Do not create a Jira issue. L11 writes dry-run JSON only, and there is no Grok Bot
+   PHI screen in this repository.
 2. Reproduce the bug in demos/phi-safe-dev/app/recall.mjs with a failing synthetic-twin test in
    recall.test.mjs. Run: node --test demos/phi-safe-dev/app/*.test.mjs
 3. Fix the cause, not just the one patient. Add tests for the other cases the same cause affects.

@@ -20,7 +20,7 @@
 
 ## Dependencies
 
-- **L11 PHI tripwire (workstream B, `demos/support-voice/`)** supplies the redaction step before a Jira write. Until its card lands, `node demos/_shared/scripts/catalog.mjs --preflight phi-safe-dev` reports it as pending and the agent skips Jira. Everything else runs today.
+- **L11** (`demos/phi-tripwire`) supplies `demos/_shared/phi/redact.mjs`. The P3 pack is `demos/_shared/data-packs/p3-phi-like`. This story redacts locally and does not write to Jira.
 
 ## Fallback
 

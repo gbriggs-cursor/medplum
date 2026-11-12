@@ -82,15 +82,16 @@ stories:
     title: Voice front-office support
     track: generic
     stage: generic
-    readiness: planned
+    readiness: new
     runtime: 5 min live, plus agent time
-    wow: A front-desk manager's phone call becomes a redacted ticket and a docs or fix PR within minutes, with no one opening Jira or Cursor
-    trigger: Presenter calls the Grok Voice line from the support-voice story (L9) using the front-office profile, playing one of the scripted synthetic callers
-    data_pack: Front-office profile and three synthetic caller scripts (seed/front-office-profile.md, seed/calls.md); no real callers or numbers
+    wow: A front-desk manager's call becomes a ticket with no patient details, then a docs or fix PR
+    trigger: Presenter submits the {call} script on the L9 support form (demos/support-voice/server.mjs). Grok Voice is not connected
+    data_pack: Front-office profile (seed/front-office.json, same shape as demos/support-voice/prospects/foomedical.json) and three synthetic caller scripts (seed/calls.md). The server does not load this profile
     fallback: []
     reset: demos/front-office-voice/reset.sh
     depends_on:
       - L9
+      - L10
       - L11
     pending: []
     automation: false

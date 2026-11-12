@@ -1,0 +1,26 @@
+{
+  "id": "front-office",
+  "name": "Foo Medical",
+  "support_line": "Foo Medical front-office support",
+  "products": [
+    { "id": "appointments", "name": "Appointments", "surface": "Rescheduling, chairs, and reminder texts" },
+    { "id": "recall", "name": "Recall reminders", "surface": "Six-month hygiene recall lists" },
+    { "id": "portal", "name": "Patient portal", "surface": "Login, intake forms, and links in reminders" },
+    { "id": "messages", "name": "Messages", "surface": "Secure messages to the practice inbox" },
+    { "id": "eligibility", "name": "Insurance and billing", "surface": "Eligibility checks and claim status" }
+  ],
+  "voice_keyterms": [
+    "Foo Medical",
+    "recall list",
+    "hygiene recall",
+    "chair",
+    "operatory",
+    "reschedule",
+    "intake form",
+    "eligibility check",
+    "portal",
+    "reminder text"
+  ],
+  "disclaimer": "This is a demo line with synthetic data. Please do not share real patient information.",
+  "greeting": "Thanks for calling Foo Medical front-office support. I can help with appointments, recall reminders, the portal, messages, or eligibility."
+}

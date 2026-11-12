@@ -1,15 +1,17 @@
 # Front-office profile for the support-voice line
 
-> SYNTHETIC. A neutral profile for a practice-management software vendor's support line. Load it into the
-> support-voice story's prospect-profile slot (L9, `demos/support-voice/`) once that exists. Its exact file
-> format is defined there; this file holds the content only.
+> SYNTHETIC. Human-readable copy of `seed/front-office.json`, which matches the shape of
+> `demos/support-voice/prospects/foomedical.json`.
+>
+> `demos/support-voice/server.mjs` loads only `prospects/foomedical.json`. Nothing in L9 switches profiles,
+> so this file is not what the server reads.
 
 ## Who calls
 
 Front-desk staff and office managers at practices that use {prospect}'s software. They are not patients.
-They may mention a patient while describing a problem; the line must never ask for patient identifiers.
+They may mention a patient while describing a problem. The line must never ask for patient identifiers.
 
-## Products the voice agent knows
+## Products
 
 | Product | What callers ask about |
 | --- | --- |
@@ -23,14 +25,18 @@ They may mention a patient while describing a problem; the line must never ask f
 
 recall list, hygiene recall, chair, operatory, reschedule, intake form, eligibility check, portal, reminder text
 
-## Intents and routes
+## Intended routes
+
+These are the routes the scripts aim at. They have not been run through the server for this story. The P4
+KB under `demos/support-voice/kb/foomedical/` is written for patients (portal, patch, messages, appointments),
+not for a practice's front desk, so a script may not land on the route below.
 
 | Intent | Route | Outcome |
 | --- | --- | --- |
-| how-to the docs already answer | answer on the call | No ticket |
-| how-to the docs do not answer | `kb_gap` | GIO ticket, then a KB article draft PR |
-| product bug | `bug` | GIO ticket, then a fix draft PR |
+| how-to the docs already answer | answer on the form | No ticket |
+| how-to the docs do not answer | `kb_gap` | Dry-run ticket |
+| product bug | `bug` | Dry-run ticket |
 
-## Disclaimer the voice agent reads first
+## Disclaimer
 
 "This is a demo line with synthetic data. Please do not share real patient information."

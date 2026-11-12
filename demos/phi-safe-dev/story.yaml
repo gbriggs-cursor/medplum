@@ -11,7 +11,7 @@ persona: Engineering lead at {prospect}, a practice-management software company 
 trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
 actors:
   - Cursor cloud agent
-  - PHI redaction step from the PHI tripwire story (L11), once it lands
+  - Redaction in demos/_shared/phi/redact.mjs (L11)
   - check-no-phi.mjs diff tripwire
 surface: Hygiene recall list over FHIR Encounter resources (demos/phi-safe-dev/app/recall.mjs)
 data_pack: One synthetic front-desk ticket with realistic-looking fake identifiers (seed/ticket.md, all HTEST) plus synthetic-twin Encounter fixtures the agent writes
@@ -26,12 +26,12 @@ proof:
 reset: demos/phi-safe-dev/reset.sh
 fallback: []
 fallback_note: No recorded run yet. After the first live run, add its PR number here
-blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. Jira write happens only after L11 lands, and only with the redacted summary
+blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. No Jira write. L11's ticket path is dry-run JSON under demos/phi-tripwire/run/outbox/
 depends_on:
   - code: L11
     workstream: B
-    planned_path: demos/support-voice/
-    provides: Redaction step that strips identifiers before a Jira write. Until it lands the story runs without any Jira write
+    planned_path: demos/phi-tripwire
+    provides: redact() in demos/_shared/phi/redact.mjs and the tripwire in demos/phi-tripwire. The P3 pack is demos/_shared/data-packs/p3-phi-like. This story does not write a Jira ticket
 
 variables:
   prospect: Foo Medical

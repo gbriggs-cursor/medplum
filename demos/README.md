@@ -51,8 +51,8 @@ For prospects that are neither GxP nor device makers (for example a practice-man
 
 | Code | Story | Reuses | Runs today |
 | --- | --- | --- | --- |
-| G8 | `phi-safe-dev` | L11 redaction before Jira | Yes, without the Jira write |
-| G9 | `front-office-voice` | L9 support-voice line, L11 redaction | No, stubbed until L9 and L11 land |
+| G8 | `phi-safe-dev` | L11 `demos/phi-tripwire` and `demos/_shared/phi/redact.mjs` | Yes. Redacts locally. No Jira write |
+| G9 | `front-office-voice` | L9 `demos/support-voice`, L10 `demos/speech-to-fhir`, L11 `demos/phi-tripwire` | Preflight is READY. No live voice, no live Jira, no agent run of the prompt yet |
 | G10 | `practice-analytics` | L13 pack at `demos/_shared/data-packs/synthea-analytics` | Yes. Preflight is READY. A live agent run is still unverified |
 | G11 | `integration-docs` | Nothing | Yes |
 
