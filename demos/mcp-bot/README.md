@@ -21,7 +21,7 @@ A model turn that explores over MCP needs `CURSOR_API_KEY`. That secret is not s
 
 ## MCP
 
-The local server in this environment was probed. See the pull request body for the exact status and error. `packages/server/medplum.config.json` has no `mcpEnabled` key. The server default is false, and the route is mounted only when that flag is true. This story does not change that config and does not restart the shared server.
+The probe logs in to the local server as the seeded admin (`admin@example.com`) and sends that access token. It does not print the token. `packages/server/medplum.config.json` sets `mcpEnabled` to true for this demo server. The server default in code stays false. The pull request body has the probe transcript.
 
 ## Fallback
 
