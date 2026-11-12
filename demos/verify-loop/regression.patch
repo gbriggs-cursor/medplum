@@ -1,0 +1,16 @@
+diff --git a/packages/core/src/search/match.ts b/packages/core/src/search/match.ts
+index 97d3a900e..dc47d64ba 100644
+--- a/packages/core/src/search/match.ts
++++ b/packages/core/src/search/match.ts
+@@ -213,9 +213,9 @@ function matchesDateValue(resourceValue: Period, operator: Operator, filterValue
+     case Operator.GREATER_THAN:
+       return resourceEnd > filterEnd;
+     case Operator.LESS_THAN_OR_EQUALS:
+-      return resourceStart <= filterEnd;
++      return resourceStart < filterEnd && resourceStart < filterStart;
+     case Operator.GREATER_THAN_OR_EQUALS:
+-      return resourceEnd >= filterStart;
++      return resourceEnd > filterStart && resourceEnd > filterEnd;
+     case Operator.STARTS_AFTER:
+       return resourceStart > filterEnd;
+     case Operator.ENDS_BEFORE:

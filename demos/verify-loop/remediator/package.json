@@ -1,0 +1,9 @@
+{
+  "name": "verify-loop-remediator",
+  "private": true,
+  "type": "module",
+  "description": "Agent SDK remediation agent for the verify-loop demo story.",
+  "dependencies": {
+    "@grok/agent-sdk": "0.6.0"
+  }
+}
