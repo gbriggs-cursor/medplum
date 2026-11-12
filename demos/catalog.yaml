@@ -340,6 +340,32 @@ stories:
     card: demos/integration-docs/story.yaml
     prompt: demos/integration-docs/prompt.md
     readme: demos/integration-docs/README.md
+  - id: mcp-bot
+    code: L15
+    title: Medplum MCP plus Bot and Subscription
+    track: ls
+    stage: "03"
+    readiness: new
+    runtime: 15 min
+    wow: A synthetic pairing Observation becomes a Task. The MCP connection is probed and the result is reported as it happened
+    trigger: Demo Setup runs node demos/mcp-bot/scripts/offline.mjs. That replays the model turn and creates the Task on the local server.
+    data_pack: One synthetic Observation in seed/pairing-observation.json, tagged synthetic and HTEST, for an Acme Cardio patch. No real patient.
+    fallback: []
+    reset: demos/mcp-bot/reset.sh
+    offline: node demos/mcp-bot/scripts/offline.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: the model turn is not replayed, and this command still probes MCP and creates the Task on the local server."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:mcp-bot
+      - track:ls
+      - stage:03
+    card: demos/mcp-bot/story.yaml
+    prompt: demos/mcp-bot/prompt.md
+    readme: demos/mcp-bot/README.md
   - id: net-new-feature
     code: G1
     title: Net-new feature

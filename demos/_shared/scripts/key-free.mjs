@@ -68,13 +68,7 @@ export function ensureRunnerInstalled(runnerDir) {
   if (existsSync(join(runnerDir, 'node_modules/@grok/agent-sdk/package.json'))) {
     return;
   }
-  const result = spawnSync('npm', ['ci', '--ignore-scripts'], { cwd: runnerDir, encoding: 'utf8' });
-  if (result.stdout) {
-    process.stderr.write(result.stdout);
-  }
-  if (result.stderr) {
-    process.stderr.write(result.stderr);
-  }
+  const result = spawnSync('npm', ['ci', '--ignore-scripts'], { cwd: runnerDir, stdio: 'inherit' });
   if (result.status !== 0) {
     throw new Error(`npm ci failed in ${runnerDir}`);
   }
