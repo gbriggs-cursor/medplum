@@ -4,6 +4,8 @@
 
 **Wow line:** "The agent reproduced her bug on a synthetic twin, fixed it for every patient it affected, and the tripwire proves none of her identifiers left the ticket."
 
+Key-free (no `CURSOR_API_KEY`): `node demos/phi-safe-dev/run.mjs`. `DEMO_MODE=live` without that key prints BLOCKED and exits 3.
+
 ## Run it
 
 1. `demos/phi-safe-dev/reset.sh` shows the dependency status, runs the baseline tests (green), and prints the raw ticket.

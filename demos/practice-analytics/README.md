@@ -4,6 +4,8 @@
 
 **Wow line:** "Three questions, 10,000 patients, every answer backed by a query. And it found the real cause of the HbA1c drop without being told."
 
+Key-free (no `CURSOR_API_KEY`): `node demos/practice-analytics/run.mjs`. It replays the recorded analysis of `fixture-100`. The 10k pack is not required. `DEMO_MODE=live` without the key prints BLOCKED and exits 3.
+
 ## Run it
 
 L13 is on this branch: `demos/analytics-10k` and `demos/_shared/data-packs/synthea-analytics`. Check with:

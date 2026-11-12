@@ -6,6 +6,9 @@ stage: generic
 readiness: new
 runtime: 10-15 min
 environment: '67842161'
+offline: node demos/phi-safe-dev/run.mjs
+default_mode: replay
+live_mode_note: 'Live mode available once keys are added: a cloud agent runs prompt.md against the planted bug. Key-free mode replays that fix in a temp copy and writes an OFFLINE ticket.'
 
 persona: Engineering lead at {prospect}, a practice-management software company whose support tickets arrive full of patient details
 trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch

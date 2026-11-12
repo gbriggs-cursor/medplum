@@ -51,10 +51,10 @@ For prospects that are neither GxP nor device makers (for example a practice-man
 
 | Code | Story | Reuses | Runs today |
 | --- | --- | --- | --- |
-| G8 | `phi-safe-dev` | L11 `demos/phi-tripwire` and `demos/_shared/phi/redact.mjs` | Yes. Redacts locally. No Jira write |
-| G9 | `front-office-voice` | L9 `demos/support-voice`, L10 `demos/speech-to-fhir`, L11 `demos/phi-tripwire` | Preflight is READY. No live voice, no live Jira, no agent run of the prompt yet |
-| G10 | `practice-analytics` | L13 pack at `demos/_shared/data-packs/synthea-analytics` | Yes. Preflight is READY. A live agent run is still unverified |
-| G11 | `integration-docs` | Nothing | Yes |
+| G8 | `phi-safe-dev` | L11 `demos/_shared/phi/redact.mjs` | `node demos/phi-safe-dev/run.mjs` (REPLAY, no key) |
+| G9 | `front-office-voice` | L9 `demos/support-voice`, L11 redact | `node demos/front-office-voice/run.mjs` (REPLAY callers, OFFLINE ticket) |
+| G10 | `practice-analytics` | L13 `fixture-100` | `node demos/practice-analytics/run.mjs` (REPLAY). The 10k pack is not required |
+| G11 | `integration-docs` | Source anchors in `anchors.txt` | `node demos/integration-docs/run.mjs` (REPLAY guide, OFFLINE anchor check) |
 
 ## Answer keys
 

@@ -160,6 +160,7 @@ function validateStory(dir) {
   }
 
   validateGate(where, card);
+  validateKeyFree(where, card);
   validateDependsOn(where, card);
   validateVariables(where, dir, card);
   validateJira(where, dir, card);
@@ -180,6 +181,29 @@ function validateGate(where, card) {
 
 // A dependency names another story by catalog code, so it resolves once that story's card lands,
 // whatever folder it ends up in.
+function validateKeyFree(where, card) {
+  const present = ['offline', 'default_mode', 'live_mode_note'].filter((key) => card[key] !== undefined);
+  if (present.length === 0) {
+    return;
+  }
+  if (present.length !== 3) {
+    err(where, 'key-free stories need `offline`, `default_mode`, and `live_mode_note` together');
+    return;
+  }
+  if (typeof card.offline !== 'string' || !card.offline.trim()) {
+    err(where, '`offline` must be the key-free command');
+  }
+  if (!['replay', 'offline', 'live'].includes(card.default_mode)) {
+    err(where, '`default_mode` must be replay, offline, or live');
+  }
+  if (
+    typeof card.live_mode_note !== 'string' ||
+    !card.live_mode_note.startsWith('Live mode available once keys are added:')
+  ) {
+    err(where, '`live_mode_note` must start with "Live mode available once keys are added:"');
+  }
+}
+
 function validateDependsOn(where, card) {
   if (card.depends_on === undefined) {
     return;
@@ -337,6 +361,7 @@ function buildCatalog(cards, codes) {
           pending: pendingDeps(c, codes).map((d) => d.code),
         }
       : {}),
+    ...(c.offline ? { offline: c.offline, default_mode: c.default_mode, live_mode_note: c.live_mode_note } : {}),
     automation: c.jira?.automation === true,
     intake: c.jira?.intake === true,
     labels: c.jira?.labels ?? [],

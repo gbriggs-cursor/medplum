@@ -4,6 +4,8 @@
 
 **Wow line:** "One guide answers all four, and every claim links to the line of server code that proves it."
 
+Key-free (no `CURSOR_API_KEY`): `node demos/integration-docs/run.mjs`. It replays `fixtures/replay/guide.md` and checks `anchors.txt`. `DEMO_MODE=live` without the key prints BLOCKED and exits 3.
+
 ## Run it
 
 1. `demos/integration-docs/reset.sh` checks that every source anchor in `anchors.txt` still holds, then prints the partner questions. It fails if the code moved.

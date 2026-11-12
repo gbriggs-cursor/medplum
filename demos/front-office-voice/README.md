@@ -4,7 +4,7 @@
 
 **Wow line:** "One phone call. A ticket with no patient details in it, and a docs PR or a fix PR, before the presenter finishes the slide."
 
-The phone-call version needs Grok Voice. That client is not connected.
+Key-free (no `XAI_API_KEY`, no Jira keys): `node demos/front-office-voice/run.mjs`. It replays the three caller scripts through the L9 confirm and redact pipeline and writes `run/jira.json` labeled OFFLINE. `DEMO_MODE=live` without the keys prints BLOCKED and exits 3. The voice route returns 501 even when `XAI_API_KEY` is set.
 
 ## Run it
 

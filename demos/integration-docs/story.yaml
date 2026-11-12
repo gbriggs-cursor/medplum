@@ -6,6 +6,9 @@ stage: generic
 readiness: new
 runtime: 10-15 min
 environment: '67842161'
+offline: node demos/integration-docs/run.mjs
+default_mode: replay
+live_mode_note: 'Live mode available once keys are added: a cloud agent writes the integration guide from prompt.md. Key-free mode replays a recorded guide and checks it against anchors.txt.'
 
 persona: Partner engineering or developer relations lead at {prospect}, a healthcare SaaS company whose partners integrate over FHIR
 trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch

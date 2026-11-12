@@ -94,6 +94,9 @@ stories:
       - L10
       - L11
     pending: []
+    offline: node demos/front-office-voice/run.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: Grok Voice takes the call and the L9 server can write a live GIO issue. Key-free mode replays the caller scripts and writes OFFLINE dry-run JSON. The voice route returns 501 even when XAI_API_KEY is set."
     automation: false
     intake: false
     labels:
@@ -116,6 +119,9 @@ stories:
     data_pack: Four synthetic partner questions (seed/partner-questions.md) and the source anchors they must be verified against (anchors.txt)
     fallback: []
     reset: demos/integration-docs/reset.sh
+    offline: node demos/integration-docs/run.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: a cloud agent writes the integration guide from prompt.md. Key-free mode replays a recorded guide and checks it against anchors.txt."
     automation: false
     intake: false
     labels:
@@ -165,6 +171,9 @@ stories:
     depends_on:
       - L11
     pending: []
+    offline: node demos/phi-safe-dev/run.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: a cloud agent runs prompt.md against the planted bug. Key-free mode replays that fix in a temp copy and writes an OFFLINE ticket."
     automation: false
     intake: false
     labels:
@@ -213,6 +222,9 @@ stories:
     depends_on:
       - L13
     pending: []
+    offline: node demos/practice-analytics/run.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: a cloud agent runs prompt.md against the P2 pack. Key-free mode replays the recorded analysis of the committed 100-patient fixture."
     automation: false
     intake: false
     labels:
