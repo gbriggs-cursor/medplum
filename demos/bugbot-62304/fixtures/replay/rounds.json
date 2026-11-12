@@ -1,0 +1,79 @@
+{
+  "label": "REPLAY (no key)",
+  "source": "Authored from the rules in .cursor/BUGBOT.md (section IEC 62304) against the synthetic regulatory seed. Not captured from a Bugbot run; Bugbot is not enabled on this repository.",
+  "rounds": [
+    {
+      "id": "1-class-c-no-trace",
+      "step": "prompt.md part 1: the agent changes Vitals.utils.ts and writes evidence without a Trace line",
+      "files": [
+        { "path": "packages/react/src/PatientSummary/Vitals.utils.ts", "kind": "modified" },
+        { "path": "packages/react/src/PatientSummary/Vitals.utils.test.ts", "kind": "added" },
+        { "path": "evidence/EVIDENCE.md", "kind": "added" }
+      ],
+      "evidence": "Requirement: A blood-pressure entry whose diastolic value is greater than or equal to its systolic value is rejected.\nChange: createCompoundObservation returns undefined for an inverted blood-pressure panel\nTest: npx vitest run src/PatientSummary/Vitals.utils.test.ts (in packages/react)\nResult: pass (3 passed, 0 failed)\nSynthetic: true\nCommit: 1111111111111111111111111111111111111111\n",
+      "dependencyChanges": [],
+      "soupDiff": "",
+      "expected": [
+        {
+          "level": "high",
+          "rule": "trace-missing",
+          "subject": "packages/react/src/PatientSummary/Vitals.utils.ts"
+        }
+      ],
+      "review": "review-1-class-c-no-trace.md"
+    },
+    {
+      "id": "2-trace-added",
+      "step": "prompt.md part 2: the agent adds the Trace line from the regulatory seed",
+      "files": [
+        { "path": "packages/react/src/PatientSummary/Vitals.utils.ts", "kind": "modified" },
+        { "path": "packages/react/src/PatientSummary/Vitals.utils.test.ts", "kind": "added" },
+        { "path": "evidence/EVIDENCE.md", "kind": "added" }
+      ],
+      "evidence": "Requirement: A blood-pressure entry whose diastolic value is greater than or equal to its systolic value is rejected.\nChange: createCompoundObservation returns undefined for an inverted blood-pressure panel\nTest: npx vitest run src/PatientSummary/Vitals.utils.test.ts (in packages/react)\nResult: pass (3 passed, 0 failed)\nSynthetic: true\nCommit: 2222222222222222222222222222222222222222\nTrace: REQ-006, RISK-001\n",
+      "dependencyChanges": [],
+      "soupDiff": "",
+      "expected": [],
+      "review": "review-2-trace-added.md"
+    },
+    {
+      "id": "3-soup-missing",
+      "step": "optional SOUP beat: a runtime dependency is added to packages/react without a SOUP.md update",
+      "files": [
+        { "path": "packages/react/src/PatientSummary/Vitals.utils.ts", "kind": "modified" },
+        { "path": "packages/react/package.json", "kind": "modified" },
+        { "path": "evidence/EVIDENCE.md", "kind": "added" }
+      ],
+      "evidence": "Requirement: A blood-pressure entry whose diastolic value is greater than or equal to its systolic value is rejected.\nChange: createCompoundObservation returns undefined for an inverted blood-pressure panel\nTest: npx vitest run src/PatientSummary/Vitals.utils.test.ts (in packages/react)\nResult: pass (3 passed, 0 failed)\nSynthetic: true\nCommit: 3333333333333333333333333333333333333333\nTrace: REQ-006, RISK-001\n",
+      "dependencyChanges": [{ "manifest": "packages/react/package.json", "package": "date-fns", "change": "added" }],
+      "soupDiff": "",
+      "expected": [
+        {
+          "level": "high",
+          "rule": "soup-missing",
+          "subject": "date-fns"
+        }
+      ],
+      "review": "review-3-soup-missing.md"
+    },
+    {
+      "id": "4-unknown-trace-id",
+      "step": "negative case: a Trace ID that is not in the regulatory seed",
+      "files": [
+        { "path": "examples/foomedical/src/pages/health-record/Measurement.data.ts", "kind": "modified" },
+        { "path": "evidence/EVIDENCE.md", "kind": "added" }
+      ],
+      "evidence": "Requirement: A 30-day trend shows every reading in the window.\nChange: Measurement.data.ts keeps the first day of the window\nTest: npm test (in examples/foomedical)\nResult: pass (12 passed, 0 failed)\nSynthetic: true\nCommit: 4444444444444444444444444444444444444444\nTrace: REQ-099, RISK-003\n",
+      "dependencyChanges": [],
+      "soupDiff": "",
+      "expected": [
+        {
+          "level": "medium",
+          "rule": "trace-unknown-id",
+          "subject": "REQ-099"
+        }
+      ],
+      "review": "review-4-unknown-trace-id.md"
+    }
+  ]
+}

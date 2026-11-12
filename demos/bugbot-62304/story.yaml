@@ -24,7 +24,12 @@ proof:
   - Follow-up commit adding the Trace line and Bugbot's clean re-review
 reset: null
 fallback: []
-fallback_note: New story with no recorded take yet. Record one before showing it live, then list that PR number here.
+fallback_note: No live Bugbot take exists (Bugbot is not enabled here). The REPLAY (no key) run in `offline` is the default path.
+offline: node demos/bugbot-62304/offline.mjs
+default_mode: replay
+live_mode_note: >-
+  Live mode available once Bugbot is enabled on gbriggs-cursor/medplum (a repository setting, not an env key):
+  Bugbot reviews the agent's draft PR instead of the replayed review. The seed check and rule evaluation are unchanged.
 blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. No Jira writes
 
 variables:
