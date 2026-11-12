@@ -19,6 +19,7 @@ stories:
       - 11
     reset: demos/device-evidence/reset.sh
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -44,6 +45,7 @@ stories:
       - 13
     reset: demos/docs-from-questions/reset.sh
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -67,6 +69,7 @@ stories:
       - 14
     reset: null
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -88,6 +91,7 @@ stories:
     fallback: []
     reset: null
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -96,6 +100,34 @@ stories:
     card: demos/rebrand/story.yaml
     prompt: demos/rebrand/prompt.md
     readme: demos/rebrand/README.md
+  - id: support-voice
+    code: L9
+    title: Voice patient support (Foo Medical)
+    track: ls
+    stage: post-market
+    readiness: adapt
+    runtime: 5 min live, plus agent time
+    wow: A patient asks about pairing a patch; a redacted GIO ticket appears and the bots turn it into a KB article or a fix PR
+    trigger: A synthetic patient calls (Grok Voice) or uses the support form; after a server-enforced read-back and confirm, a redacted GIO intake ticket is created
+    data_pack: P4 support KB (8 Foo Medical articles in kb/foomedical plus 9 Medplum docs listed in kb/medplum-docs.json) and 14 synthetic intakes in evals/cases.json
+    fallback: []
+    reset: demos/support-voice/reset.sh
+    automation: false
+    intake: true
+    labels:
+      - demo
+      - medplum
+      - story:support-voice
+      - track:ls
+      - stage:post-market
+      - support
+      - platform-demo
+    card: demos/support-voice/story.yaml
+    prompt: demos/support-voice/prompt.md
+    readme: demos/support-voice/README.md
+    offline: node demos/support-voice/scripts/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: this command creates the GIO issue from the same synthetic call instead of writing the OFFLINE file. Grok Voice and the triage agent are still not called from this repo."
   - id: ticket-to-pr
     code: G2
     title: Ticket-to-PR automation
@@ -112,6 +144,7 @@ stories:
       - 16
     reset: demos/ticket-to-pr/reset.sh
     automation: true
+    intake: false
     labels:
       - demo
       - medplum

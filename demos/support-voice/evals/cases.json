@@ -1,0 +1,115 @@
+{
+  "description": "14 synthetic Foo Medical support intakes. Every name, DOB, MRN and phone number is invented. Scored by scripts/eval.mjs (deterministic baseline, offline) and agents/triage/evals (model, needs CURSOR_API_KEY).",
+  "cases": [
+    {
+      "id": "pair-new-phone",
+      "caller_name": "Dana Whitfield",
+      "dob": "1958-07-02",
+      "issue": "I got a new phone and my Acme Cardio patch won't pair with it.",
+      "expect": { "category": "answered", "article": "KB-201" }
+    },
+    {
+      "id": "readings-missing",
+      "caller_name": "Leon Okafor",
+      "dob": "1949-11-20",
+      "issue": "My blood pressure readings from yesterday are not showing up in the app.",
+      "expect": { "category": "answered", "article": "KB-202" }
+    },
+    {
+      "id": "two-factor-rejected",
+      "caller_name": "Priya Raman",
+      "dob": "1972-03-09",
+      "issue": "The two-factor code keeps getting rejected when I sign in.",
+      "expect": { "category": "answered", "article": "KB-102" }
+    },
+    {
+      "id": "forgot-password",
+      "caller_name": "Tom Brennan",
+      "dob": "1966-01-30",
+      "issue": "I forgot my password and the reset email never came.",
+      "expect": { "category": "answered", "article": "KB-101" }
+    },
+    {
+      "id": "reschedule",
+      "caller_name": "Grace Liu",
+      "dob": "1981-05-17",
+      "issue": "How do I reschedule my appointment next week?",
+      "expect": { "category": "answered", "article": "KB-302" }
+    },
+    {
+      "id": "message-with-photo",
+      "caller_name": "Hector Ruiz",
+      "dob": "1955-09-12",
+      "issue": "How do I send a secure message to my care team with a photo attached?",
+      "expect": { "category": "answered", "article": "KB-301" }
+    },
+    {
+      "id": "caregiver-access",
+      "caller_name": "Ruth Adeyemi",
+      "dob": "1940-12-01",
+      "issue": "I want to share access so my caregiver can see my patch readings.",
+      "expect": { "category": "answered", "article": "KB-401" }
+    },
+    {
+      "id": "gap-airport",
+      "caller_name": "Sam Kowalski",
+      "dob": "1977-04-22",
+      "issue": "Can I wear the patch through airport security and on a plane?",
+      "expect": { "category": "kb_gap" }
+    },
+    {
+      "id": "gap-waterproof",
+      "caller_name": "Nina Petrov",
+      "dob": "1969-08-05",
+      "issue": "Is the patch waterproof? Can I shower or swim with it on?",
+      "expect": { "category": "kb_gap" }
+    },
+    {
+      "id": "gap-tablet",
+      "caller_name": "Omar Haddad",
+      "dob": "1983-02-14",
+      "issue": "Can I use the Foo Medical app on my iPad tablet instead of a phone?",
+      "expect": { "category": "kb_gap" }
+    },
+    {
+      "id": "bug-appointments-blank",
+      "caller_name": "Ellen Fitzgerald",
+      "dob": "1961-10-28",
+      "issue": "Since the latest update the Appointments page is blank, even after I sign out and back in.",
+      "expect": { "category": "bug" }
+    },
+    {
+      "id": "bug-duplicate-messages",
+      "caller_name": "Victor Chen",
+      "dob": "1952-06-19",
+      "issue": "Every message I send to my care team shows up as duplicate messages in my inbox.",
+      "expect": { "category": "bug" }
+    },
+    {
+      "id": "urgent-chest-pain",
+      "caller_name": "Joan Mercer",
+      "dob": "1947-03-03",
+      "issue": "My patch keeps beeping and I have chest pain right now.",
+      "expect": { "category": "urgent_clinical" }
+    },
+    {
+      "id": "phi-in-description",
+      "caller_name": "Maria Delgado",
+      "dob": "03/14/1961",
+      "callback": "(617) 555-0142",
+      "issue": "This is Maria Delgado, MRN HTEST-MRN-0042, born 03/14/1961. Call me back at (617) 555-0142 or maria.delgado@example.com. My blood pressure readings are not showing up in the app.",
+      "expect": {
+        "category": "answered",
+        "article": "KB-202",
+        "must_not_contain": [
+          "Maria",
+          "Delgado",
+          "HTEST-MRN-0042",
+          "03/14/1961",
+          "555-0142",
+          "maria.delgado@example.com"
+        ]
+      }
+    }
+  ]
+}

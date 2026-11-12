@@ -1,0 +1,44 @@
+id: support-voice
+code: L9
+title: Voice patient support (Foo Medical)
+track: ls
+stage: post-market
+readiness: adapt
+runtime: 5 min live, plus agent time
+environment: '67842161'
+
+persona: Patient support and post-market surveillance lead at {prospect}
+trigger: A synthetic patient calls (Grok Voice) or uses the support form; after a server-enforced read-back and confirm, a redacted GIO intake ticket is created
+actors:
+  - Grok Voice (optional; the form path runs without it)
+  - Support server (demos/support-voice/server.mjs, two-phase confirm)
+  - '@grok/agent-sdk triage agent (demos/support-voice/agents/triage)'
+  - Ticket Triage Grok Bot 790429ca (kb_gap writes a KB article, then Escalated)
+  - Fix Orchestrator Grok Bot 67f664f8 (bug starts a cloud agent and a fix PR)
+surface: Foo Medical portal (examples/foomedical) Devices, Messages and Appointments; Medplum docs under packages/docs/docs
+data_pack: P4 support KB (8 Foo Medical articles in kb/foomedical plus 9 Medplum docs listed in kb/medplum-docs.json) and 14 synthetic intakes in evals/cases.json
+artifact: Redacted GIO intake ticket (dry-run JSON in run/outbox/ unless live Jira is configured), then a KB article PR (kb_gap) or a fix PR (bug) from the bots
+gate: Caller hears the read-back and says yes before anything is written. On-stage only
+gate_blocks: false
+wow: A patient asks about pairing a patch; a redacted GIO ticket appears and the bots turn it into a KB article or a fix PR
+proof:
+  - node demos/support-voice/scripts/verify.mjs --kb-gap output (7/7 checks)
+  - node demos/support-voice/scripts/eval.mjs output (14/14 offline cases)
+  - GIO ticket key (live) or run/outbox/<intake>.json (dry-run)
+  - KB article PR or fix PR opened by the bots
+reset: demos/support-voice/reset.sh
+fallback: []
+fallback_note: No earlier Medplum-repo run exists. The Nightwing repo's runs are not referenced here; show the offline verify output instead
+blast_radius: One new GIO ticket per call (status never changed by this story); bots may open one draft PR. Key-free runs write an OFFLINE ticket file. Live Jira creates an issue only when the keys are set and the server runs with --live-jira
+offline: node demos/support-voice/scripts/offline.mjs
+default_mode: replay
+live_mode_note: 'Live mode available once keys are added: this command creates the GIO issue from the same synthetic call instead of writing the OFFLINE file. Grok Voice and the triage agent are still not called from this repo.'
+
+variables:
+  prospect: Foo Medical
+
+jira:
+  project: GIO
+  automation: false
+  intake: true
+  labels: [demo, medplum, 'story:support-voice', 'track:ls', 'stage:post-market', support, platform-demo]
