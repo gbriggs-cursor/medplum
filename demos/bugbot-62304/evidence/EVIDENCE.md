@@ -1,9 +1,9 @@
 Requirement: Bugbot applies IEC 62304 rules (safety class, trace ID, SOUP list) using a regulatory seed whose IDs are internally consistent.
-Change: Extended .cursor/BUGBOT.md with an IEC 62304 section; added demos/_shared/regulatory/ (software-items.md, requirements.md, hazards.md, SOUP.md, check.mjs) and the demos/bugbot-62304 story card.
+Change: Extended .cursor/BUGBOT.md with an IEC 62304 section; added demos/_shared/regulatory/ (software-items.md, requirements.md, hazards.md, SOUP.md, check.mjs) and the demos/bugbot-62304 story card (catalog entry added in a follow-up commit).
 Test: node demos/_shared/regulatory/check.mjs (from the repository root)
 Result: pass (42 passed, 0 failed)
 Synthetic: true
-Commit: edc0bbcd13c68e21de3b4d4e5de78193b0190f8a
+Commit: 4aee661a79ffd84247c7d55aa8cfc350cf8c9ac6
 
 | Requirement | Test | Run | Result |
 | --- | --- | --- | --- |
