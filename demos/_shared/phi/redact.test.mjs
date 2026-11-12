@@ -41,6 +41,11 @@ test('leaves product words and non-identifying numbers alone', () => {
   assert.deepEqual(phiScreen(input), { clean: true, hits: [] });
 });
 
+test('labelled ids need a digit, so a resource reference is not an MRN', () => {
+  assert.equal(phiScreen('Chart: QuestionnaireResponse/b10c6c14-8c85-439e-93dc-3975155958b2').clean, true);
+  assert.equal(phiScreen('Chart: A1234567').clean, false);
+});
+
 test('screen ignores placeholders and flags raw identifiers', () => {
   assert.equal(phiScreen('Caller [NAME], [DATE], [PHONE]').clean, true);
   assert.deepEqual(phiScreen('call 617-555-0142').hits, ['PHONE']);

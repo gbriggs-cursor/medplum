@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Foo Medical patient support: serves site/ and the intake API on 127.0.0.1. No outside domains.
-//   node server.mjs [--port 8787] [--live-jira]
+//   node server.mjs [--port 8787] [--live-jira] [--medplum]
 
 import { readFileSync } from 'node:fs';
 import { createServer } from 'node:http';
@@ -19,6 +19,14 @@ const port = Number(arg('--port', process.env.PORT ?? 8787));
 const liveJira = process.argv.includes('--live-jira');
 const prospect = JSON.parse(readFileSync(join(storyDir, 'prospects', 'foomedical.json'), 'utf8'));
 const store = createIntakeStore();
+// --medplum (L10): also write the intake to the local Medplum server as a QuestionnaireResponse.
+const medplum = process.argv.includes('--medplum')
+  ? import('../speech-to-fhir/lib/medplum.mjs').then(async (m) => {
+      const client = await m.connect();
+      await m.seedQuestionnaire(client);
+      return client;
+    })
+  : undefined;
 
 const SPOKEN = {
   answered: (d) => `Here is what should help, from article ${d.article}. I've logged this call for the team.`,
@@ -67,7 +75,11 @@ const server = createServer(async (req, res) => {
       if (result.state !== 'confirmed') {
         return send(res, 200, { id, state: result.state });
       }
-      const out = await submit(result.intake, { intakeId: id, live: liveJira });
+      const out = medplum
+        ? await (
+            await import('../speech-to-fhir/lib/record.mjs')
+          ).recordIntake(await medplum, result.intake, { intakeId: id, live: liveJira })
+        : await submit(result.intake, { intakeId: id, live: liveJira });
       return send(res, 200, {
         id,
         state: 'submitted',
@@ -76,6 +88,7 @@ const server = createServer(async (req, res) => {
         spoken: SPOKEN[out.decision.category](out.decision),
         ticket: out.written,
         redaction: out.redaction,
+        chart: out.questionnaireResponse && `QuestionnaireResponse/${out.questionnaireResponse.id}`,
       });
     }
     if (req.method === 'POST' && url.pathname === '/api/voice/session') {
@@ -105,6 +118,6 @@ const server = createServer(async (req, res) => {
 
 server.listen(port, '127.0.0.1', () => {
   console.log(
-    `Foo Medical support on http://127.0.0.1:${port} (Jira: ${liveJira ? 'live' : 'dry-run to run/outbox/'})`
+    `Foo Medical support on http://127.0.0.1:${port} (Jira: ${liveJira ? 'live' : 'dry-run to run/outbox/'}; Medplum chart: ${medplum ? 'on' : 'off'})`
   );
 });

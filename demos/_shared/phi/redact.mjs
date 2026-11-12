@@ -27,11 +27,14 @@ const RULES = [
   { type: 'SSN', re: /\b\d{3}-\d{2}-\d{4}\b/g },
   {
     type: 'MRN',
-    re: /\b(?:MRN|medical record(?: number| no\.?)?|chart(?: number| no\.?)?)\s*[:#]?\s*[A-Z0-9][A-Z0-9-]{4,}\b/gi,
+    re: /\b(?:MRN|medical record(?: number| no\.?)?|chart(?: number| no\.?)?)\s*[:#]?\s*(?=[A-Z-]*\d)[A-Z0-9][A-Z0-9-]{4,}\b/gi,
   },
   { type: 'MRN', re: /\bHTEST-MRN-\d{4,}\b/g },
-  { type: 'SERIAL', re: /\b(?:serial(?: number| no\.?)?|S\/N|SN)\s*[:#]?\s*[A-Z0-9][A-Z0-9-]{5,}\b/gi },
-  { type: 'MEMBER_ID', re: /\b(?:member|policy|insurance)(?: id| number| no\.?)\s*[:#]?\s*[A-Z0-9][A-Z0-9-]{4,}\b/gi },
+  { type: 'SERIAL', re: /\b(?:serial(?: number| no\.?)?|S\/N|SN)\s*[:#]?\s*(?=[A-Z-]*\d)[A-Z0-9][A-Z0-9-]{5,}\b/gi },
+  {
+    type: 'MEMBER_ID',
+    re: /\b(?:member|policy|insurance)(?: id| number| no\.?)\s*[:#]?\s*(?=[A-Z-]*\d)[A-Z0-9][A-Z0-9-]{4,}\b/gi,
+  },
   { type: 'PHONE', re: /(?<![\w-])(?:\+?1[\s.-]?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]\d{4}\b/g },
   { type: 'DATE', re: new RegExp(`\\b(?:${MONTHS})\\.?\\s+\\d{1,2}(?:st|nd|rd|th)?,?\\s+\\d{4}\\b`, 'gi') },
   { type: 'DATE', re: new RegExp(`\\b\\d{1,2}(?:st|nd|rd|th)?\\s+(?:${MONTHS})\\.?,?\\s+\\d{4}\\b`, 'gi') },
