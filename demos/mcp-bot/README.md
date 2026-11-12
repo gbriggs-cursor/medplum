@@ -6,12 +6,17 @@
 
 ## Run it
 
-1. `demos/mcp-bot/reset.sh` (nothing is seeded on disk; safe to re-run).
-2. From the repository root: `npx vitest run --config demos/mcp-bot/vitest.config.mjs`
-3. `node demos/mcp-bot/scripts/probe-mcp.mjs` against the local server (`MEDPLUM_BASE_URL`, default `http://127.0.0.1:8103`).
-4. `subscription.json` is the Subscription to create. Replace `Bot/pairing-task` with the Bot id after the Bot exists. The handler is `bot/pairing-task.ts`. The sample input is `seed/pairing-observation.json`.
+From the repository root, with no `CURSOR_API_KEY`:
 
-A model turn that explores over MCP needs `CURSOR_API_KEY`. That secret is not set. `XAI_API_KEY` is not used.
+`node demos/mcp-bot/scripts/offline.mjs`
+
+That prints `REPLAY (no key)` for the checked-in model turn, then `OFFLINE` for the local MCP probe and the Task the pairing handler creates. `DEMO_MODE=live` without `CURSOR_API_KEY` prints `BLOCKED` and exits 3.
+
+1. `demos/mcp-bot/reset.sh` (does not delete the server Task; safe to re-run).
+2. `npx vitest run --config demos/mcp-bot/vitest.config.mjs`
+3. `subscription.json` is the Subscription to create. Replace `Bot/pairing-task` with the Bot id after the Bot exists. The handler is `bot/pairing-task.ts`. The sample input is `seed/pairing-observation.json`.
+
+A live model turn that explores over MCP needs `CURSOR_API_KEY`. That secret is not set, so the model turn stays the checked-in replay. `XAI_API_KEY` is not used.
 
 ## What to click
 

@@ -60,7 +60,7 @@ stories:
     readiness: new
     runtime: 15 min
     wow: A synthetic pairing Observation becomes a Task. The MCP connection is probed and the result is reported as it happened
-    trigger: Demo Setup runs the bot unit test and demos/mcp-bot/scripts/probe-mcp.mjs against the local server
+    trigger: Demo Setup runs node demos/mcp-bot/scripts/offline.mjs. That replays the model turn and creates the Task on the local server.
     data_pack: One synthetic Observation in seed/pairing-observation.json, tagged synthetic and HTEST, for an Acme Cardio patch. No real patient.
     fallback: []
     reset: demos/mcp-bot/reset.sh
@@ -74,6 +74,9 @@ stories:
     card: demos/mcp-bot/story.yaml
     prompt: demos/mcp-bot/prompt.md
     readme: demos/mcp-bot/README.md
+    offline: node demos/mcp-bot/scripts/offline.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: the model turn is not replayed, and this command still probes MCP and creates the Task on the local server."
   - id: net-new-feature
     code: G1
     title: Net-new feature

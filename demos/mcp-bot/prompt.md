@@ -14,6 +14,6 @@ Work in demos/mcp-bot/.
 3. subscription.json is the Subscription. Set channel.endpoint to the created Bot id. Do not
    wait for an approval.
 Open a draft PR against the default branch. Synthetic data only. No Jira writes.
-A model turn needs CURSOR_API_KEY. If that secret is missing, say so and do not pretend the
-agent explored FHIR over MCP.
+With no CURSOR_API_KEY, run `node demos/mcp-bot/scripts/offline.mjs`. The model turn is
+REPLAY (no key). The MCP probe and the Task are OFFLINE. Do not present the replay as a live model.
 ```
