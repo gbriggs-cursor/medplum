@@ -1,0 +1,41 @@
+id: requirements-clerk
+code: L1
+title: Requirements clerk
+track: ls
+stage: '01'
+readiness: new
+runtime: 3 min
+environment: '67842161'
+
+persona: Design-control lead for connected-device software at {prospect}
+trigger: Presenter pastes prompt.md into the requirements-clerk Grok Bot. The bot reads the seed notes and files new GIO tickets. It does not wait for approval.
+actors:
+  - Grok Bot (requirements clerk; not created or edited by this change)
+  - Atlassian connector (create GIO issues only)
+surface: GIO board, new design-input tickets, and demos/requirements-clerk/run/requirements.yaml
+data_pack: Requirements slice of the P5 regulatory seed. Meeting notes and an id register in demos/requirements-clerk/seed/. Synthetic, tagged HTEST. No patient names.
+artifact: One new GIO ticket per design input, plus run/requirements.yaml. Existing tickets are not edited.
+gate: Presenter reads the filed REQ ids. On-stage only. A reviewer may edit a requirement later; the run does not wait.
+gate_blocks: false
+wow: Meeting notes become traced GIO requirements (REQ-xxx design inputs)
+proof:
+  - GIO ticket keys created for this run
+  - Ticket titles carrying the new REQ ids, with the card's labels and no automation labels
+  - demos/requirements-clerk/run/requirements.yaml written by the bot
+reset: demos/requirements-clerk/reset.sh
+fallback: []
+fallback_note: >-
+  No earlier pull request has run this story. Do not reuse a traced-build pull request as a
+  stand-in for filed requirements.
+blast_radius: >-
+  When the bot runs, it creates new GIO tickets and does not change status or comment on existing
+  tickets. No GitHub writes. No write-back to Medplum. This change itself writes nothing to Jira.
+answer_key: answer-keys://requirements-clerk/
+
+variables:
+  prospect: Acme Cardio
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:requirements-clerk', 'track:ls', 'stage:01']

@@ -1,0 +1,41 @@
+id: risk-teammate
+code: L2
+title: Risk teammate
+track: ls
+stage: '02'
+readiness: new
+runtime: 3 min
+environment: '67842161'
+
+persona: Risk manager for connected-device software at {prospect}
+trigger: Presenter pastes prompt.md into the risk-teammate Grok Bot. The bot reads the hazard seed and files one hazard. It does not wait for approval.
+actors:
+  - Grok Bot (risk teammate; not created or edited by this change)
+  - Atlassian connector (create GIO issues only)
+surface: GIO board and demos/risk-teammate/run/hazard.yaml
+data_pack: Hazard slice of the P5 regulatory seed. Intended use, one already-filed hazard, and one unassessed requirement in demos/risk-teammate/seed/. Synthetic, tagged HTEST.
+artifact: One hazard record with a safety class, status ready-for-review, and one new GIO ticket. The class can be overridden later.
+gate: Presenter shows the filed safety class. On-stage only. A reviewer may override it later; the run does not wait.
+gate_blocks: false
+wow: The bot files an ISO 14971 hazard and a safety class, and a reviewer can override it later
+proof:
+  - GIO ticket key for the new hazard
+  - demos/risk-teammate/run/hazard.yaml with safety_class and status ready-for-review
+  - HAZ-001 unchanged
+reset: demos/risk-teammate/reset.sh
+fallback: []
+fallback_note: >-
+  No earlier pull request has run this story. The hazard seed is a fixture, not a recorded bot run.
+blast_radius: >-
+  When the bot runs, it creates one new GIO ticket and does not change status or comment on existing
+  tickets. No product-code changes, no GitHub writes, no write-back to Medplum. This change itself
+  writes nothing to Jira.
+answer_key: answer-keys://risk-teammate/
+
+variables:
+  prospect: Acme Cardio
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:risk-teammate', 'track:ls', 'stage:02']
