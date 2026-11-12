@@ -28,6 +28,29 @@ stories:
     card: demos/device-evidence/story.yaml
     prompt: demos/device-evidence/prompt.md
     readme: demos/device-evidence/README.md
+  - id: dhf-release
+    code: L7
+    title: DHF release
+    track: ls
+    stage: "07"
+    readiness: new
+    runtime: 5-10 min
+    wow: One command builds the design history index and a trace matrix from the synthetic release records
+    trigger: Demo Setup runs demos/dhf-release/src/assemble.mjs, or the @grok/agent-sdk runner tool assemble-dhf
+    data_pack: Three synthetic release records in seed/release-records.json. Record one cites the P1 cohort counts from pull request 11. No patient bundle is copied.
+    fallback:
+      - 11
+    reset: demos/dhf-release/reset.sh
+    automation: false
+    labels:
+      - demo
+      - medplum
+      - story:dhf-release
+      - track:ls
+      - stage:07
+    card: demos/dhf-release/story.yaml
+    prompt: demos/dhf-release/prompt.md
+    readme: demos/dhf-release/README.md
   - id: docs-from-questions
     code: G4
     title: Docs from repeat questions
