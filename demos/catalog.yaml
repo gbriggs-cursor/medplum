@@ -131,7 +131,7 @@ stories:
     readiness: new
     runtime: 15-20 min
     wow: CI goes red on a planted regression, the remediation agent fixes the source without touching a test, and the trace matrix turns green
-    trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch; it runs demos/verify-loop/run.sh
+    trigger: Presenter runs demos/verify-loop/run.sh (or pastes prompt.md into a cloud agent started from the default branch)
     data_pack: None beyond packages/core fixtures. Planted regression in demos/verify-loop/regression.patch; traced tests in trace-spec.json
     fallback: []
     reset: demos/verify-loop/reset.sh
