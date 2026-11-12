@@ -8,7 +8,7 @@ runtime: 5-10 min
 environment: '67842161'
 
 persona: Clinical quality or data lead at {prospect} who owns the diabetes dashboard
-trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+trigger: 'Default is key-free, bash demos/analytics-10k/run.sh. With CURSOR_API_KEY, the live path is unchanged: paste prompt.md into a cloud agent started from the default branch'
 actors:
   - Cursor cloud agent
   - DuckDB (Python 1.1.3)
@@ -25,9 +25,12 @@ proof:
   - Score from the private scorer (answer-keys://analytics-10k/score.py)
 reset: demos/analytics-10k/reset.sh
 fallback: []
-fallback_note: No recorded run yet. Use the committed P0 fixture (demos/_shared/data-packs/synthea-analytics/fixture-100) to show the same queries on 100 patients
+fallback_note: No live cloud-agent PR yet. The key-free command uses fixture-100 when the 10k pack is not installed
 blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. No Jira writes. No outside domains at demo time (the pack is preloaded at environment build)
 answer_key: answer-keys://analytics-10k/
+offline: bash demos/analytics-10k/run.sh
+default_mode: replay
+live_mode_note: 'Live mode available once keys are added: a cloud agent runs prompt.md against the pack instead of the checked-in REPLAY turns.'
 
 variables:
   prospect: Foo Medical

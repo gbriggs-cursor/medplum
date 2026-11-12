@@ -1,0 +1,73 @@
+# date: 2026-11-12T16:23:40Z
+# host: cursor bcId bc-0cd959ac-1861-559d-8c01-623bee2ef187 env 67842161-d7e0-11f1-ba91-f63b1661ac50
+$ curl -sS -o /dev/null -w '%{http_code}' -L https://github.com/gbriggs-cursor/medplum/releases/download/data-p2-synthea-analytics-10k-v1/synthea-analytics-10k.tar.gz
+200
+$ ./fetch.sh   (default URL from fetch.sh, sha256 from pack.yaml)
+ok   patients: sha256
+ok   patients: 11842 rows (manifest 11842)
+ok   organizations: sha256
+ok   organizations: 1141 rows (manifest 1141)
+ok   providers: sha256
+ok   providers: 1141 rows (manifest 1141)
+ok   encounters: sha256
+ok   encounters: 167424 rows (manifest 167424)
+ok   conditions: sha256
+ok   conditions: 238623 rows (manifest 238623)
+ok   observations: sha256
+ok   observations: 2505043 rows (manifest 2505043)
+ok   medications: sha256
+ok   medications: 187995 rows (manifest 187995)
+ok   devices: sha256
+ok   devices: 11769 rows (manifest 11769)
+ok   device_readings: sha256
+ok   device_readings: 1695070 rows (manifest 1695070)
+ok   patients: every row synthetic + HTEST (0 untagged)
+ok   analytics.duckdb patients: 11842 rows
+ok   analytics.duckdb organizations: 1141 rows
+ok   analytics.duckdb providers: 1141 rows
+ok   analytics.duckdb encounters: 167424 rows
+ok   analytics.duckdb conditions: 238623 rows
+ok   analytics.duckdb observations: 2505043 rows
+ok   analytics.duckdb medications: 187995 rows
+ok   analytics.duckdb devices: 11769 rows
+ok   analytics.duckdb device_readings: 1695070 rows
+PASS: synthea-analytics-10k (0 failed)
+fetch.sh exit=0
+$ sha256sum ~/.cache/medplum-demos/synthea-analytics-10k.tar.gz
+5f803a524ba57b31067657a0c9a0e6d009bc0d2b62115abdc79c6412bbc20cef  /home/ubuntu/.cache/medplum-demos/synthea-analytics-10k.tar.gz
+$ python3 verify.py ~/.cache/medplum-demos/synthea-analytics-10k
+ok   patients: sha256
+ok   patients: 11842 rows (manifest 11842)
+ok   organizations: sha256
+ok   organizations: 1141 rows (manifest 1141)
+ok   providers: sha256
+ok   providers: 1141 rows (manifest 1141)
+ok   encounters: sha256
+ok   encounters: 167424 rows (manifest 167424)
+ok   conditions: sha256
+ok   conditions: 238623 rows (manifest 238623)
+ok   observations: sha256
+ok   observations: 2505043 rows (manifest 2505043)
+ok   medications: sha256
+ok   medications: 187995 rows (manifest 187995)
+ok   devices: sha256
+ok   devices: 11769 rows (manifest 11769)
+ok   device_readings: sha256
+ok   device_readings: 1695070 rows (manifest 1695070)
+ok   patients: every row synthetic + HTEST (0 untagged)
+ok   analytics.duckdb patients: 11842 rows
+ok   analytics.duckdb organizations: 1141 rows
+ok   analytics.duckdb providers: 1141 rows
+ok   analytics.duckdb encounters: 167424 rows
+ok   analytics.duckdb conditions: 238623 rows
+ok   analytics.duckdb observations: 2505043 rows
+ok   analytics.duckdb medications: 187995 rows
+ok   analytics.duckdb devices: 11769 rows
+ok   analytics.duckdb device_readings: 1695070 rows
+PASS: synthea-analytics-10k (0 failed)
+verify.py exit=0
+$ duckdb CLI row count
+patients
+11842
+observations
+25263

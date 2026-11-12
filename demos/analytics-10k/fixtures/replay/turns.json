@@ -1,0 +1,47 @@
+{
+  "label": "REPLAY (no key)",
+  "sdk": "@grok/agent-sdk",
+  "source": "Checked-in turns for key-free mode. Not a capture of a live model call. The SQL runs locally against whichever pack is installed; follow-up queries are built from what these return. HbA1c control comes from the shared definition (hba1c-control.sql).",
+  "turns": [
+    {
+      "role": "user",
+      "content": "Foo Medical's diabetes dashboard shows HbA1c control (share of type 2 diabetes patients' HbA1c results under 7%) dropping. Find out why, back every claim with SQL, and check the rest of the data for other problems that would distort a dashboard. Data is the local synthetic analytics pack."
+    },
+    {
+      "role": "assistant",
+      "content": "REPLAY (no key)\n\nI will put the dashboard's view (SNOMED 44054006 only, threshold on stored values) next to the shared definition (type 2 diabetes value set, values in NGSP percent), month by month, and find the month with the largest fall. Then I will profile the fields that feed the metric: for HbA1c units and condition code systems, when each value first appears relative to the start of the data window.",
+      "queries": [
+        {
+          "id": "window",
+          "sql": "select min(start)::date as window_start, max(start)::date as window_end from encounters"
+        },
+        {
+          "id": "monthly-control",
+          "sql": "select cohort, month, n, controlled_n, control_pct, controlled_raw_n, control_pct_raw from hba1c_control_monthly_by_cohort where month >= '2025-12-01' and month < '2026-06-01' order by cohort, month"
+        },
+        {
+          "id": "hba1c-units",
+          "sql": "select units, min(date)::date as first_seen, count(*) as n from observations where code = '4548-4' group by 1 order by 2"
+        },
+        {
+          "id": "condition-systems",
+          "sql": "select system, min(start)::date as first_seen, count(*) as n, count(distinct code) as codes from conditions group by 1 order by 2"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": "REPLAY (no key)\n\nI will look for other distortions: a second patient row with the same SSN and birth date, and a device model with a run of days with no readings inside its reporting span.",
+      "queries": [
+        {
+          "id": "duplicates",
+          "sql": "select ssn, birthdate, count(*) as n, list(id) as ids from patients group by ssn, birthdate having count(*) > 1 order by ssn"
+        },
+        {
+          "id": "device-days",
+          "sql": "select model, reading_date, count(*) as n from device_readings group by 1, 2 order by 1, 2"
+        }
+      ]
+    }
+  ]
+}
