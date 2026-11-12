@@ -35,7 +35,9 @@ These drafts are separate. They are not one traced requirement. Do not present a
 | 10 | Analytics | L13 on [PR #33](https://github.com/gbriggs-cursor/medplum/pull/33) |
 | 11 | Voice | L9 on [PR #27](https://github.com/gbriggs-cursor/medplum/pull/27) |
 | 12 | Speech to FHIR | L10 on [PR #31](https://github.com/gbriggs-cursor/medplum/pull/31) |
-| 13 | Healthcare SaaS | G8–G11 on [PR #22](https://github.com/gbriggs-cursor/medplum/pull/22) |
+| 13 | PHI tripwire | L11 on [PR #36](https://github.com/gbriggs-cursor/medplum/pull/36) |
+| 14 | MCP route | [PR #37](https://github.com/gbriggs-cursor/medplum/pull/37), stacked on [PR #35](https://github.com/gbriggs-cursor/medplum/pull/35) |
+| 15 | Healthcare SaaS | G8–G11 on [PR #22](https://github.com/gbriggs-cursor/medplum/pull/22) |
 
 ## 0. Catalog — PR #17
 
@@ -161,7 +163,23 @@ Recorded: `npm test` 6 passed, 0 failed. `node scripts/run.mjs` for transcripts 
 
 Not run: Grok Voice is stubbed. No `XAI_API_KEY`, so the input is seeded transcripts and typed text. No live speech was tested. Extraction is regex; spelled-out digits and a name given without "my name is" are not handled. No Jira writes; the ticket is dry-run JSON in `demos/support-voice/run/outbox/` only. The run used the local dev server and the seeded admin login. It was not run against a hosted project or a patient-scoped AccessPolicy. A patient-chart screenshot was not included because that path is not an app route. Bots `790429ca` and `67f664f8` were not touched and were not exercised.
 
-## 13. Healthcare SaaS — PR #22
+## 13. PHI tripwire — L11 on PR #36
+
+P3 pack. Stacked on PR #31.
+
+Recorded: tests 6 of 6. Eval of 50 notes and 213 identifiers: 0 in allowed tickets, 2 of 2 expected refusals, 0 allowed without a chart. Recall 99.1% with the chart and 74.2% blind. The 99.1% is partly by construction.
+
+Jira was dry-run only. The Grok Bot PHI screen is not built. The tripwire reads committed `patients.json`, not Medplum.
+
+## 14. MCP route — PR #37
+
+Enables `mcpEnabled` in `packages/server/medplum.config.json`. Stacked on PR #35.
+
+Recorded: the route is mounted. An unauthenticated probe of `/mcp/stream`, `/mcp/sse`, and `/api/mcp/stream` returns 401 Unauthorized (previously 404).
+
+An admin-token rerun is in progress and is not recorded yet.
+
+## 15. Healthcare SaaS — PR #22
 
 Generic track for a prospect that is not a device maker. Defaults to Foo Medical. Codes G8–G11 because G5–G7 are reserved. This PR includes L13's files so G10 can see them. It did not push to PR #33 or PR #17.
 

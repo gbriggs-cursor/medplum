@@ -75,6 +75,8 @@ stories:
       - 31
       - 33
       - 34
+      - 36
+      - 37
     reset: demos/factory-e2e/reset.sh
     automation: false
     labels:

@@ -22,7 +22,7 @@ proof:
   - L5 reference rehearsal on PR #21 (51 passed, 3 failed, then 54 passed, 0 failed)
   - L13 published-pack verify on PR #33 (fetch.sh exit 0; verify.py 28 checks, 0 failed)
 reset: demos/factory-e2e/reset.sh
-fallback: [17, 18, 21, 22, 23, 25, 27, 28, 30, 31, 33, 34]
+fallback: [17, 18, 21, 22, 23, 25, 27, 28, 30, 31, 33, 34, 36, 37]
 blast_radius: None. The presenter opens existing draft PRs. No Jira writes, no merges, no comments on other PRs.
 answer_key: answer-keys://factory-e2e/
 
