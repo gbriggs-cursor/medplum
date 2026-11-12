@@ -1,0 +1,12 @@
+
+ RUN  v4.1.12 /agent/repos/medplum/packages/core
+
+ ✓ |@medplum/core| src/search/match.test.ts (54 tests) 464ms
+
+ Test Files  1 passed (1)
+      Tests  54 passed (54)
+   Start at  16:06:10
+   Duration  1.18s (transform 212ms, setup 224ms, import 33ms, tests 464ms, environment 375ms)
+
+JSON report written to /agent/repos/medplum/demos/verify-loop/self-test/evidence/run-2.vitest.json
+EXIT:0

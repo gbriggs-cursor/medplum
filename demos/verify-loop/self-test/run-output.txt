@@ -1,0 +1,21 @@
+verify-loop: clean
+== 1. Plant the regression
+ packages/core/src/search/match.ts | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+== 2. CI on the planted tree (expect red)
+verify-loop run-1 (planted regression): 51 passed, 3 failed
+  FAIL Search matching Date greater than or equals same value
+  FAIL Search matching Date less than or equals same value
+  FAIL Search matching Period start and end le 2025-05-15T12:00:00.000Z
+  REQ-004 / RISK-003: RED (23/26 tests pass)
+  REQ-005 / RISK-004: GREEN (5/5 tests pass)
+== 3. Build the remediation workspace at /tmp/verify-loop-workspace
+== 4. Remediate (reference)
+reference remediator: reversed the planted patch (pipeline self-test, not an agent)
+== 5. Guard: copy back source changes only
+guard: accepted modified packages/core/src/search/match.ts
+== 6. CI on the remediated tree (expect green)
+verify-loop run-2 (after remediation (reference)): 54 passed, 0 failed
+  REQ-004 / RISK-003: GREEN (26/26 tests pass)
+  REQ-005 / RISK-004: GREEN (5/5 tests pass)
+verify-loop: evidence in demos/verify-loop/self-test/evidence/ (EVIDENCE.md, trace.json, TRACE.md)
