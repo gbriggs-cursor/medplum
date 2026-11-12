@@ -452,6 +452,7 @@ if (checkOnly) {
     `PASS: ${cards.length} stories valid (${cards.length} passed, 0 failed), catalog.yaml up to date, no branch pinning`
   );
 } else {
+  writeFileSync(catalogPath, next);
   console.log(
     `PASS: ${cards.length} stories valid (${cards.length} passed, 0 failed), no branch pinning. Wrote demos/catalog.yaml`
   );
