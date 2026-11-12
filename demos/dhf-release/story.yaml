@@ -1,0 +1,38 @@
+id: dhf-release
+code: L7
+title: DHF release
+track: ls
+stage: '07'
+readiness: new
+runtime: 5-10 min
+environment: '67842161'
+
+persona: QA/RA lead at {prospect} assembling a design history file for a connected cardiac patch
+trigger: Demo Setup runs node demos/dhf-release/src/demo.mjs, which replays the model turn and executes assemble-dhf
+actors:
+  - '@grok/agent-sdk runner'
+surface: Design history index and trace matrix for the synthetic {prospect} patch v2 release records
+data_pack: Three synthetic release records in seed/release-records.json. Record one cites the P1 cohort counts from pull request 11. No patient bundle is copied.
+artifact: 'evidence/DHF-INDEX.md plus evidence v2 EVIDENCE.md and trace.json. approval.json is not written'
+gate: No decision is recorded. The L6 approval gate writes approval.json, and only after a human decision. On-stage only
+gate_blocks: false
+wow: One command builds the design history index and a trace matrix from the synthetic release records
+proof:
+  - node --test output
+  - evidence/DHF-INDEX.md and evidence/trace.json
+  - Draft PR link
+reset: demos/dhf-release/reset.sh
+fallback: [11]
+blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. No Jira writes. The runner reads the local git SHA and writes demos/dhf-release/evidence/
+answer_key: answer-keys://dhf-release/
+offline: node demos/dhf-release/src/demo.mjs
+default_mode: replay
+live_mode_note: 'Live mode available once keys are added: agent-sdk run calls the model, which calls assemble-dhf, and the evidence files are not labeled REPLAY (no key).'
+
+variables:
+  prospect: Acme Cardio
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:dhf-release', 'track:ls', 'stage:07']
