@@ -1,32 +1,63 @@
 {
   "label": "REPLAY (no key)",
-  "computed_with": "duckdb 1.1.3 against demos/_shared/data-packs/synthea-analytics/fixture-100 on 2026-11-12",
-  "pack": "demos/_shared/data-packs/synthea-analytics/fixture-100",
-  "limit": "The 10k pack is not on this machine. These numbers are the committed 100-patient fixture (115 patient rows, 100 living). Type 2 diabetes has no HbA1c result in March 2026 in this fixture, so question 1 is answered on every HbA1c result.",
-  "questions": [
-    {
-      "id": 1,
-      "answer": "Naive HbA1c control (value under 7, ignoring units) went from 100% in February 2026 (1 of 1, percent) to 75% in March 2026 (3 of 4). The March result that fails is 44 mmol/mol. A percent threshold treats that unit as out of range. The type 2 cohort has no March 2026 HbA1c row in this fixture.",
-      "sql": "select strftime(date_trunc('month', date), '%Y-%m') as mon, units, count(*) as n, min(value_num) as lo, max(value_num) as hi from 'PACK/parquet/observations.parquet' where code = '4548-4' and date >= DATE '2026-02-01' and date < DATE '2026-04-01' group by 1, 2 order by 1, 2",
-      "rows": [
-        ["2026-02", "%", 1, 6.4, 6.4],
-        ["2026-03", "%", 3, 3.9, 6.4],
-        ["2026-03", "mmol/mol", 1, 44.0, 44.0]
-      ]
+  "recorded": "2026-11-12, duckdb 1.1.3. P2 fetched with demos/_shared/data-packs/synthea-analytics/fetch.sh from release data-p2-synthea-analytics-10k-v1, sha256 5f803a524ba57b31067657a0c9a0e6d009bc0d2b62115abdc79c6412bbc20cef, verify.py PASS",
+  "control": "Share of type 2 diabetes (SNOMED 44054006) HbA1c results (LOINC 4548-4) under 7%. mmol/mol is converted first: NGSP % = 0.09148 * IFCC mmol/mol + 2.152",
+  "queries": {
+    "q1_monthly": "with dm as (select distinct patient from 'PACK/parquet/conditions.parquet' where code = '44054006'), a as (select o.date, o.units, o.value_num as v, case when o.units = 'mmol/mol' then 0.09148 * o.value_num + 2.152 else o.value_num end as pct from 'PACK/parquet/observations.parquet' o join dm using (patient) where o.code = '4548-4') select strftime(date_trunc('month', date), '%Y-%m') as mon, count(*) as n, sum((units = 'mmol/mol')::int) as mmol_rows, round(100.0 * avg((v < 7)::int), 1) as naive_pct, round(100.0 * avg((pct < 7)::int), 1) as normalized_pct from a where date >= DATE '2026-01-01' and date < DATE '2026-05-01' group by 1 order by 1",
+    "q1_unit_change": "select strftime(min(date) filter (where units = 'mmol/mol'), '%Y-%m-%d') as first_mmol, sum((units = 'mmol/mol')::int) as mmol_rows, sum((units = '%')::int) as pct_rows from 'PACK/parquet/observations.parquet' where code = '4548-4'",
+    "q2": "select strftime(date_trunc('month', start), '%Y-%m') as mon, count(*) as n from 'PACK/parquet/encounters.parquet' group by 1 order by n asc, mon asc limit 1",
+    "q2_types": "with m as (select strftime(date_trunc('month', start), '%Y-%m') as mon, count(*) as n from 'PACK/parquet/encounters.parquet' group by 1 order by n asc, mon asc limit 1) select e.description, count(*) as n from 'PACK/parquet/encounters.parquet' e join m on strftime(date_trunc('month', e.start), '%Y-%m') = m.mon group by 1 order by n desc, 1 limit 1",
+    "q3": "with per as (select patient, count(*) as n from 'PACK/parquet/encounters.parquet' group by 1), ranked as (select n, ntile(10) over (order by n desc, patient) as decile from per) select sum(n) filter (where decile = 1) as top_decile_visits, sum(n) as visits from ranked"
+  },
+  "datasets": {
+    "p2-10k": {
+      "name": "P2 synthea-analytics-10k (10,000 living patients, 11,842 patient rows)",
+      "rows": {
+        "q1_monthly": [
+          ["2026-01", 241, 0, 95.9, 95.9],
+          ["2026-02", 217, 0, 96.8, 96.8],
+          ["2026-03", 213, 73, 68.1, 93.4],
+          ["2026-04", 226, 82, 65.9, 93.8]
+        ],
+        "q1_unit_change": [["2026-03-07", 2126, 23137]],
+        "q2": [["2023-10", 4136]],
+        "q2_types": [["Encounter for problem (procedure)", 1100]],
+        "q3": [[84104, 167424]]
+      },
+      "answers": {
+        "q1": "HbA1c results started arriving in mmol/mol on 2026-03-07 (2,126 rows from then on). A percent threshold reads those as out of control. Naive control fell from 96.8% in February to 68.1% in March. After converting mmol/mol to percent, March is 93.4% (April 93.8%). The unit change explains about 25 of the 28.7 points. A smaller drop of about 3.4 points remains after conversion and is not explained here.",
+        "q2": "October 2023 had the fewest visits, 4,136. The largest visit type that month was Encounter for problem (procedure), 1,100.",
+        "q3": "The busiest 10% of patients account for 84,104 of 167,424 visits (50.2%)."
+      },
+      "finding": {
+        "title": "HbA1c unit change from % to mmol/mol",
+        "summary": "From 2026-03-07, HbA1c (LOINC 4548-4) results are recorded in mmol/mol. Applying the 7% threshold to raw values drops control from 96.8% to 68.1%. Converted with NGSP = 0.09148 * IFCC + 2.152, March control is 93.4%.",
+        "start_date": "2026-03-07",
+        "end_date": null,
+        "entities": ["4548-4", "mmol/mol", "%", "44054006"]
+      }
     },
-    {
-      "id": 2,
-      "answer": "November 2023 had the fewest visits, 23. Prenatal visits were the largest type, 5 of those 23.",
-      "sql": "select strftime(date_trunc('month', start), '%Y-%m') as mon, count(*) as n from 'PACK/parquet/encounters.parquet' group by 1 order by n asc, mon asc limit 1",
-      "rows": [["2023-11", 23]],
-      "types_sql": "select description, count(*) as n from 'PACK/parquet/encounters.parquet' where strftime(date_trunc('month', start), '%Y-%m') = '2023-11' group by 1 order by n desc limit 1",
-      "types_rows": [["Prenatal visit", 5]]
-    },
-    {
-      "id": 3,
-      "answer": "The busiest 10% of patients account for 624 of 1322 visits (47.2%).",
-      "sql": "with per as (select patient, count(*) as n from 'PACK/parquet/encounters.parquet' group by 1), ranked as (select n, ntile(10) over (order by n desc, patient) as decile from per) select sum(n) filter (where decile = 1), sum(n) from ranked",
-      "rows": [[624, 1322]]
+    "p0-100": {
+      "name": "P0 synthea-analytics-100 (committed 100-patient fixture)",
+      "rows": {
+        "q1_monthly": [],
+        "q1_unit_change": [["2026-03-30", 9, 67]],
+        "q2": [["2023-11", 23]],
+        "q2_types": [["Prenatal visit", 5]],
+        "q3": [[624, 1322]]
+      },
+      "answers": {
+        "q1": "The fixture has no type 2 diabetes HbA1c result from January to April 2026, so the March control rate cannot be computed on it. The unit change is still visible: HbA1c starts arriving in mmol/mol on 2026-03-30 (9 rows).",
+        "q2": "November 2023 had the fewest visits, 23. The largest visit type was Prenatal visit, 5.",
+        "q3": "The busiest 10% of patients account for 624 of 1,322 visits (47.2%)."
+      },
+      "finding": {
+        "title": "HbA1c unit change from % to mmol/mol",
+        "summary": "From 2026-03-30, HbA1c (LOINC 4548-4) results are recorded in mmol/mol (9 rows in the fixture). Convert with NGSP = 0.09148 * IFCC + 2.152 before applying a 7% threshold.",
+        "start_date": "2026-03-30",
+        "end_date": null,
+        "entities": ["4548-4", "mmol/mol", "%"]
+      }
     }
-  ]
+  }
 }

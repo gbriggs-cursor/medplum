@@ -4,7 +4,9 @@
 
 **Wow line:** "One phone call. A ticket with no patient details in it, and a docs PR or a fix PR, before the presenter finishes the slide."
 
-Key-free (no `XAI_API_KEY`, no Jira keys): `node demos/front-office-voice/run.mjs`. It replays the three caller scripts through the L9 confirm and redact pipeline and writes `run/jira.json` labeled OFFLINE. `DEMO_MODE=live` without the keys prints BLOCKED and exits 3. The voice route returns 501 even when `XAI_API_KEY` is set.
+Key-free (no `XAI_API_KEY`, no Jira keys): `node demos/front-office-voice/run.mjs`. It replays the three caller scripts through the L9 confirm and redaction, routes them with `lib/route.mjs`, and writes `run/jira.json` labeled OFFLINE. It exits 1 if a caller misses its intended route (reschedule `answered`, eligibility `kb_gap`, recall `bug`). `DEMO_MODE=live` without the keys prints BLOCKED and exits 3. The voice route returns 501 even when `XAI_API_KEY` is set.
+
+The front-office route answers from the staff-facing articles in `kb/staff/` (FO-101 to FO-104). Bug and clinical signals use L9's triage rules unchanged. The L9 form server does not use this route; it still answers from patient articles.
 
 ## Run it
 
