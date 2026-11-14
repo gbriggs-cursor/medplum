@@ -1,0 +1,17 @@
+{
+  "name": "demo-support-voice",
+  "private": true,
+  "type": "module",
+  "description": "Foo Medical patient support: intake, redaction, triage and GIO tickets. No dependencies outside Node.",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test ../_shared/phi/*.test.mjs test/*.test.mjs",
+    "eval": "node scripts/eval.mjs",
+    "eval:agent": "npm --prefix agents/triage run eval",
+    "demo:verify": "node scripts/verify.mjs",
+    "reset": "./reset.sh"
+  }
+}

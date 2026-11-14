@@ -1,0 +1,6 @@
+product: "{prospect} patch v2 software"
+synthetic: true
+htest: true
+fiction: Fictional device software for this demo. Not a marketed or cleared device.
+next_complaint_id: CMP-001
+next_capa_id: CAPA-001

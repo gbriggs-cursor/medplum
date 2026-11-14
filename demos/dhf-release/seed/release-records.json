@@ -1,0 +1,26 @@
+{
+  "synthetic": true,
+  "prospect": "Acme Cardio",
+  "product": "Acme Cardio patch v2",
+  "records": [
+    {
+      "req": "REQ-001",
+      "risk": "RISK-001",
+      "title": "Ingest synthetic blood-pressure panels and ECG summaries",
+      "test": "Release record cites the P1 cohort counts published on pull request 11 (20 patients, 20 devices, 40 observations, seed 20261104)",
+      "source_pr": 11
+    },
+    {
+      "req": "REQ-002",
+      "risk": "RISK-002",
+      "title": "Carry a requirement and a risk on every release record",
+      "test": "Each record has req, risk, title, and test"
+    },
+    {
+      "req": "REQ-003",
+      "risk": "RISK-003",
+      "title": "Release does not wait for a signature",
+      "test": "The assembler writes EVIDENCE.md and trace.json and does not write approval.json"
+    }
+  ]
+}

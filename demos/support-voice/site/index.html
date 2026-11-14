@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Foo Medical patient support</title>
+    <style>
+      :root {
+        --ink: #1b2a3a;
+        --muted: #5b6b7c;
+        --brand: #1f6feb;
+        --line: #d8dee6;
+        --bg: #f5f7fa;
+        --ok: #1a7f37;
+        --warn: #9a6700;
+        --bad: #cf222e;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font:
+          15px/1.5 system-ui,
+          -apple-system,
+          Segoe UI,
+          sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+      }
+      header {
+        background: #fff;
+        border-bottom: 1px solid var(--line);
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      header .logo {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: var(--brand);
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+      }
+      main {
+        max-width: 760px;
+        margin: 24px auto;
+        padding: 0 16px;
+        display: grid;
+        gap: 16px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 20px;
+      }
+      .disclaimer {
+        font-size: 13px;
+        color: var(--muted);
+        border-left: 3px solid var(--warn);
+        padding-left: 10px;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        margin: 12px 0 4px;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 9px 10px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        font: inherit;
+      }
+      textarea {
+        min-height: 96px;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      button {
+        padding: 10px 16px;
+        border-radius: 8px;
+        border: 1px solid var(--brand);
+        background: var(--brand);
+        color: #fff;
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      button.secondary {
+        background: #fff;
+        color: var(--brand);
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+      .actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 16px;
+        flex-wrap: wrap;
+      }
+      .readback {
+        background: #eef4ff;
+        border-radius: 8px;
+        padding: 12px;
+      }
+      .pill {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        background: #eaeef2;
+      }
+      .pill.answered {
+        background: #dafbe1;
+        color: var(--ok);
+      }
+      .pill.kb_gap {
+        background: #fff8c5;
+        color: var(--warn);
+      }
+      .pill.bug {
+        background: #ffebe9;
+        color: var(--bad);
+      }
+      .pill.urgent_clinical {
+        background: var(--bad);
+        color: #fff;
+      }
+      pre {
+        background: #0d1117;
+        color: #e6edf3;
+        padding: 12px;
+        border-radius: 8px;
+        overflow: auto;
+        font-size: 12px;
+      }
+      .hidden {
+        display: none;
+      }
+      .muted {
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">F</div>
+      <div><strong>Foo Medical</strong> <span class="muted">patient support</span></div>
+    </header>
+    <main>
+      <section class="card">
+        <p id="mode-banner" class="disclaimer hidden"></p>
+        <p id="greeting"></p>
+        <p class="disclaimer" id="disclaimer"></p>
+      </section>
+
+      <form class="card" id="intake">
+        <h2 style="margin-top: 0">Tell us what's going on</h2>
+        <div class="row">
+          <div>
+            <label for="caller_name">Your name</label
+            ><input id="caller_name" name="caller_name" required placeholder="Made-up name, e.g. Dana Whitfield" />
+          </div>
+          <div>
+            <label for="dob">Date of birth</label><input id="dob" name="dob" required placeholder="1958-07-02" />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="callback">Callback (optional)</label
+            ><input id="callback" name="callback" placeholder="(617) 555-0100" />
+          </div>
+          <div>
+            <label for="product">Product</label>
+            <select id="product" name="product">
+              <option value="">Not sure</option>
+              <option value="portal">Patient portal</option>
+              <option value="patch">Acme Cardio patch v2</option>
+              <option value="messages">Messages</option>
+              <option value="appointments">Appointments</option>
+            </select>
+          </div>
+        </div>
+        <label for="issue">What's the problem?</label>
+        <textarea id="issue" name="issue" required placeholder="My patch won't pair with my new phone."></textarea>
+        <div class="actions">
+          <button type="submit">Review</button>
+          <button type="button" class="secondary" id="voice">Talk to Grok Voice</button>
+        </div>
+        <p class="muted hidden" id="voice-status"></p>
+      </form>
+
+      <section class="card hidden" id="confirm">
+        <h2 style="margin-top: 0">Is this right?</h2>
+        <p class="readback" id="readback"></p>
+        <div class="actions">
+          <button id="yes">Yes, submit</button><button class="secondary" id="no">No, let me fix it</button>
+        </div>
+      </section>
+
+      <section class="card hidden" id="result">
+        <h2 style="margin-top: 0">Submitted <span class="pill" id="category"></span></h2>
+        <p id="spoken"></p>
+        <p class="muted" id="ticket"></p>
+      </section>
+    </main>
+    <script>
+      const $ = (id) => document.getElementById(id);
+      let draft;
+      fetch('/api/prospect')
+        .then((r) => r.json())
+        .then((p) => {
+          $('greeting').textContent = p.greeting;
+          $('disclaimer').textContent = p.disclaimer;
+        });
+      fetch('/api/mode')
+        .then((r) => r.json())
+        .then((m) => {
+          if (m.mode !== 'REPLAY (no key)') {
+            return;
+          }
+          $('mode-banner').textContent = 'REPLAY (no key): voice is a checked-in call. Jira: OFFLINE.';
+          $('mode-banner').classList.remove('hidden');
+        });
+
+      $('intake').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const body = Object.fromEntries(new FormData(e.target));
+        body.channel = 'form';
+        const res = await fetch('/api/intake/draft', { method: 'POST', body: JSON.stringify(body) });
+        draft = await res.json();
+        if (!res.ok) {
+          alert(draft.message);
+          return;
+        }
+        $('readback').textContent = draft.readback;
+        $('confirm').classList.remove('hidden');
+        $('result').classList.add('hidden');
+      });
+
+      async function confirm(confirmed) {
+        const res = await fetch('/api/intake/confirm', {
+          method: 'POST',
+          body: JSON.stringify({ id: draft.id, confirmToken: draft.confirmToken, confirmed }),
+        });
+        const out = await res.json();
+        $('confirm').classList.add('hidden');
+        if (!res.ok) {
+          alert(out.message);
+          return;
+        }
+        if (out.state !== 'submitted') {
+          $('caller_name').focus();
+          return;
+        }
+        $('category').textContent = out.category;
+        $('category').className = 'pill ' + out.category;
+        $('spoken').textContent = out.spoken;
+        const t = out.ticket;
+        const jira = t.mode === 'live' ? t.key : t.mode === 'OFFLINE' ? `OFFLINE: ${t.file}` : `dry-run: ${t.file}`;
+        $('ticket').textContent =
+          `${out.id}. GIO ticket ${jira}. ${out.redaction.total} identifier(s) redacted before Jira.`;
+        $('result').classList.remove('hidden');
+      }
+      $('yes').addEventListener('click', () => confirm(true));
+      $('no').addEventListener('click', () => confirm(false));
+
+      $('voice').addEventListener('click', async () => {
+        const res = await fetch('/api/voice/session', { method: 'POST' });
+        const out = await res.json();
+        $('voice-status').textContent = out.message;
+        $('voice-status').classList.remove('hidden');
+      });
+    </script>
+  </body>
+</html>

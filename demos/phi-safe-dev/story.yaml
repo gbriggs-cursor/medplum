@@ -1,0 +1,47 @@
+id: phi-safe-dev
+code: G8
+title: PHI-safe debugging for practice software
+track: generic
+stage: generic
+readiness: new
+runtime: 10-15 min
+environment: '67842161'
+offline: node demos/phi-safe-dev/run.mjs
+default_mode: replay
+live_mode_note: 'Live mode available once keys are added: a cloud agent runs prompt.md against the planted bug. Key-free mode replays that fix in a temp copy and writes an OFFLINE ticket.'
+
+persona: Engineering lead at {prospect}, a practice-management software company whose support tickets arrive full of patient details
+trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+actors:
+  - Cursor cloud agent
+  - Redaction in demos/_shared/phi/redact.mjs (L11)
+  - check-no-phi.mjs diff tripwire
+surface: Hygiene recall list over FHIR Encounter resources (demos/phi-safe-dev/app/recall.mjs)
+data_pack: One synthetic front-desk ticket with realistic-looking fake identifiers (seed/ticket.md, all HTEST) plus synthetic-twin Encounter fixtures the agent writes
+artifact: Draft PR with a failing-then-passing synthetic-twin test, the fix, a redacted ticket summary, and check-no-phi.mjs output in the PR body
+gate: Presenter runs check-no-phi.mjs on the PR diff live. On-stage only
+gate_blocks: false
+wow: The agent reproduces the patient's bug on a synthetic twin and fixes it, and not one identifier from the ticket reaches Jira, code, or the PR
+proof:
+  - Draft PR link
+  - node --test output, failing before the fix and passing after
+  - check-no-phi.mjs PASS on the PR diff and PR body
+reset: demos/phi-safe-dev/reset.sh
+fallback: []
+fallback_note: No recorded run yet. After the first live run, add its PR number here
+blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. No Jira write. L11's ticket path is dry-run JSON under demos/phi-tripwire/run/outbox/
+depends_on:
+  - code: L11
+    workstream: B
+    planned_path: demos/phi-tripwire
+    provides: redact() in demos/_shared/phi/redact.mjs and the tripwire in demos/phi-tripwire. The P3 pack is demos/_shared/data-packs/p3-phi-like. This story does not write a Jira ticket
+
+variables:
+  prospect: Foo Medical
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:phi-safe-dev', 'track:generic']
+
+answer_key: answer-keys://phi-safe-dev/

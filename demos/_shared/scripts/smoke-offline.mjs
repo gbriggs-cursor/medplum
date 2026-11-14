@@ -3,20 +3,30 @@
 //
 //   node demos/_shared/scripts/smoke-offline.mjs
 //
-// Exit 0 when every story prints REPLAY (no key) or OFFLINE and exits 0.
+// Exit 0 when every story prints REPLAY (no key) or OFFLINE (no key) and exits 0.
+// The command is the `offline` field in demos/<story>/story.yaml.
 
 import { spawn } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import YAML from 'yaml';
 
 const repoRoot = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
-const catalogPath = join(repoRoot, 'demos', 'catalog.yaml');
+const demosDir = join(repoRoot, 'demos');
 const STORY_TIMEOUT_MS = 180000;
 
-const catalog = YAML.parse(readFileSync(catalogPath, 'utf8'));
-const stories = Array.isArray(catalog?.stories) ? catalog.stories : [];
+function storyCards() {
+  return readdirSync(demosDir)
+    .filter((name) => !name.startsWith('_') && !name.startsWith('.'))
+    .filter((name) => statSync(join(demosDir, name)).isDirectory())
+    .filter((name) => existsSync(join(demosDir, name, 'story.yaml')))
+    .map((name) => YAML.parse(readFileSync(join(demosDir, name, 'story.yaml'), 'utf8')))
+    .filter((card) => card && typeof card === 'object')
+    .sort((a, b) => String(a.id).localeCompare(String(b.id)));
+}
+
+const stories = storyCards();
 
 function childEnv() {
   const env = { ...process.env };
@@ -64,7 +74,7 @@ function runOffline(command) {
 }
 
 function labeled(out) {
-  return out.includes('REPLAY (no key)') || out.includes('OFFLINE');
+  return out.includes('REPLAY (no key)') || out.includes('OFFLINE (no key)');
 }
 
 const results = [];
@@ -92,11 +102,11 @@ for (const story of stories) {
   if (!labeled(run.out)) {
     results.push({
       ok: false,
-      line: `FAIL  ${code} ${id}  exit 0 missing REPLAY (no key) or OFFLINE label`,
+      line: `FAIL  ${code} ${id}  exit 0 missing REPLAY (no key) or OFFLINE (no key)`,
     });
     continue;
   }
-  const mode = run.out.includes('REPLAY (no key)') ? 'REPLAY (no key)' : 'OFFLINE';
+  const mode = run.out.includes('REPLAY (no key)') ? 'REPLAY (no key)' : 'OFFLINE (no key)';
   results.push({ ok: true, line: `PASS  ${code} ${id}  ${mode}` });
 }
 

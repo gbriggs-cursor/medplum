@@ -1,0 +1,5 @@
+{"type":"session.started","index":0,"sessionId":"ses_replay_dhf_release","at":"2026-11-12T21:00:00.000Z","data":{"channelId":"replay"}}
+{"type":"message.received","index":1,"sessionId":"ses_replay_dhf_release","turnId":"turn_1","at":"2026-11-12T21:00:00.000Z","data":{"text":"Build the design history index for the synthetic release records."}}
+{"type":"actions.requested","index":2,"sessionId":"ses_replay_dhf_release","turnId":"turn_1","at":"2026-11-12T21:00:01.000Z","data":{"calls":[{"callId":"call_assemble","toolName":"assemble-dhf","args":{}}]}}
+{"type":"message.completed","index":3,"sessionId":"ses_replay_dhf_release","turnId":"turn_1","at":"2026-11-12T21:00:02.000Z","data":{"text":"REPLAY (no key). Called assemble-dhf. Passed and failed counts come from the tool, not from this recording. Named tests are not re-run."}}
+{"type":"turn.completed","index":4,"sessionId":"ses_replay_dhf_release","turnId":"turn_1","at":"2026-11-12T21:00:02.000Z","data":{"result":"REPLAY (no key)"}}

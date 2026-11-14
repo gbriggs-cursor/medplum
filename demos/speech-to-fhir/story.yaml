@@ -1,0 +1,40 @@
+id: speech-to-fhir
+code: L10
+title: Speech to FHIR (voice intake to QuestionnaireResponse)
+track: ls
+stage: post-market
+readiness: new
+runtime: 5 min
+environment: '67842161'
+
+persona: Clinical operations or post-market lead at {prospect}
+trigger: A confirmed support intake (voice transcript or form) from L9 support-voice, or node demos/speech-to-fhir/scripts/run.mjs with a seeded transcript
+actors:
+  - Grok Voice (optional; seeded transcripts run without it)
+  - Support server with --medplum (demos/support-voice/server.mjs)
+  - Local Medplum server ($validate, Patient match, QuestionnaireResponse write)
+surface: Medplum app QuestionnaireResponse on the synthetic patient's chart; Questionnaire support-intake
+data_pack: seed/questionnaire.json (Foo Medical support intake) and 3 synthetic transcripts in seed/transcripts.json; patients are created or matched by name + birth date and tagged synthetic + HTEST + demo-story speech-to-fhir
+artifact: A QuestionnaireResponse that passed server $validate, linked to the synthetic Patient, plus a redacted GIO ticket (dry-run) that points at the response id only
+gate: Caller confirms the read-back before the response is written. On-stage only
+gate_blocks: false
+wow: What the caller said is a structured QuestionnaireResponse on the chart, and the Jira ticket carries none of their identity
+proof:
+  - node demos/speech-to-fhir/scripts/run.mjs output (QuestionnaireResponse id, $validate clean, identity in ticket none)
+  - Medplum app screenshot of the QuestionnaireResponse
+reset: demos/speech-to-fhir/reset.sh
+fallback: []
+fallback_note: New story, no earlier run. Show the run.mjs output from the evidence log
+blast_radius: Local Medplum server only (Patients and QuestionnaireResponses tagged speech-to-fhir). Key-free runs write an OFFLINE ticket file and do not post to Jira
+offline: node demos/speech-to-fhir/scripts/run.mjs
+default_mode: replay
+live_mode_note: 'Live mode available once keys are added: the command reads the seeded transcript and does not print a replay label. Extraction, server validation, and the Medplum write are the same either way. This repo still does not open a live voice session.'
+
+variables:
+  prospect: Foo Medical
+
+jira:
+  project: GIO
+  automation: false
+  intake: true
+  labels: [demo, medplum, 'story:speech-to-fhir', 'track:ls', 'stage:post-market', support, platform-demo]
