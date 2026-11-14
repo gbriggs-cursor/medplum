@@ -1,0 +1,41 @@
+id: test-review
+code: L19
+title: 'Test & Review: Story A, PRD to UAT evidence'
+track: ls
+stage: '05'
+readiness: new
+runtime: 15 min
+environment: '67842161'
+
+persona: Product, QA, and engineering leads at {prospect} who sign off a feature against its acceptance criteria
+trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch, with demos/test-review/context/ as Project Context
+actors:
+  - Cursor cloud agent (builds the feature from the PRD)
+  - uat-from-acceptance-criteria skill (computer-use check per REQ line)
+  - evidence-package skill
+surface: Medplum app Patient page, Devices tab at /Patient/:id/devices (built live; not in this repository)
+data_pack: Synthetic bundle demos/_shared/data/taylor-demo-bp-cuff.json (Patient Taylor Demo, one Acme Cardio home BP cuff, 12 readings over 30 days, latest 117/75, tagged synthetic + HTEST)
+artifact: Draft PR with the Devices tab, plus evidence/EVIDENCE.md with one UAT row and one screenshot or video per REQ-DEV line
+gate: Presenter reviews the UAT rows and proof on stage before marking the PR ready. On-stage only
+gate_blocks: false
+wow: The agent builds the tab from a four-line PRD, then proves each acceptance criterion on screen, including the day 0 reading a gt filter would drop
+proof:
+  - Draft PR link
+  - evidence/EVIDENCE.md with REQ-DEV-01 to REQ-DEV-04 rows
+  - One screenshot or video per REQ-DEV line
+reset: null
+fallback:
+  - 10
+offline: node demos/test-review/offline.mjs
+default_mode: offline
+live_mode_note: >-
+  Live mode available once keys are added: a cloud agent builds the feature from prd-patient-devices.md and runs the uat-from-acceptance-criteria skill with computer use against a local app loaded with the synthetic bundle.
+blast_radius: GitHub draft PR in gbriggs-cursor/medplum and a local Medplum server only. No Jira writes
+
+variables:
+  prospect: Foo Medical
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:test-review', 'track:ls', 'stage:05']

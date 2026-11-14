@@ -1,0 +1,41 @@
+id: review-ladder
+code: L18
+title: Review ladder (Bugbot, then Security Reviewer)
+track: ls
+stage: '04'
+readiness: new
+runtime: 10 min
+environment: '67842161'
+
+persona: Engineering and QA/RA leads at {prospect} who review device software changes
+trigger: Presenter runs demos/review-ladder/seed.sh after Gio tags demo-baseline-v1, then opens the two draft PRs it prints
+actors:
+  - demos/review-ladder/seed.sh (cuts demo/run-<date>/b-seed-* branches and draft PRs)
+  - Bugbot (rules in .cursor/BUGBOT.md)
+  - Security Reviewer (automation, once enabled)
+surface: Two draft PRs on gbriggs-cursor/medplum, each with seeded findings in Vitals capture, the 30-day device-observation filter, and a PatientDevices stub
+data_pack: P5 regulatory seed in demos/_shared/regulatory/ plus the two seed patches in demos/review-ladder/seeds/. Synthetic only (Acme Cardio, Foo Medical, Taylor Demo)
+artifact: Two draft PRs labeled demo-do-not-merge, each with Bugbot or Security Reviewer comments on the seeded lines
+gate: Presenter reads the reviewer comments on stage and closes the run with seed.sh --close. On-stage only
+gate_blocks: false
+wow: Bugbot catches five seeded process and logic defects and Security Reviewer catches four seeded security defects, on PRs cut from one tagged baseline in under a minute
+proof:
+  - Two draft PR links titled "[DEMO – do not merge] ..."
+  - Bugbot comments naming the five bugbot.patch findings
+  - Security Reviewer comments naming the four security.patch findings
+reset: null
+fallback: []
+fallback_note: No recorded take yet. The OFFLINE (no key) self-test proves both seeds apply to a temporary ref and that --close never touches the recorded takes.
+offline: bash demos/review-ladder/seed.sh --self-test
+default_mode: offline
+live_mode_note: >-
+  Live mode available once keys are added: none is needed for seed.sh itself. Live mode also needs the demo-baseline-v1 tag, Bugbot enabled on gbriggs-cursor/medplum, and the Security Reviewer automation turned on. Those are repository settings, not keys.
+blast_radius: GitHub draft PRs and demo/run-* branches in gbriggs-cursor/medplum only. No Jira writes
+
+variables:
+  prospect: Acme Cardio
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:review-ladder', 'track:ls', 'stage:04']

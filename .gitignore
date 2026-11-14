@@ -107,6 +107,7 @@ playwright/.cache/
 # Cursor
 .cursor/*
 !.cursor/BUGBOT.md
+!.cursor/skills/
 
 # Claude
 .claude/*

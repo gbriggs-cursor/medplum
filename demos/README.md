@@ -59,6 +59,19 @@ For prospects that are neither GxP nor device makers (for example a practice-man
 | G10  | `practice-analytics` | L13 shared HbA1c views; P2 10k pack, `fixture-100` if the fetch fails | `node demos/practice-analytics/run.mjs` (REPLAY)                           |
 | G11  | `integration-docs`   | Source anchors in `anchors.txt`                                       | `node demos/integration-docs/run.mjs` (REPLAY guide, OFFLINE anchor check) |
 
+## Health check
+
+Run from the repo root before a rehearsal. Every line must end in PASS; none needs a key.
+
+```
+node demos/_shared/scripts/catalog.mjs --check
+node demos/_shared/scripts/smoke-offline.mjs
+DEMO_MODE=offline bash demos/verify-loop/run.sh
+node demos/bugbot-62304/offline.mjs
+```
+
+Test & Review baseline: `demo-baseline-v1` = `<SHA, set when Gio tags the merged harness>`. `demos/review-ladder/seed.sh` cuts its demo PRs from this tag.
+
 ## Answer keys
 
 Answer keys live in a separate private repository that agents cannot read. It is not created yet.
