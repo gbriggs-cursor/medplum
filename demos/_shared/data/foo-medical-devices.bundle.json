@@ -1,0 +1,5045 @@
+{
+  "resourceType": "Bundle",
+  "type": "batch",
+  "meta": {
+    "tag": [
+      {
+        "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+        "code": "synthetic",
+        "display": "Synthetic"
+      }
+    ],
+    "security": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+        "code": "HTEST",
+        "display": "test health data"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "foo-patient-01",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/patient",
+            "value": "foo-patient-01"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Synthetic",
+            "given": [
+              "Avery"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1968-03-02"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/foo-patient-01"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Device",
+        "id": "foo-bp-cuff-01",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/device",
+            "value": "FBP-0001"
+          }
+        ],
+        "status": "active",
+        "manufacturer": "Foo Devices (synthetic)",
+        "serialNumber": "FBP-0001",
+        "deviceName": [
+          {
+            "name": "Foo Home BP Cuff",
+            "type": "user-friendly-name"
+          }
+        ],
+        "type": {
+          "text": "Blood pressure monitor"
+        },
+        "patient": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/foo-bp-cuff-01"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Device",
+        "id": "foo-oximeter-01",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/device",
+            "value": "FOX-0001"
+          }
+        ],
+        "status": "active",
+        "manufacturer": "Foo Devices (synthetic)",
+        "serialNumber": "FOX-0001",
+        "deviceName": [
+          {
+            "name": "Foo Pulse Oximeter",
+            "type": "user-friendly-name"
+          }
+        ],
+        "type": {
+          "text": "Pulse oximeter"
+        },
+        "patient": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/foo-oximeter-01"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Device",
+        "id": "foo-glucometer-01",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/device",
+            "value": "FGL-0001"
+          }
+        ],
+        "status": "inactive",
+        "manufacturer": "Foo Devices (synthetic)",
+        "serialNumber": "FGL-0001",
+        "deviceName": [
+          {
+            "name": "Foo Glucometer",
+            "type": "user-friendly-name"
+          }
+        ],
+        "type": {
+          "text": "Glucose meter"
+        },
+        "patient": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Device/foo-glucometer-01"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-29",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-10-16T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 128,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 83,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-29"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-28",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-10-17T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 123,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 82,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-28"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-27",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-10-18T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 123,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 84,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-27"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-26",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-10-19T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 133,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 79,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-26"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-25",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-10-20T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 133,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 78,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-25"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-24",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-10-21T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 134,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 79,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-24"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-23",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-10-22T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 128,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 79,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-23"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-22",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-10-23T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 134,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 87,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-22"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-21",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-10-24T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 131,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 83,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-21"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-20",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-10-25T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 123,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 78,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-20"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-19",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-10-26T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 131,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 85,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-19"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-18",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-10-27T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 126,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 86,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-18"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-17",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-10-28T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 130,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 78,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-17"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-16",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-10-29T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 129,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 79,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-16"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-15",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-10-30T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 121,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 87,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-15"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-14",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-10-31T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 123,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 85,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-14"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-13",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-11-01T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 122,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 87,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-13"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-12",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-11-02T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 128,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 79,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-12"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-11",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-11-03T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 134,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 82,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-11"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-10",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-11-04T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 134,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 83,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-10"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-09",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-11-05T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 129,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 84,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-09"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-08",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-11-06T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 136,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 85,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-08"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-07",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-11-07T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 124,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 80,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-07"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-06",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-11-08T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 122,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 85,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-06"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-05",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-11-09T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 134,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 77,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-05"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-04",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-11-10T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 130,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 86,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-04"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-03",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-11-11T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 120,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 82,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-03"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-02",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-11-12T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 129,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 82,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-02"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-01",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-11-13T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 133,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 85,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-01"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-00",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-11-14T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 126,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 82,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-00"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-bp-45",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel"
+            }
+          ],
+          "text": "Blood pressure panel"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-bp-cuff-01"
+        },
+        "effectiveDateTime": "2026-09-30T08:00:00Z",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 134,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 78,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-bp-45"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-spo2-28",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "59408-5",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-10-17T21:00:00Z",
+        "valueQuantity": {
+          "value": 96,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-spo2-28"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-hr-28",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-10-17T21:00:00Z",
+        "valueQuantity": {
+          "value": 71,
+          "unit": "beats/minute",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-hr-28"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-spo2-26",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "59408-5",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-10-19T21:00:00Z",
+        "valueQuantity": {
+          "value": 97,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-spo2-26"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-hr-26",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-10-19T21:00:00Z",
+        "valueQuantity": {
+          "value": 76,
+          "unit": "beats/minute",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-hr-26"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-spo2-24",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "59408-5",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-10-21T21:00:00Z",
+        "valueQuantity": {
+          "value": 98,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-spo2-24"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-hr-24",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-10-21T21:00:00Z",
+        "valueQuantity": {
+          "value": 67,
+          "unit": "beats/minute",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-hr-24"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-spo2-22",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "59408-5",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-10-23T21:00:00Z",
+        "valueQuantity": {
+          "value": 95,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-spo2-22"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-hr-22",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-10-23T21:00:00Z",
+        "valueQuantity": {
+          "value": 71,
+          "unit": "beats/minute",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-hr-22"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-spo2-20",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "59408-5",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-10-25T21:00:00Z",
+        "valueQuantity": {
+          "value": 95,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-spo2-20"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-hr-20",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-10-25T21:00:00Z",
+        "valueQuantity": {
+          "value": 68,
+          "unit": "beats/minute",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-hr-20"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-spo2-18",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "59408-5",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-10-27T21:00:00Z",
+        "valueQuantity": {
+          "value": 96,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-spo2-18"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-hr-18",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-10-27T21:00:00Z",
+        "valueQuantity": {
+          "value": 74,
+          "unit": "beats/minute",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-hr-18"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-spo2-16",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "59408-5",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-10-29T21:00:00Z",
+        "valueQuantity": {
+          "value": 95,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-spo2-16"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-hr-16",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-10-29T21:00:00Z",
+        "valueQuantity": {
+          "value": 75,
+          "unit": "beats/minute",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-hr-16"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-spo2-14",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "59408-5",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-10-31T21:00:00Z",
+        "valueQuantity": {
+          "value": 97,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-spo2-14"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-hr-14",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-10-31T21:00:00Z",
+        "valueQuantity": {
+          "value": 76,
+          "unit": "beats/minute",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-hr-14"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-spo2-12",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "59408-5",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-11-02T21:00:00Z",
+        "valueQuantity": {
+          "value": 97,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-spo2-12"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-hr-12",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-11-02T21:00:00Z",
+        "valueQuantity": {
+          "value": 69,
+          "unit": "beats/minute",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-hr-12"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-spo2-10",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "59408-5",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-11-04T21:00:00Z",
+        "valueQuantity": {
+          "value": 98,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-spo2-10"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-hr-10",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-11-04T21:00:00Z",
+        "valueQuantity": {
+          "value": 77,
+          "unit": "beats/minute",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-hr-10"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-spo2-08",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "59408-5",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-11-06T21:00:00Z",
+        "valueQuantity": {
+          "value": 97,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-spo2-08"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-hr-08",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-11-06T21:00:00Z",
+        "valueQuantity": {
+          "value": 75,
+          "unit": "beats/minute",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-hr-08"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-spo2-06",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "59408-5",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-11-08T21:00:00Z",
+        "valueQuantity": {
+          "value": 95,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-spo2-06"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-hr-06",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-11-08T21:00:00Z",
+        "valueQuantity": {
+          "value": 70,
+          "unit": "beats/minute",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-hr-06"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-spo2-04",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "59408-5",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-11-10T21:00:00Z",
+        "valueQuantity": {
+          "value": 94,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-spo2-04"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-hr-04",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-11-10T21:00:00Z",
+        "valueQuantity": {
+          "value": 78,
+          "unit": "beats/minute",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-hr-04"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-spo2-02",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "59408-5",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-11-12T21:00:00Z",
+        "valueQuantity": {
+          "value": 94,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-spo2-02"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-hr-02",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-11-12T21:00:00Z",
+        "valueQuantity": {
+          "value": 78,
+          "unit": "beats/minute",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-hr-02"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-spo2-00",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "59408-5",
+              "display": "Oxygen saturation"
+            }
+          ],
+          "text": "Oxygen saturation"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-11-14T21:00:00Z",
+        "valueQuantity": {
+          "value": 96,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-spo2-00"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-hr-00",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8867-4",
+              "display": "Heart rate"
+            }
+          ],
+          "text": "Heart rate"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-oximeter-01"
+        },
+        "effectiveDateTime": "2026-11-14T21:00:00Z",
+        "valueQuantity": {
+          "value": 78,
+          "unit": "beats/minute",
+          "system": "http://unitsofmeasure.org",
+          "code": "/min"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-hr-00"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Observation",
+        "id": "foo-glucose-60",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+              "code": "synthetic",
+              "display": "Synthetic"
+            }
+          ],
+          "security": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+              "code": "HTEST",
+              "display": "test health data"
+            }
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2339-0",
+              "display": "Glucose [Mass/volume] in Blood"
+            }
+          ],
+          "text": "Glucose [Mass/volume] in Blood"
+        },
+        "subject": {
+          "reference": "Patient/foo-patient-01",
+          "display": "Avery Synthetic"
+        },
+        "device": {
+          "reference": "Device/foo-glucometer-01"
+        },
+        "effectiveDateTime": "2026-09-15T07:00:00Z",
+        "valueQuantity": {
+          "value": 109,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/foo-glucose-60"
+      }
+    }
+  ]
+}
