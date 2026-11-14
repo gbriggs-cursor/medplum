@@ -1,0 +1,29 @@
+
+> @medplum/react@5.2.14 test
+> vitest run
+
+
+ RUN  v4.1.12 /agent/repos/medplum/packages/react
+
+Not implemented: navigation to another Document
+Not implemented: navigation to another Document
+
+ Test Files  169 passed (169)
+      Tests  1574 passed (1574)
+   Start at  16:35:36
+   Duration  71.56s (transform 7.78s, setup 122.49s, import 83.18s, tests 113.01s, environment 84.03s)
+
+
+> @medplum/app@5.2.14 test
+> vitest run
+
+
+ RUN  v4.1.12 /agent/repos/medplum/packages/app
+
+
+ Test Files  70 passed (70)
+      Tests  485 passed (485)
+   Start at  16:36:48
+   Duration  40.36s (transform 10.69s, setup 50.07s, import 65.12s, tests 80.96s, environment 33.73s)
+
+EXIT:0
