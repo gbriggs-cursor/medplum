@@ -3,15 +3,16 @@
 import { Card, Group, Loader, Stack, Table, Text, Title } from '@mantine/core';
 import type { WithId } from '@medplum/core';
 import { formatDateTime, getDisplayString, getReferenceString } from '@medplum/core';
-import type { CodeableConcept, Device, Observation, Patient, Quantity, Reference } from '@medplum/fhirtypes';
+import type { Device, Patient, Reference } from '@medplum/fhirtypes';
 import { useSearchResources } from '@medplum/react-hooks';
 import type { JSX } from 'react';
 import { useMemo } from 'react';
 import { MedplumLink } from '../MedplumLink/MedplumLink';
 import { OperationOutcomeAlert } from '../OperationOutcomeAlert/OperationOutcomeAlert';
 import { StatusBadge } from '../StatusBadge/StatusBadge';
+import type { DeviceReadingSeries, ReadingWindow } from './PatientDevices.utils';
+import { getDeviceReadingSeries, getReadingWindow } from './PatientDevices.utils';
 
-const DAY_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_DAYS = 30;
 const CHART_WIDTH = 240;
 const CHART_HEIGHT = 48;
@@ -21,23 +22,6 @@ export interface PatientDevicesProps {
   readonly patient: Patient | Reference<Patient>;
   /** Number of days of readings to chart, ending now. Defaults to 30. */
   readonly days?: number;
-}
-
-export interface DeviceReadingPoint {
-  readonly time: number;
-  readonly value: number;
-}
-
-export interface DeviceReadingSeries {
-  readonly key: string;
-  readonly label: string;
-  readonly unit: string;
-  readonly points: DeviceReadingPoint[];
-}
-
-interface ReadingWindow {
-  readonly start: number;
-  readonly end: number;
 }
 
 /**
@@ -50,10 +34,7 @@ export function PatientDevices(props: PatientDevicesProps): JSX.Element {
   const patientRef = getReferenceString(props.patient) ?? '';
   const days = props.days ?? DEFAULT_DAYS;
   // Computed once per `days` so the search URL, and therefore the search, stays stable across renders.
-  const range = useMemo<ReadingWindow>(() => {
-    const end = Date.now();
-    return { start: end - days * DAY_MS, end };
-  }, [days]);
+  const range = useMemo(() => getReadingWindow(days), [days]);
 
   const [devices, loading, outcome] = useSearchResources('Device', { patient: patientRef, _count: '100' });
 
@@ -203,51 +184,6 @@ function ReadingChart(props: { readonly series: DeviceReadingSeries; readonly ra
       <circle cx={last[0]} cy={last[1]} r={2.5} fill="var(--mantine-color-blue-6)" />
     </svg>
   );
-}
-
-/**
- * Groups numeric Observation values into one series per measurement code, ordered by time.
- * Panel observations (such as blood pressure) contribute one series per component.
- * @param observations - The observations to group.
- * @returns The reading series, in order of first appearance.
- */
-export function getDeviceReadingSeries(observations: Observation[]): DeviceReadingSeries[] {
-  const byKey = new Map<string, { label: string; unit: string; points: DeviceReadingPoint[] }>();
-
-  function add(code: CodeableConcept | undefined, quantity: Quantity | undefined, time: number): void {
-    if (typeof quantity?.value !== 'number' || !code) {
-      return;
-    }
-    const coding = code.coding?.[0];
-    const key = coding?.code ? `${coding.system ?? ''}|${coding.code}` : code.text;
-    if (!key) {
-      return;
-    }
-    let entry = byKey.get(key);
-    if (!entry) {
-      entry = { label: code.text ?? coding?.display ?? coding?.code ?? key, unit: quantity.unit ?? quantity.code ?? '', points: [] };
-      byKey.set(key, entry);
-    }
-    entry.points.push({ time, value: quantity.value });
-  }
-
-  for (const obs of observations) {
-    const dateTime = obs.effectiveDateTime ?? obs.effectivePeriod?.start ?? obs.effectiveInstant ?? obs.issued;
-    const time = dateTime ? Date.parse(dateTime) : Number.NaN;
-    if (Number.isNaN(time)) {
-      continue;
-    }
-    add(obs.code, obs.valueQuantity, time);
-    for (const component of obs.component ?? []) {
-      add(component.code, component.valueQuantity, time);
-    }
-  }
-
-  return Array.from(byKey, ([key, entry]) => ({
-    key,
-    ...entry,
-    points: entry.points.sort((a, b) => a.time - b.time),
-  }));
 }
 
 function formatValue(value: number, unit: string): string {

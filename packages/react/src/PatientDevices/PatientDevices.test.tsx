@@ -8,7 +8,8 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { MemoryRouter } from 'react-router';
 import { act, render, screen, within } from '../test-utils/render';
-import { getDeviceReadingSeries, PatientDevices } from './PatientDevices';
+import { PatientDevices } from './PatientDevices';
+import { getDeviceReadingSeries } from './PatientDevices.utils';
 
 const fixture = JSON.parse(
   readFileSync(resolve(import.meta.dirname, '../../../../demos/_shared/data/foo-medical-devices.bundle.json'), 'utf8')
@@ -71,7 +72,9 @@ describe('PatientDevices', () => {
     expect(within(cuff).getByRole('img', { name: /^Diastolic blood pressure trend, 30 readings/ })).toBeInTheDocument();
 
     const oximeter = card('Foo Pulse Oximeter');
-    expect(await within(oximeter).findByRole('img', { name: /^Oxygen saturation trend, 15 readings/ })).toBeInTheDocument();
+    expect(
+      await within(oximeter).findByRole('img', { name: /^Oxygen saturation trend, 15 readings/ })
+    ).toBeInTheDocument();
     expect(within(oximeter).getByRole('img', { name: /^Heart rate trend, 15 readings/ })).toBeInTheDocument();
 
     const glucometer = card('Foo Glucometer');

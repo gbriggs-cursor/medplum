@@ -85,6 +85,7 @@ export * from './Panel/Panel';
 export * from './PasswordInput/PasswordInput';
 export * from './PatientAccountsForm/PatientAccountsForm';
 export * from './PatientDevices/PatientDevices';
+export * from './PatientDevices/PatientDevices.utils';
 export * from './PatientExportForm/PatientExportForm';
 export * from './PatientHeader/PatientHeader';
 export * from './PatientSummary/PatientSummary';
