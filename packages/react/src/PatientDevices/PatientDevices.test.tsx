@@ -14,7 +14,8 @@ import { getDeviceReadingSeries } from './PatientDevices.utils';
 const fixture = JSON.parse(
   readFileSync(resolve(import.meta.dirname, '../../../../demos/_shared/data/foo-medical-devices.bundle.json'), 'utf8')
 ) as Bundle;
-const patient: Reference<Patient> = { reference: 'Patient/foo-patient-01' };
+const patientId = fixture.entry?.find((e) => e.resource?.resourceType === 'Patient')?.resource?.id;
+const patient: Reference<Patient> = { reference: `Patient/${patientId}` };
 
 async function setup(props: { patient: Reference<Patient>; days?: number }): Promise<void> {
   const medplum = new MockClient();

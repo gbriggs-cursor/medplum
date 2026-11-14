@@ -5,6 +5,7 @@
 // 30 days of Observation readings ending on ANCHOR. Every resource is synthetic.
 // Usage: node demos/_shared/data/generate-foo-medical-devices.mjs
 
+import { createHash } from 'node:crypto';
 import { writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -19,6 +20,16 @@ const meta = {
     { system: 'http://terminology.hl7.org/CodeSystem/v3-ActReason', code: 'HTEST', display: 'test health data' },
   ],
 };
+
+// Medplum requires UUID ids, so each readable key maps to a stable name-based (v5) UUID.
+const UUID_NAMESPACE = Buffer.from('6f6f6d65-6469-4361-8c2d-73796e746865'.replaceAll('-', ''), 'hex');
+function uuid(key) {
+  const hash = createHash('sha1').update(UUID_NAMESPACE).update(key).digest();
+  hash[6] = (hash[6] & 0x0f) | 0x50;
+  hash[8] = (hash[8] & 0x3f) | 0x80;
+  const hex = hash.subarray(0, 16).toString('hex');
+  return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+}
 
 let state = SEED;
 function rand() {
@@ -38,7 +49,7 @@ function ucum(value, unit, code) {
   return { value, unit, system: 'http://unitsofmeasure.org', code };
 }
 
-const patientRef = { reference: 'Patient/foo-patient-01', display: 'Avery Synthetic' };
+const patientRef = { reference: `Patient/${uuid('foo-patient-01')}`, display: 'Avery Synthetic' };
 const vitalSigns = [
   {
     coding: [
@@ -53,7 +64,7 @@ const vitalSigns = [
 
 const patient = {
   resourceType: 'Patient',
-  id: 'foo-patient-01',
+  id: uuid('foo-patient-01'),
   meta,
   identifier: [{ system: 'https://foo-medical.example/synthetic/patient', value: 'foo-patient-01' }],
   name: [{ use: 'official', family: 'Synthetic', given: ['Avery'] }],
@@ -61,10 +72,10 @@ const patient = {
   birthDate: '1968-03-02',
 };
 
-function device(id, name, type, manufacturer, serialNumber, status) {
+function device(key, name, type, manufacturer, serialNumber, status) {
   return {
     resourceType: 'Device',
-    id,
+    id: uuid(key),
     meta,
     identifier: [{ system: 'https://foo-medical.example/synthetic/device', value: serialNumber }],
     status,
@@ -89,16 +100,17 @@ const devices = [
   device('foo-glucometer-01', 'Foo Glucometer', 'Glucose meter', 'Foo Devices (synthetic)', 'FGL-0001', 'inactive'),
 ];
 
-function observation(id, deviceId, code, effectiveDateTime, value) {
+function observation(key, deviceKey, code, effectiveDateTime, value) {
   return {
     resourceType: 'Observation',
-    id,
+    id: uuid(key),
     meta,
+    identifier: [{ system: 'https://foo-medical.example/synthetic/observation', value: key }],
     status: 'final',
     category: vitalSigns,
     code,
     subject: patientRef,
-    device: { reference: `Device/${deviceId}` },
+    device: { reference: `Device/${uuid(deviceKey)}` },
     effectiveDateTime,
     ...value,
   };

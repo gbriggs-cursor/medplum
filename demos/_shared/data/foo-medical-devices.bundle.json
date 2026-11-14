@@ -21,7 +21,7 @@
     {
       "resource": {
         "resourceType": "Patient",
-        "id": "foo-patient-01",
+        "id": "1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
         "meta": {
           "tag": [
             {
@@ -58,13 +58,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Patient/foo-patient-01"
+        "url": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc"
       }
     },
     {
       "resource": {
         "resourceType": "Device",
-        "id": "foo-bp-cuff-01",
+        "id": "93e94c9e-41eb-580f-a47d-900e56b24721",
         "meta": {
           "tag": [
             {
@@ -100,19 +100,19 @@
           "text": "Blood pressure monitor"
         },
         "patient": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         }
       },
       "request": {
         "method": "PUT",
-        "url": "Device/foo-bp-cuff-01"
+        "url": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
       }
     },
     {
       "resource": {
         "resourceType": "Device",
-        "id": "foo-oximeter-01",
+        "id": "c8c10c16-84f8-54aa-9d84-63b2e6da46fd",
         "meta": {
           "tag": [
             {
@@ -148,19 +148,19 @@
           "text": "Pulse oximeter"
         },
         "patient": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         }
       },
       "request": {
         "method": "PUT",
-        "url": "Device/foo-oximeter-01"
+        "url": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
       }
     },
     {
       "resource": {
         "resourceType": "Device",
-        "id": "foo-glucometer-01",
+        "id": "813a71fd-aa56-5148-bdb2-40c819ac32cd",
         "meta": {
           "tag": [
             {
@@ -196,19 +196,19 @@
           "text": "Glucose meter"
         },
         "patient": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         }
       },
       "request": {
         "method": "PUT",
-        "url": "Device/foo-glucometer-01"
+        "url": "Device/813a71fd-aa56-5148-bdb2-40c819ac32cd"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-29",
+        "id": "38f50010-a770-57d2-8490-1bfd27538aeb",
         "meta": {
           "tag": [
             {
@@ -225,6 +225,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-29"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -248,11 +254,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-10-16T08:00:00Z",
         "component": [
@@ -296,13 +302,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-29"
+        "url": "Observation/38f50010-a770-57d2-8490-1bfd27538aeb"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-28",
+        "id": "6d9214fc-0550-508c-8994-e0976281a631",
         "meta": {
           "tag": [
             {
@@ -319,6 +325,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-28"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -342,11 +354,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-10-17T08:00:00Z",
         "component": [
@@ -390,13 +402,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-28"
+        "url": "Observation/6d9214fc-0550-508c-8994-e0976281a631"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-27",
+        "id": "8a8331eb-9f51-5892-85c8-79f0806e3e79",
         "meta": {
           "tag": [
             {
@@ -413,6 +425,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-27"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -436,11 +454,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-10-18T08:00:00Z",
         "component": [
@@ -484,13 +502,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-27"
+        "url": "Observation/8a8331eb-9f51-5892-85c8-79f0806e3e79"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-26",
+        "id": "03a517a9-f5b2-5585-9aff-398235bd545a",
         "meta": {
           "tag": [
             {
@@ -507,6 +525,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-26"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -530,11 +554,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-10-19T08:00:00Z",
         "component": [
@@ -578,13 +602,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-26"
+        "url": "Observation/03a517a9-f5b2-5585-9aff-398235bd545a"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-25",
+        "id": "4a92b89a-4b68-5df3-a664-318115831083",
         "meta": {
           "tag": [
             {
@@ -601,6 +625,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-25"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -624,11 +654,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-10-20T08:00:00Z",
         "component": [
@@ -672,13 +702,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-25"
+        "url": "Observation/4a92b89a-4b68-5df3-a664-318115831083"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-24",
+        "id": "6de26dcd-9922-5010-a6df-e46e447b4516",
         "meta": {
           "tag": [
             {
@@ -695,6 +725,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-24"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -718,11 +754,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-10-21T08:00:00Z",
         "component": [
@@ -766,13 +802,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-24"
+        "url": "Observation/6de26dcd-9922-5010-a6df-e46e447b4516"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-23",
+        "id": "4fc1f1ef-37f7-5b8e-8c21-5abe7bb460ad",
         "meta": {
           "tag": [
             {
@@ -789,6 +825,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-23"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -812,11 +854,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-10-22T08:00:00Z",
         "component": [
@@ -860,13 +902,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-23"
+        "url": "Observation/4fc1f1ef-37f7-5b8e-8c21-5abe7bb460ad"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-22",
+        "id": "30bddc21-07be-56e3-aad7-b987f67335e7",
         "meta": {
           "tag": [
             {
@@ -883,6 +925,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-22"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -906,11 +954,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-10-23T08:00:00Z",
         "component": [
@@ -954,13 +1002,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-22"
+        "url": "Observation/30bddc21-07be-56e3-aad7-b987f67335e7"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-21",
+        "id": "5c3107ef-4bfa-547f-a378-9944aa2a303b",
         "meta": {
           "tag": [
             {
@@ -977,6 +1025,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-21"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -1000,11 +1054,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-10-24T08:00:00Z",
         "component": [
@@ -1048,13 +1102,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-21"
+        "url": "Observation/5c3107ef-4bfa-547f-a378-9944aa2a303b"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-20",
+        "id": "bbf94ab4-eb87-5431-932f-6d44973ee301",
         "meta": {
           "tag": [
             {
@@ -1071,6 +1125,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-20"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -1094,11 +1154,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-10-25T08:00:00Z",
         "component": [
@@ -1142,13 +1202,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-20"
+        "url": "Observation/bbf94ab4-eb87-5431-932f-6d44973ee301"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-19",
+        "id": "994ec138-655d-5a8a-a314-2b71f49e586c",
         "meta": {
           "tag": [
             {
@@ -1165,6 +1225,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-19"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -1188,11 +1254,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-10-26T08:00:00Z",
         "component": [
@@ -1236,13 +1302,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-19"
+        "url": "Observation/994ec138-655d-5a8a-a314-2b71f49e586c"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-18",
+        "id": "3fddb529-7a93-53e2-a604-921007f9ea2f",
         "meta": {
           "tag": [
             {
@@ -1259,6 +1325,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-18"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -1282,11 +1354,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-10-27T08:00:00Z",
         "component": [
@@ -1330,13 +1402,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-18"
+        "url": "Observation/3fddb529-7a93-53e2-a604-921007f9ea2f"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-17",
+        "id": "cb2579d2-1283-5178-9cef-a4004a1f413a",
         "meta": {
           "tag": [
             {
@@ -1353,6 +1425,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-17"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -1376,11 +1454,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-10-28T08:00:00Z",
         "component": [
@@ -1424,13 +1502,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-17"
+        "url": "Observation/cb2579d2-1283-5178-9cef-a4004a1f413a"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-16",
+        "id": "a66f535f-6cfb-50e0-9c77-2a97e7aa062b",
         "meta": {
           "tag": [
             {
@@ -1447,6 +1525,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-16"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -1470,11 +1554,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-10-29T08:00:00Z",
         "component": [
@@ -1518,13 +1602,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-16"
+        "url": "Observation/a66f535f-6cfb-50e0-9c77-2a97e7aa062b"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-15",
+        "id": "c34492b5-2173-5e73-ad77-78ead0224476",
         "meta": {
           "tag": [
             {
@@ -1541,6 +1625,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-15"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -1564,11 +1654,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-10-30T08:00:00Z",
         "component": [
@@ -1612,13 +1702,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-15"
+        "url": "Observation/c34492b5-2173-5e73-ad77-78ead0224476"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-14",
+        "id": "e155be81-6bc8-5528-9b2e-06ca70ec4afb",
         "meta": {
           "tag": [
             {
@@ -1635,6 +1725,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-14"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -1658,11 +1754,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-10-31T08:00:00Z",
         "component": [
@@ -1706,13 +1802,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-14"
+        "url": "Observation/e155be81-6bc8-5528-9b2e-06ca70ec4afb"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-13",
+        "id": "491fd07b-7019-508d-98ea-4446ff232ff3",
         "meta": {
           "tag": [
             {
@@ -1729,6 +1825,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-13"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -1752,11 +1854,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-11-01T08:00:00Z",
         "component": [
@@ -1800,13 +1902,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-13"
+        "url": "Observation/491fd07b-7019-508d-98ea-4446ff232ff3"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-12",
+        "id": "acdc6b1b-ba7f-53f3-a6c1-6a5af8a2b26e",
         "meta": {
           "tag": [
             {
@@ -1823,6 +1925,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-12"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -1846,11 +1954,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-11-02T08:00:00Z",
         "component": [
@@ -1894,13 +2002,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-12"
+        "url": "Observation/acdc6b1b-ba7f-53f3-a6c1-6a5af8a2b26e"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-11",
+        "id": "706e8fdd-a8dc-5cd6-b110-dfae069402bb",
         "meta": {
           "tag": [
             {
@@ -1917,6 +2025,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-11"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -1940,11 +2054,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-11-03T08:00:00Z",
         "component": [
@@ -1988,13 +2102,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-11"
+        "url": "Observation/706e8fdd-a8dc-5cd6-b110-dfae069402bb"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-10",
+        "id": "0c95f195-eb72-51e8-8755-c6d9c6459964",
         "meta": {
           "tag": [
             {
@@ -2011,6 +2125,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-10"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -2034,11 +2154,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-11-04T08:00:00Z",
         "component": [
@@ -2082,13 +2202,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-10"
+        "url": "Observation/0c95f195-eb72-51e8-8755-c6d9c6459964"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-09",
+        "id": "48660538-b81a-5fdf-9e7b-715b383f6a6e",
         "meta": {
           "tag": [
             {
@@ -2105,6 +2225,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-09"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -2128,11 +2254,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-11-05T08:00:00Z",
         "component": [
@@ -2176,13 +2302,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-09"
+        "url": "Observation/48660538-b81a-5fdf-9e7b-715b383f6a6e"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-08",
+        "id": "3c2c7e0d-6bf2-5e27-b8d5-92908edeb0d5",
         "meta": {
           "tag": [
             {
@@ -2199,6 +2325,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-08"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -2222,11 +2354,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-11-06T08:00:00Z",
         "component": [
@@ -2270,13 +2402,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-08"
+        "url": "Observation/3c2c7e0d-6bf2-5e27-b8d5-92908edeb0d5"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-07",
+        "id": "2bb21742-3b61-5fac-b73d-323e748b489a",
         "meta": {
           "tag": [
             {
@@ -2293,6 +2425,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-07"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -2316,11 +2454,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-11-07T08:00:00Z",
         "component": [
@@ -2364,13 +2502,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-07"
+        "url": "Observation/2bb21742-3b61-5fac-b73d-323e748b489a"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-06",
+        "id": "25fef661-3527-538a-8c08-2647352bc2f2",
         "meta": {
           "tag": [
             {
@@ -2387,6 +2525,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-06"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -2410,11 +2554,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-11-08T08:00:00Z",
         "component": [
@@ -2458,13 +2602,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-06"
+        "url": "Observation/25fef661-3527-538a-8c08-2647352bc2f2"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-05",
+        "id": "e35c4f44-d095-53a7-9ff2-e5c85fd2143b",
         "meta": {
           "tag": [
             {
@@ -2481,6 +2625,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-05"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -2504,11 +2654,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-11-09T08:00:00Z",
         "component": [
@@ -2552,13 +2702,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-05"
+        "url": "Observation/e35c4f44-d095-53a7-9ff2-e5c85fd2143b"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-04",
+        "id": "71ef65d9-a01b-58c5-b966-50bc01006076",
         "meta": {
           "tag": [
             {
@@ -2575,6 +2725,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-04"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -2598,11 +2754,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-11-10T08:00:00Z",
         "component": [
@@ -2646,13 +2802,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-04"
+        "url": "Observation/71ef65d9-a01b-58c5-b966-50bc01006076"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-03",
+        "id": "b5a5991d-92ee-581f-b17d-e66c33079ce3",
         "meta": {
           "tag": [
             {
@@ -2669,6 +2825,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-03"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -2692,11 +2854,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-11-11T08:00:00Z",
         "component": [
@@ -2740,13 +2902,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-03"
+        "url": "Observation/b5a5991d-92ee-581f-b17d-e66c33079ce3"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-02",
+        "id": "7aeae2e6-bd08-5a0c-829c-34d700b24e67",
         "meta": {
           "tag": [
             {
@@ -2763,6 +2925,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-02"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -2786,11 +2954,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-11-12T08:00:00Z",
         "component": [
@@ -2834,13 +3002,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-02"
+        "url": "Observation/7aeae2e6-bd08-5a0c-829c-34d700b24e67"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-01",
+        "id": "e893c5aa-7819-5f43-bfd9-d0a72e6b92ca",
         "meta": {
           "tag": [
             {
@@ -2857,6 +3025,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-01"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -2880,11 +3054,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-11-13T08:00:00Z",
         "component": [
@@ -2928,13 +3102,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-01"
+        "url": "Observation/e893c5aa-7819-5f43-bfd9-d0a72e6b92ca"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-00",
+        "id": "e6a0671f-6db8-5542-9f34-21f5d42d6afb",
         "meta": {
           "tag": [
             {
@@ -2951,6 +3125,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-00"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -2974,11 +3154,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-11-14T08:00:00Z",
         "component": [
@@ -3022,13 +3202,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-00"
+        "url": "Observation/e6a0671f-6db8-5542-9f34-21f5d42d6afb"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-bp-45",
+        "id": "37abeda9-25da-5d4d-b5c7-7a5bbf12dfe3",
         "meta": {
           "tag": [
             {
@@ -3045,6 +3225,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-bp-45"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -3068,11 +3254,11 @@
           "text": "Blood pressure panel"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-bp-cuff-01"
+          "reference": "Device/93e94c9e-41eb-580f-a47d-900e56b24721"
         },
         "effectiveDateTime": "2026-09-30T08:00:00Z",
         "component": [
@@ -3116,13 +3302,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-bp-45"
+        "url": "Observation/37abeda9-25da-5d4d-b5c7-7a5bbf12dfe3"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-spo2-28",
+        "id": "f844e607-f9a7-5cfc-88e9-425b5a5f41d2",
         "meta": {
           "tag": [
             {
@@ -3139,6 +3325,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-spo2-28"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -3162,11 +3354,11 @@
           "text": "Oxygen saturation"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-10-17T21:00:00Z",
         "valueQuantity": {
@@ -3178,13 +3370,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-spo2-28"
+        "url": "Observation/f844e607-f9a7-5cfc-88e9-425b5a5f41d2"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-hr-28",
+        "id": "9b4d789e-ce2a-5b00-b601-8cc4b82c8f0a",
         "meta": {
           "tag": [
             {
@@ -3201,6 +3393,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-hr-28"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -3224,11 +3422,11 @@
           "text": "Heart rate"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-10-17T21:00:00Z",
         "valueQuantity": {
@@ -3240,13 +3438,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-hr-28"
+        "url": "Observation/9b4d789e-ce2a-5b00-b601-8cc4b82c8f0a"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-spo2-26",
+        "id": "46169fbc-cae9-5598-98bc-d11f9a9d34bc",
         "meta": {
           "tag": [
             {
@@ -3263,6 +3461,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-spo2-26"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -3286,11 +3490,11 @@
           "text": "Oxygen saturation"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-10-19T21:00:00Z",
         "valueQuantity": {
@@ -3302,13 +3506,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-spo2-26"
+        "url": "Observation/46169fbc-cae9-5598-98bc-d11f9a9d34bc"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-hr-26",
+        "id": "64dcdd91-69ac-573a-b84a-7b71a92619a6",
         "meta": {
           "tag": [
             {
@@ -3325,6 +3529,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-hr-26"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -3348,11 +3558,11 @@
           "text": "Heart rate"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-10-19T21:00:00Z",
         "valueQuantity": {
@@ -3364,13 +3574,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-hr-26"
+        "url": "Observation/64dcdd91-69ac-573a-b84a-7b71a92619a6"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-spo2-24",
+        "id": "54fcfefa-5d56-5db4-b20e-b03cb4c70cea",
         "meta": {
           "tag": [
             {
@@ -3387,6 +3597,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-spo2-24"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -3410,11 +3626,11 @@
           "text": "Oxygen saturation"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-10-21T21:00:00Z",
         "valueQuantity": {
@@ -3426,13 +3642,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-spo2-24"
+        "url": "Observation/54fcfefa-5d56-5db4-b20e-b03cb4c70cea"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-hr-24",
+        "id": "7903ebe2-1ba7-54ab-97e8-80840f74c957",
         "meta": {
           "tag": [
             {
@@ -3449,6 +3665,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-hr-24"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -3472,11 +3694,11 @@
           "text": "Heart rate"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-10-21T21:00:00Z",
         "valueQuantity": {
@@ -3488,13 +3710,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-hr-24"
+        "url": "Observation/7903ebe2-1ba7-54ab-97e8-80840f74c957"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-spo2-22",
+        "id": "6c976fd5-6cff-514a-a914-aa773200b8dc",
         "meta": {
           "tag": [
             {
@@ -3511,6 +3733,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-spo2-22"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -3534,11 +3762,11 @@
           "text": "Oxygen saturation"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-10-23T21:00:00Z",
         "valueQuantity": {
@@ -3550,13 +3778,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-spo2-22"
+        "url": "Observation/6c976fd5-6cff-514a-a914-aa773200b8dc"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-hr-22",
+        "id": "e106029d-0e26-5228-a095-cab51eed4d19",
         "meta": {
           "tag": [
             {
@@ -3573,6 +3801,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-hr-22"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -3596,11 +3830,11 @@
           "text": "Heart rate"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-10-23T21:00:00Z",
         "valueQuantity": {
@@ -3612,13 +3846,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-hr-22"
+        "url": "Observation/e106029d-0e26-5228-a095-cab51eed4d19"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-spo2-20",
+        "id": "552e922d-5879-5ef3-bc0d-0a59e82c3d23",
         "meta": {
           "tag": [
             {
@@ -3635,6 +3869,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-spo2-20"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -3658,11 +3898,11 @@
           "text": "Oxygen saturation"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-10-25T21:00:00Z",
         "valueQuantity": {
@@ -3674,13 +3914,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-spo2-20"
+        "url": "Observation/552e922d-5879-5ef3-bc0d-0a59e82c3d23"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-hr-20",
+        "id": "a6261770-ebb9-54be-a7fb-3ad64da60548",
         "meta": {
           "tag": [
             {
@@ -3697,6 +3937,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-hr-20"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -3720,11 +3966,11 @@
           "text": "Heart rate"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-10-25T21:00:00Z",
         "valueQuantity": {
@@ -3736,13 +3982,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-hr-20"
+        "url": "Observation/a6261770-ebb9-54be-a7fb-3ad64da60548"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-spo2-18",
+        "id": "b8ae89a2-2606-5b32-8c25-67dbc50b9f97",
         "meta": {
           "tag": [
             {
@@ -3759,6 +4005,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-spo2-18"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -3782,11 +4034,11 @@
           "text": "Oxygen saturation"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-10-27T21:00:00Z",
         "valueQuantity": {
@@ -3798,13 +4050,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-spo2-18"
+        "url": "Observation/b8ae89a2-2606-5b32-8c25-67dbc50b9f97"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-hr-18",
+        "id": "e165edc7-9596-5d0c-ad5b-96d6faf1632d",
         "meta": {
           "tag": [
             {
@@ -3821,6 +4073,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-hr-18"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -3844,11 +4102,11 @@
           "text": "Heart rate"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-10-27T21:00:00Z",
         "valueQuantity": {
@@ -3860,13 +4118,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-hr-18"
+        "url": "Observation/e165edc7-9596-5d0c-ad5b-96d6faf1632d"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-spo2-16",
+        "id": "65b95f88-9710-5cea-a1a3-6f80d971b8d5",
         "meta": {
           "tag": [
             {
@@ -3883,6 +4141,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-spo2-16"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -3906,11 +4170,11 @@
           "text": "Oxygen saturation"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-10-29T21:00:00Z",
         "valueQuantity": {
@@ -3922,13 +4186,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-spo2-16"
+        "url": "Observation/65b95f88-9710-5cea-a1a3-6f80d971b8d5"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-hr-16",
+        "id": "1d46c0a8-424e-5952-85a8-5e4b4df4033e",
         "meta": {
           "tag": [
             {
@@ -3945,6 +4209,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-hr-16"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -3968,11 +4238,11 @@
           "text": "Heart rate"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-10-29T21:00:00Z",
         "valueQuantity": {
@@ -3984,13 +4254,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-hr-16"
+        "url": "Observation/1d46c0a8-424e-5952-85a8-5e4b4df4033e"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-spo2-14",
+        "id": "0c27ca31-fa24-57a7-9978-ff48d473454f",
         "meta": {
           "tag": [
             {
@@ -4007,6 +4277,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-spo2-14"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -4030,11 +4306,11 @@
           "text": "Oxygen saturation"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-10-31T21:00:00Z",
         "valueQuantity": {
@@ -4046,13 +4322,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-spo2-14"
+        "url": "Observation/0c27ca31-fa24-57a7-9978-ff48d473454f"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-hr-14",
+        "id": "dd3d5f31-7584-5443-98c3-f2b7e6868bcd",
         "meta": {
           "tag": [
             {
@@ -4069,6 +4345,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-hr-14"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -4092,11 +4374,11 @@
           "text": "Heart rate"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-10-31T21:00:00Z",
         "valueQuantity": {
@@ -4108,13 +4390,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-hr-14"
+        "url": "Observation/dd3d5f31-7584-5443-98c3-f2b7e6868bcd"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-spo2-12",
+        "id": "533d4b45-b6e2-5893-bc53-bdfe249c9531",
         "meta": {
           "tag": [
             {
@@ -4131,6 +4413,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-spo2-12"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -4154,11 +4442,11 @@
           "text": "Oxygen saturation"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-11-02T21:00:00Z",
         "valueQuantity": {
@@ -4170,13 +4458,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-spo2-12"
+        "url": "Observation/533d4b45-b6e2-5893-bc53-bdfe249c9531"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-hr-12",
+        "id": "556e6dcd-d06e-5171-b043-e9ca101f85cc",
         "meta": {
           "tag": [
             {
@@ -4193,6 +4481,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-hr-12"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -4216,11 +4510,11 @@
           "text": "Heart rate"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-11-02T21:00:00Z",
         "valueQuantity": {
@@ -4232,13 +4526,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-hr-12"
+        "url": "Observation/556e6dcd-d06e-5171-b043-e9ca101f85cc"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-spo2-10",
+        "id": "d13719f6-f175-5122-a820-4beab3ada314",
         "meta": {
           "tag": [
             {
@@ -4255,6 +4549,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-spo2-10"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -4278,11 +4578,11 @@
           "text": "Oxygen saturation"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-11-04T21:00:00Z",
         "valueQuantity": {
@@ -4294,13 +4594,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-spo2-10"
+        "url": "Observation/d13719f6-f175-5122-a820-4beab3ada314"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-hr-10",
+        "id": "ee322996-3b4d-5059-abb6-3fb0bf5f5023",
         "meta": {
           "tag": [
             {
@@ -4317,6 +4617,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-hr-10"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -4340,11 +4646,11 @@
           "text": "Heart rate"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-11-04T21:00:00Z",
         "valueQuantity": {
@@ -4356,13 +4662,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-hr-10"
+        "url": "Observation/ee322996-3b4d-5059-abb6-3fb0bf5f5023"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-spo2-08",
+        "id": "d0dab6aa-3c05-51c5-abb0-ca69f294c856",
         "meta": {
           "tag": [
             {
@@ -4379,6 +4685,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-spo2-08"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -4402,11 +4714,11 @@
           "text": "Oxygen saturation"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-11-06T21:00:00Z",
         "valueQuantity": {
@@ -4418,13 +4730,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-spo2-08"
+        "url": "Observation/d0dab6aa-3c05-51c5-abb0-ca69f294c856"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-hr-08",
+        "id": "34a2c2e1-7cc8-52c1-ac6b-7c346e6d1f9b",
         "meta": {
           "tag": [
             {
@@ -4441,6 +4753,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-hr-08"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -4464,11 +4782,11 @@
           "text": "Heart rate"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-11-06T21:00:00Z",
         "valueQuantity": {
@@ -4480,13 +4798,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-hr-08"
+        "url": "Observation/34a2c2e1-7cc8-52c1-ac6b-7c346e6d1f9b"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-spo2-06",
+        "id": "e77916bc-2f05-5005-abc5-19a7f8d34ccb",
         "meta": {
           "tag": [
             {
@@ -4503,6 +4821,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-spo2-06"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -4526,11 +4850,11 @@
           "text": "Oxygen saturation"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-11-08T21:00:00Z",
         "valueQuantity": {
@@ -4542,13 +4866,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-spo2-06"
+        "url": "Observation/e77916bc-2f05-5005-abc5-19a7f8d34ccb"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-hr-06",
+        "id": "880965ac-3492-5480-8fe0-5057730239e1",
         "meta": {
           "tag": [
             {
@@ -4565,6 +4889,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-hr-06"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -4588,11 +4918,11 @@
           "text": "Heart rate"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-11-08T21:00:00Z",
         "valueQuantity": {
@@ -4604,13 +4934,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-hr-06"
+        "url": "Observation/880965ac-3492-5480-8fe0-5057730239e1"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-spo2-04",
+        "id": "e1e4dcfa-584d-52c3-8ada-9cbae529865e",
         "meta": {
           "tag": [
             {
@@ -4627,6 +4957,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-spo2-04"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -4650,11 +4986,11 @@
           "text": "Oxygen saturation"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-11-10T21:00:00Z",
         "valueQuantity": {
@@ -4666,13 +5002,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-spo2-04"
+        "url": "Observation/e1e4dcfa-584d-52c3-8ada-9cbae529865e"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-hr-04",
+        "id": "96ebde10-55ad-55bd-b37c-bd2f3a62f78f",
         "meta": {
           "tag": [
             {
@@ -4689,6 +5025,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-hr-04"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -4712,11 +5054,11 @@
           "text": "Heart rate"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-11-10T21:00:00Z",
         "valueQuantity": {
@@ -4728,13 +5070,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-hr-04"
+        "url": "Observation/96ebde10-55ad-55bd-b37c-bd2f3a62f78f"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-spo2-02",
+        "id": "efaaf280-345f-5116-84fa-fa78a2865318",
         "meta": {
           "tag": [
             {
@@ -4751,6 +5093,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-spo2-02"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -4774,11 +5122,11 @@
           "text": "Oxygen saturation"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-11-12T21:00:00Z",
         "valueQuantity": {
@@ -4790,13 +5138,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-spo2-02"
+        "url": "Observation/efaaf280-345f-5116-84fa-fa78a2865318"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-hr-02",
+        "id": "00d54ed6-dee7-5f22-b337-9f770b47af33",
         "meta": {
           "tag": [
             {
@@ -4813,6 +5161,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-hr-02"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -4836,11 +5190,11 @@
           "text": "Heart rate"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-11-12T21:00:00Z",
         "valueQuantity": {
@@ -4852,13 +5206,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-hr-02"
+        "url": "Observation/00d54ed6-dee7-5f22-b337-9f770b47af33"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-spo2-00",
+        "id": "f53936ca-d619-5d1b-8289-87227767d6fa",
         "meta": {
           "tag": [
             {
@@ -4875,6 +5229,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-spo2-00"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -4898,11 +5258,11 @@
           "text": "Oxygen saturation"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-11-14T21:00:00Z",
         "valueQuantity": {
@@ -4914,13 +5274,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-spo2-00"
+        "url": "Observation/f53936ca-d619-5d1b-8289-87227767d6fa"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-hr-00",
+        "id": "5ebfd4cb-300d-5032-bb89-4603c1ed3482",
         "meta": {
           "tag": [
             {
@@ -4937,6 +5297,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-hr-00"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -4960,11 +5326,11 @@
           "text": "Heart rate"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-oximeter-01"
+          "reference": "Device/c8c10c16-84f8-54aa-9d84-63b2e6da46fd"
         },
         "effectiveDateTime": "2026-11-14T21:00:00Z",
         "valueQuantity": {
@@ -4976,13 +5342,13 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-hr-00"
+        "url": "Observation/5ebfd4cb-300d-5032-bb89-4603c1ed3482"
       }
     },
     {
       "resource": {
         "resourceType": "Observation",
-        "id": "foo-glucose-60",
+        "id": "dd7e7ec5-069d-56ff-9e50-4adbbb4eec2a",
         "meta": {
           "tag": [
             {
@@ -4999,6 +5365,12 @@
             }
           ]
         },
+        "identifier": [
+          {
+            "system": "https://foo-medical.example/synthetic/observation",
+            "value": "foo-glucose-60"
+          }
+        ],
         "status": "final",
         "category": [
           {
@@ -5022,11 +5394,11 @@
           "text": "Glucose [Mass/volume] in Blood"
         },
         "subject": {
-          "reference": "Patient/foo-patient-01",
+          "reference": "Patient/1fa5b37d-beaa-5440-b498-a7c2bc8ad1dc",
           "display": "Avery Synthetic"
         },
         "device": {
-          "reference": "Device/foo-glucometer-01"
+          "reference": "Device/813a71fd-aa56-5148-bdb2-40c819ac32cd"
         },
         "effectiveDateTime": "2026-09-15T07:00:00Z",
         "valueQuantity": {
@@ -5038,7 +5410,7 @@
       },
       "request": {
         "method": "PUT",
-        "url": "Observation/foo-glucose-60"
+        "url": "Observation/dd7e7ec5-069d-56ff-9e50-4adbbb4eec2a"
       }
     }
   ]

@@ -15,6 +15,7 @@ import { AppRoutes } from '../AppRoutes';
 const fixture = JSON.parse(
   readFileSync(resolve(import.meta.dirname, '../../../../demos/_shared/data/foo-medical-devices.bundle.json'), 'utf8')
 ) as Bundle;
+const patientId = fixture.entry?.find((e) => e.resource?.resourceType === 'Patient')?.resource?.id;
 
 describe('DevicesPage', () => {
   async function setup(url: string): Promise<void> {
@@ -48,7 +49,7 @@ describe('DevicesPage', () => {
   });
 
   test('Patient shows Devices tab with device readings', async () => {
-    await setup('/Patient/foo-patient-01/devices');
+    await setup(`/Patient/${patientId}/devices`);
     expect(await screen.findByRole('tab', { name: 'Devices' })).toBeInTheDocument();
     expect(await screen.findAllByTestId('patient-device-card')).toHaveLength(3);
     expect(await screen.findByRole('img', { name: /^Systolic blood pressure trend, 30 readings/ })).toBeInTheDocument();
