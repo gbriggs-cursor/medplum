@@ -5,6 +5,28 @@ jira_project: GIO
 default_prospect: Acme Cardio
 answer_keys: answer-keys:// resolves to a separate private repo (placeholder; see demos/README.md)
 stories:
+  - id: bugbot-62304
+    code: L4
+    title: IEC 62304 Bugbot rules
+    track: ls
+    stage: "04"
+    readiness: adapt
+    runtime: 10 min
+    wow: Bugbot flags a class C change high risk for a missing trace ID, the agent adds it, and the flag clears
+    trigger: Presenter pastes prompt.md part 1 into a new cloud agent started from the default branch
+    data_pack: P5 regulatory seed in demos/_shared/regulatory/ (software items, REQ-001 to REQ-006, RISK-001 to RISK-004, SOUP list)
+    fallback: []
+    reset: null
+    automation: false
+    labels:
+      - demo
+      - medplum
+      - story:bugbot-62304
+      - track:ls
+      - stage:04
+    card: demos/bugbot-62304/story.yaml
+    prompt: demos/bugbot-62304/prompt.md
+    readme: demos/bugbot-62304/README.md
   - id: device-evidence
     code: L3
     title: Traced build (device evidence)
@@ -123,3 +145,25 @@ stories:
     card: demos/ticket-to-pr/story.yaml
     prompt: demos/ticket-to-pr/prompt.md
     readme: demos/ticket-to-pr/README.md
+  - id: verify-loop
+    code: L5
+    title: Verify loop
+    track: ls
+    stage: "05"
+    readiness: new
+    runtime: 15-20 min
+    wow: CI goes red on a planted regression, the remediation agent fixes the source without touching a test, and the trace matrix turns green
+    trigger: Presenter runs demos/verify-loop/run.sh (or pastes prompt.md into a cloud agent started from the default branch)
+    data_pack: None beyond packages/core fixtures. Planted regression in demos/verify-loop/regression.patch; traced tests in trace-spec.json
+    fallback: []
+    reset: demos/verify-loop/reset.sh
+    automation: false
+    labels:
+      - demo
+      - medplum
+      - story:verify-loop
+      - track:ls
+      - stage:05
+    card: demos/verify-loop/story.yaml
+    prompt: demos/verify-loop/prompt.md
+    readme: demos/verify-loop/README.md
