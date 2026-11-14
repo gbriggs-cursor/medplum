@@ -160,7 +160,8 @@ function ReadingChart(props: { readonly series: DeviceReadingSeries; readonly ra
   const innerWidth = CHART_WIDTH - 2 * CHART_PADDING;
   const innerHeight = CHART_HEIGHT - 2 * CHART_PADDING;
   const coords = series.points.map((p) => {
-    const x = CHART_PADDING + ((p.time - range.start) / span) * innerWidth;
+    const fraction = Math.min(Math.max((p.time - range.start) / span, 0), 1);
+    const x = CHART_PADDING + fraction * innerWidth;
     const y = max === min ? CHART_HEIGHT / 2 : CHART_PADDING + (1 - (p.value - min) / (max - min)) * innerHeight;
     return [Math.round(x * 10) / 10, Math.round(y * 10) / 10] as const;
   });
