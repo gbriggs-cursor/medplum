@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 import type { Observation } from '@medplum/fhirtypes';
 import { CODES, RHYTHMS } from './cohort';
+import type { EcgSummary } from './ecg';
 import { decodeSampledData, detectRPeaks, formatEcgSummary, parseEcgSummary } from './ecg';
 import { bundleResources, readBundle } from './load';
 
@@ -35,7 +36,12 @@ describe('REQ-001 ECG summary parser', () => {
       expect(summary.flags.includes('tachycardia'), label).toBe((summary.heartRate as number) > 100);
       expect(summary.flags.includes('prolonged-qtc'), label).toBe((summary.qtcInterval as number) > 460);
     }
-    expect(ecgs.map(parseEcgSummary).filter((s) => s.flags.includes('irregular-rhythm')).length).toBeGreaterThan(0);
+    const summaries = ecgs.map(parseEcgSummary);
+    expect(summaries.filter((s) => s.flags.includes('irregular-rhythm')).length).toBeGreaterThan(0);
+    const normal = summaries.find((s) => s.rhythm === RHYTHMS.sinus.display && s.flags.length === 0);
+    expect(formatEcgSummary(normal as EcgSummary)).toBe(
+      `HR ${normal?.heartRate} /min, PR ${normal?.prInterval} ms, QRS ${normal?.qrsDuration} ms, QTc ${normal?.qtcInterval} ms, Normal sinus rhythm`
+    );
   });
 
   test('decodes SampledData edge cases and detects R peaks on a hand-built trace', () => {
