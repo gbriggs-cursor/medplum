@@ -1,0 +1,10 @@
+
+ RUN  v4.1.12 /agent/repos/medplum/examples/foomedical
+
+
+ Test Files  3 passed (3)
+      Tests  17 passed (17)
+   Start at  16:16:46
+   Duration  2.00s (transform 1.50s, setup 198ms, import 2.35s, tests 278ms, environment 1.13s)
+
+EXIT:0
