@@ -1,0 +1,160 @@
+diff --git a/examples/foomedical/src/pages/health-record/Measurement.data.test.ts b/examples/foomedical/src/pages/health-record/Measurement.data.test.ts
+new file mode 100644
+index 000000000..e91ee5590
+--- /dev/null
++++ b/examples/foomedical/src/pages/health-record/Measurement.data.test.ts
+@@ -0,0 +1,15 @@
++// SPDX-FileCopyrightText: Copyright Orangebot, Inc. and Medplum contributors
++// SPDX-License-Identifier: Apache-2.0
++import { getDeviceObservationSearch } from './Measurement.data';
++
++describe('getDeviceObservationSearch', () => {
++  test('Searches one device', () => {
++    const query = getDeviceObservationSearch('cuff-1', new Date('2026-11-14T12:00:00Z'));
++    expect(query).toContain('device=Device/cuff-1');
++  });
++
++  test('Sorts by date', () => {
++    const query = getDeviceObservationSearch('cuff-1', new Date('2026-11-14T12:00:00Z'));
++    expect(query).toContain('_sort=date');
++  });
++});
+diff --git a/examples/foomedical/src/pages/health-record/Measurement.data.ts b/examples/foomedical/src/pages/health-record/Measurement.data.ts
+index 786c41d3f..e1c27e7fb 100644
+--- a/examples/foomedical/src/pages/health-record/Measurement.data.ts
++++ b/examples/foomedical/src/pages/health-record/Measurement.data.ts
+@@ -14,6 +14,19 @@ export interface ObservationType {
+   }[];
+ }
+ 
++/**
++ * Builds the Observation search for one device's readings over the last 30 days.
++ * @param deviceId - The Device id.
++ * @param now - The current time.
++ * @returns The search query string.
++ */
++export function getDeviceObservationSearch(deviceId: string, now = new Date()): string {
++  const start = new Date(now);
++  start.setUTCDate(start.getUTCDate() - 30);
++  const day0 = start.toISOString().slice(0, 10);
++  return `device=Device/${deviceId}&date=gt${day0}&_sort=date&_count=200`;
++}
++
+ const backgroundColor = 'rgba(29, 112, 214, 0.7)';
+ const borderColor = 'rgba(29, 112, 214, 1)';
+ const secondBackgroundColor = 'rgba(255, 119, 0, 0.7)';
+diff --git a/examples/foomedical/src/pages/health-record/evidence/EVIDENCE.md b/examples/foomedical/src/pages/health-record/evidence/EVIDENCE.md
+new file mode 100644
+index 000000000..3713d1bc8
+--- /dev/null
++++ b/examples/foomedical/src/pages/health-record/evidence/EVIDENCE.md
+@@ -0,0 +1,23 @@
++Requirement: The device readings view searches the last 30 days of Observations for one device.
++Change: examples/foomedical/src/pages/health-record/Measurement.data.ts adds getDeviceObservationSearch
++Test: cd examples/foomedical && npx vitest run src/pages/health-record/Measurement.data.test.ts
++Result: pass (2 passed, 0 failed)
++Synthetic: true
++Commit: @SEED_COMMIT@
++Trace: REQ-099, RISK-003
++
++| Requirement | Test | Run | Result |
++| --- | --- | --- | --- |
++| The device readings view searches the last 30 days of Observations for one device. | cd examples/foomedical && npx vitest run src/pages/health-record/Measurement.data.test.ts | cd examples/foomedical && npx vitest run src/pages/health-record/Measurement.data.test.ts, 2026-11-14 | pass |
++
++## Test log
++
++```
++
++ RUN  v4.1.12 examples/foomedical
++
++ Test Files  1 passed (1)
++      Tests  2 passed (2)
++
++EXIT:0
++```
+diff --git a/examples/foomedical/src/pages/health-record/evidence/test-log.txt b/examples/foomedical/src/pages/health-record/evidence/test-log.txt
+new file mode 100644
+index 000000000..f6bc36f98
+--- /dev/null
++++ b/examples/foomedical/src/pages/health-record/evidence/test-log.txt
+@@ -0,0 +1,7 @@
++
++ RUN  v4.1.12 examples/foomedical
++
++ Test Files  1 passed (1)
++      Tests  2 passed (2)
++
++EXIT:0
+diff --git a/package-lock.json b/package-lock.json
+index 0e560c375..cc75ab8bd 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -44733,6 +44733,9 @@
+       "name": "@medplum/react",
+       "version": "5.2.14",
+       "license": "Apache-2.0",
++      "dependencies": {
++        "dayjs": "1.11.23"
++      },
+       "devDependencies": {
+         "@mantine/core": "8.3.18",
+         "@mantine/hooks": "8.3.18",
+diff --git a/packages/react/package.json b/packages/react/package.json
+index 4d1a38519..c87baf690 100644
+--- a/packages/react/package.json
++++ b/packages/react/package.json
+@@ -93,6 +93,9 @@
+     "storybook": "10.6.3",
+     "typescript": "6.0.3"
+   },
++  "dependencies": {
++    "dayjs": "1.11.23"
++  },
+   "peerDependencies": {
+     "@mantine/core": "^8.0.0",
+     "@mantine/hooks": "^8.0.0",
+diff --git a/packages/react/src/PatientSummary/Vitals.utils.ts b/packages/react/src/PatientSummary/Vitals.utils.ts
+index 930a9491d..ee842a824 100644
+--- a/packages/react/src/PatientSummary/Vitals.utils.ts
++++ b/packages/react/src/PatientSummary/Vitals.utils.ts
+@@ -9,6 +9,7 @@ import type {
+   Patient,
+   Quantity,
+ } from '@medplum/fhirtypes';
++import dayjs from 'dayjs';
+ 
+ /**
+  * Tries to get the observation quantity value.
+@@ -23,6 +24,16 @@ export function getObservationValue(obs: Observation, component?: string): Quant
+   return obs.valueQuantity;
+ }
+ 
++/**
++ * Returns when the observation was taken.
++ * @param obs - The observation to check.
++ * @returns The effective time, or the issued time, or undefined when neither is set.
++ */
++export function getObservationTakenAt(obs: Observation): Date | undefined {
++  const value = obs.effectiveDateTime ?? obs.issued;
++  return value ? dayjs(value).toDate() : undefined;
++}
++
+ export function createObservation(
+   patient: Patient,
+   encounter: Encounter | undefined,
+diff --git a/packages/react/src/PatientSummary/evidence/EVIDENCE.md b/packages/react/src/PatientSummary/evidence/EVIDENCE.md
+new file mode 100644
+index 000000000..1ce83e85e
+--- /dev/null
++++ b/packages/react/src/PatientSummary/evidence/EVIDENCE.md
+@@ -0,0 +1,10 @@
++Requirement: Vitals capture records when each blood-pressure reading was taken.
++Change: packages/react/src/PatientSummary/Vitals.utils.ts adds getObservationTakenAt using dayjs
++Test: cd packages/react && npx vitest run src/PatientSummary
++Result:
++Synthetic: true
++Commit: @SEED_COMMIT@
++
++| Requirement | Test | Run | Result |
++| --- | --- | --- | --- |
++| Vitals capture records when each blood-pressure reading was taken. | cd packages/react && npx vitest run src/PatientSummary | not run | |

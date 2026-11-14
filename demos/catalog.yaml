@@ -526,6 +526,32 @@ stories:
     card: demos/requirements-clerk/story.yaml
     prompt: demos/requirements-clerk/prompt.md
     readme: demos/requirements-clerk/README.md
+  - id: review-ladder
+    code: L18
+    title: Review ladder (Bugbot, then Security Reviewer)
+    track: ls
+    stage: "04"
+    readiness: new
+    runtime: 10 min
+    wow: Bugbot catches five seeded process and logic defects and Security Reviewer catches four seeded security defects, on PRs cut from one tagged baseline in under a minute
+    trigger: Presenter runs demos/review-ladder/seed.sh after Gio tags demo-baseline-v1, then opens the two draft PRs it prints
+    data_pack: P5 regulatory seed in demos/_shared/regulatory/ plus the two seed patches in demos/review-ladder/seeds/. Synthetic only (Acme Cardio, Foo Medical, Taylor Demo)
+    fallback: []
+    reset: null
+    offline: bash demos/review-ladder/seed.sh --self-test
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: none is needed for seed.sh itself. Live mode also needs the demo-baseline-v1 tag, Bugbot enabled on gbriggs-cursor/medplum, and the Security Reviewer automation turned on. Those are repository settings, not keys."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:review-ladder
+      - track:ls
+      - stage:04
+    card: demos/review-ladder/story.yaml
+    prompt: demos/review-ladder/prompt.md
+    readme: demos/review-ladder/README.md
   - id: risk-teammate
     code: L2
     title: Risk teammate
@@ -608,6 +634,33 @@ stories:
     card: demos/support-voice/story.yaml
     prompt: demos/support-voice/prompt.md
     readme: demos/support-voice/README.md
+  - id: test-review
+    code: L19
+    title: "Test & Review: Story A, PRD to UAT evidence"
+    track: ls
+    stage: "05"
+    readiness: new
+    runtime: 15 min
+    wow: The agent builds the tab from a four-line PRD, then proves each acceptance criterion on screen, including the day 0 reading a gt filter would drop
+    trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch, with demos/test-review/context/ as Project Context
+    data_pack: Synthetic bundle demos/_shared/data/taylor-demo-bp-cuff.json (Patient Taylor Demo, one Acme Cardio home BP cuff, 12 readings over 30 days, latest 117/75, tagged synthetic + HTEST)
+    fallback:
+      - 10
+    reset: null
+    offline: node demos/test-review/offline.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: a cloud agent builds the feature from prd-patient-devices.md and runs the uat-from-acceptance-criteria skill with computer use against a local app loaded with the synthetic bundle."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:test-review
+      - track:ls
+      - stage:05
+    card: demos/test-review/story.yaml
+    prompt: demos/test-review/prompt.md
+    readme: demos/test-review/README.md
   - id: ticket-to-pr
     code: G2
     title: Ticket-to-PR automation

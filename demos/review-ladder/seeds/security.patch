@@ -1,0 +1,166 @@
+diff --git a/packages/react/src/PatientDevices/PatientDevices.tsx b/packages/react/src/PatientDevices/PatientDevices.tsx
+new file mode 100644
+index 000000000..3df72767e
+--- /dev/null
++++ b/packages/react/src/PatientDevices/PatientDevices.tsx
+@@ -0,0 +1,38 @@
++// SPDX-FileCopyrightText: Copyright Orangebot, Inc. and Medplum contributors
++// SPDX-License-Identifier: Apache-2.0
++import { List, Text } from '@mantine/core';
++import { formatHumanName } from '@medplum/core';
++import type { Device, Patient } from '@medplum/fhirtypes';
++import { useMedplum } from '@medplum/react-hooks';
++import type { JSX } from 'react';
++import { useEffect, useState } from 'react';
++import { useParams } from 'react-router';
++import { buildDeviceSearch } from './PatientDevices.utils';
++
++export interface PatientDevicesProps {
++  readonly patient: Patient;
++}
++
++export function PatientDevices(props: PatientDevicesProps): JSX.Element {
++  const medplum = useMedplum();
++  const { id } = useParams() as { id: string };
++  const [devices, setDevices] = useState<Device[]>([]);
++
++  useEffect(() => {
++    const name = props.patient.name?.[0] ? formatHumanName(props.patient.name[0]) : '';
++    const mrn = props.patient.identifier?.find((i) => i.type?.coding?.[0]?.code === 'MR')?.value;
++    console.log(`Loading devices for ${name} MRN ${mrn}`);
++    medplum.searchResources('Device', buildDeviceSearch(id)).then(setDevices).catch(console.error);
++  }, [medplum, id, props.patient]);
++
++  if (devices.length === 0) {
++    return <Text c="dimmed">No devices</Text>;
++  }
++  return (
++    <List>
++      {devices.map((device) => (
++        <List.Item key={device.id}>{device.deviceName?.[0]?.name ?? device.id}</List.Item>
++      ))}
++    </List>
++  );
++}
+diff --git a/packages/react/src/PatientDevices/PatientDevices.utils.test.ts b/packages/react/src/PatientDevices/PatientDevices.utils.test.ts
+new file mode 100644
+index 000000000..12ac13b34
+--- /dev/null
++++ b/packages/react/src/PatientDevices/PatientDevices.utils.test.ts
+@@ -0,0 +1,13 @@
++// SPDX-FileCopyrightText: Copyright Orangebot, Inc. and Medplum contributors
++// SPDX-License-Identifier: Apache-2.0
++import { buildDeviceSearch } from './PatientDevices.utils';
++
++describe('buildDeviceSearch', () => {
++  test('Searches the patient', () => {
++    expect(buildDeviceSearch('taylor-demo')).toContain('patient=Patient/taylor-demo');
++  });
++
++  test('Caps the page size', () => {
++    expect(buildDeviceSearch('taylor-demo')).toContain('_count=100');
++  });
++});
+diff --git a/packages/react/src/PatientDevices/PatientDevices.utils.ts b/packages/react/src/PatientDevices/PatientDevices.utils.ts
+new file mode 100644
+index 000000000..6842ab2fe
+--- /dev/null
++++ b/packages/react/src/PatientDevices/PatientDevices.utils.ts
+@@ -0,0 +1,11 @@
++// SPDX-FileCopyrightText: Copyright Orangebot, Inc. and Medplum contributors
++// SPDX-License-Identifier: Apache-2.0
++
++/**
++ * Builds the Device search for the patient in the /Patient/:id/devices route.
++ * @param patientId - The :id route param.
++ * @returns The search query string.
++ */
++export function buildDeviceSearch(patientId: string): string {
++  return 'patient=Patient/' + patientId + '&_count=100';
++}
+diff --git a/packages/react/src/PatientDevices/deviceSync.ts b/packages/react/src/PatientDevices/deviceSync.ts
+new file mode 100644
+index 000000000..6e009dd76
+--- /dev/null
++++ b/packages/react/src/PatientDevices/deviceSync.ts
+@@ -0,0 +1,14 @@
++// SPDX-FileCopyrightText: Copyright Orangebot, Inc. and Medplum contributors
++// SPDX-License-Identifier: Apache-2.0
++import type { MedplumClient } from '@medplum/core';
++
++const DEVICE_SYNC_CLIENT_ID = '6f1c2a4e-0d5b-4c7e-9a3f-1b2c3d4e5f60';
++const DEVICE_SYNC_CLIENT_SECRET = 'DEMO-NOT-A-REAL-SECRET';
++
++/**
++ * Signs the device sync client in so it can pull readings from home devices.
++ * @param medplum - The Medplum client.
++ */
++export async function startDeviceSync(medplum: MedplumClient): Promise<void> {
++  await medplum.startClientLogin(DEVICE_SYNC_CLIENT_ID, DEVICE_SYNC_CLIENT_SECRET);
++}
+diff --git a/packages/react/src/PatientDevices/evidence/EVIDENCE.md b/packages/react/src/PatientDevices/evidence/EVIDENCE.md
+new file mode 100644
+index 000000000..c11b111e6
+--- /dev/null
++++ b/packages/react/src/PatientDevices/evidence/EVIDENCE.md
+@@ -0,0 +1,22 @@
++Requirement: The Devices tab lists the Device resources linked to the patient.
++Change: packages/react/src/PatientDevices/ adds PatientDevices, buildDeviceSearch, and startDeviceSync; packages/server/src/fhir/patientdevices.ts adds listPatientDevices
++Test: cd packages/react && npx vitest run src/PatientDevices
++Result: pass (2 passed, 0 failed)
++Synthetic: true
++Commit: @SEED_COMMIT@
++
++| Requirement | Test | Run | Result |
++| --- | --- | --- | --- |
++| The Devices tab lists the Device resources linked to the patient. | cd packages/react && npx vitest run src/PatientDevices | cd packages/react && npx vitest run src/PatientDevices, 2026-11-14 | pass |
++
++## Test log
++
++```
++
++ RUN  v4.1.12 packages/react
++
++ Test Files  1 passed (1)
++      Tests  2 passed (2)
++
++EXIT:0
++```
+diff --git a/packages/react/src/PatientDevices/evidence/test-log.txt b/packages/react/src/PatientDevices/evidence/test-log.txt
+new file mode 100644
+index 000000000..001b9a7c4
+--- /dev/null
++++ b/packages/react/src/PatientDevices/evidence/test-log.txt
+@@ -0,0 +1,7 @@
++
++ RUN  v4.1.12 packages/react
++
++ Test Files  1 passed (1)
++      Tests  2 passed (2)
++
++EXIT:0
+diff --git a/packages/server/src/fhir/patientdevices.ts b/packages/server/src/fhir/patientdevices.ts
+new file mode 100644
+index 000000000..02dbd3b26
+--- /dev/null
++++ b/packages/server/src/fhir/patientdevices.ts
+@@ -0,0 +1,19 @@
++// SPDX-FileCopyrightText: Copyright Orangebot, Inc. and Medplum contributors
++// SPDX-License-Identifier: Apache-2.0
++import type { WithId } from '@medplum/core';
++import { Operator } from '@medplum/core';
++import type { Device } from '@medplum/fhirtypes';
++import { getGlobalSystemRepo } from './repo';
++
++/**
++ * Lists every Device linked to a patient, for the Devices tab.
++ * @param patientId - The Patient id.
++ * @returns The patient's devices.
++ */
++export async function listPatientDevices(patientId: string): Promise<WithId<Device>[]> {
++  const repo = getGlobalSystemRepo();
++  return repo.searchResources<Device>({
++    resourceType: 'Device',
++    filters: [{ code: 'patient', operator: Operator.EQUALS, value: `Patient/${patientId}` }],
++  });
++}
