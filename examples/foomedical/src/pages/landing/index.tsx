@@ -8,6 +8,7 @@ import DoctorImage from '../../img/landingPage/doctor.jpg';
 import EngineeringImage from '../../img/landingPage/engineering.jpg';
 import LabImage from '../../img/landingPage/laboratory.jpg';
 import WorkingEnvironmentImage from '../../img/landingPage/working-environment.jpg';
+import { brand } from '../../theme';
 import { Header } from './Header';
 import classes from './index.module.css';
 
@@ -45,13 +46,13 @@ export function LandingPage(): JSX.Element {
           <div className={classes.inner}>
             <div className={classes.content}>
               <Title className={classes.title}>
-                An extraordinary
+                Your heart,
                 <br />
-                <span className={classes.highlight}>doctor&apos;s office</span>
+                <span className={classes.highlight}>between visits.</span>
               </Title>
               <Text size="lg" c="dimmed" mt="md">
-                This is not actually a medical practice, this is a sample open source application for developers to
-                clone, customize and run.
+                {brand.productName} is a fictional cardiology patient portal for demos. It is not a real medical
+                practice.
               </Text>
               <Group mt={30}>
                 <Button radius="xl" size="md" className={classes.control}>

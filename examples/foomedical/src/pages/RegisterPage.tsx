@@ -4,6 +4,7 @@ import { BackgroundImage, Box, SimpleGrid } from '@mantine/core';
 import { RegisterForm } from '@medplum/react';
 import type { JSX } from 'react';
 import { useNavigate } from 'react-router';
+import { brand } from '../theme';
 
 export function RegisterPage(): JSX.Element {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ export function RegisterPage(): JSX.Element {
           onSuccess={() => navigate('/')?.catch(console.error)}
           onSignIn={() => navigate('/signin')?.catch(console.error)}
         >
-          <h2>Register with Foo Medical</h2>
+          <h2>Register with {brand.productName}</h2>
         </RegisterForm>
       </Box>
       <BackgroundImage src="https://images.unsplash.com/photo-1556761175-4b46a572b786?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1567&amp;q=80" />

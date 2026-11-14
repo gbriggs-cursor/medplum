@@ -28,6 +28,7 @@ import { PasswordInput, useMedplum } from '@medplum/react';
 import { IconCopy, IconLink, IconPlayerPlay, IconShieldCheck } from '@tabler/icons-react';
 import type { JSX } from 'react';
 import { useState } from 'react';
+import { brand } from '../theme';
 
 interface GeneratedSmartHealthLink {
   shlink: string;
@@ -42,7 +43,7 @@ export function SmartHealthLinksPage(): JSX.Element {
   const medplum = useMedplum();
   const patient = medplum.getProfile() as WithId<Patient>;
   const [mode, setMode] = useState<SmartHealthLinkMode>('direct');
-  const [label, setLabel] = useState('FooMedical patient share');
+  const [label, setLabel] = useState(`${brand.shortName} patient share`);
   const [recipient, setRecipient] = useState('Verona Health System');
   const [passcode, setPasscode] = useState('');
   const [includeQrCode, setIncludeQrCode] = useState(true);

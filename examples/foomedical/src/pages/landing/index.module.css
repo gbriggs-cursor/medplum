@@ -24,9 +24,7 @@
 
 .title {
   color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
-  font-family:
-    Greycliff CF,
-    theme.fontFamily;
+  font-family: var(--mantine-font-family-headings);
   font-size: 56px;
   line-height: 1.2;
   font-weight: 600;
