@@ -24,6 +24,9 @@ proof:
   - manifest.json counts (20 patients, 20 devices) and seed
   - evidence/EVIDENCE.md with Result pass and a count
 reset: demos/device-evidence/reset.sh
+offline: node demos/device-evidence/offline.mjs
+default_mode: offline
+live_mode_note: 'Live mode available once keys are added: a cloud agent generates the cohort, parser, tests, and evidence PR.'
 fallback: [11]
 blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. No Jira writes
 

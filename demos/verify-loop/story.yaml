@@ -1,0 +1,44 @@
+id: verify-loop
+code: L5
+title: Verify loop
+track: ls
+stage: '05'
+readiness: new
+runtime: 15-20 min
+environment: '67842161'
+
+persona: QA/RA lead for medical device software at {prospect}
+trigger: Presenter runs demos/verify-loop/run.sh (or pastes prompt.md into a cloud agent started from the default branch)
+actors:
+  - verify-loop CI (demos/verify-loop/ci.mjs)
+  - Agent SDK remediation agent (demos/verify-loop/remediator, @grok/agent-sdk 0.6.0)
+  - Source-only guard (demos/verify-loop/guard.mjs)
+  - Cursor cloud agent (runs the loop, opens the draft PR)
+surface: packages/core search date matching (ge / le boundaries) used by every date-filtered FHIR search, including 30-day vitals trends
+data_pack: None beyond packages/core fixtures. Planted regression in demos/verify-loop/regression.patch; traced tests in trace-spec.json
+artifact: Evidence v2 in demos/verify-loop/evidence/ (EVIDENCE.md, trace.json, TRACE.md, guard.json, run logs)
+gate: Presenter shows the red matrix, then the green one. On-stage only
+gate_blocks: false
+wow: CI goes red on a planted regression, the remediation agent fixes the source without touching a test, and the trace matrix turns green
+proof:
+  - TRACE.md with run-1 red and run-2 green for REQ-004
+  - guard.json showing only packages/core/src/search/match.ts changed
+  - Draft PR link with the evidence
+reset: demos/verify-loop/reset.sh
+fallback: []
+fallback_note: No live agent take exists yet (no key). The `offline` command is the default path and runs the real red-to-green matrix in about 5 seconds, labeled OFFLINE (no key).
+offline: DEMO_MODE=offline demos/verify-loop/run.sh
+default_mode: offline
+live_mode_note: >-
+  Live mode available once keys are added: with CURSOR_API_KEY set, run.sh auto-selects the @grok/agent-sdk
+  remediator instead of the OFFLINE reference remediator. The plant, CI runs, guard, and trace matrix are unchanged.
+blast_radius: Local working tree and one GitHub draft PR in gbriggs-cursor/medplum. No Jira writes. The remediation agent runs sandboxed with no network
+answer_key: answer-keys://verify-loop/
+
+variables:
+  prospect: Acme Cardio
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:verify-loop', 'track:ls', 'stage:05']

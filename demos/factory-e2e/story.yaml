@@ -1,0 +1,38 @@
+id: factory-e2e
+code: L8
+title: Factory end to end
+track: ls
+stage: '01-07'
+readiness: new
+runtime: 30-40 min
+environment: '67842161'
+
+persona: QA/RA lead for a connected cardiac device at {prospect}
+trigger: Presenter follows README.md and opens the draft PRs it names. This card does not start a live take.
+actors:
+  - Presenter
+surface: Foo Medical and the {prospect} patch evidence, shown from the draft PRs in the run order
+data_pack: None in this folder. Each stage keeps the synthetic pack named on its own card (P1 device cohort seed 20261104, P5 regulatory slices, P2 Synthea 10k).
+artifact: Presenter runbook. A live end-to-end take has not produced a new draft PR.
+gate: The L6 approval card is shown on stage. The walk continues without waiting for a decision.
+gate_blocks: false
+wow: One synthetic requirement is walked from requirement through release, including the verify failure that loops back to build
+proof:
+  - Draft PR links in README.md, in run order
+  - L5 reference rehearsal on PR #21 (51 passed, 3 failed, then 54 passed, 0 failed)
+  - L13 published-pack verify on PR #33 (fetch.sh exit 0; verify.py 28 checks, 0 failed)
+reset: demos/factory-e2e/reset.sh
+offline: node demos/factory-e2e/offline.mjs
+default_mode: offline
+live_mode_note: 'Live mode available once keys are added: the presenter can start the live agent, voice, and Jira paths named in this runbook.'
+fallback: [17, 18, 21, 22, 23, 25, 27, 28, 30, 31, 33, 34, 36, 37]
+blast_radius: None. The presenter opens existing draft PRs. No Jira writes, no merges, no comments on other PRs.
+answer_key: answer-keys://factory-e2e/
+
+variables:
+  prospect: Acme Cardio
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:factory-e2e', 'track:ls', 'stage:01-07']

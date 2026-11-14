@@ -5,6 +5,57 @@ jira_project: GIO
 default_prospect: Acme Cardio
 answer_keys: answer-keys:// resolves to a separate private repo (placeholder; see demos/README.md)
 stories:
+  - id: approval-gate
+    code: L6
+    title: Design review gate
+    track: ls
+    stage: "06"
+    readiness: new
+    runtime: 5 min
+    wow: A human approves on stage, approval.json records signer, meaning, and time against the evidence digest, and editing the evidence afterwards makes verify fail
+    trigger: Presenter runs the offline command (no keys), or pastes prompt.md part 1 into a new cloud agent started from the default branch for live mode
+    data_pack: P1 device cohort in demos/_shared/data-packs/p1-device-cohort (20 synthetic patients, Acme Cardio patch v2, seed 20261104, from PR
+    fallback:
+      - 11
+    reset: demos/approval-gate/reset.sh
+    offline: demos/approval-gate/offline.sh
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: none are needed for the gate itself. Live mode is prompt.md in a cloud agent, with Grok Bot posting APPROVAL-CARD.md and the decision recorded with --channel grok-bot. The Grok Bot card post has not been run yet"
+    automation: false
+    labels:
+      - demo
+      - medplum
+      - story:approval-gate
+      - track:ls
+      - stage:06
+    card: demos/approval-gate/story.yaml
+    prompt: demos/approval-gate/prompt.md
+    readme: demos/approval-gate/README.md
+  - id: bugbot-62304
+    code: L4
+    title: IEC 62304 Bugbot rules
+    track: ls
+    stage: "04"
+    readiness: adapt
+    runtime: 10 min
+    wow: Bugbot flags a class C change high risk for a missing trace ID, the agent adds it, and the flag clears
+    trigger: Presenter pastes prompt.md part 1 into a new cloud agent started from the default branch
+    data_pack: P5 regulatory seed in demos/_shared/regulatory/ (software items, REQ-001 to REQ-006, RISK-001 to RISK-004, SOUP list)
+    fallback: []
+    reset: null
+    offline: node demos/bugbot-62304/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: none is needed for the seed check or rule evaluation, but live mode also needs Bugbot enabled on gbriggs-cursor/medplum. That is a repository setting, not a key. With it on, Bugbot reviews the agent's draft PR instead of the replayed review."
+    automation: false
+    labels:
+      - demo
+      - medplum
+      - story:bugbot-62304
+      - track:ls
+      - stage:04
+    card: demos/bugbot-62304/story.yaml
+    prompt: demos/bugbot-62304/prompt.md
+    readme: demos/bugbot-62304/README.md
   - id: device-evidence
     code: L3
     title: Traced build (device evidence)
@@ -18,6 +69,9 @@ stories:
     fallback:
       - 11
     reset: demos/device-evidence/reset.sh
+    offline: node demos/device-evidence/offline.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: a cloud agent generates the cohort, parser, tests, and evidence PR."
     automation: false
     labels:
       - demo
@@ -43,6 +97,9 @@ stories:
       - 8
       - 13
     reset: demos/docs-from-questions/reset.sh
+    offline: node demos/docs-from-questions/offline.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: a cloud agent writes the docs PR from the seeded questions."
     automation: false
     labels:
       - demo
@@ -52,6 +109,45 @@ stories:
     card: demos/docs-from-questions/story.yaml
     prompt: demos/docs-from-questions/prompt.md
     readme: demos/docs-from-questions/README.md
+  - id: factory-e2e
+    code: L8
+    title: Factory end to end
+    track: ls
+    stage: 01-07
+    readiness: new
+    runtime: 30-40 min
+    wow: One synthetic requirement is walked from requirement through release, including the verify failure that loops back to build
+    trigger: Presenter follows README.md and opens the draft PRs it names. This card does not start a live take.
+    data_pack: None in this folder. Each stage keeps the synthetic pack named on its own card (P1 device cohort seed 20261104, P5 regulatory slices, P2 Synthea 10k).
+    fallback:
+      - 17
+      - 18
+      - 21
+      - 22
+      - 23
+      - 25
+      - 27
+      - 28
+      - 30
+      - 31
+      - 33
+      - 34
+      - 36
+      - 37
+    reset: demos/factory-e2e/reset.sh
+    offline: node demos/factory-e2e/offline.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: the presenter can start the live agent, voice, and Jira paths named in this runbook."
+    automation: false
+    labels:
+      - demo
+      - medplum
+      - story:factory-e2e
+      - track:ls
+      - stage:01-07
+    card: demos/factory-e2e/story.yaml
+    prompt: demos/factory-e2e/prompt.md
+    readme: demos/factory-e2e/README.md
   - id: net-new-feature
     code: G1
     title: Net-new feature
@@ -66,6 +162,9 @@ stories:
       - 10
       - 14
     reset: null
+    offline: node demos/net-new-feature/offline.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: a cloud agent runs demos/net-new-feature/prompt.md and opens a draft PR."
     automation: false
     labels:
       - demo
@@ -87,6 +186,9 @@ stories:
     data_pack: Brand kit committed under demos/rebrand/brand/<brand_kit>/ (default acme-cardio, fictional). No network fetch
     fallback: []
     reset: null
+    offline: node demos/rebrand/offline.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: a cloud agent applies the committed Acme Cardio brand kit and opens a draft PR."
     automation: false
     labels:
       - demo
@@ -111,6 +213,9 @@ stories:
       - 9
       - 16
     reset: demos/ticket-to-pr/reset.sh
+    offline: node demos/ticket-to-pr/offline.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: Demo Setup creates the GIO ticket and automation d5489670 opens the draft PR."
     automation: true
     labels:
       - demo
@@ -123,3 +228,28 @@ stories:
     card: demos/ticket-to-pr/story.yaml
     prompt: demos/ticket-to-pr/prompt.md
     readme: demos/ticket-to-pr/README.md
+  - id: verify-loop
+    code: L5
+    title: Verify loop
+    track: ls
+    stage: "05"
+    readiness: new
+    runtime: 15-20 min
+    wow: CI goes red on a planted regression, the remediation agent fixes the source without touching a test, and the trace matrix turns green
+    trigger: Presenter runs demos/verify-loop/run.sh (or pastes prompt.md into a cloud agent started from the default branch)
+    data_pack: None beyond packages/core fixtures. Planted regression in demos/verify-loop/regression.patch; traced tests in trace-spec.json
+    fallback: []
+    reset: demos/verify-loop/reset.sh
+    offline: DEMO_MODE=offline demos/verify-loop/run.sh
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: with CURSOR_API_KEY set, run.sh auto-selects the @grok/agent-sdk remediator instead of the OFFLINE reference remediator. The plant, CI runs, guard, and trace matrix are unchanged."
+    automation: false
+    labels:
+      - demo
+      - medplum
+      - story:verify-loop
+      - track:ls
+      - stage:05
+    card: demos/verify-loop/story.yaml
+    prompt: demos/verify-loop/prompt.md
+    readme: demos/verify-loop/README.md

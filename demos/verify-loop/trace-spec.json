@@ -1,0 +1,25 @@
+{
+  "story": "verify-loop",
+  "testFile": "packages/core/src/search/match.test.ts",
+  "workspace": "packages/core",
+  "requirements": [
+    {
+      "req": "REQ-004",
+      "risk": "RISK-003",
+      "text": "A 30-day trend shows every reading in the window, including the first and last day.",
+      "tests": ["Search matching Date ", "Search matching Period start and end "]
+    },
+    {
+      "req": "REQ-005",
+      "risk": "RISK-004",
+      "text": "A search filtered by project returns the same results in MockClient and on the server.",
+      "tests": [
+        "Search matching Matches _id",
+        "Search matching Token filter",
+        "Search matching Reference filter",
+        "Search matching Token equals",
+        "Search matching Token not equals"
+      ]
+    }
+  ]
+}
