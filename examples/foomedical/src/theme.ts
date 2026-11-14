@@ -3,7 +3,6 @@
 import type { CSSVariablesResolver, MantineColorsTuple } from '@mantine/core';
 import { createTheme } from '@mantine/core';
 
-// Brand kit: demos/rebrand/brand/acme-cardio/brand.md (fictional brand)
 export const brand = {
   productName: 'Acme Cardio Companion',
   shortName: 'Acme Cardio',
