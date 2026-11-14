@@ -23,8 +23,11 @@ export function lastHygieneVisits(encounters) {
 }
 
 export function recallDueDate(lastVisit, months = 6) {
-  const due = new Date(`${lastVisit}T00:00:00Z`);
-  due.setUTCMonth(due.getUTCMonth() + months);
+  const [year, month, day] = lastVisit.split('-').map(Number);
+  // Anchor on day 1: setUTCMonth would roll a 31st into the next month when that month is shorter.
+  const target = new Date(Date.UTC(year, month - 1 + months, 1));
+  const lastDay = new Date(Date.UTC(target.getUTCFullYear(), target.getUTCMonth() + 1, 0)).getUTCDate();
+  const due = new Date(Date.UTC(target.getUTCFullYear(), target.getUTCMonth(), Math.min(day, lastDay)));
   return due.toISOString().slice(0, 10);
 }
 
