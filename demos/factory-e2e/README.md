@@ -11,7 +11,7 @@ These drafts are separate. They are not one traced requirement. Do not present a
 ## How to run
 
 1. `demos/factory-e2e/reset.sh` (safe to re-run; it only removes `demos/factory-e2e/run/`).
-2. Walk the order below. Open each draft PR in the browser. Leave every PR a draft.
+2. Walk the order below. Open each draft PR in the browser. Durable harness merges, demo artifacts never do.
 3. For each stop, say the recorded lines, then the not-run lines. Skip a live re-run when the PR says that run did not happen.
 4. At L6, show the approval card and continue. The card never blocks the next stage.
 5. A live agent, if one is started on a later day, starts from the default branch.
