@@ -684,15 +684,15 @@ Enable heartbeat.
 
 ### defaultSuperAdminEmail
 
-Default super admin email address. If specified, and no users exist, this user will be created as a super admin.
+Email of the super admin user created on first boot. The seed runs when the database has no `Practitioner` yet. It creates a `Project` named `Super Admin`, this user, a `Practitioner`, and a `ProjectMembership`. It does not create `Patient` resources.
 
-**Default:** None
+**Default:** omitted. The seed then uses `admin@example.com`.
 
 ### defaultSuperAdminPassword
 
-Default super admin password.
+Password of the super admin user created on first boot.
 
-**Default:** None
+**Default:** omitted. The seed then uses `medplum_admin`.
 
 ### defaultSuperAdminClientId
 

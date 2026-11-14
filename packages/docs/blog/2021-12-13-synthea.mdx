@@ -31,11 +31,11 @@ At Medplum, some of our customers use a project called [Synthea](https://github.
    4. In the folder `output/fhir`, there will be 3 new files - one representing a hospital, one representing a practitioner, and the third representing a patient.
 
 4. Import the data
-   1. Go to [Medplum Batch Create Page](https://app.medplum.com/batch)
+   1. Open the batch page for the server you are signed in to. On the hosted app that is the [Medplum Batch Create Page](https://app.medplum.com/batch). On the default local app it is [http://localhost:3000/batch](http://localhost:3000/batch). Patients are written into the project of that login. See [Load synthetic test patients](/docs/self-hosting/synthetic-test-patients) for a self-hosted server.
    2. Copy the contents of the files one at a time, _in the correct order_
       1. `hospitalInformation` first
       2. `practitionerInformation` second
       3. `patient` last
-   3. Once you have imported the data, you can go to the [Patients](https://app.medplum.com/Patient) page to browse the data you created.
+   3. Once you have imported the data, open the Patient list in that same project. On the hosted app that is the [Patients](https://app.medplum.com/Patient) page.
 
 Let us know if you need assistance with your data sets - we would be happy to help.

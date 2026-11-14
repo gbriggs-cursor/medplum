@@ -137,8 +137,9 @@ cd packages/server
 npm run dev
 ```
 
-This will seed the medplum database with an example project and user.
-The email and password for the example user are:
+On a database that has no `Practitioner` yet, this seeds a project named Super Admin and the user below. It does not create `Patient` resources. An empty Patient list after this login is the seed finishing, not the seed failing. To add synthetic patients to a project your app will search, see [Load synthetic test patients](/docs/self-hosting/synthetic-test-patients).
+
+The email and password for the seeded user are:
 
 |              |                   |
 | ------------ | ----------------- |
@@ -147,10 +148,18 @@ The email and password for the example user are:
 
 To make sure the server is working, you can access the health check at [http://localhost:8103/healthcheck](http://localhost:8103/healthcheck)
 
-If everything is working, you should see the following in your browser:
+If everything is working, the JSON includes `ok`, `version`, `platform`, `runtime`, `postgres`, `redis`, and `redisInstances`. With the default local config, `redisInstances` has a `default` entry. `postgresReader` is included when a separate reader pool is configured.
 
 ```json
-{ "ok": true, "version": "<MEDPLUM_VERSION>", "postgres": true, "redis": true }
+{
+  "ok": true,
+  "version": "<MEDPLUM_VERSION>",
+  "platform": "<process.platform>",
+  "runtime": "<process.version>",
+  "postgres": true,
+  "redis": true,
+  "redisInstances": { "default": true }
+}
 ```
 
 :::warning[Troubleshooting]
