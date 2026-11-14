@@ -1,0 +1,88 @@
+{
+  "answer": "HbA1c control did not really drop. From 2026-03-30 some HbA1c results (LOINC 4548-4) are stored in IFCC mmol/mol (values 7-54) instead of NGSP %, and the dashboard compares the raw value to 7, so every mmol/mol result counts as uncontrolled. That is 9 results, 6 patients, 8 organizations, 2026-03-30 to 2026-09-07. Converting with % = mmol/mol / 10.929 + 2.15 removes the drop: all HbA1c results in March 2026 go from 75% to 100% controlled; the type 2 diabetes cohort after the switch goes from 33.3% to 77.8% (62.5% before the switch), and each converted value is within about 0.5 points of the patient's prior % result. Run on fixture-100 because the 10k pack was not installed.",
+  "findings": [
+    {
+      "title": "HbA1c results stored in mmol/mol instead of % from 2026-03-30 (root cause of the drop)",
+      "summary": "9 HbA1c (4548-4) results for 6 patients at 8 organizations carry units mmol/mol with IFCC values (7-54). value_num < 7 marks all of them uncontrolled. Converted to % they match each patient's prior % results within about 0.5 points. Corrected control: all results March 2026 75% -> 100%; T2D cohort after the switch 33.3% -> 77.8% (62.5% before).",
+      "start_date": "2026-03-30",
+      "end_date": null,
+      "entities": [
+        "LOINC 4548-4",
+        "mmol/mol",
+        "3663e822-ff3b-e756-28f4-35181d589f8a",
+        "f87d3c47-08d9-2100-1499-af12d36b47d1",
+        "db0a332f-a1e8-be95-57bf-67c6e7230a84",
+        "b9b2b88c-01c8-c883-81d2-b72c68ba55bc",
+        "c5645a26-ce76-6f68-c20b-e1fa92b3f6c8",
+        "4dc6345e-dcd6-96f8-f46d-26c6fd254273",
+        "WALPOLE MEDICAL CENTER  PC",
+        "SUNRISE HEALTHCARE LLC",
+        "MINDFUL MEDICAL CARE PC",
+        "HALLMARK HEALTH URGENT CARE PHYSICIANS LLC",
+        "TUFTS MEDICAL CENTER",
+        "READING FAMILY MEDICINE PC",
+        "HOLYOKE HEALTH CENTER INC",
+        "PRIMARY CARE NORTH PC"
+      ],
+      "sql": [
+        "SELECT strftime(date, '%Y-%m') AS month,\n       count(*) AS hba1c_results,\n       sum((value_num < 7)::INT) AS under_7,\n       round(100.0 * avg((value_num < 7)::INT), 1) AS control_pct\nFROM observations\nWHERE code = '4548-4' AND date >= '2025-04-01'\nGROUP BY 1 ORDER BY 1;",
+        "WITH t2d AS (\n  SELECT DISTINCT patient FROM conditions\n  WHERE code IN ('44054006', '127013003', '90781000119102', '157141000119108', '422034002', '1551000119108', '1501000119109')\n)\nSELECT strftime(o.date, '%Y-%m') AS month,\n       count(*) AS hba1c_results,\n       sum((o.value_num < 7)::INT) AS under_7,\n       round(100.0 * avg((o.value_num < 7)::INT), 1) AS control_pct\nFROM observations o JOIN t2d USING (patient)\nWHERE o.code = '4548-4' AND o.date >= '2025-04-01'\nGROUP BY 1 ORDER BY 1;",
+        "SELECT units, count(*) AS results, count(DISTINCT patient) AS patients,\n       min(date)::DATE AS first_result, max(date)::DATE AS last_result\nFROM observations WHERE code = '4548-4' GROUP BY 1 ORDER BY 1;",
+        "SELECT strftime(date, '%Y-%m') AS month, units,\n       count(*) AS results,\n       min(value_num) AS min_value, max(value_num) AS max_value\nFROM observations WHERE code = '4548-4' AND date >= '2025-10-01'\nGROUP BY ALL ORDER BY 1, 2;",
+        "SELECT o.date::DATE AS date, o.patient, org.name AS organization,\n       o.value_num AS value_mmol_mol,\n       round(o.value_num / 10.929 + 2.15, 2) AS value_pct_converted,\n       (SELECT p.value_num FROM observations p\n         WHERE p.patient = o.patient AND p.code = '4548-4' AND p.units = '%' AND p.date < o.date\n         ORDER BY p.date DESC LIMIT 1) AS prior_pct_result,\n       o.value_num < 7 AS counted_as_controlled_naive\nFROM observations o\nJOIN encounters e ON e.id = o.encounter\nJOIN organizations org ON org.id = e.organization\nWHERE o.code = '4548-4' AND o.units = 'mmol/mol'\nORDER BY o.date;",
+        "SELECT count(DISTINCT e.organization) FILTER (WHERE o.units = 'mmol/mol') AS orgs_with_mmol,\n       count(DISTINCT o.patient) FILTER (WHERE o.units = 'mmol/mol') AS patients_with_mmol,\n       count(*) FILTER (WHERE o.date >= '2026-03-30' AND o.units = 'mmol/mol') AS mmol_results_since_switch,\n       count(*) FILTER (WHERE o.date >= '2026-03-30' AND o.units = '%') AS pct_results_since_switch\nFROM observations o JOIN encounters e ON e.id = o.encounter\nWHERE o.code = '4548-4';",
+        "WITH t2d AS (\n  SELECT DISTINCT patient FROM conditions\n  WHERE code IN ('44054006', '127013003', '90781000119102', '157141000119108', '422034002', '1551000119108', '1501000119109')\n),\na1c AS (\n  SELECT date, patient, value_num, units,\n         CASE WHEN units = 'mmol/mol' THEN value_num / 10.929 + 2.15 ELSE value_num END AS pct\n  FROM observations WHERE code = '4548-4' AND date >= '2025-04-01'\n)\nSELECT strftime(date, '%Y-%m') AS month,\n       count(*) FILTER (WHERE patient IN (SELECT patient FROM t2d)) AS t2d_results,\n       round(100.0 * avg((value_num < 7)::INT) FILTER (WHERE patient IN (SELECT patient FROM t2d)), 1) AS t2d_naive_pct,\n       round(100.0 * avg((pct < 7)::INT) FILTER (WHERE patient IN (SELECT patient FROM t2d)), 1) AS t2d_corrected_pct,\n       count(*) AS all_results,\n       sum((units = 'mmol/mol')::INT) AS mmol_results,\n       round(100.0 * avg((value_num < 7)::INT), 1) AS all_naive_pct,\n       round(100.0 * avg((pct < 7)::INT), 1) AS all_corrected_pct\nFROM a1c GROUP BY 1 ORDER BY 1;",
+        "WITH t2d AS (\n  SELECT DISTINCT patient FROM conditions\n  WHERE code IN ('44054006', '127013003', '90781000119102', '157141000119108', '422034002', '1551000119108', '1501000119109')\n),\na1c AS (\n  SELECT date, patient, value_num, units,\n         CASE WHEN units = 'mmol/mol' THEN value_num / 10.929 + 2.15 ELSE value_num END AS pct,\n         patient IN (SELECT patient FROM t2d) AS is_t2d\n  FROM observations WHERE code = '4548-4' AND date >= '2025-04-01'\n)\nSELECT CASE WHEN date < '2026-03-30' THEN '1: 2025-04-01 to 2026-03-29' ELSE '2: 2026-03-30 to 2026-09-30' END AS period,\n       CASE WHEN is_t2d THEN 'T2D cohort' ELSE 'other tested' END AS population,\n       count(*) AS results,\n       round(100.0 * avg((value_num < 7)::INT), 1) AS naive_pct,\n       round(100.0 * avg((pct < 7)::INT), 1) AS corrected_pct\nFROM a1c GROUP BY ALL ORDER BY 1, 2;"
+      ]
+    },
+    {
+      "title": "Duplicate patient record (split identity) from 2026-05-04",
+      "summary": "Patient 704b7b53-21ff-4b35-bd8f-057b9597b58b ('Line Hessel84', version 4 UUID, upper-case address) has the same SSN 999-10-8466, birthdate, middle/last name and address as d1e0303f-62e7-0cd8-a588-3dd21dc975f6 ('Lien262 Hessel84'). Its 4 encounters run 2026-05-04 to 2026-08-12, after the original's last encounter on 2025-11-14. 115 patient rows, 114 people.",
+      "start_date": "2026-05-04",
+      "end_date": null,
+      "entities": [
+        "704b7b53-21ff-4b35-bd8f-057b9597b58b",
+        "d1e0303f-62e7-0cd8-a588-3dd21dc975f6",
+        "SSN 999-10-8466",
+        "Hessel84"
+      ],
+      "sql": [
+        "SELECT id, first, middle, last, birthdate, ssn, address, city,\n       (SELECT min(start)::DATE FROM encounters e WHERE e.patient = p.id) AS first_encounter,\n       (SELECT max(start)::DATE FROM encounters e WHERE e.patient = p.id) AS last_encounter,\n       (SELECT count(*) FROM encounters e WHERE e.patient = p.id) AS encounters\nFROM patients p\nWHERE ssn IN (SELECT ssn FROM patients GROUP BY ssn HAVING count(*) > 1)\nORDER BY first_encounter;",
+        "SELECT count(*) AS patient_rows, count(DISTINCT ssn) AS distinct_ssn,\n       count(DISTINCT lower(last) || birthdate || lower(address)) AS distinct_person_keys\nFROM patients;"
+      ]
+    },
+    {
+      "title": "GlucoSense G2 glucose meters stopped reporting 2026-01-09 to 2026-01-20",
+      "summary": "All 10 GlucoSense G2 meters have zero readings for 12 days (120 missing meter-days); G3 and G3 Plus meters have no gaps all year. January 2026 has 779 readings against 899 expected.",
+      "start_date": "2026-01-09",
+      "end_date": "2026-01-20",
+      "entities": [
+        "GlucoSense G2",
+        "device_readings",
+        "SNOMED 337414009"
+      ],
+      "sql": [
+        "SELECT reading_date,\n       count(*) FILTER (WHERE model = 'GlucoSense G2') AS g2_readings,\n       count(*) FILTER (WHERE model = 'GlucoSense G3') AS g3_readings,\n       count(*) FILTER (WHERE model = 'GlucoSense G3 Plus') AS g3_plus_readings\nFROM device_readings\nWHERE reading_date BETWEEN '2026-01-07' AND '2026-01-22'\nGROUP BY 1 ORDER BY 1;",
+        "WITH span AS (\n  SELECT device_id, model, min(reading_date) AS first_day, max(reading_date) AS last_day, count(*) AS readings\n  FROM device_readings GROUP BY 1, 2\n)\nSELECT model, count(*) AS meters,\n       sum(datediff('day', first_day, last_day) + 1) AS expected_readings,\n       sum(readings) AS actual_readings,\n       sum(datediff('day', first_day, last_day) + 1) - sum(readings) AS missing_readings\nFROM span GROUP BY 1 ORDER BY 1;",
+        "WITH days AS (\n  SELECT d.device_id, d.model, gs::DATE AS day\n  FROM (SELECT device_id, model, min(reading_date) AS a, max(reading_date) AS b FROM device_readings GROUP BY 1, 2) d,\n       generate_series(d.a::TIMESTAMP, d.b::TIMESTAMP, INTERVAL 1 DAY) t(gs)\n)\nSELECT days.model, count(DISTINCT days.device_id) AS meters_with_gaps, count(*) AS missing_meter_days,\n       min(day) AS first_missing_day, max(day) AS last_missing_day\nFROM days LEFT JOIN device_readings r ON r.device_id = days.device_id AND r.reading_date = days.day\nWHERE r.device_id IS NULL\nGROUP BY 1 ORDER BY 1;"
+      ]
+    },
+    {
+      "title": "Hypertension diagnosis coded ICD-10-CM I10 instead of SNOMED 59621000",
+      "summary": "28 essential hypertension diagnoses use SNOMED 59621000. One, on 2025-12-23 for patient cd50a10e-37ea-7e09-7b15-0aefb9fc7f31, uses system ICD-10-CM code I10 (the only ICD-10-CM row in conditions). The patient has no SNOMED hypertension code, so SNOMED-based hypertension registries miss her.",
+      "start_date": "2025-12-23",
+      "end_date": "2025-12-23",
+      "entities": [
+        "cd50a10e-37ea-7e09-7b15-0aefb9fc7f31",
+        "ICD-10-CM I10",
+        "SNOMED 59621000",
+        "ce49614f-4af9-6f1c-d113-5c1d4fe561db"
+      ],
+      "sql": [
+        "SELECT system, code, description, count(*) AS rows, count(DISTINCT patient) AS patients,\n       min(start) AS first_start, max(start) AS last_start\nFROM conditions\nWHERE code IN ('59621000', 'I10') OR description ILIKE '%hypertension%'\nGROUP BY ALL ORDER BY rows DESC;",
+        "SELECT c.patient, c.start, c.system, c.code,\n       EXISTS (SELECT 1 FROM conditions s WHERE s.patient = c.patient AND s.code = '59621000') AS has_snomed_hypertension,\n       (SELECT max(value_num) FROM observations o\n         WHERE o.patient = c.patient AND o.code = '8480-6' AND o.date::DATE = c.start) AS systolic_that_day\nFROM conditions c WHERE c.system = 'ICD-10-CM';",
+        "SELECT system, count(*) AS rows FROM conditions GROUP BY 1 ORDER BY rows DESC;"
+      ]
+    }
+  ]
+}
