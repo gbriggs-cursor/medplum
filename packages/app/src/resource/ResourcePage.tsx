@@ -69,7 +69,7 @@ function getTabs(resourceType: string): string[] {
   result.push('Details', 'Edit', 'Event', 'History', 'Blame', 'JSON', 'Apps', 'Profiles');
 
   if (resourceType === 'Patient') {
-    result.push('Accounts', 'Export');
+    result.push('Devices', 'Accounts', 'Export');
   }
 
   return result;
