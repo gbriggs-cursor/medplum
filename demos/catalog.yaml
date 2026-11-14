@@ -18,6 +18,9 @@ stories:
     fallback:
       - 11
     reset: demos/approval-gate/reset.sh
+    offline: demos/approval-gate/offline.sh
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: none are needed for the gate itself. Live mode is prompt.md in a cloud agent, with Grok Bot posting APPROVAL-CARD.md and the decision recorded with --channel grok-bot. The Grok Bot card post has not been run yet"
     automation: false
     labels:
       - demo
@@ -40,6 +43,9 @@ stories:
     data_pack: P5 regulatory seed in demos/_shared/regulatory/ (software items, REQ-001 to REQ-006, RISK-001 to RISK-004, SOUP list)
     fallback: []
     reset: null
+    offline: node demos/bugbot-62304/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: none is needed for the seed check or rule evaluation, but live mode also needs Bugbot enabled on gbriggs-cursor/medplum. That is a repository setting, not a key. With it on, Bugbot reviews the agent's draft PR instead of the replayed review."
     automation: false
     labels:
       - demo
@@ -234,6 +240,9 @@ stories:
     data_pack: None beyond packages/core fixtures. Planted regression in demos/verify-loop/regression.patch; traced tests in trace-spec.json
     fallback: []
     reset: demos/verify-loop/reset.sh
+    offline: DEMO_MODE=offline demos/verify-loop/run.sh
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: with CURSOR_API_KEY set, run.sh auto-selects the @grok/agent-sdk remediator instead of the OFFLINE reference remediator. The plant, CI runs, guard, and trace matrix are unchanged."
     automation: false
     labels:
       - demo
