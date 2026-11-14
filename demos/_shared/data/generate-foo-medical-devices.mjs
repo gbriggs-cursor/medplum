@@ -141,10 +141,10 @@ observations.push(bloodPressure(45));
 for (let daysAgo = 28; daysAgo >= 0; daysAgo -= 2) {
   const suffix = String(daysAgo).padStart(2, '0');
   observations.push(
-    observation(`foo-spo2-${suffix}`, 'foo-oximeter-01', loinc('59408-5', 'Oxygen saturation'), at(daysAgo, 21), {
+    observation(`foo-spo2-${suffix}`, 'foo-oximeter-01', loinc('59408-5', 'Oxygen saturation'), at(daysAgo, 6), {
       valueQuantity: ucum(around(96, 2), '%', '%'),
     }),
-    observation(`foo-hr-${suffix}`, 'foo-oximeter-01', loinc('8867-4', 'Heart rate'), at(daysAgo, 21), {
+    observation(`foo-hr-${suffix}`, 'foo-oximeter-01', loinc('8867-4', 'Heart rate'), at(daysAgo, 6), {
       valueQuantity: ucum(around(72, 6), 'beats/minute', '/min'),
     })
   );
