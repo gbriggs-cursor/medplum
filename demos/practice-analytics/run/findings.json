@@ -1,0 +1,57 @@
+{
+  "answer": "The March 2026 drop comes from a change in HbA1c reporting units, not from worse glycemic control. Starting 2026-03-30, some organizations report HbA1c (LOINC 4548-4) in IFCC mmol/mol instead of NGSP %, in the same value_num column; only the units column changes. A 'value_num < 7' test counts results like 44 mmol/mol (6.2%) as not under 7. Converting mmol/mol to % (NGSP = IFCC / 10.929 + 2.15) before applying the threshold removes the drop. Data note: the 10k P2 pack was not on this machine, so this was found on the committed fixture-100 (planted). There the March drop shows in the panel-wide HbA1c result rate (100% to 75% raw, 100% normalized); the fixture's 3-4 patient type 2 diabetes cohort had no March HbA1c, so its rate does not move.",
+  "findings": [
+    {
+      "title": "HbA1c results switch from % to mmol/mol starting 2026-03-30",
+      "summary": "From 2026-03-30, 9 of 21 HbA1c (LOINC 4548-4) results are reported with units 'mmol/mol' (values 7-54) instead of '%'. There are none before March 2026. They come from 8 organizations, none of which reported a % HbA1c after its first mmol/mol result, which fits a per-organization lab or interface change. Each converted value is consistent with the same patient's earlier % results (for example, 54 mmol/mol = 7.1% for a patient previously at 7.1%).",
+      "start_date": "2026-03-30",
+      "end_date": null,
+      "entities": [
+        "LOINC 4548-4",
+        "units mmol/mol",
+        "units %",
+        "observations.value_num",
+        "observations.units",
+        "d3085315-9893-34c7-8889-3a31dc17c2b0 WALPOLE MEDICAL CENTER PC",
+        "a2d45ee8-b930-3169-b612-f602961ad212 SUNRISE HEALTHCARE LLC",
+        "d17688c1-9cc8-3e68-980f-82fe1ed685fe MINDFUL MEDICAL CARE PC",
+        "3e97ce4f-3ad7-3cea-883f-e2bb4ca89d83 HALLMARK HEALTH URGENT CARE PHYSICIANS LLC",
+        "901c2d40-1ca3-3879-9a20-c663b8adc0a9 TUFTS MEDICAL CENTER",
+        "817f4acb-0184-3146-9ce0-87197d8f115a READING FAMILY MEDICINE PC",
+        "b03b624d-c939-3688-986d-9555b8009a3b HOLYOKE HEALTH CENTER INC",
+        "936ceb96-2b12-371f-aa68-ee02a9c06f4c PRIMARY CARE NORTH PC",
+        "patient 3663e822-ff3b-e756-28f4-35181d589f8a (44 mmol/mol on 2026-03-30)",
+        "patient 4dc6345e-dcd6-96f8-f46d-26c6fd254273 (type 2 diabetes, 54 mmol/mol on 2026-09-07)"
+      ],
+      "sql": [
+        "select o.units, o.date >= '2026-03-01' as from_march_2026, count(*) as results, count(distinct e.organization) as orgs\nfrom observations o join encounters e on e.id = o.encounter\nwhere o.code = '4548-4' group by all order by all;",
+        "select o.date::date as date, o.patient, o.value_num, o.units, round(o.value_num / 10.929 + 2.15, 1) as pct,\n       e.organization, g.name as organization_name,\n       o.patient in (select patient from conditions\n                     where (system = 'SNOMED-CT' and code = '44054006')\n                        or (system in ('ICD-10-CM', 'ICD10') and code like 'E11%')) as is_t2d\nfrom observations o join encounters e on e.id = o.encounter join organizations g on g.id = e.organization\nwhere o.code = '4548-4' and o.units = 'mmol/mol' order by o.date;"
+      ]
+    },
+    {
+      "title": "A raw '< 7' threshold reads mmol/mol values as uncontrolled; normalizing removes the March drop",
+      "summary": "Share of HbA1c results under 7%: 100% in every month from 2025-11 to 2026-02, then 75% in March 2026 on raw values (1 of 4 results is 44 mmol/mol). After converting mmol/mol to %, March 2026 is 100%. The raw rate stays depressed afterward (0%, 25%, 33.3%, 66.7%), while the normalized rate is 100% in most months. The one normalized miss is a true value of 7.1% or higher.",
+      "start_date": "2026-03-01",
+      "end_date": null,
+      "entities": [
+        "LOINC 4548-4",
+        "threshold 7%",
+        "IFCC to NGSP: % = mmol/mol / 10.929 + 2.15",
+        "SNOMED 44054006 Diabetes mellitus type 2"
+      ],
+      "sql": [
+        "with a1c as (\n  select patient, date, value_num, units,\n         case when units = 'mmol/mol' then round(value_num / 10.929 + 2.15, 1) else value_num end as pct\n  from observations where code = '4548-4')\nselect strftime(date, '%Y-%m') as month, count(*) as tests,\n       sum((value_num < 7)::int) as under7_raw, round(100.0 * sum((value_num < 7)::int) / count(*), 1) as pct_raw,\n       sum((pct < 7)::int) as under7_normalized, round(100.0 * sum((pct < 7)::int) / count(*), 1) as pct_normalized,\n       sum((units = 'mmol/mol')::int) as mmol_results\nfrom a1c where date >= '2025-10-01' group by 1 order by 1;"
+      ]
+    },
+    {
+      "title": "Fixture-size caveat: the fixture's type 2 diabetes cohort does not show the March drop",
+      "summary": "The P2 10k pack was missing, so the analysis used fixture-100. There, the type 2 diabetes cohort (SNOMED 44054006 or ICD-10-CM E11%, alive, latest HbA1c in the trailing 12 months) is only 3-4 patients, and none had an HbA1c in March 2026, so the cohort rate is flat (33.3%) through April 2026. The cohort's only mmol/mol result (54 mmol/mol = 7.1%, 2026-09-07) is genuinely not under 7. With the 10k panel, the same units switch would reach the cohort's March results. Re-run this SQL against P2 analytics.duckdb to size it.",
+      "start_date": "2026-03-01",
+      "end_date": "2026-03-31",
+      "entities": ["SNOMED 44054006", "fixture-100", "synthea-analytics-10k (not present)"],
+      "sql": [
+        "with t2d as (select patient, min(start) as onset from conditions\n             where (system = 'SNOMED-CT' and code = '44054006')\n                or (system in ('ICD-10-CM', 'ICD10') and code like 'E11%')\n             group by 1),\na1c as (select patient, date, value_num, units,\n               case when units = 'mmol/mol' then round(value_num / 10.929 + 2.15, 1) else value_num end as pct\n        from observations where code = '4548-4'),\nmonths as (select (d + interval 1 month - interval 1 day)::date as month_end, strftime(d, '%Y-%m') as month\n           from range(date '2025-10-01', date '2026-10-01', interval 1 month) t(d)),\nlatest as (\n  select m.month, a.patient, arg_max(a.value_num, a.date) as raw, arg_max(a.pct, a.date) as pct,\n         arg_max(a.units, a.date) as units\n  from months m\n  join t2d t on t.onset <= m.month_end\n  join patients p on p.id = t.patient and (p.deathdate is null or p.deathdate > m.month_end)\n  join a1c a on a.patient = t.patient and a.date::date <= m.month_end and a.date::date > m.month_end - interval 12 month\n  group by all)\nselect month, count(*) as denom,\n       round(100.0 * sum((raw < 7)::int) / count(*), 1) as pct_raw,\n       round(100.0 * sum((pct < 7)::int) / count(*), 1) as pct_normalized,\n       sum((units = 'mmol/mol')::int) as latest_in_mmol\nfrom latest group by 1 order by 1;"
+      ]
+    }
+  ]
+}
