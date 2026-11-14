@@ -7,6 +7,7 @@ The workspace is a checkout of the Medplum monorepo with only `packages/` presen
 ## Rules
 
 - Change source files only. Never edit, add, delete, skip, or weaken a test: no `*.test.ts`, `*.test.tsx`, `test.setup.ts`, snapshot, or test config change. A test change is rejected and the run fails.
+- Do not add files. Do not leave a writability probe such as `.write-test`. Edit the existing source file the failing tests exercise.
 - Find the root cause from the failing tests and the source they exercise. Make the smallest change that restores correct behavior.
 - Re-run the failing test file from `packages/core`: `npx vitest run src/search/match.test.ts`. If the sandbox blocks the run, still make the fix; CI re-runs it outside the sandbox.
 - No network. No git commits. No new dependencies.
