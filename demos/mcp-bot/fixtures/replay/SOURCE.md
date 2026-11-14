@@ -1,0 +1,1 @@
+Generated against the synthetic pairing Observation in `seed/pairing-observation.json`. No live model call was recorded: `CURSOR_API_KEY` was not set. The assistant text is not a live model response. The probe and the Task are executed when the story runs, and those lines are labeled OFFLINE.

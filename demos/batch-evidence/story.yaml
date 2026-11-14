@@ -1,0 +1,40 @@
+id: batch-evidence
+code: L14
+title: Batch evidence
+track: ls
+stage: '05'
+readiness: new
+runtime: 10 min
+environment: '67842161'
+
+persona: QA/RA lead at {prospect} who needs overnight evidence for a batch of device changes
+trigger: Demo Setup runs node demos/batch-evidence/src/demo.mjs, which replays the model turn and executes refresh-evidence
+actors:
+  - '@grok/agent-sdk runner'
+  - evidence-package skill
+surface: One evidence folder for the P1 device cohort, with a trace row per synthetic change
+data_pack: P1 device cohort resource ids (20 patients, 20 devices, 40 observations, seed 20261104) copied from pull request 11, plus four synthetic changes in seed/changes.json. Every record is tagged synthetic.
+artifact: 'One evidence/ folder: EVIDENCE.md and trace.json (evidence v2). approval.json is not written'
+gate: No decision is recorded. The L6 approval gate is what writes approval.json, and only after a human decision. On-stage only
+gate_blocks: false
+wow: One command writes a single evidence v2 package whose trace has one row per device change, and a device missing from the cohort fails that row
+proof:
+  - node --test output (pass and the planted missing-device failure)
+  - evidence/trace.json row count
+  - Draft PR link
+reset: demos/batch-evidence/reset.sh
+fallback: [11]
+blast_radius: GitHub draft PR in gbriggs-cursor/medplum only. No Jira writes. The runner reads the local git SHA and writes demos/batch-evidence/evidence/
+answer_key: answer-keys://batch-evidence/
+offline: node demos/batch-evidence/src/demo.mjs
+default_mode: replay
+live_mode_note: 'Live mode available once keys are added: agent-sdk run calls the model, which calls refresh-evidence, and the evidence files are not labeled REPLAY (no key).'
+
+variables:
+  prospect: Acme Cardio
+  seed: '20261104'
+
+jira:
+  project: GIO
+  automation: false
+  labels: [demo, medplum, 'story:batch-evidence', 'track:ls', 'stage:05']

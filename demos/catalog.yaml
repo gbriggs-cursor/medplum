@@ -5,6 +5,32 @@ jira_project: GIO
 default_prospect: Acme Cardio
 answer_keys: answer-keys:// resolves to a separate private repo (placeholder; see demos/README.md)
 stories:
+  - id: analytics-10k
+    code: L13
+    title: 10k-patient investigation
+    track: ls
+    stage: analytics
+    readiness: new
+    runtime: 5-10 min
+    wow: '"Why did A1c control drop in March?" The agent finds the root cause in 10,000 patients and backs it with SQL'
+    trigger: "Default is key-free, bash demos/analytics-10k/run.sh. With CURSOR_API_KEY, the live path is unchanged: paste prompt.md into a cloud agent started from the default branch"
+    data_pack: P2 synthea-analytics-10k, Synthea v3.3.0, 10,000 living patients, seed 20261112, end date 2026-10-01, every patient tagged synthetic + HTEST. P0 synthea-analytics-100 (seed 100) is the committed fixture
+    fallback: []
+    reset: demos/analytics-10k/reset.sh
+    offline: bash demos/analytics-10k/run.sh
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: a cloud agent runs prompt.md against the pack instead of the checked-in REPLAY turns."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:analytics-10k
+      - track:ls
+      - stage:analytics
+    card: demos/analytics-10k/story.yaml
+    prompt: demos/analytics-10k/prompt.md
+    readme: demos/analytics-10k/README.md
   - id: approval-gate
     code: L6
     title: Design review gate
@@ -22,6 +48,7 @@ stories:
     default_mode: offline
     live_mode_note: "Live mode available once keys are added: none are needed for the gate itself. Live mode is prompt.md in a cloud agent, with Grok Bot posting APPROVAL-CARD.md and the decision recorded with --channel grok-bot. The Grok Bot card post has not been run yet"
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -31,6 +58,59 @@ stories:
     card: demos/approval-gate/story.yaml
     prompt: demos/approval-gate/prompt.md
     readme: demos/approval-gate/README.md
+  - id: audit-qa
+    code: L17
+    title: Audit-ready Q&A
+    track: ls
+    stage: "07"
+    readiness: new
+    runtime: 3 min
+    wow: Asking for REQ-012 returns the requirement, risk, test, run, and approval from the index
+    trigger: Presenter pastes prompt.md into the audit Q&A Grok Bot and asks for one requirement id. The bot answers from the trace index only.
+    data_pack: Hand-written trace index standing in for an L7 DHF index. Requirement, risk, test, run, result, approval, and commit rows for a few REQ ids. All rows are fixtures and were not executed here.
+    fallback: []
+    reset: demos/audit-qa/reset.sh
+    offline: node demos/audit-qa/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: the audit Q&A bot reads prompt.md and answers from the trace index. This runner does not call the bot."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:audit-qa
+      - track:ls
+      - stage:07
+    card: demos/audit-qa/story.yaml
+    prompt: demos/audit-qa/prompt.md
+    readme: demos/audit-qa/README.md
+  - id: batch-evidence
+    code: L14
+    title: Batch evidence
+    track: ls
+    stage: "05"
+    readiness: new
+    runtime: 10 min
+    wow: One command writes a single evidence v2 package whose trace has one row per device change, and a device missing from the cohort fails that row
+    trigger: Demo Setup runs node demos/batch-evidence/src/demo.mjs, which replays the model turn and executes refresh-evidence
+    data_pack: P1 device cohort resource ids (20 patients, 20 devices, 40 observations, seed 20261104) copied from pull request 11, plus four synthetic changes in seed/changes.json. Every record is tagged synthetic.
+    fallback:
+      - 11
+    reset: demos/batch-evidence/reset.sh
+    offline: node demos/batch-evidence/src/demo.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: agent-sdk run calls the model, which calls refresh-evidence, and the evidence files are not labeled REPLAY (no key)."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:batch-evidence
+      - track:ls
+      - stage:05
+    card: demos/batch-evidence/story.yaml
+    prompt: demos/batch-evidence/prompt.md
+    readme: demos/batch-evidence/README.md
   - id: bugbot-62304
     code: L4
     title: IEC 62304 Bugbot rules
@@ -47,6 +127,7 @@ stories:
     default_mode: replay
     live_mode_note: "Live mode available once keys are added: none is needed for the seed check or rule evaluation, but live mode also needs Bugbot enabled on gbriggs-cursor/medplum. That is a repository setting, not a key. With it on, Bugbot reviews the agent's draft PR instead of the replayed review."
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -56,6 +137,32 @@ stories:
     card: demos/bugbot-62304/story.yaml
     prompt: demos/bugbot-62304/prompt.md
     readme: demos/bugbot-62304/README.md
+  - id: complaint-capa
+    code: L16
+    title: Complaint to CAPA
+    track: ls
+    stage: post-market
+    readiness: new
+    runtime: 5 min
+    wow: The bot files a complaint record and a reportability assessment, ready for review
+    trigger: Presenter pastes prompt.md into the complaint-clerk Grok Bot. The bot reads the fixture complaint and files a complaint record and a reportability assessment. It does not wait for approval.
+    data_pack: Synthetic complaint fixture standing in for an L9 intake ticket, plus a fictional complaint SOP, in demos/complaint-capa/seed/. Tagged HTEST. Subject id SP-014 only. No patient name or date of birth.
+    fallback: []
+    reset: demos/complaint-capa/reset.sh
+    offline: node demos/complaint-capa/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: the complaint-clerk bot reads prompt.md and creates GIO issues through the Atlassian connector. This runner does not call the bot."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:complaint-capa
+      - track:ls
+      - stage:post-market
+    card: demos/complaint-capa/story.yaml
+    prompt: demos/complaint-capa/prompt.md
+    readme: demos/complaint-capa/README.md
   - id: device-evidence
     code: L3
     title: Traced build (device evidence)
@@ -73,6 +180,7 @@ stories:
     default_mode: offline
     live_mode_note: "Live mode available once keys are added: a cloud agent generates the cohort, parser, tests, and evidence PR."
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -82,6 +190,33 @@ stories:
     card: demos/device-evidence/story.yaml
     prompt: demos/device-evidence/prompt.md
     readme: demos/device-evidence/README.md
+  - id: dhf-release
+    code: L7
+    title: DHF release
+    track: ls
+    stage: "07"
+    readiness: new
+    runtime: 5-10 min
+    wow: One command builds the design history index and a trace matrix from the synthetic release records
+    trigger: Demo Setup runs node demos/dhf-release/src/demo.mjs, which replays the model turn and executes assemble-dhf
+    data_pack: Three synthetic release records in seed/release-records.json. Record one cites the P1 cohort counts from pull request 11. No patient bundle is copied.
+    fallback:
+      - 11
+    reset: demos/dhf-release/reset.sh
+    offline: node demos/dhf-release/src/demo.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: agent-sdk run calls the model, which calls assemble-dhf, and the evidence files are not labeled REPLAY (no key)."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:dhf-release
+      - track:ls
+      - stage:07
+    card: demos/dhf-release/story.yaml
+    prompt: demos/dhf-release/prompt.md
+    readme: demos/dhf-release/README.md
   - id: docs-from-questions
     code: G4
     title: Docs from repeat questions
@@ -101,6 +236,7 @@ stories:
     default_mode: offline
     live_mode_note: "Live mode available once keys are added: a cloud agent writes the docs PR from the seeded questions."
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -139,6 +275,7 @@ stories:
     default_mode: offline
     live_mode_note: "Live mode available once keys are added: the presenter can start the live agent, voice, and Jira paths named in this runbook."
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -148,6 +285,87 @@ stories:
     card: demos/factory-e2e/story.yaml
     prompt: demos/factory-e2e/prompt.md
     readme: demos/factory-e2e/README.md
+  - id: front-office-voice
+    code: G9
+    title: Voice front-office support
+    track: generic
+    stage: generic
+    readiness: new
+    runtime: 5 min live, plus agent time
+    wow: A front-desk manager's call becomes a ticket with no patient details, then a docs or fix PR
+    trigger: Presenter submits the {call} script on the L9 support form (demos/support-voice/server.mjs). Grok Voice is not connected
+    data_pack: Front-office profile (seed/front-office.json, same shape as demos/support-voice/prospects/foomedical.json) and three synthetic caller scripts (seed/calls.md). The server does not load this profile
+    fallback: []
+    reset: demos/front-office-voice/reset.sh
+    depends_on:
+      - L9
+      - L10
+      - L11
+    pending: []
+    offline: node demos/front-office-voice/run.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: Grok Voice takes the call and the L9 server can write a live GIO issue. Key-free mode replays the caller scripts, routes them against the staff articles in kb/staff, and writes OFFLINE dry-run JSON. The voice route returns 501 even when XAI_API_KEY is set."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:front-office-voice
+      - track:generic
+    card: demos/front-office-voice/story.yaml
+    prompt: demos/front-office-voice/prompt.md
+    readme: demos/front-office-voice/README.md
+  - id: integration-docs
+    code: G11
+    title: Integration docs for a partner
+    track: generic
+    stage: generic
+    readiness: new
+    runtime: 10-15 min
+    wow: Four partner questions become one integration guide where every claim links to the line of server code that backs it
+    trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+    data_pack: Four synthetic partner questions (seed/partner-questions.md) and the source anchors they must be verified against (anchors.txt)
+    fallback: []
+    reset: demos/integration-docs/reset.sh
+    offline: node demos/integration-docs/run.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: a cloud agent writes the integration guide from prompt.md. Key-free mode replays a recorded guide and checks it against anchors.txt."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:integration-docs
+      - track:generic
+    card: demos/integration-docs/story.yaml
+    prompt: demos/integration-docs/prompt.md
+    readme: demos/integration-docs/README.md
+  - id: mcp-bot
+    code: L15
+    title: Medplum MCP plus Bot and Subscription
+    track: ls
+    stage: "03"
+    readiness: new
+    runtime: 15 min
+    wow: A synthetic pairing Observation becomes a Task. The MCP connection is probed and the result is reported as it happened
+    trigger: Demo Setup runs node demos/mcp-bot/scripts/offline.mjs. That replays the model turn and creates the Task on the local server.
+    data_pack: One synthetic Observation in seed/pairing-observation.json, tagged synthetic and HTEST, for an Acme Cardio patch. No real patient.
+    fallback: []
+    reset: demos/mcp-bot/reset.sh
+    offline: node demos/mcp-bot/scripts/offline.mjs
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: the model turn is not replayed, and this command still probes MCP and creates the Task on the local server."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:mcp-bot
+      - track:ls
+      - stage:03
+    card: demos/mcp-bot/story.yaml
+    prompt: demos/mcp-bot/prompt.md
+    readme: demos/mcp-bot/README.md
   - id: net-new-feature
     code: G1
     title: Net-new feature
@@ -166,6 +384,7 @@ stories:
     default_mode: offline
     live_mode_note: "Live mode available once keys are added: a cloud agent runs demos/net-new-feature/prompt.md and opens a draft PR."
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -174,6 +393,88 @@ stories:
     card: demos/net-new-feature/story.yaml
     prompt: demos/net-new-feature/prompt.md
     readme: demos/net-new-feature/README.md
+  - id: phi-safe-dev
+    code: G8
+    title: PHI-safe debugging for practice software
+    track: generic
+    stage: generic
+    readiness: new
+    runtime: 10-15 min
+    wow: The agent reproduces the patient's bug on a synthetic twin and fixes it, and not one identifier from the ticket reaches Jira, code, or the PR
+    trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+    data_pack: One synthetic front-desk ticket with realistic-looking fake identifiers (seed/ticket.md, all HTEST) plus synthetic-twin Encounter fixtures the agent writes
+    fallback: []
+    reset: demos/phi-safe-dev/reset.sh
+    depends_on:
+      - L11
+    pending: []
+    offline: node demos/phi-safe-dev/run.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: a cloud agent runs prompt.md against the planted bug. Key-free mode replays that fix in a temp copy and writes an OFFLINE ticket."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:phi-safe-dev
+      - track:generic
+    card: demos/phi-safe-dev/story.yaml
+    prompt: demos/phi-safe-dev/prompt.md
+    readme: demos/phi-safe-dev/README.md
+  - id: phi-tripwire
+    code: L11
+    title: PHI tripwire
+    track: ls
+    stage: floor
+    readiness: new
+    runtime: 5 min
+    wow: A realistic note with a name, MRN, DOB, SSN and phone goes in; the ticket comes out with placeholders, and a note with an unknown identifier is refused outright
+    trigger: Presenter pastes a P3 note (node demos/phi-tripwire/scripts/tripwire.mjs --note {note})
+    data_pack: P3 PHI-like pack, demos/_shared/data-packs/p3-phi-like, seed 20261112 (24 patients, 50 notes, 213 planted identifiers), tagged synthetic + HTEST
+    fallback: []
+    reset: demos/phi-tripwire/reset.sh
+    offline: node demos/phi-tripwire/scripts/tripwire.mjs --note P3-N-001
+    default_mode: offline
+    live_mode_note: "Live mode available once keys are added: the ticket file is the same redacted payload without the OFFLINE label. This story still does not post to Jira."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:phi-tripwire
+      - track:ls
+      - stage:floor
+    card: demos/phi-tripwire/story.yaml
+    prompt: demos/phi-tripwire/prompt.md
+    readme: demos/phi-tripwire/README.md
+  - id: practice-analytics
+    code: G10
+    title: Practice analytics on 10,000 patients
+    track: generic
+    stage: generic
+    readiness: new
+    runtime: 5-10 min
+    wow: A practice manager's three questions over 10,000 synthetic patients get answered with SQL, and the agent finds the planted cause on its own
+    trigger: Presenter pastes prompt.md into a new cloud agent started from the default branch
+    data_pack: P2 synthea-analytics-10k from L13 (demos/analytics-10k). Parquet and analytics.duckdb unpack to ~/.cache/medplum-demos/synthea-analytics-10k. Committed fallback is demos/_shared/data-packs/synthea-analytics/fixture-100. This story adds only the practice-manager questions and the column contract
+    fallback: []
+    reset: demos/practice-analytics/reset.sh
+    depends_on:
+      - L13
+    pending: []
+    offline: node demos/practice-analytics/run.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: a cloud agent runs prompt.md against the P2 pack. Key-free mode reads question 1 from the shared HbA1c views on the P2 10k pack (fetched with fetch.sh), or the committed 100-patient fixture if the fetch or checksum fails."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:practice-analytics
+      - track:generic
+    card: demos/practice-analytics/story.yaml
+    prompt: demos/practice-analytics/prompt.md
+    readme: demos/practice-analytics/README.md
   - id: rebrand
     code: G3
     title: Prospect rebrand
@@ -190,6 +491,7 @@ stories:
     default_mode: offline
     live_mode_note: "Live mode available once keys are added: a cloud agent applies the committed Acme Cardio brand kit and opens a draft PR."
     automation: false
+    intake: false
     labels:
       - demo
       - medplum
@@ -198,6 +500,114 @@ stories:
     card: demos/rebrand/story.yaml
     prompt: demos/rebrand/prompt.md
     readme: demos/rebrand/README.md
+  - id: requirements-clerk
+    code: L1
+    title: Requirements clerk
+    track: ls
+    stage: "01"
+    readiness: new
+    runtime: 3 min
+    wow: Meeting notes become traced GIO requirements (REQ-xxx design inputs)
+    trigger: Presenter pastes prompt.md into the requirements-clerk Grok Bot. The bot reads the seed notes and files new GIO tickets. It does not wait for approval.
+    data_pack: Requirements slice of the P5 regulatory seed. Meeting notes and an id register in demos/requirements-clerk/seed/. Synthetic, tagged HTEST. No patient names.
+    fallback: []
+    reset: demos/requirements-clerk/reset.sh
+    offline: node demos/requirements-clerk/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: the requirements-clerk bot reads prompt.md and creates GIO issues through the Atlassian connector. This runner does not call the bot."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:requirements-clerk
+      - track:ls
+      - stage:01
+    card: demos/requirements-clerk/story.yaml
+    prompt: demos/requirements-clerk/prompt.md
+    readme: demos/requirements-clerk/README.md
+  - id: risk-teammate
+    code: L2
+    title: Risk teammate
+    track: ls
+    stage: "02"
+    readiness: new
+    runtime: 3 min
+    wow: The bot files an ISO 14971 hazard and a safety class, and a reviewer can override it later
+    trigger: Presenter pastes prompt.md into the risk-teammate Grok Bot. The bot reads the hazard seed and files one hazard. It does not wait for approval.
+    data_pack: Hazard slice of the P5 regulatory seed. Intended use, one already-filed hazard, and one unassessed requirement in demos/risk-teammate/seed/. Synthetic, tagged HTEST.
+    fallback: []
+    reset: demos/risk-teammate/reset.sh
+    offline: node demos/risk-teammate/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: the risk-teammate bot reads prompt.md and creates one GIO issue through the Atlassian connector. This runner does not call the bot."
+    automation: false
+    intake: false
+    labels:
+      - demo
+      - medplum
+      - story:risk-teammate
+      - track:ls
+      - stage:02
+    card: demos/risk-teammate/story.yaml
+    prompt: demos/risk-teammate/prompt.md
+    readme: demos/risk-teammate/README.md
+  - id: speech-to-fhir
+    code: L10
+    title: Speech to FHIR (voice intake to QuestionnaireResponse)
+    track: ls
+    stage: post-market
+    readiness: new
+    runtime: 5 min
+    wow: What the caller said is a structured QuestionnaireResponse on the chart, and the Jira ticket carries none of their identity
+    trigger: A confirmed support intake (voice transcript or form) from L9 support-voice, or node demos/speech-to-fhir/scripts/run.mjs with a seeded transcript
+    data_pack: seed/questionnaire.json (Foo Medical support intake) and 3 synthetic transcripts in seed/transcripts.json; patients are created or matched by name + birth date and tagged synthetic + HTEST + demo-story speech-to-fhir
+    fallback: []
+    reset: demos/speech-to-fhir/reset.sh
+    offline: node demos/speech-to-fhir/scripts/run.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: the command reads the seeded transcript and does not print a replay label. Extraction, server validation, and the Medplum write are the same either way. This repo still does not open a live voice session."
+    automation: false
+    intake: true
+    labels:
+      - demo
+      - medplum
+      - story:speech-to-fhir
+      - track:ls
+      - stage:post-market
+      - support
+      - platform-demo
+    card: demos/speech-to-fhir/story.yaml
+    prompt: demos/speech-to-fhir/prompt.md
+    readme: demos/speech-to-fhir/README.md
+  - id: support-voice
+    code: L9
+    title: Voice patient support (Foo Medical)
+    track: ls
+    stage: post-market
+    readiness: adapt
+    runtime: 5 min live, plus agent time
+    wow: A patient asks about pairing a patch; a redacted GIO ticket appears and the bots turn it into a KB article or a fix PR
+    trigger: A synthetic patient calls (Grok Voice) or uses the support form; after a server-enforced read-back and confirm, a redacted GIO intake ticket is created
+    data_pack: P4 support KB (8 Foo Medical articles in kb/foomedical plus 9 Medplum docs listed in kb/medplum-docs.json) and 14 synthetic intakes in evals/cases.json
+    fallback: []
+    reset: demos/support-voice/reset.sh
+    offline: node demos/support-voice/scripts/offline.mjs
+    default_mode: replay
+    live_mode_note: "Live mode available once keys are added: this command creates the GIO issue from the same synthetic call instead of writing the OFFLINE file. Grok Voice and the triage agent are still not called from this repo."
+    automation: false
+    intake: true
+    labels:
+      - demo
+      - medplum
+      - story:support-voice
+      - track:ls
+      - stage:post-market
+      - support
+      - platform-demo
+    card: demos/support-voice/story.yaml
+    prompt: demos/support-voice/prompt.md
+    readme: demos/support-voice/README.md
   - id: ticket-to-pr
     code: G2
     title: Ticket-to-PR automation
@@ -217,6 +627,7 @@ stories:
     default_mode: offline
     live_mode_note: "Live mode available once keys are added: Demo Setup creates the GIO ticket and automation d5489670 opens the draft PR."
     automation: true
+    intake: false
     labels:
       - demo
       - medplum
@@ -244,6 +655,7 @@ stories:
     default_mode: offline
     live_mode_note: "Live mode available once keys are added: with CURSOR_API_KEY set, run.sh auto-selects the @grok/agent-sdk remediator instead of the OFFLINE reference remediator. The plant, CI runs, guard, and trace matrix are unchanged."
     automation: false
+    intake: false
     labels:
       - demo
       - medplum

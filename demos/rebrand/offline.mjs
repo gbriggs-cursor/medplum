@@ -1,6 +1,6 @@
 import { existsSync } from 'node:fs';
 
-console.log('OFFLINE');
+console.log('OFFLINE (no key)');
 const kit = 'demos/rebrand/brand/acme-cardio';
 if (!existsSync(`${kit}/brand.md`) || !existsSync(`${kit}/logo.svg`)) {
   console.error('rebrand: committed Acme Cardio brand kit is missing');

@@ -1,0 +1,5 @@
+{"type":"session.started","index":0,"sessionId":"ses_replay_mcp_bot","at":"2026-11-12T21:00:00.000Z","data":{"channelId":"replay"}}
+{"type":"message.received","index":1,"sessionId":"ses_replay_mcp_bot","turnId":"turn_1","at":"2026-11-12T21:00:00.000Z","data":{"text":"For synthetic Acme Cardio device pairing, probe the local Medplum MCP and create a Task from the synthetic Observation."}}
+{"type":"actions.requested","index":2,"sessionId":"ses_replay_mcp_bot","turnId":"turn_1","at":"2026-11-12T21:00:01.000Z","data":{"calls":[{"callId":"call_probe","toolName":"probe-mcp","args":{}},{"callId":"call_task","toolName":"create-pairing-task","args":{}}]}}
+{"type":"message.completed","index":3,"sessionId":"ses_replay_mcp_bot","turnId":"turn_1","at":"2026-11-12T21:00:02.000Z","data":{"text":"REPLAY (no key). The probe and the Task run locally and are labeled OFFLINE. This recording has no tool list and no Task id."}}
+{"type":"turn.completed","index":4,"sessionId":"ses_replay_mcp_bot","turnId":"turn_1","at":"2026-11-12T21:00:02.000Z","data":{"result":"REPLAY (no key)"}}

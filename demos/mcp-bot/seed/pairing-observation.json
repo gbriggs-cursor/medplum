@@ -1,0 +1,33 @@
+{
+  "resourceType": "Observation",
+  "status": "final",
+  "meta": {
+    "tag": [
+      {
+        "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+        "code": "synthetic",
+        "display": "Synthetic"
+      }
+    ],
+    "security": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+        "code": "HTEST",
+        "display": "test health data"
+      }
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "system": "https://acme-cardio.example/synthetic/observation",
+        "code": "device-pairing",
+        "display": "Synthetic device pairing"
+      }
+    ],
+    "text": "Synthetic device pairing"
+  },
+  "subject": { "reference": "Patient/acme-patient-00" },
+  "device": { "reference": "Device/acme-device-00" },
+  "valueString": "paired"
+}

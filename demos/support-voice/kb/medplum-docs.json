@@ -1,0 +1,15 @@
+{
+  "description": "Curated Medplum docs subset (P4). Read in place from packages/docs/docs so the KB never drifts from the repo. Engineering audience: attached to bug and kb_gap tickets as references, never read to a patient.",
+  "root": "packages/docs/docs",
+  "docs": [
+    { "id": "MP-AUTH-MFA", "path": "auth/mfa.md", "product": "portal" },
+    { "id": "MP-AUTH-HOW-MFA", "path": "auth/how-mfa-works.md", "product": "portal" },
+    { "id": "MP-MSG-SEND", "path": "communications/sending-messages-and-attachments.mdx", "product": "messages" },
+    { "id": "MP-MSG-STATUS", "path": "communications/read-receipts-and-message-status.mdx", "product": "messages" },
+    { "id": "MP-APPT-RESCHEDULE", "path": "scheduling/appointment-reschedule.md", "product": "appointments" },
+    { "id": "MP-APPT-CANCEL", "path": "scheduling/appointment-cancel.md", "product": "appointments" },
+    { "id": "MP-APPT-TZ", "path": "scheduling/timezones.md", "product": "appointments" },
+    { "id": "MP-QR", "path": "questionnaires/questionnaires-and-responses.md", "product": "portal" },
+    { "id": "MP-HIPAA", "path": "compliance/hipaa.md", "product": "portal" }
+  ]
+}

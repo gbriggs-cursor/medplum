@@ -1,0 +1,24 @@
+REPLAY (no key)
+# Redacted transcripts of bash demos/analytics-10k/run.sh, 2026-11-12, CURSOR_API_KEY/XAI_API_KEY/JIRA_* unset, DEMO_MODE unset.
+# Only the label, pack, scorer status and exit code are kept; full output is with the private answer key.
+
+## 10k pack, answer key present
+REPLAY (no key)
+pack: synthea-analytics-10k (installed) at /home/ubuntu/.cache/medplum-demos/synthea-analytics-10k via analytics.duckdb
+answer key present: answer-key-10k.json
+SCORE: 4/4
+CONTROL: ok (details private)
+PINNED: ok (details private)
+EXIT=0
+
+## 10k pack, answer key absent
+REPLAY (no key)
+pack: synthea-analytics-10k (installed) at /home/ubuntu/.cache/medplum-demos/synthea-analytics-10k via analytics.duckdb
+answer key absent (no index.json in /home/ubuntu/.cache/medplum-demos/answer-keys/analytics-10k); run is unscored
+EXIT=0
+
+## fixture-100 fallback (L13_PACK_DIR=/tmp/l13-no-pack), answer key absent
+REPLAY (no key)
+pack: synthea-analytics-100 (fixture-100) at /agent/repos/medplum/demos/_shared/data-packs/synthea-analytics/fixture-100 via parquet
+answer key absent (no index.json in /home/ubuntu/.cache/medplum-demos/answer-keys/analytics-10k); run is unscored
+EXIT=0
