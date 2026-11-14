@@ -9,3 +9,5 @@
 **/packages/definitions/src/fhir/**/*
 packages/server/binary/**/*
 demos/_shared/data-packs/p3-phi-like/*.json
+demos/device-evidence/run/data/**/*
+demos/device-evidence/run/evidence/**/*

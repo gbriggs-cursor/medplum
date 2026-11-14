@@ -1,0 +1,284 @@
+{
+  "requirement": "REQ-001",
+  "seed": 20261104,
+  "synthetic": true,
+  "tags": [
+    {
+      "system": "https://medplum.com/fhir/CodeSystem/synthetic",
+      "code": "synthetic",
+      "display": "Synthetic demo data"
+    },
+    {
+      "system": "http://terminology.hl7.org/CodeSystem/v3-ActReason",
+      "code": "HTEST",
+      "display": "test health data"
+    }
+  ],
+  "prospect": "Acme Cardio",
+  "device": "Acme Cardio patch v2",
+  "bundle": "data/acme-cardio-patch-v2.bundle.json",
+  "generator": "npx tsx src/generate.ts",
+  "counts": {
+    "Patient": 20,
+    "DeviceDefinition": 20,
+    "Device": 20,
+    "Observation": 40,
+    "bloodPressurePanels": 20,
+    "ecgObservations": 20,
+    "atrialFibrillation": 3,
+    "total": 100
+  },
+  "resources": {
+    "Patient": [
+      "af06a9da-7130-419d-b93c-40c144692cf3",
+      "8f22b933-53a1-473b-a28a-2f6ce45ed9d9",
+      "465f12ba-0fbe-45cb-b059-e7c5c410ced9",
+      "b827cd8f-543d-4dfd-893c-8f7ff0620540",
+      "1388cabf-558b-47c6-8350-b1d55205a03c",
+      "c6a482d3-a6d4-42bf-a8ca-515b9a0cdb75",
+      "370a4fb6-7e56-465a-b216-43cdb055040e",
+      "12ab619a-e37a-42c0-a9d7-3077e3629942",
+      "5e4521e7-7e07-4952-82d2-579f132d7fb5",
+      "ec5dc16d-68c5-4530-9454-7ea89be28a64",
+      "fc8ded64-d67c-44b0-98aa-b3a24f087c32",
+      "e61da54e-dad7-46c6-8579-d17cf51656ea",
+      "b94978ea-f549-4b92-b1e8-64148848a3be",
+      "20253bad-640c-4789-9423-26cfd0495d24",
+      "5e6186ea-cb55-48d8-a181-df461f9a9bca",
+      "4d9b760d-5998-4c1b-9786-79efa348a25c",
+      "594cd597-109e-4f1e-88fa-04f03feaa71f",
+      "b9c32cec-e5fe-472d-95c5-5499684862cd",
+      "1c1731f0-968b-4912-a3e1-42f271a11f41",
+      "5151ec9f-a90b-431c-a7fe-0de2e91c96ff"
+    ],
+    "DeviceDefinition": [
+      "b3a266c7-ca82-4de2-b2dd-1069bc1dcfdc",
+      "babeb278-b9c5-44f6-9d22-21ffaba1c5aa",
+      "ca0e7365-96c0-49e8-a122-8c220d04cd2a",
+      "73797355-4bee-466a-b2a4-ce95f4b295b5",
+      "4d4f203a-d6ab-41f4-863d-732b073c43f7",
+      "a89904f3-3fd4-4431-b30c-5c93fdea607f",
+      "7ee67cdf-1a9c-4a5e-b757-ee74ff3d5b34",
+      "3ba1618e-04f2-4de8-822b-baa66de78c8e",
+      "29aeefe2-eed0-44e2-889e-bac946afb3da",
+      "3097141f-72f6-48b4-9350-1d56ac49106c",
+      "cc488af4-1a60-45b3-8e6f-c7440842b798",
+      "29872aea-b0e1-4949-8e97-523b1864ab3b",
+      "8ab4fc13-a75f-4a43-9ae5-ee1445f09824",
+      "3f051ee4-3ad5-4b51-a249-67714c5b6641",
+      "e0b158e6-4acc-4411-b34c-4f6091f4156b",
+      "9b5bc21d-ec47-485e-96aa-ec6876699ba7",
+      "dd7989d9-61fa-4083-b375-6e7e88d777d4",
+      "0171a779-4d64-4e7b-917b-628ad476cd34",
+      "6296ee10-c416-4b59-aec8-9c1a5c3cd9b6",
+      "f8b81eb3-fc81-4d9c-989f-341e21a3d3e8"
+    ],
+    "Device": [
+      "45377ab7-b859-4545-8c17-c00e9eef00e0",
+      "9db912e9-1534-4f5f-90d1-e8dfada728a3",
+      "e7269bc2-2570-440c-aab3-935353485e59",
+      "e5377ee4-a1c6-489f-867b-b192afa8bf97",
+      "dd5e934d-77a6-41f2-a260-db63aa763219",
+      "5d73bca2-e1cd-485b-8a62-606da0b5efe5",
+      "8dee274b-807e-4847-b715-4073a2a7b1a4",
+      "49f320d3-9aa2-4b0b-a1e7-2f30dac434b2",
+      "1fd5a6c9-191f-4616-9539-7b536737c4f2",
+      "c0d3b73b-2bbd-485c-8021-b37078fdc0a8",
+      "b03e7310-e976-424e-aede-d4ab5f8bdc3a",
+      "b12fc32a-2a13-4f1b-a3f4-095fcecb45f1",
+      "22e755e2-aab8-4757-91b1-3deb4385b68e",
+      "78b74a49-579c-4966-a0d0-339da4c96a8e",
+      "58bd144d-f17e-4b10-8c0c-f3bc24806d4d",
+      "edf44c43-1257-4d7c-a8e4-2f16b3dbfdd9",
+      "a9a4e719-f15f-4058-a378-b9a6083de81a",
+      "8474c222-4e5b-425d-b406-0508c272cbaa",
+      "6f36728c-f17a-4f27-ba29-c9bf7d8f4d24",
+      "2ff89d07-b3a0-4743-b36e-362b8a82e3c7"
+    ],
+    "Observation": [
+      "e29a85da-9368-4ac7-b286-500503f20ad8",
+      "021c92c8-3c00-4b4b-a03f-15589f811f10",
+      "122d3328-eae7-46ba-a796-69e40ce5dac1",
+      "7e03de12-0ab2-45ae-8164-5081a020fc59",
+      "74e69bea-069f-4c4c-bc63-ce701c063aab",
+      "5528700f-52d9-44ea-a913-e042c3faac8e",
+      "486bbad3-087d-49b0-adc9-2275ba96020f",
+      "97c05901-792a-4a4b-8cf7-9214a31623c7",
+      "4b55e36d-237b-4ac5-a121-99b0592f4ac0",
+      "7b1ae112-6ddb-441e-a727-15c2930ee13f",
+      "c13088c7-2315-466b-8010-cbbdb1f2ee1e",
+      "0e248c73-12f7-4ca7-8706-89d30e8aac5a",
+      "bf4d18b8-1757-460c-b010-c6d39fe37bd8",
+      "e29c6ce1-cc0c-44ff-a0ee-d2ee35298016",
+      "dd9f5939-e0e0-4568-b32a-dd04b67c8a3a",
+      "b2bbf1bb-499d-40f7-8a95-3e88713fc4b9",
+      "8c7a43c6-c63e-469a-b569-bea496450409",
+      "f4d49487-b2f0-4340-b3c6-023b9e417aea",
+      "3c93d75d-dc27-4fc9-9505-a54251fe20aa",
+      "f70f0e6a-cb28-4387-aabc-0ed2d8c711ac",
+      "20d129a4-cd34-4291-aa98-6d2ee58cda20",
+      "dd29c4c8-c698-4560-ba2e-5dd041a7091d",
+      "39e10e8d-f7ca-44df-8f98-ad149b888a45",
+      "07fd2e91-c16d-421d-8430-138733a30b00",
+      "1bfa2d84-973f-4450-916c-5d13954144db",
+      "f8981574-a2a6-4274-bc13-c95ce04b276f",
+      "bcd66b3b-894a-407e-af07-049222a5a374",
+      "076bccff-7130-4ca4-94b7-d2a9f3f3a531",
+      "adb5eb95-dbbd-49ea-ab1f-873dd9211985",
+      "1e041fbd-641d-40a4-92df-e7f7764f7512",
+      "c9deab5a-73ec-4a04-b666-d393964388a2",
+      "716f7584-c7f5-4981-85d4-2afeacb0f35c",
+      "f432d64a-4d9f-4ad2-87e3-98ec705be254",
+      "a6210aa0-1bdc-448a-bfc3-5140c70ba96e",
+      "3cf8cd78-5ccf-4925-a396-333528520b7f",
+      "da6dbbb5-6442-4ccc-bc03-2cebad5b0d94",
+      "18ef5d04-8d2b-426d-99c4-da2b13fe8738",
+      "3bee53cb-a6f0-40d4-8176-a4df91f21a43",
+      "10265eb4-ff73-4d0f-b2ab-80855c40d730",
+      "8bb691e3-bef7-4a21-b939-30811ccbb385"
+    ]
+  },
+  "patients": [
+    {
+      "patient": "af06a9da-7130-419d-b93c-40c144692cf3",
+      "deviceDefinition": "b3a266c7-ca82-4de2-b2dd-1069bc1dcfdc",
+      "device": "45377ab7-b859-4545-8c17-c00e9eef00e0",
+      "bloodPressure": "e29a85da-9368-4ac7-b286-500503f20ad8",
+      "ecg": "20d129a4-cd34-4291-aa98-6d2ee58cda20"
+    },
+    {
+      "patient": "8f22b933-53a1-473b-a28a-2f6ce45ed9d9",
+      "deviceDefinition": "babeb278-b9c5-44f6-9d22-21ffaba1c5aa",
+      "device": "9db912e9-1534-4f5f-90d1-e8dfada728a3",
+      "bloodPressure": "021c92c8-3c00-4b4b-a03f-15589f811f10",
+      "ecg": "dd29c4c8-c698-4560-ba2e-5dd041a7091d"
+    },
+    {
+      "patient": "465f12ba-0fbe-45cb-b059-e7c5c410ced9",
+      "deviceDefinition": "ca0e7365-96c0-49e8-a122-8c220d04cd2a",
+      "device": "e7269bc2-2570-440c-aab3-935353485e59",
+      "bloodPressure": "122d3328-eae7-46ba-a796-69e40ce5dac1",
+      "ecg": "39e10e8d-f7ca-44df-8f98-ad149b888a45"
+    },
+    {
+      "patient": "b827cd8f-543d-4dfd-893c-8f7ff0620540",
+      "deviceDefinition": "73797355-4bee-466a-b2a4-ce95f4b295b5",
+      "device": "e5377ee4-a1c6-489f-867b-b192afa8bf97",
+      "bloodPressure": "7e03de12-0ab2-45ae-8164-5081a020fc59",
+      "ecg": "07fd2e91-c16d-421d-8430-138733a30b00"
+    },
+    {
+      "patient": "1388cabf-558b-47c6-8350-b1d55205a03c",
+      "deviceDefinition": "4d4f203a-d6ab-41f4-863d-732b073c43f7",
+      "device": "dd5e934d-77a6-41f2-a260-db63aa763219",
+      "bloodPressure": "74e69bea-069f-4c4c-bc63-ce701c063aab",
+      "ecg": "1bfa2d84-973f-4450-916c-5d13954144db"
+    },
+    {
+      "patient": "c6a482d3-a6d4-42bf-a8ca-515b9a0cdb75",
+      "deviceDefinition": "a89904f3-3fd4-4431-b30c-5c93fdea607f",
+      "device": "5d73bca2-e1cd-485b-8a62-606da0b5efe5",
+      "bloodPressure": "5528700f-52d9-44ea-a913-e042c3faac8e",
+      "ecg": "f8981574-a2a6-4274-bc13-c95ce04b276f"
+    },
+    {
+      "patient": "370a4fb6-7e56-465a-b216-43cdb055040e",
+      "deviceDefinition": "7ee67cdf-1a9c-4a5e-b757-ee74ff3d5b34",
+      "device": "8dee274b-807e-4847-b715-4073a2a7b1a4",
+      "bloodPressure": "486bbad3-087d-49b0-adc9-2275ba96020f",
+      "ecg": "bcd66b3b-894a-407e-af07-049222a5a374"
+    },
+    {
+      "patient": "12ab619a-e37a-42c0-a9d7-3077e3629942",
+      "deviceDefinition": "3ba1618e-04f2-4de8-822b-baa66de78c8e",
+      "device": "49f320d3-9aa2-4b0b-a1e7-2f30dac434b2",
+      "bloodPressure": "97c05901-792a-4a4b-8cf7-9214a31623c7",
+      "ecg": "076bccff-7130-4ca4-94b7-d2a9f3f3a531"
+    },
+    {
+      "patient": "5e4521e7-7e07-4952-82d2-579f132d7fb5",
+      "deviceDefinition": "29aeefe2-eed0-44e2-889e-bac946afb3da",
+      "device": "1fd5a6c9-191f-4616-9539-7b536737c4f2",
+      "bloodPressure": "4b55e36d-237b-4ac5-a121-99b0592f4ac0",
+      "ecg": "adb5eb95-dbbd-49ea-ab1f-873dd9211985"
+    },
+    {
+      "patient": "ec5dc16d-68c5-4530-9454-7ea89be28a64",
+      "deviceDefinition": "3097141f-72f6-48b4-9350-1d56ac49106c",
+      "device": "c0d3b73b-2bbd-485c-8021-b37078fdc0a8",
+      "bloodPressure": "7b1ae112-6ddb-441e-a727-15c2930ee13f",
+      "ecg": "1e041fbd-641d-40a4-92df-e7f7764f7512"
+    },
+    {
+      "patient": "fc8ded64-d67c-44b0-98aa-b3a24f087c32",
+      "deviceDefinition": "cc488af4-1a60-45b3-8e6f-c7440842b798",
+      "device": "b03e7310-e976-424e-aede-d4ab5f8bdc3a",
+      "bloodPressure": "c13088c7-2315-466b-8010-cbbdb1f2ee1e",
+      "ecg": "c9deab5a-73ec-4a04-b666-d393964388a2"
+    },
+    {
+      "patient": "e61da54e-dad7-46c6-8579-d17cf51656ea",
+      "deviceDefinition": "29872aea-b0e1-4949-8e97-523b1864ab3b",
+      "device": "b12fc32a-2a13-4f1b-a3f4-095fcecb45f1",
+      "bloodPressure": "0e248c73-12f7-4ca7-8706-89d30e8aac5a",
+      "ecg": "716f7584-c7f5-4981-85d4-2afeacb0f35c"
+    },
+    {
+      "patient": "b94978ea-f549-4b92-b1e8-64148848a3be",
+      "deviceDefinition": "8ab4fc13-a75f-4a43-9ae5-ee1445f09824",
+      "device": "22e755e2-aab8-4757-91b1-3deb4385b68e",
+      "bloodPressure": "bf4d18b8-1757-460c-b010-c6d39fe37bd8",
+      "ecg": "f432d64a-4d9f-4ad2-87e3-98ec705be254"
+    },
+    {
+      "patient": "20253bad-640c-4789-9423-26cfd0495d24",
+      "deviceDefinition": "3f051ee4-3ad5-4b51-a249-67714c5b6641",
+      "device": "78b74a49-579c-4966-a0d0-339da4c96a8e",
+      "bloodPressure": "e29c6ce1-cc0c-44ff-a0ee-d2ee35298016",
+      "ecg": "a6210aa0-1bdc-448a-bfc3-5140c70ba96e"
+    },
+    {
+      "patient": "5e6186ea-cb55-48d8-a181-df461f9a9bca",
+      "deviceDefinition": "e0b158e6-4acc-4411-b34c-4f6091f4156b",
+      "device": "58bd144d-f17e-4b10-8c0c-f3bc24806d4d",
+      "bloodPressure": "dd9f5939-e0e0-4568-b32a-dd04b67c8a3a",
+      "ecg": "3cf8cd78-5ccf-4925-a396-333528520b7f"
+    },
+    {
+      "patient": "4d9b760d-5998-4c1b-9786-79efa348a25c",
+      "deviceDefinition": "9b5bc21d-ec47-485e-96aa-ec6876699ba7",
+      "device": "edf44c43-1257-4d7c-a8e4-2f16b3dbfdd9",
+      "bloodPressure": "b2bbf1bb-499d-40f7-8a95-3e88713fc4b9",
+      "ecg": "da6dbbb5-6442-4ccc-bc03-2cebad5b0d94"
+    },
+    {
+      "patient": "594cd597-109e-4f1e-88fa-04f03feaa71f",
+      "deviceDefinition": "dd7989d9-61fa-4083-b375-6e7e88d777d4",
+      "device": "a9a4e719-f15f-4058-a378-b9a6083de81a",
+      "bloodPressure": "8c7a43c6-c63e-469a-b569-bea496450409",
+      "ecg": "18ef5d04-8d2b-426d-99c4-da2b13fe8738"
+    },
+    {
+      "patient": "b9c32cec-e5fe-472d-95c5-5499684862cd",
+      "deviceDefinition": "0171a779-4d64-4e7b-917b-628ad476cd34",
+      "device": "8474c222-4e5b-425d-b406-0508c272cbaa",
+      "bloodPressure": "f4d49487-b2f0-4340-b3c6-023b9e417aea",
+      "ecg": "3bee53cb-a6f0-40d4-8176-a4df91f21a43"
+    },
+    {
+      "patient": "1c1731f0-968b-4912-a3e1-42f271a11f41",
+      "deviceDefinition": "6296ee10-c416-4b59-aec8-9c1a5c3cd9b6",
+      "device": "6f36728c-f17a-4f27-ba29-c9bf7d8f4d24",
+      "bloodPressure": "3c93d75d-dc27-4fc9-9505-a54251fe20aa",
+      "ecg": "10265eb4-ff73-4d0f-b2ab-80855c40d730"
+    },
+    {
+      "patient": "5151ec9f-a90b-431c-a7fe-0de2e91c96ff",
+      "deviceDefinition": "f8b81eb3-fc81-4d9c-989f-341e21a3d3e8",
+      "device": "2ff89d07-b3a0-4743-b36e-362b8a82e3c7",
+      "bloodPressure": "f70f0e6a-cb28-4387-aabc-0ed2d8c711ac",
+      "ecg": "8bb691e3-bef7-4a21-b939-30811ccbb385"
+    }
+  ],
+  "bundleSha256": "36824c5b7fbd039fca87b140e3af394faa225859a53182dac275d92a15916274"
+}

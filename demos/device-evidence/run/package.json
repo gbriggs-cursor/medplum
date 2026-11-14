@@ -1,0 +1,11 @@
+{
+  "name": "device-evidence-run",
+  "private": true,
+  "type": "module",
+  "description": "REQ-001: synthetic Acme Cardio patch v2 cohort, ECG summary parser, and Vitest evidence. Synthetic data only.",
+  "scripts": {
+    "generate": "tsx src/generate.ts",
+    "test": "vitest run",
+    "coverage": "vitest run --coverage"
+  }
+}
