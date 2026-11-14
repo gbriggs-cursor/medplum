@@ -382,6 +382,7 @@ Medplum provides building blocks for custom integrations. **Any system that expo
 
 Complex integrations are built by composing [bots](/docs/bots/), [subscriptions](/docs/subscriptions), [authentication and authorization](/docs/auth) and the [TypeScript SDK](/docs/sdk/).
 
+- [Practice Software Sync](/docs/integration/practice-software-sync) walks through a server-to-server integration end to end: client credentials authentication, patient upsert by external identifier, signed Appointment webhooks, and bulk export
 - [Running on localhost](/docs/contributing/run-the-stack) is useful for testing integrations
 - [CLI](/docs/cli/external-fhir-servers) is commonly used to test connectivity to external FHIR Servers
 - [Integration Features and Fixes](https://github.com/medplum/medplum/pulls?q=is%3Apr+label%3Aintegration) on GitHub show the code that powers many of the integrations.

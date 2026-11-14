@@ -423,6 +423,11 @@ const sidebars: SidebarsConfig = {
       label: 'Medplum Integrations',
       id: 'integration/index',
     },
+    {
+      type: 'doc',
+      label: 'Practice Software Sync',
+      id: 'integration/practice-software-sync',
+    },
     { type: 'html', value: '<strong class="menu__link">E-Prescribe</strong>' },
     {
       type: 'category',
