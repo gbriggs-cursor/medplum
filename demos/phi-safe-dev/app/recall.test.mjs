@@ -30,3 +30,24 @@ test('non-hygiene encounters are ignored', () => {
   const encounters = [{ ...visit('twin-d', '2026-08-14'), type: [{ coding: [{ code: 'exam' }] }] }];
   assert.deepEqual(recallList(encounters, 2027, 2), []);
 });
+
+test('end-of-month hygiene visit is recalled in the clamped month, not the next one', () => {
+  const encounters = [visit('twin-aug31', '2026-08-31'), visit('twin-aug15', '2026-08-15')];
+  assert.deepEqual(recallList(encounters, 2027, 2), ['Patient/twin-aug15', 'Patient/twin-aug31']);
+  assert.deepEqual(recallList(encounters, 2027, 3), []);
+});
+
+const dueDates = [
+  ['2026-08-31', 6, '2027-02-28'],
+  ['2026-08-29', 6, '2027-02-28'],
+  ['2026-03-31', 6, '2026-09-30'],
+  ['2026-01-31', 1, '2026-02-28'],
+  ['2027-08-31', 6, '2028-02-29'],
+  ['2026-01-31', 6, '2026-07-31'],
+];
+
+for (const [last, months, due] of dueDates) {
+  test(`due date ${last} plus ${months} ${months === 1 ? 'month' : 'months'} is ${due}`, () => {
+    assert.equal(recallDueDate(last, months), due);
+  });
+}
