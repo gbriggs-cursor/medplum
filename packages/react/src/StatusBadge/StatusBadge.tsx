@@ -66,6 +66,7 @@ const statusToColor: Record<string, DefaultMantineColor> = {
   disconnected: 'red',
   finished: 'green',
   planned: 'gray',
+  inactive: 'gray',
 };
 
 export interface StatusBadgeProps extends Omit<BadgeProps, 'children'> {
