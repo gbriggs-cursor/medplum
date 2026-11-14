@@ -1,0 +1,34 @@
+
+ RUN  v4.1.12 /agent/repos/medplum/demos/device-evidence/run
+      Coverage enabled with v8
+
+ ✓ src/ecg.test.ts > REQ-001 ECG summary parser > summarizes every synthetic ECG, with waveform-derived heart rate matching the reported rate 52ms
+ ✓ src/ecg.test.ts > REQ-001 ECG summary parser > decodes SampledData edge cases and detects R peaks on a hand-built trace 2ms
+ ✓ src/ecg.test.ts > REQ-001 ECG summary parser > handles a minimal ECG without waveform, flags abnormal values, and rejects non-ECG input 3ms
+ ✓ src/cohort.test.ts > REQ-001 synthetic Acme Cardio patch v2 cohort > regenerating from the seed reproduces the committed bundle and manifest 75ms
+ ✓ src/cohort.test.ts > REQ-001 synthetic Acme Cardio patch v2 cohort > manifest lists every resource id with counts; every resource is valid R4 and tagged synthetic and HTEST 537ms
+ ✓ src/vitals.test.tsx > REQ-001 Foo Medical vitals display > a synthetic patch v2 patient sees the blood-pressure panel and ECG summary in Foo Medical vitals 949ms
+ ✓ src/cohort.test.ts > REQ-001 synthetic Acme Cardio patch v2 cohort > MockClient ingests the bundle and links patient, device, definition, BP panel, and ECG 688ms
+
+ Test Files  3 passed (3)
+      Tests  7 passed (7)
+   Start at  16:19:26
+   Duration  3.03s (transform 2.22s, setup 192ms, import 3.19s, tests 2.31s, environment 1.25s)
+
+ % Coverage report from v8
+-----------|---------|----------|---------|---------|---------------------------
+File       | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s         
+-----------|---------|----------|---------|---------|---------------------------
+All files  |     100 |    90.06 |     100 |     100 |                           
+ cohort.ts |     100 |      100 |     100 |     100 |                           
+ ecg.ts    |     100 |    89.81 |     100 |     100 | ...69,186-196,235,244-247 
+ load.ts   |     100 |    71.42 |     100 |     100 | 23,51-52                  
+-----------|---------|----------|---------|---------|---------------------------
+
+=============================== Coverage summary ===============================
+Statements   : 100% ( 273/273 )
+Branches     : 90.06% ( 136/151 )
+Functions    : 100% ( 49/49 )
+Lines        : 100% ( 247/247 )
+================================================================================
+EXIT:0
