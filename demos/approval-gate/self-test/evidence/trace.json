@@ -1,0 +1,55 @@
+{
+  "mode": "offline",
+  "schema": "evidence-v2/trace",
+  "version": 2,
+  "story": "approval-gate",
+  "synthetic": true,
+  "commit": "3aa9dd53d8ee74dd6050fccafcc4c230b7b1782a",
+  "runs": [
+    {
+      "id": "run-1",
+      "label": "design review build",
+      "command": "npx vitest run (in demos/_shared/data-packs/p1-device-cohort)",
+      "date": "2026-11-12T21:06:38.498Z",
+      "tree": "repository",
+      "passed": 4,
+      "failed": 0,
+      "exit": 0,
+      "mode": "offline"
+    }
+  ],
+  "rows": [
+    {
+      "req": "REQ-001",
+      "risk": "RISK-002",
+      "test": "parseEcgSummary reads component valueSampledData",
+      "run": "run-1",
+      "result": "pass",
+      "commit": "3aa9dd53d8ee74dd6050fccafcc4c230b7b1782a"
+    },
+    {
+      "req": "REQ-001",
+      "risk": "RISK-002",
+      "test": "parseEcgSummary throws when sampled data is missing",
+      "run": "run-1",
+      "result": "pass",
+      "commit": "3aa9dd53d8ee74dd6050fccafcc4c230b7b1782a"
+    },
+    {
+      "req": "REQ-001",
+      "risk": "RISK-001",
+      "test": "MockClient ingests the synthetic Acme Cardio patch v2 bundle",
+      "run": "run-1",
+      "result": "pass",
+      "commit": "3aa9dd53d8ee74dd6050fccafcc4c230b7b1782a"
+    },
+    {
+      "req": "REQ-001",
+      "risk": "RISK-001",
+      "test": "Foo Medical Vitals shows ingested blood pressure for the signed-in patient",
+      "run": "run-1",
+      "result": "pass",
+      "commit": "3aa9dd53d8ee74dd6050fccafcc4c230b7b1782a"
+    }
+  ]
+}

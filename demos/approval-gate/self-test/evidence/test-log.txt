@@ -1,0 +1,13 @@
+
+ RUN  v4.1.12 /agent/repos/medplum/demos/_shared/data-packs/p1-device-cohort
+
+ ✓ src/ecg-summary-parser.test.ts (2 tests) 3ms
+ ✓ src/vitals.ingest.test.tsx (2 tests) 205ms
+
+ Test Files  2 passed (2)
+      Tests  4 passed (4)
+   Start at  21:06:35
+   Duration  2.49s (transform 1.14s, setup 1.43s, import 1.07s, tests 208ms, environment 817ms)
+
+JSON report written to /agent/repos/medplum/demos/approval-gate/self-test/evidence/vitest.json
+EXIT:0
