@@ -89,8 +89,16 @@ echo "== 4. Remediate ($mode)"
 case "$mode" in
   live)
     VERIFY_LOOP_WORKSPACE="$ws" npx --yes "$sdk" run --dir "$here/remediator" --message "$message" --json \
-      --trace "$out/remediator.trace.ndjson" > "$out/remediator.json"
-    node -e 'const r=require(process.argv[1]); console.log(`remediator: ok=${r.ok} session=${r.sessionId}`)' "$out/remediator.json"
+      --trace "$out/remediator.trace.ndjson" > "$out/remediator.stdout.txt"
+    # --json still prints log lines before the document. Keep the document only.
+    node -e '
+      const fs = require("node:fs");
+      const raw = fs.readFileSync(process.argv[1], "utf8");
+      const at = raw.indexOf("\n{");
+      const value = JSON.parse(at === -1 ? raw.trim() : raw.slice(at + 1));
+      fs.writeFileSync(process.argv[2], JSON.stringify(value, null, 2) + "\n");
+      console.log(`remediator: ok=${value.ok} session=${value.sessionId}`);
+    ' "$out/remediator.stdout.txt" "$out/remediator.json"
     ;;
   offline)
     (cd "$ws" && git apply -R "$patch")

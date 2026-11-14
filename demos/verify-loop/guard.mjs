@@ -43,13 +43,26 @@ for (const f of new Set([...wsFiles, ...repoFiles])) {
   }
 }
 
-const rejected = changed.filter(
+// An empty dotfile outside src/ is a writability probe. It is not copied back.
+const scratch = changed.filter((entry) => {
+  if (entry.kind !== 'added' || entry.file.startsWith('packages/core/src/')) {
+    return false;
+  }
+  const name = entry.file.slice(entry.file.lastIndexOf('/') + 1);
+  if (!name.startsWith('.')) {
+    return false;
+  }
+  const file = join(ws, entry.file.slice('packages/core/'.length));
+  return existsSync(file) && statSync(file).size === 0;
+});
+const considered = changed.filter((entry) => !scratch.includes(entry));
+const rejected = considered.filter(
   (c) => TEST.test(c.file) || !c.file.startsWith('packages/core/src/') || c.kind !== 'modified'
 );
-const result = { accepted: rejected.length === 0, changed, rejected };
+const result = { accepted: rejected.length === 0, changed: considered, scratch, rejected };
 writeFileSync(out, `${JSON.stringify(result, null, 2)}\n`);
 
-if (changed.length === 0) {
+if (considered.length === 0) {
   console.error('guard: the remediation changed nothing');
   process.exit(1);
 }
@@ -60,7 +73,7 @@ if (rejected.length) {
   }
   process.exit(1);
 }
-for (const c of changed) {
+for (const c of considered) {
   copyFileSync(join(ws, c.file.slice('packages/core/'.length)), join(repo, c.file.slice('packages/core/'.length)));
   console.log(`guard: accepted ${c.kind} ${c.file}`);
 }
