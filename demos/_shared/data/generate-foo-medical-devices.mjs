@@ -15,7 +15,9 @@ const SEED = 20261114;
 
 const meta = {
   tag: [{ system: 'https://medplum.com/fhir/CodeSystem/synthetic', code: 'synthetic', display: 'Synthetic' }],
-  security: [{ system: 'http://terminology.hl7.org/CodeSystem/v3-ActReason', code: 'HTEST', display: 'test health data' }],
+  security: [
+    { system: 'http://terminology.hl7.org/CodeSystem/v3-ActReason', code: 'HTEST', display: 'test health data' },
+  ],
 };
 
 let state = SEED;
@@ -40,7 +42,11 @@ const patientRef = { reference: 'Patient/foo-patient-01', display: 'Avery Synthe
 const vitalSigns = [
   {
     coding: [
-      { system: 'http://terminology.hl7.org/CodeSystem/observation-category', code: 'vital-signs', display: 'Vital Signs' },
+      {
+        system: 'http://terminology.hl7.org/CodeSystem/observation-category',
+        code: 'vital-signs',
+        display: 'Vital Signs',
+      },
     ],
   },
 ];
@@ -71,7 +77,14 @@ function device(id, name, type, manufacturer, serialNumber, status) {
 }
 
 const devices = [
-  device('foo-bp-cuff-01', 'Foo Home BP Cuff', 'Blood pressure monitor', 'Foo Devices (synthetic)', 'FBP-0001', 'active'),
+  device(
+    'foo-bp-cuff-01',
+    'Foo Home BP Cuff',
+    'Blood pressure monitor',
+    'Foo Devices (synthetic)',
+    'FBP-0001',
+    'active'
+  ),
   device('foo-oximeter-01', 'Foo Pulse Oximeter', 'Pulse oximeter', 'Foo Devices (synthetic)', 'FOX-0001', 'active'),
   device('foo-glucometer-01', 'Foo Glucometer', 'Glucose meter', 'Foo Devices (synthetic)', 'FGL-0001', 'inactive'),
 ];
