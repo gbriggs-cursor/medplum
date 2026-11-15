@@ -19,6 +19,7 @@ import { OrderLabsModal } from '../../components/labs/OrderLabsModal';
 import { usePharmacyDialog } from '../../components/pharmacy/usePharmacyDialog';
 import { useDoseSpotAccess } from '../../hooks/useDoseSpotAccess';
 import { usePatient } from '../../hooks/usePatient';
+import { LowBatteryBadge } from './LowBatteryBadge';
 import classes from './PatientPage.module.css';
 import { getPatientPageTabs, patientPathPrefix } from './PatientPage.utils';
 import { usePatientActionsMenu } from './usePatientActionsMenu';
@@ -84,6 +85,7 @@ export function PatientPage(): JSX.Element {
               }
               sections={sections}
               headerMenuItems={headerMenuItems}
+              headerExtra={<LowBatteryBadge patient={patient} />}
               onEditPatient={openEditModal}
             />
           </ScrollArea>
