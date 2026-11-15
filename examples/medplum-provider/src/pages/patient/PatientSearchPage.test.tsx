@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: Apache-2.0
 import { MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
+import { formatDate } from '@medplum/core';
+import type { Device, Observation } from '@medplum/fhirtypes';
 import { HomerSimpson, MockClient } from '@medplum/mock';
 import { MedplumProvider } from '@medplum/react';
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
@@ -143,5 +145,46 @@ describe('PatientSearchPage', () => {
   test('Handles search with filters', async () => {
     await setup(`/Patient/${HomerSimpson.id}/Patient?name=Homer`);
     expect(await screen.findByTestId('search-control')).toBeInTheDocument();
+  });
+
+  test('Devices tab shows the latest blood-pressure date for each device', async () => {
+    const medplum = new MockClient();
+    const older = '2026-01-04T15:00:00.000Z';
+    const latest = '2026-06-15T15:00:00.000Z';
+    const device = await medplum.createResource<Device>({
+      resourceType: 'Device',
+      status: 'active',
+      patient: { reference: `Patient/${HomerSimpson.id}` },
+      deviceName: [{ name: 'Acme cuff', type: 'user-friendly-name' }],
+    });
+    await medplum.createResource<Observation>({
+      resourceType: 'Observation',
+      status: 'final',
+      code: { coding: [{ system: 'http://loinc.org', code: '85354-9', display: 'Blood pressure panel' }] },
+      subject: { reference: `Patient/${HomerSimpson.id}` },
+      device: { reference: `Device/${device.id}` },
+      effectiveDateTime: older,
+    });
+    await medplum.createResource<Observation>({
+      resourceType: 'Observation',
+      status: 'final',
+      code: { coding: [{ system: 'http://loinc.org', code: '85354-9', display: 'Blood pressure panel' }] },
+      subject: { reference: `Patient/${HomerSimpson.id}` },
+      device: { reference: `Device/${device.id}` },
+      effectiveDateTime: latest,
+    });
+
+    await setup(`/Patient/${HomerSimpson.id}/Device?_fields=deviceName,status&patient=${HomerSimpson.id}`, medplum);
+
+    expect(await screen.findByText('Last BP date')).toBeInTheDocument();
+    expect(await screen.findByText(formatDate(latest))).toBeInTheDocument();
+    expect(screen.queryByText(formatDate(older))).not.toBeInTheDocument();
+  });
+
+  test('other patient search tabs do not show the blood-pressure column', async () => {
+    await setup(`/Patient/${HomerSimpson.id}/Encounter`);
+
+    expect(await screen.findByTestId('search-control')).toBeInTheDocument();
+    expect(screen.queryByText('Last BP date')).not.toBeInTheDocument();
   });
 });
