@@ -117,7 +117,7 @@ function matchesReferenceFilter(searchParam: SearchParameter, typedValues: Typed
 
 function matchesTokenFilter(typedValues: TypedValue[], filter: Filter): boolean {
   const resourceValues = convertToSearchableTokens(typedValues);
-  const filterValues = splitSearchOnComma(filter.value);
+  const filterValues = splitSearchOnComma(filter.value).map((value) => projectFilterId(filter.code, value));
   const negated = isNegated(filter.operator);
   for (const resourceValue of resourceValues) {
     for (const filterValue of filterValues) {
@@ -130,6 +130,15 @@ function matchesTokenFilter(typedValues: TypedValue[], filter: Filter): boolean 
   // If "not equals" and no matches, then return true
   // If "equals" and no matches, then return false
   return negated;
+}
+
+// meta.project stores the id. Server search accepts Project/<id> and compares the id.
+function projectFilterId(code: string, value: string): string {
+  if (code !== '_project') {
+    return value;
+  }
+  const slash = value.lastIndexOf('/');
+  return slash >= 0 ? value.slice(slash + 1) : value;
 }
 
 function matchesTokenValue(resourceValue: SearchableToken, filterValue: string): boolean {
