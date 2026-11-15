@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: Copyright Orangebot, Inc. and Medplum contributors
 // SPDX-License-Identifier: Apache-2.0
-import { ActionIcon, Box, Divider, Flex, Group, Menu, Skeleton, Stack, Text } from '@mantine/core';
+import { ActionIcon, Badge, Box, Divider, Flex, Group, Menu, Skeleton, Stack, Text } from '@mantine/core';
 import type { MedplumClient, WithId } from '@medplum/core';
 import { formatDate, formatHumanName, resolveId } from '@medplum/core';
 import type { OperationOutcome, Patient, Reference, Resource } from '@medplum/fhirtypes';
@@ -12,6 +12,7 @@ import { MedplumLink } from '../MedplumLink/MedplumLink';
 import { ResourceAvatar } from '../ResourceAvatar/ResourceAvatar';
 import styles from './PatientSummary.module.css';
 import type { PatientSummarySectionConfig } from './PatientSummary.types';
+import { formatPatientLastUpdated } from './PatientSummary.utils';
 import { getDefaultSections } from './sectionConfigs';
 
 export interface PatientSummaryProps {
@@ -39,6 +40,7 @@ export function PatientSummary(props: PatientSummaryProps): JSX.Element | null {
   });
 
   const patient = modifiedPatient?.id === resolvedPatient?.id ? modifiedPatient : resolvedPatient;
+  const lastUpdatedLabel = patient ? formatPatientLastUpdated(patient.meta?.lastUpdated) : undefined;
 
   // Determine sections: custom or default
   const defaultSections = useMemo(() => getDefaultSections(onRequestLabs), [onRequestLabs]);
@@ -71,6 +73,20 @@ export function PatientSummary(props: PatientSummaryProps): JSX.Element | null {
           <Text fz="xs" mt={-2} fw={500} c="gray.6" truncate style={{ minWidth: 0 }}>
             Patient since {formatDate(createdDate)}
           </Text>
+        )}
+        {lastUpdatedLabel && (
+          <Badge
+            variant="light"
+            color="gray"
+            size="sm"
+            radius="sm"
+            tt="none"
+            mt={4}
+            w="fit-content"
+            data-testid="patient-last-updated"
+          >
+            Last updated {lastUpdatedLabel}
+          </Badge>
         )}
       </Stack>
     </Group>

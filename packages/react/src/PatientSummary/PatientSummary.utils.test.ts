@@ -4,6 +4,7 @@ import { HTTP_HL7_ORG } from '@medplum/core';
 import type { Patient, Resource } from '@medplum/fhirtypes';
 import {
   formatPatientGenderDisplay,
+  formatPatientLastUpdated,
   formatPatientRaceEthnicityDisplay,
   formatStatusLabel,
   getBirthSex,
@@ -14,6 +15,34 @@ import {
   getRace,
   isEnteredInError,
 } from './PatientSummary.utils';
+
+describe('formatPatientLastUpdated', () => {
+  const now = new Date('2026-06-15T12:00:00.000Z');
+
+  function at(offsetMs: number): string {
+    return new Date(now.getTime() + offsetMs).toISOString();
+  }
+
+  const minute = 60_000;
+  const hour = 60 * minute;
+  const day = 24 * hour;
+
+  it.each<[string | undefined, string | undefined]>([
+    [undefined, undefined],
+    ['not-a-date', undefined],
+    [at(hour), 'just now'],
+    [at(-59_000), 'just now'],
+    [at(-minute), '1 minute ago'],
+    [at(-2 * minute), '2 minutes ago'],
+    [at(-hour), '1 hour ago'],
+    [at(-day), '1 day ago'],
+    [at(-30 * day), '1 month ago'],
+    [at(-365 * day), '1 year ago'],
+    [at(-2 * 365 * day), '2 years ago'],
+  ])('formats %s as %s', (lastUpdated, expected) => {
+    expect(formatPatientLastUpdated(lastUpdated, now)).toBe(expected);
+  });
+});
 
 describe('Patient Utilities', () => {
   beforeEach(() => {

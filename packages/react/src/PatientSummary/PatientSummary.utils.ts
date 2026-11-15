@@ -101,6 +101,47 @@ export function formatStatusLabel(status: string): string {
     .join(' ');
 }
 
+const MINUTE_MS = 60_000;
+const HOUR_MS = 60 * MINUTE_MS;
+const DAY_MS = 24 * HOUR_MS;
+const MONTH_MS = 30 * DAY_MS;
+const YEAR_MS = 365 * DAY_MS;
+
+const RELATIVE_UNITS: readonly (readonly [number, string])[] = [
+  [YEAR_MS, 'year'],
+  [MONTH_MS, 'month'],
+  [DAY_MS, 'day'],
+  [HOUR_MS, 'hour'],
+  [MINUTE_MS, 'minute'],
+];
+
+/**
+ * Relative phrase for `Patient.meta.lastUpdated`.
+ * @param lastUpdated - FHIR instant, when the resource has one.
+ * @param now - Comparison clock. Defaults to the current time.
+ * @returns `just now` for a future instant or one under a minute old, a phrase such as `2 hours ago` otherwise, or `undefined` when `lastUpdated` is missing or unparseable.
+ */
+export function formatPatientLastUpdated(lastUpdated: string | undefined, now: Date = new Date()): string | undefined {
+  if (!lastUpdated) {
+    return undefined;
+  }
+  const then = Date.parse(lastUpdated);
+  if (Number.isNaN(then)) {
+    return undefined;
+  }
+  const elapsed = now.getTime() - then;
+  if (elapsed < MINUTE_MS) {
+    return 'just now';
+  }
+  for (const [size, unit] of RELATIVE_UNITS) {
+    if (elapsed >= size) {
+      const count = Math.floor(elapsed / size);
+      return `${count} ${unit}${count === 1 ? '' : 's'} ago`;
+    }
+  }
+  return 'just now';
+}
+
 export const getPreferredLanguage = (patient: Patient): string | undefined => {
   if (!patient.communication?.length) {
     return undefined;
