@@ -4,6 +4,7 @@ import { SEARCH_PARAMETER_BUNDLE_FILES, readJson } from '@medplum/definitions';
 import type { Bundle, Patient, SearchParameter } from '@medplum/fhirtypes';
 import { indexSearchParameterBundle } from '../types';
 import { indexStructureDefinitionBundle } from '../typeschema/types';
+import { matchesSearchRequest } from './match';
 import type { SearchRequest } from './search';
 import {
   Operator,
@@ -349,6 +350,25 @@ describe('Search Utils', () => {
       total: 'accurate',
     });
     expect(result).toStrictEqual('?_count=5&_fields=id,name&_offset=10&_total=accurate&name=alice');
+  });
+
+  test('Patient identifier search keeps leading zeros', () => {
+    const mrn = '000123';
+    const query = formatSearchQuery({
+      resourceType: 'Patient',
+      filters: [{ code: 'identifier', operator: Operator.EQUALS, value: mrn }],
+    });
+    expect(query).toBe('?identifier=000123');
+
+    const parsed = parseSearchRequest('Patient?identifier=000123');
+    expect(parsed.filters?.[0]?.value).toBe(mrn);
+
+    const patient: Patient = {
+      resourceType: 'Patient',
+      identifier: [{ system: 'http://example.com/mrn', value: mrn }],
+    };
+    expect(matchesSearchRequest(patient, parsed)).toBe(true);
+    expect(matchesSearchRequest(patient, parseSearchRequest('Patient?identifier=123'))).toBe(false);
   });
 
   test('Format empty search', () => {

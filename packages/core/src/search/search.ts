@@ -575,10 +575,16 @@ export function formatSearchQuery(definition: SearchRequest): string {
   return '?' + params.join('&');
 }
 
+// Number("000123") is 123, which searches for a different patient.
+function identifierSearchValue(value: string): string {
+  return value;
+}
+
 function formatFilter(filter: Filter): string {
   const modifier = filter.operator in MODIFIER_OPERATORS ? ':' + filter.operator : '';
   const prefix = filter.operator !== Operator.EQUALS && filter.operator in PREFIX_OPERATORS ? filter.operator : '';
-  return `${filter.code}${modifier}=${prefix}${encodeURIComponent(filter.value)}`;
+  const value = filter.code === 'identifier' ? identifierSearchValue(filter.value) : filter.value;
+  return `${filter.code}${modifier}=${prefix}${encodeURIComponent(value)}`;
 }
 
 function formatSortRules(sortRules: SortRule[]): string {
