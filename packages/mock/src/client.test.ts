@@ -392,6 +392,27 @@ describe('MockClient', () => {
     expect(result.entry).toBeUndefined();
   });
 
+  test('Search by _project returns only that project', async () => {
+    const client = new MockClient({ seedDefaultData: false });
+    const projectA = randomUUID();
+    const projectB = randomUUID();
+
+    const patientA = await client.createResource<Patient>({
+      resourceType: 'Patient',
+      meta: { project: projectA },
+    });
+    await client.createResource<Patient>({
+      resourceType: 'Patient',
+      meta: { project: projectB },
+    });
+
+    const bare = await client.searchResources('Patient', `_project=${projectA}`);
+    const prefixed = await client.searchResources('Patient', `_project=Project/${projectA}`);
+
+    expect(bare.map((patient) => patient.id)).toEqual([patientA.id]);
+    expect(prefixed.map((patient) => patient.id)).toEqual([patientA.id]);
+  });
+
   test('Create binary success', async () => {
     const client = new MockClient();
     const result = await client.createBinary('test', 'test.txt', ContentType.TEXT);
