@@ -20,13 +20,22 @@ export interface PatientSummaryProps {
   readonly onRequestLabs?: () => void;
   readonly sections?: PatientSummarySectionConfig[];
   readonly headerMenuItems?: ReactNode;
+  readonly headerExtra?: ReactNode;
   readonly headerLink?: Resource | Reference | string;
   readonly onEditPatient?: () => void;
 }
 
 export function PatientSummary(props: PatientSummaryProps): JSX.Element | null {
   const medplum = useMedplum();
-  const { patient: propsPatient, onClickResource, onRequestLabs, headerMenuItems, headerLink, onEditPatient } = props;
+  const {
+    patient: propsPatient,
+    onClickResource,
+    onRequestLabs,
+    headerMenuItems,
+    headerExtra,
+    headerLink,
+    onEditPatient,
+  } = props;
   const [patientOutcome, setPatientOutcome] = useState<OperationOutcome | undefined>();
   const resolvedPatient = useResource(propsPatient, setPatientOutcome);
   const [modifiedPatient, setModifiedPatient] = useState<WithId<Patient> | undefined>();
@@ -87,6 +96,7 @@ export function PatientSummary(props: PatientSummaryProps): JSX.Element | null {
           ) : (
             headerContent
           )}
+          {headerExtra}
           {headerMenuItems && (
             <Menu shadow="md" radius="md" width={240} position="bottom-end">
               <Menu.Target>
