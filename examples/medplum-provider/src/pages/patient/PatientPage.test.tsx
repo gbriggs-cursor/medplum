@@ -131,6 +131,19 @@ describe('PatientPage', () => {
     });
   });
 
+  test('shows the active device count on the summary header', async () => {
+    await medplum.createResource({
+      resourceType: 'Device',
+      status: 'active',
+      manufacturer: 'Acme Cardio',
+      patient: { reference: `Patient/${HomerSimpson.id}` },
+    });
+    setup(`/Patient/${HomerSimpson.id}`);
+
+    const chip = await screen.findByText('1 device');
+    expect(screen.getByTestId('patient-summary-header')).toContainElement(chip);
+  });
+
   test('renders homer summary information in sidebar', async () => {
     const patientSummarySpy = vi.spyOn(medplumReact, 'PatientSummary');
     setup(`/Patient/${HomerSimpson.id}`);
