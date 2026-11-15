@@ -54,6 +54,42 @@ describe('PatientSummary', () => {
     expect(screen.queryByRole('link', { name: /Homer Simpson/ })).toBeNull();
   });
 
+  function withLastUpdated(lastUpdated: string | undefined): typeof HomerSimpson {
+    return { ...HomerSimpson, meta: { ...HomerSimpson.meta, lastUpdated } };
+  }
+
+  test('Shows a last-updated badge from meta.lastUpdated', async () => {
+    await setup({
+      patient: withLastUpdated(new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString()),
+      sections: [],
+    });
+
+    expect(screen.getByTestId('patient-last-updated')).toHaveTextContent('Last updated 2 hours ago');
+  });
+
+  test('Hides the last-updated badge when meta.lastUpdated is missing', async () => {
+    await setup({ patient: withLastUpdated(undefined), sections: [] });
+
+    expect(screen.getByText('Homer Simpson')).toBeInTheDocument();
+    expect(screen.queryByTestId('patient-last-updated')).toBeNull();
+  });
+
+  test('Shows just now when meta.lastUpdated is in the future', async () => {
+    await setup({
+      patient: withLastUpdated(new Date(Date.now() + 60 * 60 * 1000).toISOString()),
+      sections: [],
+    });
+
+    expect(screen.getByTestId('patient-last-updated')).toHaveTextContent('Last updated just now');
+  });
+
+  test('Hides the last-updated badge when meta.lastUpdated is not a timestamp', async () => {
+    await setup({ patient: withLastUpdated('not-a-date'), sections: [] });
+
+    expect(screen.getByText('Homer Simpson')).toBeInTheDocument();
+    expect(screen.queryByTestId('patient-last-updated')).toBeNull();
+  });
+
   test('Reflects patient updates made through the client', async () => {
     const client = new MockClient();
     await act(async () => {
