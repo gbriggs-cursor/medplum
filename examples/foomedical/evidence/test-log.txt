@@ -1,0 +1,14 @@
+
+> foomedical@5.2.14 test
+> vitest run src/components/DeviceCard.test.tsx src/pages/health-record/Devices.test.tsx
+
+
+ RUN  v4.1.12 /agent/repos/medplum/examples/foomedical
+
+
+ Test Files  2 passed (2)
+      Tests  8 passed (8)
+   Start at  02:55:00
+   Duration  2.90s (transform 1.25s, setup 124ms, import 2.40s, tests 443ms, environment 903ms)
+
+EXIT:0
