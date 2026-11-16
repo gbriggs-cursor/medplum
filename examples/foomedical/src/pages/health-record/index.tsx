@@ -12,6 +12,7 @@ const sideMenu = {
   title: 'Health Record',
   menu: [
     { name: 'Lab Results', href: '/health-record/lab-results' },
+    { name: 'Devices', href: '/health-record/devices' },
     { name: 'Medications', href: '/health-record/medications' },
     { name: 'Questionnaire Responses', href: '/health-record/questionnaire-responses' },
     { name: 'Vaccines', href: '/health-record/vaccines' },

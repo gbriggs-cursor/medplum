@@ -12,6 +12,7 @@ import { ActionItems } from './pages/care-plan/ActionItems';
 import { CheckInPage } from './pages/CheckInPage';
 import { GetCare } from './pages/GetCarePage';
 import { HealthRecord } from './pages/health-record';
+import { Devices } from './pages/health-record/Devices';
 import { LabResult } from './pages/health-record/LabResult';
 import { LabResults } from './pages/health-record/LabResults';
 import { Measurement } from './pages/health-record/Measurement';
@@ -45,6 +46,7 @@ export function Router(): JSX.Element {
         <Route index element={<Navigate replace to="/health-record/lab-results" />} />
         <Route path="lab-results" element={<LabResults />} />
         <Route path="lab-results/:resultId" element={<LabResult />} />
+        <Route path="devices" element={<Devices />} />
         <Route path="medications" element={<Medications />} />
         <Route path="medications/:medicationId" element={<Medication />} />
         <Route path="questionnaire-responses" element={<Responses />} />
